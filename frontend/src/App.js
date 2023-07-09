@@ -1,7 +1,6 @@
 
 import './App.css';
 import Navbar from './components/Navbar';
-import Link from './components/Link';
 import Home from "./pages/Home";
 import Log from "./pages/Login";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -9,12 +8,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <Navbar />
+
       <Router>
-        <Link />
+        <Navbar />
         <Routes>
-          <Route path="/" exact component={Home} />
-          <Route path="/Login" exact component={Log} />
+          <Route index element={<Home />} />
+          <Route path="/Login" element={<Log />} />
+
         </Routes>
       </Router>
 
