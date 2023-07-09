@@ -1,0 +1,28 @@
+.slider img {
+    width: 100%;
+}
+
+.container img {
+    margin-bottom: -22.5%;
+    margin-left: calc(-50%);
+    border-radius: 50%;
+    height: 15%;
+    width: 15%;
+    object-fit: cover;
+
+}
+
+.quote-box {
+    width: 50%;
+    height: 40%;
+    background-color: darkgray;
+    padding: 50px;
+    margin-top: 5%;
+    margin-left: 25%;
+    border-radius: 10px;
+}
+
+.quote-box .quote p {
+    font-size: 25px;
+    text-align: right;
+}
