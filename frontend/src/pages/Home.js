@@ -2,11 +2,13 @@ import React from 'react'
 import Slide1 from '../assets/slide1.png';
 import Cornish from '../assets/cornish.png';
 import '../styles/Home.css';
+import Navbar from '../components/Navbar';
 
 
 function Home() {
     return (
         <div>
+            <Navbar />
             <div className='slider'>
                 <img src={Slide1} alt='slide1' />
             </div>
