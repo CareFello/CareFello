@@ -1,3 +1,4 @@
+
 .footer{
     width: 100%;
     height: 150px;
@@ -6,16 +7,21 @@
     display: flex;
 }
 
+
 .footer .left{
     width: 30%
     
 }
 
 .footer .left img{
+
     width: 25%;
     height: 60%;
     margin-top: 5%;
 }
+
+
+
 
 .footer .middle{
     width: 30%;
@@ -24,9 +30,12 @@
 }
 
 .footer .middle .address{
+
     display: flex;
 
 }
+
+
 
 .footer .middle .address p{
     font-size: 15px;
@@ -35,6 +44,7 @@
 }
 
 .footer .middle .address img{
+
     margin-top: 2%;
     width: 5%;
     height: 5%;
@@ -47,6 +57,7 @@
     text-align: left;
 }
 
+
 .footer p{
     font-size: 15px;
 }
@@ -54,6 +65,5 @@
 .footer .Right .social img{
     padding: 5px;
 }
-
 
 
