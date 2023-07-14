@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import line from '../assets/Line.png';
 import photo from '../assets/photo.png';
-import Navbar from '../components/Navbar';
 import '../styles/LoginPage.css';
 
 const LoginPage = () => {
@@ -28,7 +27,6 @@ const LoginPage = () => {
 
   return (
     <div>
-        <Navbar />
     <div className='photo'><img src={photo} alt='photo' /></div>
     <div className='logbox'>
       <div className='line1'><img src={line} alt='line' /></div>
@@ -65,3 +63,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

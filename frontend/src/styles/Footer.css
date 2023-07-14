@@ -1,4 +1,5 @@
-.footer {
+
+.footer{
     width: 100%;
     height: 150px;
     color: white;
@@ -6,34 +7,44 @@
     display: flex;
 }
 
-.footer .left {
+
+.footer .left{
     width: 30%
+    
 }
 
-.footer .left img {
+.footer .left img{
+
     width: 25%;
     height: 60%;
     margin-top: 5%;
 }
 
-.footer .middle {
+
+
+
+.footer .middle{
     width: 30%;
     margin-left: 5%;
-
+    
 }
 
-.footer .middle .address {
+.footer .middle .address{
+
     display: flex;
 
 }
 
-.footer .middle .address p {
+
+
+.footer .middle .address p{
     font-size: 15px;
-    margin-left: 5%;
+   margin-left: 5%;
 
 }
 
-.footer .middle .address img {
+.footer .middle .address img{
+
     margin-top: 2%;
     width: 5%;
     height: 5%;
@@ -46,10 +57,13 @@
     text-align: left;
 }
 
-.footer p {
+
+.footer p{
     font-size: 15px;
 }
 
-.footer .Right .social img {
+.footer .Right .social img{
     padding: 5px;
 }
+
+

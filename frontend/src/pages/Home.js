@@ -7,11 +7,15 @@ import Elders from '../assets/elders.png';
 import About from '../assets/about.png';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
+
+
+
 import CountUp, { useCountUp } from 'react-countup';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Footer from '../components/HomepageFooter';
 
 const images = [Background, Background, Background, Background, Background, Background, Background, Background, Background]
+
 
 
 
@@ -30,6 +34,7 @@ function Home() {
 
         < div style={{ backgroundImage: `url(${Background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 700 }}>
             <Navbar />
+            
             <div className='slider'>
 
             </div>
@@ -133,11 +138,16 @@ function Home() {
                     </ResponsiveMasonry>
                 </div>
             </div>
+
+            
+        </div>
+
             <div className='contactus'>
 
             </div>
             <Footer />
         </div >
+
     )
 }
 
