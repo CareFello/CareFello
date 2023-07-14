@@ -34,7 +34,7 @@ function Home() {
 
         < div style={{ backgroundImage: `url(${Background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 700 }}>
             <Navbar />
-            
+
             <div className='slider'>
 
             </div>
@@ -124,7 +124,7 @@ function Home() {
                     <ResponsiveMasonry
                         columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
                     >
-                        <Masonry gutter="20px">
+                        <Masonry gutter="18px">
                             {images.map((images, i) => (
                                 <img
                                     key={i}
@@ -139,8 +139,8 @@ function Home() {
                 </div>
             </div>
 
-            
-        </div>
+
+
 
             <div className='contactus'>
 
