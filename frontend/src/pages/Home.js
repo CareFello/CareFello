@@ -6,6 +6,7 @@ import Relax from '../assets/relax.png';
 import About from '../assets/about.png';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
+import Footer from '../components/HomepageFooter';
 
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
 
         < div style={{ backgroundImage: `url(${Background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 700 }}>
             <Navbar />
+            
             <div className='slider'>
 
             </div>
@@ -72,6 +74,7 @@ function Home() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }
