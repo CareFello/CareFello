@@ -34,7 +34,7 @@ function Home() {
 
         < div style={{ backgroundImage: `url(${Background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 700 }}>
             <Navbar />
-            
+
             <div className='slider'>
 
             </div>
@@ -139,8 +139,8 @@ function Home() {
                 </div>
             </div>
 
-            
-        </div>
+
+
 
             <div className='contactus'>
 
