@@ -12,6 +12,7 @@ import utube from '../assets/youtubeLogo.png';
 
 
 function HomepageFooter() {
+
     return (
         <div className='footer'>
             <div className='left'>
@@ -46,6 +47,7 @@ function HomepageFooter() {
             </div>
         </div>
     )
+
 }
 
 export default HomepageFooter
