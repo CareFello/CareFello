@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Background from '../assets/background.png';
 import Health from '../assets/health_icon.png';
 import Room from '../assets/room.png';
 import Relax from '../assets/relax.png';
+import Elders from '../assets/elders.png';
 import About from '../assets/about.png';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
-import Footer from '../components/HomepageFooter';
+
+
+
+import CountUp, { useCountUp } from 'react-countup';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+
+const images = [Background, Background, Background, Background, Background, Background, Background, Background, Background]
+
+
 
 
 function Home() {
+    useCountUp({
+        ref: 'counter',
+        end: 1234567,
+        enableScrollSpy: true,
+        scrollSpyDelay: 1000,
+    });
+    const [data, setData] = useState({ img: '', i: 0 })
+    const viewImage = (img, i) => {
+        setData({ img, i })
+    };
     return (
 
         < div style={{ backgroundImage: `url(${Background})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 700 }}>
@@ -31,7 +50,7 @@ function Home() {
             </div>
             <div className='grid'>
                 <div className='box'>
-                    <img src={Health} />
+                    <img src={Health} alt='health care' />
                     <h4>Health Care</h4>
                     <p>Caregiver Protection &<br></br>
                         Individual Attention<br></br>
@@ -40,7 +59,7 @@ function Home() {
                         Healthy Foods</p>
                 </div>
                 <div className='box'>
-                    <img src={Room} />
+                    <img src={Room} alt='room' />
                     <h4>Accomodation</h4>
                     <p>Both Single & Shared<br></br>
                         Rooms<br></br>
@@ -49,7 +68,7 @@ function Home() {
                         Room Services</p>
                 </div>
                 <div className='box'>
-                    <img src={Relax} />
+                    <img src={Relax} alt='relax' />
                     <h4>Relax Environment</h4>
                     <p>
                         Large Garden Area &<br></br>
@@ -70,12 +89,63 @@ function Home() {
                         </p>
                     </div>
                     <div className='image'>
-                        <img src={About} />
+                        <img src={About} alt='about' />
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <br></br>
+            <div style={{ backgroundImage: `url(${Elders})`, backgroundRepeat: "no-repeat", backgroundSize: "cover", height: 500 }}>
+
+                <div className='countup'>
+                    <h4><CountUp end={1000} enableScrollSpy /> + <br></br>Satisfied Users</h4>
+                    <h4><CountUp end={50} enableScrollSpy /> + <br></br>working Staff</h4>
+                    <h4><CountUp end={15} enableScrollSpy /> + <br></br>Years of Experience</h4>
+                </div>
+            </div>
+            <div className='gallery'>
+                <h2>Gallery</h2>
+                {
+                    data.img &&
+                    <div style={{
+                        width: '100%',
+                        height: '100vh',
+                        background: 'black',
+                        position: 'fixed',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        overflow: 'hidden',
+                    }}>
+                        <img src={data.img} />
+                    </div>
+                }
+                <div style={{ padding: '50px 100px' }}>
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                    >
+                        <Masonry gutter="20px">
+                            {images.map((images, i) => (
+                                <img
+                                    key={i}
+                                    src={images}
+                                    style={{ width: "100%", display: "block", cursor: 'pointer' }}
+                                    alt=""
+                                    onClick={() => viewImage(images, i)}
+                                />
+                            ))}
+                        </Masonry>
+                    </ResponsiveMasonry>
+                </div>
+            </div>
+
+            
         </div>
+
+            <div className='contactus'>
+
+            </div>
+        </div >
+
     )
 }
 
