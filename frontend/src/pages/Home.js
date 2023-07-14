@@ -8,7 +8,8 @@ import About from '../assets/about.png';
 import '../styles/Home.css';
 import Navbar from '../components/Navbar';
 import CountUp, { useCountUp } from 'react-countup';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import Footer from '../components/HomepageFooter';
 
 const images = [Background, Background, Background, Background, Background, Background, Background, Background, Background]
 
@@ -135,6 +136,7 @@ function Home() {
             <div className='contactus'>
 
             </div>
+            <Footer />
         </div >
     )
 }
