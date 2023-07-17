@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import line from '../assets/Line.png';
-import photo from '../assets/photo.png';
-import Navbar from '../components/Navbar';
-import '../styles/LoginPage.css';
-
+import {  useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+
 
 function Login() {
    
@@ -49,46 +45,51 @@ function Login() {
       
       }
 
-  return (
-    <div>
-        <Navbar />
-    <div className='photo'><img src={photo} alt='photo' /></div>
-    <div className='logbox'>
-      <div className='line1'><img src={line} alt='line' /></div>
-      <div className='line2'><img src={line} alt='line' /></div>
-      
-      <form>
-        <div>
-          <input className='input1'
-            type="email"
-            id="email"
-            placeholder='Email'
-            value={email}
-            onChange={(event) => {
+    return (
+       <div>
+            <div class="container">
+            <div class="row">
+                <h2>Login</h2>
+             <hr/>
+             </div>
+
+             <div class="row">
+             <div class="col-sm-6">
+ 
+            <form>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email"  class="form-control" id="email" placeholder="Enter Name"
+          
+          value={email}
+          onChange={(event) => {
             setEmail(event.target.value);
           }}
-            required
+          
           />
+
         </div>
-        <div>
-          <input className='input2'
-            type="password"
-            id="password"
-            placeholder='Password'
+
+        <div class="form-group">
+            <label>password</label>
+            <input type="password"  class="form-control" id="password" placeholder="Enter Fee"
+            
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
             }}
-            required
-          />
-        </div>
-        <button className='logbtn' type="submit" onClick={login}>LOGIN</button>
-      </form>
-      <div className='signup'>Dosen't have an an account yet?</div><div className='signup1'><a href='http://localhost:3000/reg'>Sign Up</a></div>
-      <div className='forgot'>Forgot Password?</div><div className='forgot1'>Click Here</div>
-    </div>
-    </div>
-  );
-};
+            
+            />
+          </div>
+                  <button type="submit" class="btn btn-primary" onClick={login} >Login</button>
+              </form>
 
-export default Login;
+            </div>
+            </div>
+            </div>
+
+     </div>
+    );
+  }
+  
+  export default Login;
