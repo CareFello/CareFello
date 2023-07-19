@@ -83,16 +83,10 @@ const Caregiverlist = () => {
         </tr>
       </tbody>
     </Table>
-     
-    
-
-
- 
 <div className='contactus'>
 <Footer />
 </div>
 </div>
-
 );
 
 }
