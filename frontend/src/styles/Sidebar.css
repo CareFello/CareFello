@@ -2,6 +2,7 @@
   margin:0;
   padding:0;
   text-decoration: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 .top_selection{
@@ -9,20 +10,24 @@
   flex-direction: row;
   height: 50px;
   align-items: center;
-  background-color: #05445E;
+  background-color: white;
+  box-shadow: 3px px 3px #bddee9f1;
 }
 
 
 main{
   width:100%;
-  padding: 20px;
+}
+
+.container{
+  box-shadow: 1px 1px 3px #bddee9f1;
 }
 
 .sidebar{
-  background:#05445E;
+  background:white;
   position:relative;
   height:100vh;
-  width: 300px;
+  width: 100px;
   transition: all 0.5s;
 }
 
@@ -52,26 +57,30 @@ main{
 .bars{
   display: flex;
   font-size: 25px;
-  margin-left: 200px;
-  color:#F9FFFE;
+  padding-left: 13px;
+  padding-top: 14px;
+  color:#05445E;
   padding-bottom: 20px;
 }
 
 .link{
   display: flex;
   color: #F9FFFE;
-  gap: 15px;
+  gap: 12px;
   transition: all 0.5s;
 }
 
 .link:hover{
-  background: #F9FFFE;
+  background:#189AB4;
   transition: all 0.5s;
+  border-radius: 15px;
+  /* padding: 1px; */
+  margin: 2px;
 }
 
 .link:hover .icon,
 .link:hover .link_text {
-  color: #05445E;
+  color: white;
 }
 
 
@@ -81,11 +90,15 @@ main{
 } */
 
 .link_text{
-  font-size: 17px;
-  color:#F9FFFE;
+  margin-top: 20px;
+  font-size: 14px;
+  font: weight 500px;
+  color:#05445E;
 }
 
 .icon{
   font-size:x-large;
-  color:#F9FFFE;
+  color:#05445E;
+  margin-left: 13px;
+  margin-top: 16px;
 }
