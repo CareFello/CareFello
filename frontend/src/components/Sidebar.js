@@ -53,10 +53,8 @@ const Sidebar = ({children}) => {
             path: "/",
             name: "Create Account",
             icon:<AiOutlineUserAdd/>,
-            subItems: [
-                { path: "/", name: "For Doctor" },
-                { path: "/", name: "For Caregiver" }
-              ]
+           
+
         },
         {
             path: "/",
@@ -96,10 +94,10 @@ const Sidebar = ({children}) => {
     ]
     return(
         <div className="container">
-            <div style={{width: isOpen ? "200px" : "50px"}} className='sidebar'>
+            <div style={{width: isOpen ? "180px" : "50px"}} className='sidebar'>
                 <div className='top_selection'>
                     {/* <div className='logo'><h1 style={{display: isOpen ? "block" : "none"}} className="logo"></h1></div> */}
-                    <div style={{marginLeft: isOpen ? "170px" : "0px"}} className='bars'>
+                    <div style={{marginLeft: isOpen ? "135px" : "0px"}} className='bars'>
                         <FaBars onClick={toggle}/>
                     </div>
                 </div>
