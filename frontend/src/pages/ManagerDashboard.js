@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import "../styles/Dashboard.css";
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
-function ManagerDashboard() {
+
+const ManagerDashboard = () => {
+
+
   return (
-    <div>ManagerDashboard</div>
+    <div className='container'>
+      <Header />
+      <Sidebar />
+    </div>
   )
 }
 
