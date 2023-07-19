@@ -53,10 +53,7 @@ const Sidebar = ({children}) => {
             path: "/",
             name: "Create Account",
             icon:<AiOutlineUserAdd/>,
-            // subItems: [
-            //     { path: "/", name: "For Doctor" },
-            //     { path: "/", name: "For Caregiver" }
-            //   ]
+           
 
         },
         {
