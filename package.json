@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "react-icons": "^4.10.1",
-    "react-selection-popup": "^0.4.7"
-  },
-  "devDependencies": {
-    "eslint": "^8.45.0"
-  }
-}
