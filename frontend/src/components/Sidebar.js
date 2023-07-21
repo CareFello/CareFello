@@ -1,120 +1,151 @@
-import React, {useState} from 'react';
-import '../styles/Sidebar.css'
-import {
-    FaTh,
-    FaBars,
-    FaUserAlt,
-    FaRegChartBar,
-    FaCommentAlt,
-    FaShoppingBag,
-    FaThList,
-    FaUserNurse
-}from "react-icons/fa";
+import * as React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import UserIcon from '@mui/icons-material/Man';
+import { useAppStore } from '../appStore';
+import { useNavigate } from "react-router-dom"
+import { red } from '@mui/material/colors';
 
-import {
-    AiOutlineUserAdd
-}from "react-icons/ai";
+const drawerWidth = 240;
 
-import {
-    BiUserCheck
-}from "react-icons/bi";
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: 'hidden',
+});
 
-import {
-    TbListDetails,
-    TbAlertSquareRounded,
-    TbNurse
-}from "react-icons/tb";
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(8)} + 1px)`,
+    },
+});
 
-import{
-    VscRequestChanges
-}from "react-icons/vsc";
-
-import{
-    MdOutlineElderlyWoman
-}from "react-icons/md";
-
-
-import { NavLink } from 'react-router-dom';
-import Logo from '../assets/logo.png';
-import Name from '../assets/name.png';
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
 
 
-const Sidebar = ({children}) => {
-    const[isOpen,setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
 
-    const menuItem = [
-        {
-            path: "/",
-            name: "Dashboard",
-            icon:<FaTh/>
-        },
-        {
-            path: "/",
-            name: "Create Account",
-            icon:<AiOutlineUserAdd/>,
-           
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+    ({ theme, open }) => ({
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+        boxSizing: 'border-box',
+        ...(open && {
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
+        }),
+        ...(!open && {
+            ...closedMixin(theme),
+            '& .MuiDrawer-paper': closedMixin(theme),
+        }),
+    }),
+);
 
-        },
-        {
-            path: "/",
-            name: "Assign Caregiver",
-            icon:<BiUserCheck/>
-        },
-        {
-            path: "/",
-            name: "Room Details",
-            icon:<TbListDetails/>
-        },
-        {
-            path: "/",
-            name: "Guardian Request",
-            icon:<VscRequestChanges/>
-        },
-        {
-            path: "/",
-            name: "Complaints",
-            icon:<TbAlertSquareRounded/>
-        },
-        {
-            path: "/",
-            name: "View Elders",
-            icon:<MdOutlineElderlyWoman/>
-        },
-        {
-            path: "/",
-            name: "View Caregivers",
-            icon:<TbNurse/>
-        },
-        {
-            path: "/",
-            name: "View Doctors",
-            icon:<FaUserNurse/>
-        },
-    ]
-    return(
-        <div className="container">
-            <div style={{width: isOpen ? "180px" : "50px"}} className='sidebar'>
-                <div className='top_selection'>
-                    {/* <div className='logo'><h1 style={{display: isOpen ? "block" : "none"}} className="logo"></h1></div> */}
-                    <div style={{marginLeft: isOpen ? "135px" : "0px"}} className='bars'>
-                        <FaBars onClick={toggle}/>
-                    </div>
-                </div>
-                {
-                    menuItem.map((item,index)=>(
-                        <NavLink to={item.path} key={index} className="link" activeclassName="active">
-                            <div className='icon'>{item.icon}</div>
-                            <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>
-                        </NavLink>
-                    ))
-                }
-            </div>
-            {/* <main>{children}</main> */}
-        </div>
+export default function Sidebar() {
+    const theme = useTheme();
+    //const [open, setOpen] = React.useState(true);
+    const updateOpen = useAppStore((state) => state.updateOpen);
+    const open = useAppStore((state) => state.dopen);
+    const navigate = useNavigate();
+
+
+
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <Box height={80} />
+            <Drawer variant="permanent" open={open}>
+                <DrawerHeader>
+                    <IconButton >
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <List className='sidebar-background'>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+
+                                }}
+                            >
+                                <InboxIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AddDoctor") }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <UserIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Create Accounts" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+
+            </Drawer>
+
+        </Box>
     );
-};
+}
 
-export default Sidebar;
+
+
+
+
 
 
