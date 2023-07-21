@@ -8,4 +8,14 @@ table {
     border: 1px solid black;
     padding: 10px;
   }
+
+
+  .sidbar-div{
+    width: inherit !important;
+  }
+
+  .table-height{
+    height:fit-content !important;
+    margin-right: 1rem !important;
+  }
   
