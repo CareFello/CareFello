@@ -23,7 +23,6 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/list" element={<Caregiverlist/>}/>
-          <Route path="/popup" element={<Popup/>}/>
         </Routes>
       </Router>
 
