@@ -30,7 +30,7 @@ function Navbar() {
                     <Link to="/Login"> About Us </Link>
                     <Link to="/"> Our Services </Link>
                     <Link to="/Login"> Gallery </Link>
-                    <Link to="/"> Contact Us </Link>
+                    <Link to="/Managerdashboard"> Contact Us </Link>
                     <Link to="/Login"> Login </Link>
                 </div>
             </div>
