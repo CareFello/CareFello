@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Reg from "./components/Register";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ManagerDashboard from './pages/ManagerDashboard';
+import AddDoctor from './pages/AddDoctor';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+          <Route path="/AddDoctor" element={<AddDoctor />} />
 
         </Routes>
       </Router>
