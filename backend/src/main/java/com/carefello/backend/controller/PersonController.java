@@ -15,22 +15,26 @@ import com.carefello.backend.model.Person;
 
 import com.carefello.backend.repo.PersonRepo;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/persons")
 
-
-public class PersonController {
+public class PersonController{
+    private final PersonRepo personRepo;
 
     @Autowired
-    PersonRepo repo;
-
-    
-
-    @PostMapping("/addPerson")
-    public void addPerson(@RequestBody Person person) {
-        repo.save(person);
+    public PersonController(PersonRepo personRepo){
+        this.personRepo = personRepo;
     }
 
-    
+    @GetMapping
+    public List<Person> getAllPerson(){
+        return personRepo.findAll();
+    }
 }
+
+
+
+
+    
+
