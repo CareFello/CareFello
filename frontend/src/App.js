@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ManagerDashboard from './pages/ManagerDashboard';
 import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
+import AddCaregiver from './pages/AddCaregiver';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <div className="App">
 
       <Router>
-        
+
 
         <Routes>
           <Route index element={<Home />} />
@@ -31,9 +32,10 @@ function App() {
 
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
+          <Route path="/AddCaregiver" element={<AddCaregiver />} />
 
 
-          <Route path="/list" element={<Caregiverlist/>}/>
+          <Route path="/list" element={<Caregiverlist />} />
 
         </Routes>
       </Router>
