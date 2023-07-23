@@ -27,7 +27,7 @@ public class PersonController{
         this.personRepo = personRepo;
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public List<Person> getAllPerson(){
         return personRepo.findAll();
     }
