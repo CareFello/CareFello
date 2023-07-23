@@ -17,9 +17,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import UserIcon from '@mui/icons-material/Man';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useAppStore } from '../appStore';
 import { useNavigate } from "react-router-dom"
+import MedicationIcon from '@mui/icons-material/Medication';
 import { red } from '@mui/material/colors';
 
 const drawerWidth = 240;
@@ -94,7 +95,7 @@ export default function Sidebar() {
                 </DrawerHeader>
                 <Divider />
                 <List className='sidebar-background'>
-                    <ListItem disablePadding sx={{ display: 'block' }}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/ManagerDashboard") }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -130,9 +131,29 @@ export default function Sidebar() {
                                     justifyContent: 'center',
                                 }}
                             >
-                                <UserIcon />
+                                <MedicationIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Create Accounts" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Add Doctors" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AddCaregiver") }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <PersonAddIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Add Caregiver" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
                 </List>
