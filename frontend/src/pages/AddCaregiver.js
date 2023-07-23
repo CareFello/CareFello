@@ -22,12 +22,13 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import img from '../assets/caregiver.png'
 
-import img_4 from '../assets/doctor.jpg'
 
 
-
-export default function AddDoctor() {
+export default function AddCaregiver() {
 
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -35,6 +36,12 @@ export default function AddDoctor() {
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
+    };
+
+    const [gender, setGender] = React.useState('');
+
+    const handleChange = (event) => {
+        setGender(event.target.value);
     };
 
     return (
@@ -51,14 +58,14 @@ export default function AddDoctor() {
                                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                         <CardContent sx={{ flex: '1 0 auto' }}>
                                             <Typography component="div" variant="h4">
-                                                Registration of Doctors
+                                                Registration of Caregivers
                                             </Typography>
                                             <br />
                                             <div>
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Enter the Name of the Doctor"
+                                                    label="Enter the Name of the Caregiver"
                                                     sx={{ m: 1, width: '62ch' }}
 
                                                 />
@@ -78,6 +85,26 @@ export default function AddDoctor() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
+                                                    label="Date of Birth"
+                                                    sx={{ m: 1, width: '30ch' }}
+                                                />
+                                                <FormControl sx={{ m: 1, width: '30ch' }}>
+                                                    <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
+                                                    <Select
+                                                        labelId="demo-simple-select-helper-label"
+                                                        id="demo-simple-select-helper"
+                                                        value={gender}
+                                                        label="Gender"
+                                                        onChange={handleChange}
+                                                    >
+                                                        <MenuItem value={1}>Male</MenuItem>
+                                                        <MenuItem value={0}>Female</MenuItem>
+                                                    </Select>
+
+                                                </FormControl>
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
                                                     label="Email"
 
                                                     sx={{ m: 1, width: '30ch' }}
@@ -90,17 +117,13 @@ export default function AddDoctor() {
                                                     sx={{ m: 1, width: '30ch' }}
                                                 />
                                                 <TextField
-                                                    id="outlined-multiline-flexible"
-                                                    label="Specialized Areas"
-                                                    multiline
-                                                    maxRows={4}
-                                                    sx={{ m: 1, width: '30ch' }}
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Address"
+                                                    sx={{ m: 1, width: '62ch' }}
+
                                                 />
-                                                <TextField
-                                                    id="outlined-multiline-flexible"
-                                                    label="Reg No (Medical Council)"
-                                                    sx={{ m: 1, width: '30ch' }}
-                                                />
+
                                                 <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
                                                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                                     <OutlinedInput
@@ -157,7 +180,7 @@ export default function AddDoctor() {
                                     <CardMedia
                                         component="img"
                                         sx={{ width: 50 + "%" }}
-                                        image={img_4}
+                                        image={img}
                                         alt="Live from space album cover"
                                     />
                                 </Card>
@@ -169,4 +192,3 @@ export default function AddDoctor() {
         </div>
     )
 }
-
