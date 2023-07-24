@@ -1,10 +1,11 @@
 import React from 'react'
 import Logo from '../assets/logo.png';
 import Name from '../assets/name.png';
-import Call from '../assets/call.png';
-import Email from '../assets/email.png';
+import { BiPhoneCall} from 'react-icons/bi';
+import { AiOutlineMail} from 'react-icons/ai';
 import '../styles/Navbar.css';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 
 function Navbar() {
     
@@ -13,25 +14,27 @@ function Navbar() {
             <div className='navbar'>
                 <div className='left'>
                     <img src={Logo} alt='logo' />
-                    <img src={Name} alt='name' />
+                    <div className='name'><i>CareFello</i></div>
                 </div>
 
                 <div className='right'>
-                    <img src={Call} alt='call' />
-                    <h4>+94 11790360/ +94 773111912</h4>
-                    <img src={Email} alt='email' />
-                    <h4>info@Carefello.com</h4>
+                    <BiPhoneCall size={18} color="#05445E" />
+                    <div className='phone'>+94 11790360/ +94 773111912</div>
+                    <AiOutlineMail size={20} color="#05445E" />
+                    <div className='mail'>
+                        info@Carefello.com
+                    </div>
                 </div>
             </div>
             <div className='link'>
                 <div className='left'></div>
                 <div className='right'>
-                    <Link to="/"> Home </Link>
-                    <Link to="/Login"> About Us </Link>
-                    <Link to="/"> Our Services </Link>
-                    <Link to="/Login"> Gallery </Link>
-                    <Link to="/Managerdashboard"> Contact Us </Link>
-                    <Link to="/Login"> Login </Link>
+                    <NavLink to="/" exact activeClassName="active"> Home </NavLink>
+                    <NavLink to="/" activeClassName="inactive"> About Us </NavLink>
+                    <NavLink to="/" activeClassName="inactive"> Our Services </NavLink>
+                    <NavLink to="/" activeClassName="inactive"> Contact Us </NavLink>
+                    <NavLink to="/Managerdashboard" activeClassName="inactive"> Manager </NavLink>
+                    <NavLink to="/Login" activeClassName="inactive"> Login </NavLink>
                 </div>
             </div>
         </div>
