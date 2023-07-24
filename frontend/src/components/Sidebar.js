@@ -21,7 +21,11 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useAppStore } from '../appStore';
 import { useNavigate } from "react-router-dom"
 import MedicationIcon from '@mui/icons-material/Medication';
+import RoomPreferencesIcon from '@mui/icons-material/RoomPreferences';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import LivingIcon from '@mui/icons-material/Living';
 import { red } from '@mui/material/colors';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 const drawerWidth = 240;
 
@@ -111,7 +115,7 @@ export default function Sidebar() {
 
                                 }}
                             >
-                                <InboxIcon />
+                                <DashboardIcon />
                             </ListItemIcon>
                             <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
@@ -154,6 +158,66 @@ export default function Sidebar() {
                                 <PersonAddIcon />
                             </ListItemIcon>
                             <ListItemText primary="Add Caregiver" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/ViewRoomDetails") }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <RoomPreferencesIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="View Room Details" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/MealPlan") }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <RestaurantIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Meal Plan" sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/RoomPackage") }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <LivingIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="RoomPackage" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
                 </List>
