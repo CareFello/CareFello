@@ -16,6 +16,7 @@ import AddCaregiver from './pages/AddCaregiver';
 import ViewRoomDetails from './pages/ViewRoomDetails'
 import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
+import GuardianRequest from './pages/GuardianRequest';
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
           <Route path="/RoomPackage" element={<RoomPackage />} />
 
 
-          <Route path="/list" element={<Caregiverlist />} />
+          <Route path="/GuardianRequest" element={<GuardianRequest />} />
 
         </Routes>
       </Router>
