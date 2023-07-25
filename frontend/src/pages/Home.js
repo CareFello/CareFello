@@ -11,7 +11,6 @@ import Navbar from '../components/Navbar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-
 import CountUp, { useCountUp } from 'react-countup';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Footer from '../components/HomepageFooter';
