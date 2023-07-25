@@ -13,6 +13,7 @@ import ManagerDashboard from './pages/ManagerDashboard';
 import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
 import AddCaregiver from './pages/AddCaregiver';
+import Test1 from './pages/Test1';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
           <Route path="/AddCaregiver" element={<AddCaregiver />} />
+          <Route path="/test1" element={<Test1 />} />
 
 
           <Route path="/list" element={<Caregiverlist />} />
