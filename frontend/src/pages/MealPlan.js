@@ -115,7 +115,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
@@ -178,7 +179,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
@@ -241,7 +243,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
@@ -309,8 +312,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-                                            <Button size="small">Share</Button>
-                                            <Button size="small">Learn More</Button>
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
@@ -373,7 +376,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
@@ -436,7 +440,8 @@ export default function MealPlan() {
                                                 Banana or anyother fruit
                                             </Typography>
                                             <br />
-
+                                            <Button size="small">Update</Button>
+                                            <Button size="small">Delete</Button>
                                         </CardContent>
                                     </Collapse>
                                 </Card>
