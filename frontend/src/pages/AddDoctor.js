@@ -23,8 +23,8 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import img_4 from '../assets/doctor.jpg'
-
+import img_4 from '../assets/doctor.jpg';
+import '../styles/AddDoctor.css';
 
 
 export default function AddDoctor() {
@@ -38,7 +38,7 @@ export default function AddDoctor() {
     };
 
     return (
-        <div>
+        <div className='addDoctor'>
             <Header />
             <Box height={120} />
             <Box sx={{ display: 'flex' }}>
