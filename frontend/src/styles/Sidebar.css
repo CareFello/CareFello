@@ -1,0 +1,24 @@
+/* .list-item:hover {
+    background-color: #189AB4;
+}
+
+.sidebar-item:hover{
+    color:white;
+} */
+
+/* 
+.link:hover .icon,
+.link:hover .link_text {
+  color: #05445E;
+} */
+
+.list-item .sidebar-item:hover{
+    color: aliceblue;
+    background-color: aqua;
+}
+
+.list-item .sidebar-item .icon:hover{
+    color: aliceblue;
+    
+}
+
