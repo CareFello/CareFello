@@ -16,12 +16,17 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAppStore } from '../appStore';
-
+import Logo from '../assets/logo.png';
+import "../styles/Header.css"
 
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
-
+    // background: '#189AB4',
+    background: '#D4F1F4',
+    position: 'fixed',
+    color: '#05445E',
+    boxShadow: '0px 0.5px 0.5px #D4F1F4(0, 0, 0, 0.1)',
 }));
 
 const Search = styled('div')(({ theme }) => ({
@@ -35,7 +40,7 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
+        marginLeft: theme.spacing(2),
         width: 'auto',
     },
 }));
@@ -58,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
+
         [theme.breakpoints.up('md')]: {
             width: '20ch',
         },
@@ -130,7 +136,7 @@ export default function Header() {
             onClose={handleMobileMenuClose}
         >
             <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                <IconButton size="large" aria-label="show 4 new mails" color='#05445E'>
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
                     </Badge>
@@ -141,7 +147,8 @@ export default function Header() {
                 <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
-                    color="inherit"
+                    color='#05445E'
+                    sx={{ mr: 1, ml: 0.5 }}
                 >
                     <Badge badgeContent={17} color="error">
                         <NotificationsIcon />
@@ -155,7 +162,7 @@ export default function Header() {
                     aria-label="account of current user"
                     aria-controls="primary-search-account-menu"
                     aria-haspopup="true"
-                    color="inherit"
+                    color='#05445E'
                 >
                     <AccountCircle />
                 </IconButton>
@@ -165,36 +172,39 @@ export default function Header() {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <div className='header'>
+            <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
-                        color="inherit"
+                        color='#05445E'
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                         onClick={() => updateOpen(!dOpen)}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
+                    <Typography className='logo'
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        sx={{ 
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontSize: '13px',
+                            color: '#05445E',
+                         }}
                     >
-                        CareFello
+                        <div style={{ marginRight: '2px', marginTop: '4px'}}>
+                            <img src={Logo} alt='logo' height={45} width={45}/> 
+                        </div>
+                        <div style={{ marginTop: '2px', color: '#189AB4'}}>
+                            <i style={{ fontWeight: 'bold' }}>CareFello</i>
+                        </div>
                     </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -240,7 +250,10 @@ export default function Header() {
             {renderMobileMenu}
             {renderMenu}
         </Box>
-    );
+   
+        </div>
+     );
+        
 }
 
 

@@ -22,6 +22,16 @@ import {GiMeal}from "react-icons/gi";
 import {MdOutlineBedroomParent}from "react-icons/md";
 import {MdOutlineFileOpen}from "react-icons/md";
 
+
+import {AiOutlineUserAdd} from "react-icons/ai";
+import {BiUserCheck} from "react-icons/bi";
+import {VscRequestChanges} from "react-icons/vsc";
+import {TbAlertSquareRounded} from "react-icons/tb";
+import {MdOutlineElderlyWoman} from "react-icons/md";
+
+import { NavLink } from 'react-router-dom';
+
+
 import "../styles/Sidebar.css"
 
 
@@ -85,6 +95,57 @@ export default function Sidebar() {
     const navigate = useNavigate();
 
 
+    const menuItem = [
+        {
+            path: "/",
+            name: "Dashboard",
+            icon:<FaTh/>
+        },
+        {
+            path: "/",
+            name: "Create Account",
+            icon:<AiOutlineUserAdd/>,
+            subItems: [
+                { path: "/", name: "For Doctor" },
+                { path: "/", name: "For Caregiver" }
+              ]
+        },
+        {
+            path: "/",
+            name: "Assign Caregiver",
+            icon:<BiUserCheck/>
+        },
+        {
+            path: "/",
+            name: "Room Details",
+            icon:<TbListDetails/>
+        },
+        {
+            path: "/",
+            name: "Guardian Request",
+            icon:<VscRequestChanges/>
+        },
+        {
+            path: "/",
+            name: "Complaints",
+            icon:<TbAlertSquareRounded/>
+        },
+        {
+            path: "/",
+            name: "View Elders",
+            icon:<MdOutlineElderlyWoman/>
+        },
+        {
+            path: "/",
+            name: "View Caregivers",
+            icon:<TbNurse/>
+        },
+        {
+            path: "/",
+            name: "View Doctors",
+            icon:<FaUserNurse/>
+        },
+    ]
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -97,149 +158,12 @@ export default function Sidebar() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List className='sidebar-background'>
-                    <ListItem className='list-item' disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/ManagerDashboard") }}>
-                        <div className="sidebar-item"><ListItemButton 
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon 
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-
-                                }}
-                            >
-                                <FaTh/>
-                            </ListItemIcon>
-                            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton></div>
-                    </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AddDoctor") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <FaUserNurse/>
-                            </ListItemIcon>
-                            <ListItemText primary="Add Doctor" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AddCaregiver") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                               <TbNurse/>
-                            </ListItemIcon>
-                            <ListItemText primary="Add Caregiver" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem className='list-item' disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/ViewRoomDetails") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <TbListDetails className='sidebar-item'/>
-                            </ListItemIcon>
-                            <ListItemText primary="Room Details" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/MealPlan") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <GiMeal/>
-                            </ListItemIcon>
-                            <ListItemText primary="Meal Plans" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/RoomPackage") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <MdOutlineBedroomParent/>
-                            </ListItemIcon>
-                            <ListItemText primary="Room Packages" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/GuardianRequest") }}>
-                        <ListItemButton className="sidebar-item"
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 2 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <MdOutlineFileOpen />
-                            </ListItemIcon>
-                            <ListItemText primary="Guardians' Requests" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    </ListItem>
-                </List>
+               { menuItem.map((item,index)=>(
+                        <NavLink to={item.path} key={index} className="link" activeclassName="active">
+                            <div className='icon'>{item.icon}</div>
+                            { <div style={{display: open ? "block" : "none"}} className="link_text">{item.name}</div> }
+                        </NavLink>
+                    ))}
 
             </Drawer>
 
