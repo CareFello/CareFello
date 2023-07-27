@@ -18,6 +18,7 @@ import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
 
 
+import Caregiverprofile from './pages/caregiverprofile';
 function App() {
   return (
     <div className="App">
@@ -31,18 +32,8 @@ function App() {
           <Route path="/home" element={<Home1 />} />
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
-          <Route path="/sel" element={<Sel />} />
-
-          <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
-          <Route path="/AddDoctor" element={<AddDoctor />} />
-          <Route path="/AddCaregiver" element={<AddCaregiver />} />
-          <Route path="/ViewRoomDetails" element={<ViewRoomDetails />} />
-          <Route path="/MealPlan" element={<MealPlan />} />
-          <Route path="/RoomPackage" element={<RoomPackage />} />
-
-
-          <Route path="/list" element={<Caregiverlist />} />
-
+          <Route path="/list" element={<Caregiverlist/>}/>
+          <Route path="/profile" element={<Caregiverprofile/>}/>
         </Routes>
       </Router>
 
