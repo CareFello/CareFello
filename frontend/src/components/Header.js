@@ -26,7 +26,8 @@ const AppBar = styled(MuiAppBar, {
     background: '#D4F1F4',
     position: 'fixed',
     color: '#05445E',
-    boxShadow: '0px 0.5px 0.5px #D4F1F4(0, 0, 0, 0.1)',
+    // boxShadow: 'none',
+    boxShadow: '0.05px 0.05px 5px 0.05px rgba(0, 0, 0, 0.3)',
 }));
 
 const Search = styled('div')(({ theme }) => ({

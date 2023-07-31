@@ -49,7 +49,7 @@ function ManagerDashboard() {
         <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
           <Grid container spacing={1} >
             <Grid item xs={12}>
-              <Stack spacing={9} direction={'row'}>
+              <Stack spacing={5} direction={'row'}>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
