@@ -25,24 +25,49 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import img from '../assets/caregiver.png'
+import {  useState } from "react";
+import axios from "axios";
 
 
 
-export default function AddCaregiver() {
+function AddCaregiver() {
 
-    const [showPassword, setShowPassword] = React.useState(false);
-
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
-    const [gender, setGender] = React.useState('');
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [nic, setNic] = useState("");
+    const [DOB, setDob] = useState("");
+    const [contact_no, setContactNo] = useState("");
+    const [address, setAddress] = useState("");
+    const [gender, setGender] = useState('');
 
-    const handleChange = (event) => {
-        setGender(event.target.value);
-    };
+    async function save(event) {
+        event.preventDefault();
+        try {
+          await axios.post("http://localhost:8085/api/v1/caregiver/save", {
+          first_name: first_name,
+          email: email,
+          password: password,
+          last_name: last_name,
+          nic: nic,
+          DOB: DOB,
+          contact_no: contact_no,
+          address: address,
+          gender: gender,
+          });
+          alert("caregiver registration Successfull");
+
+        } catch (err) {
+          alert(err);
+        }
+      }
 
     return (
         <div>
@@ -65,8 +90,25 @@ export default function AddCaregiver() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Enter the Name of the Caregiver"
-                                                    sx={{ m: 1, width: '62ch' }}
+                                                    label="Fisrt name"
+                                                    sx={{ m: 1, width: '30ch' }}
+
+                                                    value={first_name}
+                                                    onChange={(event) => {
+                                                    setFirstName(event.target.value);
+                                                    }}
+
+                                                />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Last name"
+                                                    sx={{ m: 1, width: '30ch' }}
+
+                                                    value={last_name}
+                                                    onChange={(event) => {
+                                                    setLastName(event.target.value);
+                                                    }}
 
                                                 />
                                                 <TextField
@@ -74,47 +116,63 @@ export default function AddCaregiver() {
                                                     id="outlined-required"
                                                     label="NIC No"
                                                     sx={{ m: 1, width: '30ch' }}
-                                                />
-                                                <TextField
-                                                    required
-                                                    id="outlined-required"
-                                                    label="Reg No (Elder Care Center)"
 
-                                                    sx={{ m: 1, width: '30ch' }}
+                                                    value={nic}
+                                                    onChange={(event) => {
+                                                    setNic(event.target.value);
+                                                    }}
                                                 />
                                                 <TextField
                                                     required
                                                     id="outlined-required"
                                                     label="Date of Birth"
                                                     sx={{ m: 1, width: '30ch' }}
-                                                />
-                                                <FormControl sx={{ m: 1, width: '30ch' }}>
-                                                    <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-helper-label"
-                                                        id="demo-simple-select-helper"
-                                                        value={gender}
-                                                        label="Gender"
-                                                        onChange={handleChange}
-                                                    >
-                                                        <MenuItem value={1}>Male</MenuItem>
-                                                        <MenuItem value={0}>Female</MenuItem>
-                                                    </Select>
 
-                                                </FormControl>
+                                                    value={DOB}
+                                                    onChange={(event) => {
+                                                    setDob(event.target.value);
+                                                    }}
+                                                />
                                                 <TextField
                                                     required
                                                     id="outlined-required"
                                                     label="Email"
+                                                    sx={{ m: 1, width: '62ch' }}
 
-                                                    sx={{ m: 1, width: '30ch' }}
+                                                    value={email}
+                                                    onChange={(event) => {
+                                                    setEmail(event.target.value);
+                                                    }}
                                                 />
+                                                <FormControl sx={{ m: 1, width: '30ch' }}>
+                                                    <InputLabel id="demo-simple-select-helper-label"
+                                                    value={gender}
+                                                    onChange={(event) => {
+                                                    setGender(event.target.value);
+                                                    }}>Gender</InputLabel>
+                                                    <Select
+                                                        labelId="demo-simple-select-helper-label"
+                                                        id="demo-simple-select-helper"
+
+                                                        
+                                                    >
+                                                        <MenuItem value={'M'}>Male</MenuItem>
+                                                        <MenuItem value={'F'}>Female</MenuItem>
+                                                    </Select>
+
+                                                </FormControl>
+                                                
                                                 <TextField
                                                     id="outlined-multiline-flexible"
-                                                    label="Mobile No"
+                                                    label="Contact no"
                                                     multiline
                                                     maxRows={4}
                                                     sx={{ m: 1, width: '30ch' }}
+
+                                                    value={contact_no}
+                                                    onChange={(event) => {
+                                                    setContactNo(event.target.value);
+                                                    }}
                                                 />
                                                 <TextField
                                                     required
@@ -122,10 +180,19 @@ export default function AddCaregiver() {
                                                     label="Address"
                                                     sx={{ m: 1, width: '62ch' }}
 
+                                                    value={address}
+                                                    onChange={(event) => {
+                                                    setAddress(event.target.value);
+                                                    }}
+
                                                 />
 
                                                 <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
-                                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                                    <InputLabel htmlFor="outlined-adornment-password"
+                                                    value={password}
+                                                    onChange={(event) => {
+                                                    setPassword(event.target.value);
+                                                    }}>Password</InputLabel>
                                                     <OutlinedInput
                                                         id="outlined-adornment-password"
                                                         type={showPassword ? 'text' : 'password'}
@@ -167,7 +234,7 @@ export default function AddCaregiver() {
                                                     />
                                                 </FormControl>
                                                 <br />
-                                                <Button variant="contained" sx={{ m: 1, width: '30ch' }}>
+                                                <Button variant="contained" sx={{ m: 1, width: '30ch' }} onClick={save}>
                                                     Register
                                                 </Button>
 
@@ -192,3 +259,5 @@ export default function AddCaregiver() {
         </div>
     )
 }
+
+export default AddCaregiver;
