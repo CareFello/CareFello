@@ -38,13 +38,13 @@ function AddCaregiver() {
         event.preventDefault();
     };
 
-    const [first_name, setFirstName] = useState("");
-    const [last_name, setLastName] = useState("");
+    const [name1, setName1] = useState("");
+    const [name2, setName2] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [nic, setNic] = useState("");
-    const [DOB, setDob] = useState("");
-    const [contact_no, setContactNo] = useState("");
+    const [dob, setDob] = useState("");
+    const [cont, setCont] = useState("");
     const [address, setAddress] = useState("");
     const [gender, setGender] = useState('');
 
@@ -52,17 +52,23 @@ function AddCaregiver() {
         event.preventDefault();
         try {
           await axios.post("http://localhost:8085/api/v1/caregiver/save", {
-          first_name: first_name,
           email: email,
           password: password,
-          last_name: last_name,
           nic: nic,
-          DOB: DOB,
-          contact_no: contact_no,
+          dob: dob,
           address: address,
           gender: gender,
+          name1: name1,
+          name2: name2,
+          cont: cont
           });
           alert("caregiver registration Successfull");
+          console.log(name1);
+          console.log(email);
+          console.log(password);
+          console.log(name2);
+          console.log(cont);
+          console.log(address);
 
         } catch (err) {
           alert(err);
@@ -71,6 +77,7 @@ function AddCaregiver() {
 
     return (
         <div>
+            <form>
             <Header />
             <Box height={120} />
             <Box sx={{ display: 'flex' }}>
@@ -90,12 +97,12 @@ function AddCaregiver() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Fisrt name"
+                                                    label="First name"
                                                     sx={{ m: 1, width: '30ch' }}
 
-                                                    value={first_name}
+                                                    value={name1}
                                                     onChange={(event) => {
-                                                    setFirstName(event.target.value);
+                                                    setName1(event.target.value);
                                                     }}
 
                                                 />
@@ -105,9 +112,9 @@ function AddCaregiver() {
                                                     label="Last name"
                                                     sx={{ m: 1, width: '30ch' }}
 
-                                                    value={last_name}
+                                                    value={name2}
                                                     onChange={(event) => {
-                                                    setLastName(event.target.value);
+                                                    setName2(event.target.value);
                                                     }}
 
                                                 />
@@ -125,10 +132,11 @@ function AddCaregiver() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Date of Birth"
+                                                    label=""
                                                     sx={{ m: 1, width: '30ch' }}
+                                                    type='date'
 
-                                                    value={DOB}
+                                                    value={dob}
                                                     onChange={(event) => {
                                                     setDob(event.target.value);
                                                     }}
@@ -146,13 +154,14 @@ function AddCaregiver() {
                                                 />
                                                 <FormControl sx={{ m: 1, width: '30ch' }}>
                                                     <InputLabel id="demo-simple-select-helper-label"
-                                                    value={gender}
-                                                    onChange={(event) => {
-                                                    setGender(event.target.value);
-                                                    }}>Gender</InputLabel>
+                                                    >Gender</InputLabel>
                                                     <Select
                                                         labelId="demo-simple-select-helper-label"
                                                         id="demo-simple-select-helper"
+                                                        value={gender}
+                                                        onChange={(event) => {
+                                                        setGender(event.target.value);
+                                                    }}
 
                                                         
                                                     >
@@ -169,9 +178,9 @@ function AddCaregiver() {
                                                     maxRows={4}
                                                     sx={{ m: 1, width: '30ch' }}
 
-                                                    value={contact_no}
+                                                    value={cont}
                                                     onChange={(event) => {
-                                                    setContactNo(event.target.value);
+                                                    setCont(event.target.value);
                                                     }}
                                                 />
                                                 <TextField
@@ -189,10 +198,7 @@ function AddCaregiver() {
 
                                                 <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
                                                     <InputLabel htmlFor="outlined-adornment-password"
-                                                    value={password}
-                                                    onChange={(event) => {
-                                                    setPassword(event.target.value);
-                                                    }}>Password</InputLabel>
+                                                    >Password</InputLabel>
                                                     <OutlinedInput
                                                         id="outlined-adornment-password"
                                                         type={showPassword ? 'text' : 'password'}
@@ -209,6 +215,10 @@ function AddCaregiver() {
                                                             </InputAdornment>
                                                         }
                                                         label="Password"
+                                                        value={password}
+                                                        onChange={(event) => {
+                                                        setPassword(event.target.value);
+                                                    }}
 
                                                     />
                                                 </FormControl>
@@ -256,6 +266,7 @@ function AddCaregiver() {
                     </Grid>
                 </Box>
             </Box>
+            </form>
         </div>
     )
 }

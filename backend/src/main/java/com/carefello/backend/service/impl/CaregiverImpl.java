@@ -21,21 +21,21 @@ public class CaregiverImpl implements CaregiverService {
     @Override
     public String addCaregiver(CaregiverDTO caregiverDTO) {
         Caregiver caregiver = new Caregiver(
-                caregiverDTO.getUserId(),
-                caregiverDTO.getFirstName(),
+                
                 caregiverDTO.getEmail(),
                 this.passwordEncoder.encode(caregiverDTO.getPassword()),
-                caregiverDTO.getlastName(),
-                caregiverDTO.getContactNo(),
-                caregiverDTO.getDob(),
+                caregiverDTO.getdob(),
                 caregiverDTO.getAddress(),
                 caregiverDTO.getNic(),
-                caregiverDTO.getRating(),
                 caregiverDTO.getGender(),
-                caregiverDTO.getAvailability()
+                caregiverDTO.getAvailability(),
+                caregiverDTO.getName1(),
+                caregiverDTO.getName2(),
+                caregiverDTO.getCont()
+                
         );
         caregiverRepo.save(caregiver);
-        return caregiver.getFirstName();
+        return caregiver.getCaregiverEmail();
     }
     
 }

@@ -20,5 +20,6 @@ public class CaregiverController {
         String id = caregiverService.addCaregiver(caregiverDTO);
         return id;
     }
+
     
 }
