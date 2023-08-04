@@ -4,25 +4,19 @@ import java.sql.Date;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name="caregiver")
+@Table(name="caregiver6")
 public class Caregiver {
 
     @Id
     @Column(name="user_id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
-    @Column(name="fisrt_name", length = 255)
-    private String first_name;
     @Column(name="email", length = 255)
     private String email;
     @Column(name="password", length = 255)
     private String password;
-    @Column(name="last_anme", length = 255)
-    private String last_name;
-    @Column(name="contact_no", length = 255)
-    private String contact_no;
-    @Column(name="DOB", length = 255)
-    private Date DOB;
+    @Column(name="dob", length = 255)
+    private Date dob;
     @Column(name="address", length = 255)
     private String address;
     @Column(name="nic", length = 255)
@@ -31,28 +25,34 @@ public class Caregiver {
     private double rating;
     @Column(name="gender", length = 255)
     private char gender;
-    @Column(name="availability", length = 255)
+    @Column(name="availability", length = 45)
     private int availability;
+    @Column(name="name1", length = 255)
+    private String name1;
+    @Column(name="name2", length = 255)
+    private String name2;
+    @Column(name="cont", length = 255)
+    private String cont;
+    
 
     public Caregiver() {
 
     }
 
-    public Caregiver(int user_id, String first_name, String email, String password,
-    String last_name, String contact_no, Date DOB, String address, String nic, double rating,
-    char gender, int availability) {
-        this.user_id = user_id;
-        this.first_name = first_name;
+    public Caregiver(String email, String password, Date dob, String address, String nic,
+    char gender, int availability, String name1, String name2, String cont) {
+        
         this.email = email;
         this.password = password;
-        this.last_name = last_name;
-        this.contact_no = contact_no;
-        this.DOB = DOB;
+        this.dob = dob;
         this.address = address;
         this.nic = nic;
-        this.rating = rating;
         this.gender = gender;
         this.availability = availability;
+        this.name1 = name1;
+        this.name2 = name2;
+        this.cont = cont;
+       
     }
 
     public String getCaregiverEmail() {
@@ -62,10 +62,4 @@ public class Caregiver {
     public String getCaregiverPassword() {
         return password;
     }
-
-    public String getFirstName() {
-        return first_name;
-    }
-
-
 }
