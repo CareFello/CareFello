@@ -11,6 +11,6 @@ import lombok.Data;
 
 public class Person {
     @Id
-    private long id;
+    private Long id;
     private String name;
 }

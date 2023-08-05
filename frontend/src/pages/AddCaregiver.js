@@ -47,6 +47,8 @@ function AddCaregiver() {
     const [cont, setCont] = useState("");
     const [address, setAddress] = useState("");
     const [gender, setGender] = useState('');
+    const [isValid, setIsValid] = useState(true);
+    const [isValidnic, setIsValidnic] = useState(true);
 
     async function save(event) {
         event.preventDefault();
@@ -63,12 +65,7 @@ function AddCaregiver() {
           cont: cont
           });
           alert("caregiver registration Successfull");
-          console.log(name1);
-          console.log(email);
-          console.log(password);
-          console.log(name2);
-          console.log(cont);
-          console.log(address);
+          window.location.reload();
 
         } catch (err) {
           alert(err);
@@ -121,14 +118,19 @@ function AddCaregiver() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="NIC No"
+                                                    label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
                                                     sx={{ m: 1, width: '30ch' }}
 
                                                     value={nic}
                                                     onChange={(event) => {
                                                     setNic(event.target.value);
+                                                    const inputnic = event.target.value;
+                                                    const nicPattern = /^\d{12}$/;
+                                                    setIsValidnic(nicPattern.test(inputnic));
                                                     }}
+                                                    style={{ borderColor: isValid ? 'green' : 'red' }}
                                                 />
+                                                
                                                 <TextField
                                                     required
                                                     id="outlined-required"
@@ -144,14 +146,24 @@ function AddCaregiver() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Email"
+                                                    label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
                                                     sx={{ m: 1, width: '62ch' }}
 
                                                     value={email}
                                                     onChange={(event) => {
                                                     setEmail(event.target.value);
+                                                    const inputEmail = event.target.value;
+
+                                                    // Regular expression for email validation
+                                                    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
+
+                                                    // Check if the email matches the pattern
+                                                    setIsValid(emailPattern.test(inputEmail));
                                                     }}
+
+                                                    style={{ borderColor: isValid ? 'green' : 'red' }}
                                                 />
+                                                
                                                 <FormControl sx={{ m: 1, width: '30ch' }}>
                                                     <InputLabel id="demo-simple-select-helper-label"
                                                     >Gender</InputLabel>
@@ -162,7 +174,6 @@ function AddCaregiver() {
                                                         onChange={(event) => {
                                                         setGender(event.target.value);
                                                     }}
-
                                                         
                                                     >
                                                         <MenuItem value={'M'}>Male</MenuItem>
