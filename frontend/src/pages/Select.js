@@ -11,6 +11,20 @@ const Select = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  const handleDelete = async (id) => {
+
+    console.log(id);
+    try {
+      await axios.delete(`http://localhost:8085/api/persons/delete/${id}`);
+      axios.get('http://localhost:8085/api/persons/get')
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.error(error));
+      
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+    }
+  };
+
   return (
     <div>
       <h2>People List</h2>
@@ -18,6 +32,7 @@ const Select = () => {
         {people.map((person) => (
           <li key={person.id}>
             {person.id}: {person.name}
+            <button onClick={() => handleDelete(person.id)}>Delete</button>
           </li>
         ))}
       </ul>
