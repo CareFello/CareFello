@@ -16,18 +16,18 @@ import { useAppStore } from '../appStore';
 import { useNavigate } from "react-router-dom"
 import { FaTh } from 'react-icons/fa';
 import { FaUserNurse } from 'react-icons/fa';
-import {TbListDetails}from "react-icons/tb";
-import{TbNurse}from "react-icons/tb";
-import {GiMeal}from "react-icons/gi";
-import {MdOutlineBedroomParent}from "react-icons/md";
-import {MdOutlineFileOpen}from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
+import { TbNurse } from "react-icons/tb";
+import { GiMeal } from "react-icons/gi";
+import { MdOutlineBedroomParent } from "react-icons/md";
+import { MdOutlineFileOpen } from "react-icons/md";
 
 
-import {AiOutlineUserAdd} from "react-icons/ai";
-import {BiUserCheck} from "react-icons/bi";
-import {VscRequestChanges} from "react-icons/vsc";
-import {TbAlertSquareRounded} from "react-icons/tb";
-import {MdOutlineElderlyWoman} from "react-icons/md";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { BiUserCheck } from "react-icons/bi";
+import { VscRequestChanges } from "react-icons/vsc";
+import { TbAlertSquareRounded } from "react-icons/tb";
+import { MdOutlineElderlyWoman } from "react-icons/md";
 
 import { NavLink } from 'react-router-dom';
 
@@ -97,53 +97,53 @@ export default function Sidebar() {
 
     const menuItem = [
         {
-            path: "/",
+            path: "/ManagerDashboard",
             name: "Dashboard",
-            icon:<FaTh/>
+            icon: <FaTh />
         },
         {
-            path: "/",
-            name: "Create Account",
-            icon:<AiOutlineUserAdd/>,
+            path: "/AddDoctor",
+            name: "Add Doctor",
+            icon: <AiOutlineUserAdd />,
             subItems: [
                 { path: "/", name: "For Doctor" },
                 { path: "/", name: "For Caregiver" }
-              ]
+            ]
         },
         {
-            path: "/",
-            name: "Assign Caregiver",
-            icon:<BiUserCheck/>
+            path: "/AddCaregiver",
+            name: "Add Caregiver",
+            icon: <BiUserCheck />
         },
         {
-            path: "/",
-            name: "Room Details",
-            icon:<TbListDetails/>
+            path: "/RoomPackage",
+            name: "Packages",
+            icon: <TbListDetails />
         },
         {
-            path: "/",
+            path: "/GuardianRequest",
             name: "Guardian Request",
-            icon:<VscRequestChanges/>
+            icon: <VscRequestChanges />
         },
         {
             path: "/",
             name: "Complaints",
-            icon:<TbAlertSquareRounded/>
+            icon: <TbAlertSquareRounded />
         },
         {
             path: "/",
             name: "View Elders",
-            icon:<MdOutlineElderlyWoman/>
+            icon: <MdOutlineElderlyWoman />
         },
         {
             path: "/",
             name: "View Caregivers",
-            icon:<TbNurse/>
+            icon: <TbNurse />
         },
         {
             path: "/",
             name: "View Doctors",
-            icon:<FaUserNurse/>
+            icon: <FaUserNurse />
         },
     ]
 
@@ -158,12 +158,12 @@ export default function Sidebar() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-               { menuItem.map((item,index)=>(
-                        <NavLink to={item.path} key={index} className="link" activeclassName="active">
-                            <div className='icon'>{item.icon}</div>
-                            { <div style={{display: open ? "block" : "none"}} className="link_text">{item.name}</div> }
-                        </NavLink>
-                    ))}
+                {menuItem.map((item, index) => (
+                    <NavLink to={item.path} key={index} className="link" activeclassName="active">
+                        <div className='icon'>{item.icon}</div>
+                        {<div style={{ display: open ? "block" : "none" }} className="link_text">{item.name}</div>}
+                    </NavLink>
+                ))}
 
             </Drawer>
 
