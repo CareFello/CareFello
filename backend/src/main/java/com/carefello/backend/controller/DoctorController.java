@@ -1,8 +1,8 @@
 package com.carefello.backend.controller;
 
-import com.carefello.backend.DTO.CaregiverDTO;
+import com.carefello.backend.DTO.DoctorDTO;
 
-import com.carefello.backend.service.CaregiverService;
+import com.carefello.backend.service.DoctorService;
 import com.carefello.backend.service.EmailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +10,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
-@RequestMapping("api/v1/caregiver")
+@RequestMapping("api/v1/doctor")
 
-public class CaregiverController {
+public class DoctorController {
     @Autowired
-    private CaregiverService caregiverService;
+    private DoctorService DoctorService;
     // @Autowired
     // private EmailService emailService;
     @PostMapping(path = "/save")
-    public String saveCaregiver(@RequestBody CaregiverDTO caregiverDTO)
+    public String saveDoctor(@RequestBody DoctorDTO DoctorDTO)
     {
-        String id = caregiverService.addCaregiver(caregiverDTO);
+        String id = DoctorService.addDoctor(DoctorDTO);
 
         /*try {
-            emailService.sendSimpleEmail(caregiverDTO.getEmail(), caregiverDTO.getName1(), caregiverDTO.getName2());
+            emailService.sendSimpleEmail(DoctorDTO.getEmail(), DoctorDTO.getName1(), DoctorDTO.getName2());
             return "Email sent successfully";
         } catch (Exception e) {
             e.printStackTrace();

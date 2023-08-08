@@ -14,8 +14,11 @@ import CardContent from '@mui/material/CardContent';
 import CountUp, { useCountUp } from 'react-countup';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Footer from '../components/HomepageFooter';
-
-
+import Gallery from '../components/Gallery';
+import ContactUs from '../components/ContactUs';
+import Location from '../assets/location_logo.png'
+import Phone from '../assets/phone_logo.png'
+import Mail from '../assets/mail_logo.png'
 
 const images = [Background, Background, Background, Background, Background, Background, Background, Background, Background]
 
@@ -131,8 +134,9 @@ function Home() {
                     <h4><CountUp end={15} enableScrollSpy /> + <br></br>Years of Experience</h4>
                 </div> */}
             {/* </div> */}
-            <div className='gallery'>
-                <h2>Gallery</h2>
+            {/* <div className='gallery'> */}
+            {/* <Gallery/> */}
+                {/* <h2>Gallery</h2>
                 {
                     data.img &&
                     <div style={{
@@ -164,14 +168,28 @@ function Home() {
                             ))}
                         </Masonry>
                     </ResponsiveMasonry>
-                </div>
-            </div>
-
-
-
-
+                </div> */}
+            {/* </div> */}
             <div className='contactus'>
-
+                <h2>Contact Us</h2>
+                <ContactUs />
+            </div>
+            <div className='contact'>
+                <div className='location'>
+                    <img src={Location} alt='location' />
+                    <h6>No.23 , Garden Rd, Dehiwala</h6>
+                </div>
+                <div className='phone'>
+                    <img src={Phone} alt='phone' />
+                    <div className='phone_no'>
+                    <h6>+ 94 117901360</h6>
+                    <h6>+ 94 117901360</h6>
+                    </div>
+                </div>
+                <div className='mail'>
+                    <img src={Mail} alt='mail' />
+                    <h6>info@Carefello.com</h6>
+                </div>
             </div>
             <Footer />
             </div>
