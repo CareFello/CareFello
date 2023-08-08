@@ -28,12 +28,12 @@ function createData(Room_No, Type, Bed_1, Bed_2, Bed_3) {
 }
 
 const rows = [
-  createData('A1','Shared','Available','-','-'),
-  createData('A2','Shared','Available','-','Available'),
-  createData('B3','Shared','Available','-','-'),
-  createData('C3','Luxury','Available','-','-'),
-  createData('A1','Shared','Available','-','-'),
-  createData('A1','Single','Available','-','-'),
+  createData('A1', 'Shared', 'Available', '-', '-'),
+  createData('A2', 'Shared', 'Available', '-', 'Available'),
+  createData('B3', 'Shared', 'Available', '-', '-'),
+  createData('C3', 'Luxury', 'Available', '-', '-'),
+  createData('A1', 'Shared', 'Available', '-', '-'),
+  createData('A1', 'Single', 'Available', '-', '-'),
 
 ];
 
@@ -137,7 +137,7 @@ function ManagerDashboard() {
                       <TableBody>
                         {rows.map((row) => (
                           <TableRow
-                            
+
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                             <TableCell component="th" scope="row">
@@ -159,20 +159,20 @@ function ManagerDashboard() {
               <Card sx={{ height: 60 + "vh" }}>
                 <CardContent>
                   <Typography component="div" variant="h5">
-                     Available Time Slots for Doctors
+                    Available Time Slots for Doctors
                   </Typography>
                   <br />
                   <Typography variant="subtitle1" component="div" >
                     <ul style={{ listStyle: 'none', marginLeft: 10, textAlign: 'left' }}>
                       <li>Dr.R.M. Sampath Rathnayake</li>
-                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize:'12px', textAlign: 'left' }}>
+                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize: '12px', textAlign: 'left' }}>
                         <li>Monday : 8.30 am - 10.30 am</li>
                         <li>Thursday : 4.30 pm - 5.30 pm </li>
                         <li>Sunday : 7.00 am - 9.00 am</li>
                       </ul>
                       <br></br>
                       <li>Dr.R.M. Sampath Rathnayake</li>
-                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize:'12px', textAlign: 'left' }}>
+                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize: '12px', textAlign: 'left' }}>
                         <li>Monday : 8.30 am - 10.30 am</li>
                         <li>Thursday : 4.30 pm - 5.30 pm </li>
                         <li>Sunday : 7.00 am - 9.00 am</li>

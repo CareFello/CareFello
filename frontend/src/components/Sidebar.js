@@ -126,8 +126,8 @@ export default function Sidebar() {
             icon: <VscRequestChanges />
         },
         {
-            path: "/",
-            name: "Complaints",
+            path: "/MealPlan",
+            name: "Meal Plan",
             icon: <TbAlertSquareRounded />
         },
         {
@@ -136,12 +136,12 @@ export default function Sidebar() {
             icon: <MdOutlineElderlyWoman />
         },
         {
-            path: "/",
+            path: "/Caregiverlist",
             name: "View Caregivers",
             icon: <TbNurse />
         },
         {
-            path: "/",
+            path: "/SendRequest",
             name: "View Doctors",
             icon: <FaUserNurse />
         },

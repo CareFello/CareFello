@@ -19,6 +19,7 @@ import ViewRoomDetails from './pages/ViewRoomDetails'
 import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
 import GuardianRequest from './pages/GuardianRequest';
+import SendRequest from './pages/SendRequest';
 
 
 
@@ -44,7 +45,7 @@ function App() {
           <Route path="/ViewRoomDetails" element={<ViewRoomDetails />} />
           <Route path="/MealPlan" element={<MealPlan />} />
           <Route path="/RoomPackage" element={<RoomPackage />} />
-
+          <Route path="/SendRequest" element={<SendRequest />} />
 
 
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
