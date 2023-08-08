@@ -25,20 +25,52 @@ import Typography from '@mui/material/Typography';
 
 import img_4 from '../assets/doctor.jpg';
 import '../styles/AddDoctor.css';
+import {  useState } from "react";
+import axios from "axios";
 
 
-export default function AddDoctor() {
+function AddDoctor() {
 
-    const [showPassword, setShowPassword] = React.useState(false);
-
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
+    const [name1, setName1] = useState("");
+    const [name2, setname2] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [nic, setNic] = useState("");
+    const [cont, setCont] = useState("");
+    const [reg, setReg] = useState("");
+    const [isValid, setIsValid] = useState(true);
+    const [isValidnic, setIsValidnic] = useState(true);
+
+    async function save(event) {
+        event.preventDefault();
+        try {
+          await axios.post("http://localhost:8085/api/v1/doctor/save", {
+          email: email,
+          password: password,
+          nic: nic,
+          name1: name1,
+          name2: name2,
+          cont: cont,
+          reg: reg,
+          });
+          alert("Doctor registration Successfull");
+          window.location.reload();
+
+        } catch (err) {
+          alert(err);
+        }
+      }
+
+
     return (
         <div className='addDoctor'>
+            <form>
             <Header />
             <Box height={120} />
             <Box sx={{ display: 'flex' }}>
@@ -58,29 +90,72 @@ export default function AddDoctor() {
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Enter the Name of the Doctor"
-                                                    sx={{ m: 1, width: '62ch' }}
+                                                    label="Fisrt name"
+                                                    sx={{ m: 1, width: '30ch' }}
+
+                                                    value={name1}
+                                                    onChange={(event) => {
+                                                    setName1(event.target.value);
+                                                    }}
+                                                />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Last name"
+                                                    sx={{ m: 1, width: '30ch' }}
+
+                                                    value={name2}
+                                                    onChange={(event) => {
+                                                    setname2(event.target.value);
+                                                    }}
+                                                />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Register Number"
+                                                    sx={{ m: 1, width: '30ch' }}
+
+                                                    value={reg}
+                                                    onChange={(event) => {
+                                                    setReg(event.target.value);
+                                                    }}
 
                                                 />
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="NIC No"
+                                                    label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
                                                     sx={{ m: 1, width: '30ch' }}
+
+                                                    value={nic}
+                                                    onChange={(event) => {
+                                                    setNic(event.target.value);
+                                                    const inputnic = event.target.value;
+                                                    const nicPattern = /^\d{12}$/;
+                                                    setIsValidnic(nicPattern.test(inputnic));
+                                                    }}
+                                                    style={{ borderColor: isValid ? 'green' : 'red' }}
                                                 />
+                        
                                                 <TextField
                                                     required
                                                     id="outlined-required"
-                                                    label="Reg No (Elder Care Center)"
-
+                                                    label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
                                                     sx={{ m: 1, width: '30ch' }}
-                                                />
-                                                <TextField
-                                                    required
-                                                    id="outlined-required"
-                                                    label="Email"
 
-                                                    sx={{ m: 1, width: '30ch' }}
+                                                    value={email}
+                                                    onChange={(event) => {
+                                                    setEmail(event.target.value);
+                                                    const inputEmail = event.target.value;
+
+                                                    // Regular expression for email validation
+                                                    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
+
+                                                    // Check if the email matches the pattern
+                                                    setIsValid(emailPattern.test(inputEmail));
+                                                    }}
+
+                                                    style={{ borderColor: isValid ? 'green' : 'red' }}
                                                 />
                                                 <TextField
                                                     id="outlined-multiline-flexible"
@@ -88,19 +163,13 @@ export default function AddDoctor() {
                                                     multiline
                                                     maxRows={4}
                                                     sx={{ m: 1, width: '30ch' }}
+
+                                                    value={cont}
+                                                    onChange={(event) => {
+                                                    setCont(event.target.value);
+                                                    }}
                                                 />
-                                                <TextField
-                                                    id="outlined-multiline-flexible"
-                                                    label="Specialized Areas"
-                                                    multiline
-                                                    maxRows={4}
-                                                    sx={{ m: 1, width: '30ch' }}
-                                                />
-                                                <TextField
-                                                    id="outlined-multiline-flexible"
-                                                    label="Reg No (Medical Council)"
-                                                    sx={{ m: 1, width: '30ch' }}
-                                                />
+                                        
                                                 <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
                                                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                                     <OutlinedInput
@@ -114,12 +183,15 @@ export default function AddDoctor() {
                                                                     onMouseDown={handleMouseDownPassword}
                                                                     edge="end"
                                                                 >
-                                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
                                                                 </IconButton>
                                                             </InputAdornment>
                                                         }
                                                         label="Password"
-
+                                                        value={password}
+                                                        onChange={(event) => {
+                                                        setPassword(event.target.value);
+                                                        }}
                                                     />
                                                 </FormControl>
                                                 <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
@@ -135,7 +207,7 @@ export default function AddDoctor() {
                                                                     onMouseDown={handleMouseDownPassword}
                                                                     edge="end"
                                                                 >
-                                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
                                                                 </IconButton>
                                                             </InputAdornment>
                                                         }
@@ -144,7 +216,7 @@ export default function AddDoctor() {
                                                     />
                                                 </FormControl>
                                                 <br />
-                                                <Button variant="contained" sx={{ m: 1, width: '30ch' }}>
+                                                <Button variant="contained" sx={{ m: 1, width: '30ch' }} onClick={save}>
                                                     Register
                                                 </Button>
 
@@ -166,7 +238,10 @@ export default function AddDoctor() {
                     </Grid>
                 </Box>
             </Box>
+            </form>
         </div>
     )
 }
+
+export default AddDoctor;
 
