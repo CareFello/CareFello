@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
@@ -15,13 +15,15 @@ import Typography from '@mui/material/Typography';
 import Shared from '../assets/SharedRoom.jpg'
 import Single from '../assets/Single.jpg'
 import Luxury from '../assets/Luxury.jpg'
+import Model from "react-modal"
+import "../styles/form.css"
 
 
 
 
 export default function RoomPackage() {
 
-
+    const [visible, setVisible] = useState(false);
 
     return (
         <div>
@@ -33,6 +35,37 @@ export default function RoomPackage() {
                     <Grid container spacing={5} >
 
                         <Grid item xs={12}>
+                            <Button onClick={() => setVisible(true)}>Add New Package</Button>
+                            <Model isOpen={visible} onRequestClose={() => setVisible(false)} style={{
+                                content: { width: "500px", marginLeft: "30%", marginTop: "40px" }
+                            }}>
+                                <form action="#" className="form">
+                                    <div className="input-box">
+                                        <label>Package Name</label>
+                                        <input type="text" placeholder="Enter full name" required />
+                                    </div>
+                                    <div className="input-box">
+                                        <label>Package description</label><br />
+                                        <textarea rows="4" cols="50" required />
+                                    </div>
+                                    <div className="column">
+                                        <div className="input-box">
+                                            <label>Phone Number</label>
+                                            <input type="number" placeholder="Enter phone number" required />
+                                        </div>
+                                        <div className="input-box">
+                                            <label>Birth Date</label>
+                                            <input type="date" placeholder="Enter birth date" required />
+                                        </div>
+                                    </div>
+                                    <div className='column'>
+                                        <Button>Submit</Button>
+                                        <Button onClick={() => setVisible(false)}>Close</Button>
+                                    </div>
+                                </form>
+                                <br />
+
+                            </Model>
                             <Stack spacing={5} direction={'row'}>
 
                                 <Card sx={{ maxWidth: 32 + "%" }}>
