@@ -7,24 +7,6 @@
     margin-top: 20px;
 }
 
-textarea {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.form :where(textarea) {
-    position: relative;
-    height: 100px;
-    width: 100%;
-    outline: none;
-    font-size: 1rem;
-    color: #707070;
-    margin-top: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 0 15px;
-}
-
 .input-box label {
     color: #333;
 }
@@ -96,4 +78,50 @@ textarea {
     border: none;
     color: #707070;
     font-size: 1rem;
+}
+
+.form button {
+    height: 55px;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgb(130, 106, 251);
+}
+
+.form button:hover {
+    background: rgb(88, 56, 250);
+}
+
+/*Responsive*/
+@media screen and (max-width: 750px) {
+    .form .column {
+        flex-wrap: wrap;
+    }
+
+    .form :where(.gender-option, .gender) {
+        row-gap: 15px;
+    }
+}
+
+textarea {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form :where(textarea) {
+    position: relative;
+    height: 100px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
 }
