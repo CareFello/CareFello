@@ -1,0 +1,68 @@
+.contactus h2 {
+    color:#05445E;
+    text-align: center;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 5%;
+}
+
+.name_email {
+    display:flex;
+    flex-direction: row;
+}
+
+.contactblock {
+    display: flex;
+    padding-bottom: 100px;
+    padding: 40px;
+    flex-direction: row;
+    align-items: flex-start; /* Align items to the top of the flex container */
+     /* Adjust this padding as needed */
+}
+
+.form {
+    padding: 50px;
+    max-width: 400px;
+    margin: 0 auto;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #F9FFFE;
+}
+
+.form-label {
+    color: #05445E;
+    font-weight: 500;
+    font-size: small;
+    margin-bottom: 5px; /* Add a little space between label and input */
+}
+
+.form-control {
+    border: none;
+    margin-bottom: 20px;
+    padding: 10px;
+    /* border: 0.05px solid #ccc; */
+    border-radius: 5px;
+    width: 100%; /* Make sure the input fields take up the available width */
+    margin-right: 5px;
+}
+
+
+/* Add this new class for spacing between text boxes */
+.form-control-group {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.btn  {
+    border: none;
+    border-radius: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #189AB4;
+    color:white;
+}
