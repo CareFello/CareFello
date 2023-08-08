@@ -42,7 +42,7 @@ function HomepageFooter() {
                         <img src={utube} />
                         <img src={twitter} />
                     </div>
-                    <p>CareFello © 2023. All rights reserved</p>
+                    <div className='tagline'>CareFello © 2023. All rights reserved</div>
                 </div>
             </div>
         </div>

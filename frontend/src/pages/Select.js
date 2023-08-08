@@ -1,30 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-
-function Select() {
-  
-  const [id, setId] = useState("");
-  const [name1, setName] = useState("");
- 
-
-
-  async function add(event) {
-      event.preventDefault();
-      try {
-        await axios.post("http://localhost:8085/api/persons", {
-        name: name1,
-        id: id,
-        
-        });
-        alert("Person Registation Successfully");
-
-      } catch (err) {
-        alert(err);
-      }
-    }
-  }
-
+ import React, { useState, useEffect } from 'react';
+ import axios from 'axios';
 
 
 const Select = () => {
@@ -32,47 +7,33 @@ const Select = () => {
 
   useEffect(() => {
     // Make the GET request using Axios to fetch data from the backend
-    axios.get('http://localhost:8085/api/persons')
+    axios.get('http://localhost:8085/api/persons/get')
       .then((response) => setPeople(response.data))
       .catch((error) => console.error(error));
   }, []);
 
+  const handleDelete = async (id) => {
+
+    console.log(id);
+    try {
+      await axios.delete(`http://localhost:8085/api/persons/delete/${id}`);
+      axios.get('http://localhost:8085/api/persons/get')
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.error(error));
+      
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+    }
+  };
+
   return (
     <div>
-      <form>
-        <div class="form-group">
-          <label>Id</label>
-          <input type="text"  class="form-control" id="id" placeholder="id"
-          
-          value={id}
-          onChange={(event) => {
-            setId(event.target.value);
-          }}
-          />
-
-        </div>
-
-        <div class="form-group">
-          <label>name</label>
-          <input type="email"  class="form-control" id="name" placeholder="name"
-          
-          value={name1}
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-          
-          />
- 
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-4" onClick={add} >ADD</button>
-      </form>  
-
       <h2>People List</h2>
       <ul>
         {people.map((person) => (
           <li key={person.id}>
             {person.id}: {person.name}
+            <button onClick={() => handleDelete(person.id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -81,4 +42,5 @@ const Select = () => {
 };
 
 export default Select;
+
 

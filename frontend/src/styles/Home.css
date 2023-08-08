@@ -1,6 +1,10 @@
+
+.home{
+    background-color: #F9FFFE;
+}
+
 .slider img {
     width: 100%;
-
 }
 
 .container img {
@@ -17,18 +21,17 @@
     width: 20%;
     height: 40%;
     background-color: none;
-    padding: 50px;
-
-    margin-left: 5%;
-    border-radius: 10px;
+    padding-bottom: 100px;
+    padding-top: 50px;
+    margin-left: 10%;
+    /* border-radius: 10px; */
 
 }
 
 .quote-box .quote p {
     font-size: 25px;
-    text-align: right;
+    text-align: center;
     font-weight: 500;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     color: #05445E;
 }
 
@@ -38,17 +41,17 @@
 }
 
 .grid .box {
-    width: 309px;
-    height: 321px;
+    width: 280px;
+    height: 320px;
     flex-shrink: 0;
-    background-color: #D4F1F4;
-    border: #75E6Da solid 2px;
-    border-radius: 5px;
-    margin-left: 10%;
-
+    background-color: #F9FFFE;
+    color:#189AB4;
+    border-radius: 20px;
+    margin-left: 120px;
+    box-shadow: 0 0 50px #457f75(0, 0, 0, 0.5);
 }
 
-.grid :hover {
+.grid.box :hover {
     transform: scale(1.1);
 }
 
@@ -61,21 +64,26 @@
 }
 
 .grid .box p {
-    font-size: 20px;
+    font-size: 13px;
 }
+
+.grid .box .topic{
+    font-size:24px;
+}
+
 
 .Aboutus {
     align-items: center;
     justify-content: center;
     display: flex;
-
+    margin-left: 40px;
+    margin-right: 10px;
 }
 
 .About h2 {
-    color: #189AB4;
+    color:#05445E;
     text-align: center;
-    font-family: Poppins;
-    font-size: 40px;
+    font-size: 38px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -85,39 +93,107 @@
 
 .Aboutus .text {
     float: left;
-    margin-left: 10%;
-    font-size: 20px;
+    margin-left: 15%;
+    margin-top: 1%;
+    margin-bottom: 5%;
+    font-size: 15px;
+    color:  #05445E;
 }
 
 .Aboutus .image {
-    max-width: 25%;
-    max-height: 15%;
+    max-width: 100%;
+    max-height: 100%;
     float: right;
-    margin-right: 10%;
+    margin-right: 15%;
+    margin-bottom: 6%;
+}
+
+.card01{
+    margin-left: 10%;
+}
+
+.card02{
+    margin-left: 10%;
+}
+
+.card03{
+    margin-left: 10%;
 }
 
 .countup {
     position: relative;
     display: flex;
+   
 }
 
 .countup h4 {
-    margin-left: 12%;
-    margin-top: 10%;
-    bottom: 15%;
-    font-size: 40px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #189AB4;
+    font-size: 30px;
+    color:  #05445E;
+    filter: brightness(180%);
 }
 
 .gallery h2 {
-    color: #189AB4;
+    color:  #05445E;
     text-align: center;
     font-family: Poppins;
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-top: 5%;
+    margin-top: 6%;
 
+}
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    padding-left: 500px;
+    padding-bottom: 100px;
+}
+
+.location{
+    display: flex;
+    flex-direction: row;
+}
+
+.location img{
+    width: 10%;
+    height: 75%;
+}
+
+.phone{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.phone img{
+    width: 15%;
+    height: 55%;
+}
+
+.mail img{
+    width: 13%;
+    height: 58%;
+  
+}
+
+.mail{
+    display: flex;
+    flex-direction: row;
+}
+
+.phone {
+    padding-right: 120px;
+    padding-left: 120px;
+}
+
+.phone_no {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact h6 {
+    color: #05445E;
+    padding-left: 10px;
 }
