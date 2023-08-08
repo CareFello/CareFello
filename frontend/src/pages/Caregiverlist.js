@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Table from 'react-bootstrap/Table';
@@ -135,4 +135,4 @@ const Caregiverlist = () => (
   </div>
 )
 
-export default Caregiverlist;
+export default Caregiverlist;*/

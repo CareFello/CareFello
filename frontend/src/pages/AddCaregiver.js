@@ -117,7 +117,7 @@ function AddCaregiver() {
                                                 />
                                                 <TextField
                                                     required
-                                                    id="outlined-required"
+                                                    id="outlined-multiline-flexible"
                                                     label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
                                                     sx={{ m: 1, width: '30ch' }}
 
@@ -145,7 +145,7 @@ function AddCaregiver() {
                                                 />
                                                 <TextField
                                                     required
-                                                    id="outlined-required"
+                                                    id="outlined-multiline-flexible"
                                                     label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
                                                     sx={{ m: 1, width: '62ch' }}
 
@@ -221,7 +221,7 @@ function AddCaregiver() {
                                                                     onMouseDown={handleMouseDownPassword}
                                                                     edge="end"
                                                                 >
-                                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
                                                                 </IconButton>
                                                             </InputAdornment>
                                                         }
@@ -246,7 +246,7 @@ function AddCaregiver() {
                                                                     onMouseDown={handleMouseDownPassword}
                                                                     edge="end"
                                                                 >
-                                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
                                                                 </IconButton>
                                                             </InputAdornment>
                                                         }

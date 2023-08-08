@@ -126,7 +126,7 @@ export default function Sidebar() {
             icon: <VscRequestChanges />
         },
         {
-            path: "/",
+            path: "/MealPlan",
             name: "Complaints",
             icon: <TbAlertSquareRounded />
         },
