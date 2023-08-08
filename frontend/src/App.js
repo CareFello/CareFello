@@ -20,6 +20,7 @@ import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
 import GuardianRequest from './pages/GuardianRequest';
 import SendRequest from './pages/SendRequest';
+import Registration from './pages/Registration';
 
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/sel" element={<Sel />} />
+          <Route path="/Registration" element={<Registration />} />
 
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />

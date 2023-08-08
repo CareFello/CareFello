@@ -1,5 +1,5 @@
 .contactus h2 {
-    color:#05445E;
+    color: #05445E;
     text-align: center;
     font-size: 38px;
     font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 .name_email {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
@@ -18,11 +18,12 @@
     padding-bottom: 100px;
     padding: 40px;
     flex-direction: row;
-    align-items: flex-start; /* Align items to the top of the flex container */
-     /* Adjust this padding as needed */
+    align-items: flex-start;
+    /* Align items to the top of the flex container */
+    /* Adjust this padding as needed */
 }
 
-.form {
+.form1 {
     padding: 50px;
     max-width: 400px;
     margin: 0 auto;
@@ -36,7 +37,8 @@
     color: #05445E;
     font-weight: 500;
     font-size: small;
-    margin-bottom: 5px; /* Add a little space between label and input */
+    margin-bottom: 5px;
+    /* Add a little space between label and input */
 }
 
 .form-control {
@@ -45,7 +47,8 @@
     padding: 10px;
     /* border: 0.05px solid #ccc; */
     border-radius: 5px;
-    width: 100%; /* Make sure the input fields take up the available width */
+    width: 100%;
+    /* Make sure the input fields take up the available width */
     margin-right: 5px;
 }
 
@@ -56,7 +59,7 @@
     margin-bottom: 20px;
 }
 
-.btn  {
+.btn {
     border: none;
     border-radius: 8px;
     padding-top: 5px;
@@ -64,5 +67,5 @@
     padding-left: 15px;
     padding-right: 15px;
     background-color: #189AB4;
-    color:white;
+    color: white;
 }

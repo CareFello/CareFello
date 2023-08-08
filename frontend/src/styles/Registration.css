@@ -1,0 +1,29 @@
+.reg-container {
+    display: flex;
+    width: 70%;
+    min-height: 500px;
+    box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
+    border: 5px solid white;
+    box-shadow: 20;
+    border-radius: 50px;
+    margin-left: 15%;
+}
+
+.reg-image {
+    flex: 40%;
+    margin-top: 7%;
+    background-size: cover;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.reg-form {
+    flex: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.Topic {
+    margin-bottom: 10px;
+}

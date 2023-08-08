@@ -1,14 +1,14 @@
 import React from 'react'
 import Logo from '../assets/logo.png';
 import Name from '../assets/name.png';
-import { BiPhoneCall} from 'react-icons/bi';
-import { AiOutlineMail} from 'react-icons/ai';
+import { BiPhoneCall } from 'react-icons/bi';
+import { AiOutlineMail } from 'react-icons/ai';
 import '../styles/Navbar.css';
 import { NavLink } from "react-router-dom";
 
 
 function Navbar() {
-    
+
     return (
         <div>
             <div className='navbar'>
@@ -32,7 +32,7 @@ function Navbar() {
                     <NavLink to="/" exact activeClassName="active"> Home </NavLink>
                     <NavLink to="/" activeClassName="inactive"> About Us </NavLink>
                     <NavLink to="/" activeClassName="inactive"> Our Services </NavLink>
-                    <NavLink to="/" activeClassName="inactive"> Contact Us </NavLink>
+                    <NavLink to="/Registration" activeClassName="inactive"> Contact Us </NavLink>
                     <NavLink to="/Managerdashboard" activeClassName="inactive"> Manager </NavLink>
                     <NavLink to="/Login" activeClassName="inactive"> Login </NavLink>
                 </div>
