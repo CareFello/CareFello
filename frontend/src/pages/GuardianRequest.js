@@ -18,71 +18,32 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { CardActionArea } from '@mui/material';
 import LivingIcon from '@mui/icons-material/Living';
+import RequestCard from '../components/RequestCard'
 
 
-const columns = [
+const students = [
     {
-        id: 'Guardian',
-        label: 'Guardian',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
+        name: 'John Doe',
+        indexNo: '12345',
+        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        id: 'Elderly_Person',
-        label: 'Elderly Person',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US'),
+        name: 'John Doe',
+        indexNo: '12346',
+        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        id: 'Room_Type',
-        label: 'Room Type',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toFixed(2),
+        name: 'John Doe',
+        indexNo: '12346',
+        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        id: 'Caregiver_Type',
-        label: 'Caregiver Type',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toFixed(2),
+        name: 'John Doe',
+        indexNo: '12346',
+        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
-    {
-        id: 'Action',
-        label: 'Action',
-        minWidth: 170,
-        align: 'center',
-        format: (value) => value.toFixed(2),
-    },
+    // Add more student objects as needed
 ];
-
-
-
-const rows = [
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-    createData('G.M.Nishantha', 'G.M.Jayasena', 'Classic', 'Male', <MoreVertIcon />),
-];
-
-function createData(Guardian, Elderly_Person, Room_Type, Caregiver_Type, Action) {
-
-    return { Guardian, Elderly_Person, Room_Type, Caregiver_Type, Action };
-}
-
 
 
 export default function GuardianRequest() {
@@ -112,43 +73,13 @@ export default function GuardianRequest() {
                             <Stack spacing={5} direction={'row'}>
                                 <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                                     <TableContainer sx={{ maxHeight: 600 }}>
-                                        <Table stickyHeader aria-label="sticky table">
-                                            <TableHead>
-                                                <TableRow>
-                                                    {columns.map((column) => (
-                                                        <TableCell
-                                                            key={column.id}
-                                                            align={column.align}
-                                                            style={{ minWidth: column.minWidth }}
-                                                        >
-                                                            {column.label}
-                                                        </TableCell>
-                                                    ))}
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                                {rows
-                                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                                    .map((row) => {
-                                                        return (
-                                                            <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                                                {columns.map((column) => {
-                                                                    const value = row[column.id];
-                                                                    return (
-                                                                        <TableCell key={column.id} align={column.align}>
-                                                                            {column.format && typeof value === 'number'
-                                                                                ? column.format(value)
-                                                                                : value}
-                                                                        </TableCell>
-                                                                    );
-                                                                })}
-                                                            </TableRow>
-                                                        );
-                                                    })}
-                                            </TableBody>
-                                        </Table>
+                                        <div>
+                                            {students.map((student, index) => (
+                                                <RequestCard key={index} {...student} />
+                                            ))}
+                                        </div>
                                     </TableContainer>
-                                    <TablePagination
+                                    {/* <TablePagination
                                         rowsPerPageOptions={[10, 25, 100]}
                                         component="div"
                                         count={rows.length}
@@ -156,12 +87,12 @@ export default function GuardianRequest() {
                                         page={page}
                                         onPageChange={handleChangePage}
                                         onRowsPerPageChange={handleChangeRowsPerPage}
-                                    />
+                                    /> */}
                                 </Paper>
                             </Stack>
                         </Grid>
                         <Grid item xs={4}>
-                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
+                            {/* <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
                                 <CardActionArea>
                                     <CardContent style={{ textAlign: 'left' }}>
                                         <LivingIcon />
@@ -183,7 +114,7 @@ export default function GuardianRequest() {
 
                                     </CardContent>
                                 </CardActionArea>
-                            </Card>
+                            </Card> */}
                             <br />
                             <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
                                 <CardActionArea>

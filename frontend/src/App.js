@@ -40,7 +40,7 @@ function App() {
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
           <Route path="/AddCaregiver" element={<AddCaregiver />} />
-
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/ViewRoomDetails" element={<ViewRoomDetails />} />
           <Route path="/MealPlan" element={<MealPlan />} />
           <Route path="/RoomPackage" element={<RoomPackage />} />
