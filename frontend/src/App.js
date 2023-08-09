@@ -6,6 +6,7 @@ import Log from "./pages/Login";
 import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
+import Signup from "./components/GuardianSignup";
 import Sel from "./pages/Select";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/sel" element={<Sel />} />
+          <Route path="/GuardianSignup" element={<Signup />} />
 
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />

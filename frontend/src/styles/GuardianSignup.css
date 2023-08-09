@@ -1,0 +1,70 @@
+.topic {
+  font-size: 40px;
+  color: #05445e;
+  font-weight: 900;
+}
+.outer-body {
+  width: 62em;
+  height: 80%;
+  margin: 3rem auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.inner-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.inputAlign,
+.nameAlign,
+.pwdAlign {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameAlign,
+.pwdAlign {
+  display: flex;
+  flex-direction: row;
+}
+.pwdAlign {
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  border: solid 1px #d3d3d3;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem;
+  border-radius: 10px;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
+}
+form input::placeholder {
+  color: #000;
+  opacity: 0.5;
+}
+
+button {
+  border-radius: 100px;
+  background: #189ab4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 150px;
+  height: 50px;
+  font-weight: 600;
+  border: 0px;
+  color: #fff;
+  font-size: 30px;
+}
+.btnAlign{
+    margin-bottom: 0.5rem;
+}
+
+p span {
+  margin-top: 1rem;
+  color: #189ab4;
+  font-weight: 600;
+}

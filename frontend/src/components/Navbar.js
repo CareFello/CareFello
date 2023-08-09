@@ -35,6 +35,7 @@ function Navbar() {
                     <NavLink to="/" activeClassName="inactive"> Contact Us </NavLink>
                     <NavLink to="/Managerdashboard" activeClassName="inactive"> Manager </NavLink>
                     <NavLink to="/Login" activeClassName="inactive"> Login </NavLink>
+                    <NavLink to="/GuardianSignup" activeClassName="inactive"> Signup </NavLink>
                 </div>
             </div>
         </div>
