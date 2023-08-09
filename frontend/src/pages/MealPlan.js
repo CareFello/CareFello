@@ -22,6 +22,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import meal1 from "../assets/meal1.jpg"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { NavLink } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -56,398 +58,44 @@ export default function MealPlan() {
 
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
-
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
-
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
+                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 140 }}>
                                     <CardMedia
                                         component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
+                                        sx={{ width: 25 + "%" }}
+                                        image={meal1}
+                                        alt="Live from space album cover"
                                     />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                                        <CardContent sx={{ flex: '1 0 auto' }}>
+                                            <Grid container spacing={2}>
+                                                <Grid item xs={11}>
+                                                    <Typography component="div" variant="h5">
+                                                        Diabetic Free
+                                                    </Typography>
 
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.
+                                                    </Typography>
+                                                    <Typography variant="subtitle1" color="text.secondary" component="div">
+                                                        LKR 10000.00
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={1}>
+
+                                                    <NavLink to="/Meal">
+                                                        <ArrowForwardIosIcon style={{ marginTop: "80%", marginLeft: "80%" }} />
+                                                    </NavLink>
+                                                </Grid>
+                                            </Grid>
                                         </CardContent>
-                                    </Collapse>
+
+                                    </Box>
+
                                 </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
 
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
-                                    />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
-                                        </CardContent>
-                                    </Collapse>
-                                </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
-
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
-                                    />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
-                                        </CardContent>
-                                    </Collapse>
-                                </Card>
                             </Stack>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Stack spacing={5} direction={'row'}>
 
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
-
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
-                                    />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
-                                        </CardContent>
-                                    </Collapse>
-                                </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
-
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
-                                    />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
-                                        </CardContent>
-                                    </Collapse>
-                                </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardHeader
-
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title="Package 1"
-                                        subheader="Price : Rs.10,000"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        height="220"
-                                        src={meal1}
-                                        alt="Paella dish"
-                                    />
-                                    <CardContent>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Sri lankan authentic and healthy foods. Including both veg and non veg items.
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions disableSpacing>
-
-                                        <ExpandMore
-                                            expand={expanded}
-                                            onClick={handleExpandClick}
-                                            aria-expanded={expanded}
-                                            aria-label="show more"
-                                        >
-                                            <ExpandMoreIcon />
-                                        </ExpandMore>
-                                    </CardActions>
-                                    <Collapse in={expanded} timeout="auto" unmountOnExit>
-                                        <CardContent>
-                                            <h3>Breakfast</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Lunch</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <h3>Dinner</h3>
-                                            <Typography paragraph>
-                                                Herbal Porridge / Kurakkan Porridge<br />
-                                                String Hoppers with curries / Milk Rice<br />
-                                                Chickpea / Green Beans  <br />
-                                                Banana or anyother fruit
-                                            </Typography>
-                                            <br />
-                                            <Button size="small">Update</Button>
-                                            <Button size="small">Delete</Button>
-                                        </CardContent>
-                                    </Collapse>
-                                </Card>
-                            </Stack>
-                        </Grid>
                     </Grid>
                 </Box>
 

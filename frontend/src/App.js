@@ -21,7 +21,8 @@ import RoomPackage from './pages/RoomPackage';
 import GuardianRequest from './pages/GuardianRequest';
 import SendRequest from './pages/SendRequest';
 import Registration from './pages/Registration';
-
+import AddElder from './pages/AddElder';
+import Meal from './pages/Meal'
 
 
 function App() {
@@ -48,8 +49,8 @@ function App() {
           <Route path="/MealPlan" element={<MealPlan />} />
           <Route path="/RoomPackage" element={<RoomPackage />} />
           <Route path="/SendRequest" element={<SendRequest />} />
-
-
+          <Route path="/AddElder" element={<AddElder />} />
+          <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
 
         </Routes>
