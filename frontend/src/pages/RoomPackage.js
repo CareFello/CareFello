@@ -12,14 +12,15 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Shared from '../assets/SharedRoom.jpg'
-import Single from '../assets/Single.jpg'
+import Basic from '../assets/SharedRoom.jpg'
+import Classic from '../assets/Single.jpg'
 import Luxury from '../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../styles/form.css"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 import axios from "axios";
+import { FaLungs } from 'react-icons/fa'
 
 
 
@@ -89,9 +90,9 @@ export default function RoomPackage() {
                                 <Card sx={{ maxWidth: 32 + "%" }}  key={pack1.id}>
                                     <CardMedia
                                         component="img"
-                                        alt="green iguana"
+                                        alt={pack1.name}
                                         height="300"
-                                        src={Luxury}
+                                        src={Basic}
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
@@ -101,24 +102,11 @@ export default function RoomPackage() {
                                             {pack1.conten} {pack1.price}
                                         </Typography><br />
                                         <ul>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Single Room(AC)
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                One Caregiver per Person
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Attatched Bathroom with Hot Water System
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Room TV , Refrigirator
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Room WiFi
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Separate Balcony
-                                            </li>
+                                            {pack1.feature.map((tag,index) =>(
+                                                <li key={index} style={{ textAlign: 'left', marginLeft: 40 }}>
+                                                {tag}
+                                                </li>
+                                            ))}
                                         </ul>
                                     </CardContent>
                                     <CardActions>

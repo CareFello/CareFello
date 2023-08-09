@@ -33,7 +33,13 @@ const Select = () => {
         {people.map((person) => (
           <li key={person.id}>
             {person.id}: {person.name}
+      
             <button onClick={() => handleDelete(person.id)}>Delete</button>
+            <ul>
+              {person.test.map((tag,index) => (
+                <li key={index}>{index} {tag}</li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
