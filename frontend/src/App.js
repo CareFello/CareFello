@@ -34,6 +34,7 @@ function App() {
           <Route path="/reg" element={<Reg />} />
           <Route path="/list" element={<Caregiverlist/>}/>
           <Route path="/profile" element={<Caregiverprofile/>}/>
+          <Route path="/md" element={<ManagerDashboard/>}/>
         </Routes>
       </Router>
 
