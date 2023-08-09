@@ -1,6 +1,7 @@
 package com.carefello.backend.model;
 import lombok.Data;
 
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -19,7 +20,8 @@ public class Package {
     private String price;
     @Column(name="conten", length = 255)
     private String conten;
-
+    @ElementCollection
+    private List<String> feature;
     
     
 
