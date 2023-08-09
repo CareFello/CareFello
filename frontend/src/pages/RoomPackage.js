@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
@@ -12,19 +12,40 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Shared from '../assets/SharedRoom.jpg'
-import Single from '../assets/Single.jpg'
+import Basic from '../assets/SharedRoom.jpg'
+import Classic from '../assets/Single.jpg'
 import Luxury from '../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../styles/form.css"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
+import axios from "axios";
+import { FaLungs } from 'react-icons/fa'
 
 
 
 export default function RoomPackage() {
 
     const [visible, setVisible] = useState(false);
+    const [pack, setPack] = useState([]);
+    const [name11, setName] = useState("");
+    const [price11, setPrice] = useState("");
+    const [conten11, setConten] = useState("");
+
+    useEffect(() => {
+        // Make the GET request using Axios to fetch data from the backend
+        axios.get('http://localhost:8085/api/package/get')
+          .then((response) => setPack(response.data))
+          .catch((error) => console.error(error));
+      }, []);
+
+    const handlePack = async (id,name,price,conten) => {
+        console.log(id,name);
+        setName(name);
+        setPrice(price);
+        setConten(conten);
+        setVisible(true);
+    }  
 
     return (
         <div>
@@ -36,27 +57,24 @@ export default function RoomPackage() {
                     <Grid container spacing={5} >
 
                         <Grid item xs={12}>
-                            <Button onClick={() => setVisible(true)}>Add New Package </Button>
+
+                            {/* <Button onClick={() => setVisible(true)}>Add New Package</Button> */}
+
                             <Model isOpen={visible} onRequestClose={() => setVisible(false)} style={{
                                 content: { width: "500px", marginLeft: "30%", marginTop: "40px" }
-                            }}>
+                                }}>
                                 <form action="#" className="form">
                                     <div className="input-box">
-                                        <label>Package Name</label>
-                                        <input type="text" placeholder="Enter full name" required />
+                                        <label>{name11}</label>
                                     </div>
                                     <div className="input-box">
                                         <label>Package description</label><br />
-                                        <textarea rows="4" cols="50" required />
+                                        <textarea rows="4" cols="50" required placeholder={conten11} />
                                     </div>
                                     <div className="column">
                                         <div className="input-box">
-                                            <label>Phone Number</label>
-                                            <input type="number" placeholder="Enter phone number" required />
-                                        </div>
-                                        <div className="input-box">
-                                            <label>Birth Date</label>
-                                            <input type="date" placeholder="Enter birth date" required />
+                                            <label>Price</label>
+                                            <input type="number" placeholder={price11} required />
                                         </div>
                                     </div>
                                     <div className='column'>
@@ -68,115 +86,39 @@ export default function RoomPackage() {
 
                             </Model>
                             <Stack spacing={5} direction={'row'}>
-
-                                <Card sx={{ maxWidth: 32 + "%" }}>
+                                
+                                    {pack.map((pack1) => (
+                                    
+                                <Card sx={{ maxWidth: 32 + "%" }}  key={pack1.id}>
                                     <CardMedia
                                         component="img"
-                                        alt="green iguana"
+                                        alt={pack1.name}
                                         height="300"
-                                        src={Shared}
+                                        src={Basic}
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
-                                            Basic
+                                            {pack1.name} 
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            Larger room with two or three beds.Separate Rooms according to the gender.
+                                            {pack1.conten} {pack1.price}
                                         </Typography><br />
                                         <ul>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Shared Room(Maximum 3 Beds)
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                One Caregiver per Room
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Attatched Bathroom
-                                            </li>
+                                            {pack1.feature.map((tag,index) =>(
+                                                <li key={index} style={{ textAlign: 'left', marginLeft: 40 }}>
+                                                {tag}
+                                                </li>
+                                            ))}
                                         </ul>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">Update</Button>
+                                        <Button size="small" onClick={() => handlePack(pack1.id,pack1.name,pack1.price,pack1.conten)}>Update</Button>
 
                                     </CardActions>
                                 </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardMedia
-                                        component="img"
-                                        alt="green iguana"
-                                        height="300"
-                                        src={Single}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            Classic
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                            species, ranging across all continents except Antarctica
-                                        </Typography><br />
-                                        <ul>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Single Rooms(Non AC)
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                One Caregiver per Person
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Attatched Bathroom
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Separate Balconies
-                                            </li>
-                                        </ul>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Update</Button>
-
-                                    </CardActions>
-                                </Card>
-                                <Card sx={{ maxWidth: 32 + "%" }}>
-                                    <CardMedia
-                                        component="img"
-                                        alt="green iguana"
-                                        height="300"
-                                        src={Luxury}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            Luxury
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                            species, ranging across all continents except Antarctica
-                                        </Typography><br />
-                                        <ul>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Single Room(AC)
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                One Caregiver per Person
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Attatched Bathroom with Hot Water System
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Room TV , Refrigirator
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Room WiFi
-                                            </li>
-                                            <li style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                Separate Balcony
-                                            </li>
-                                        </ul>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Update</Button>
-
-                                    </CardActions>
-                                </Card>
-
+                                
+                                ))}
+                            
                             </Stack>
                         </Grid>
                     </Grid>

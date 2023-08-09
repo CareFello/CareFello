@@ -1,34 +1,37 @@
 package com.carefello.backend.controller;
 
-
-import com.carefello.backend.DTO.PackageDTO;
-import com.carefello.backend.service.PackageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
-@RequestMapping("api/v1/package")
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import com.carefello.backend.model.Package;
+
+import com.carefello.backend.repo.PackageRepo;
+
 @CrossOrigin
+@RestController
+@RequestMapping("/api/package")
 
-public class PackageController {
+public class PackageController{
+    private final PackageRepo PackageRepo;
+
     @Autowired
-    private PackageService packageService;
-
-
-    @PostMapping("/addPackage")
-    public PackageDTO addPackage(@RequestBody PackageDTO packageDTO){
-        return packageService.addPackage(packageDTO);
+    public PackageController(PackageRepo PackageRepo){
+        this.PackageRepo = PackageRepo;
     }
 
-    @GetMapping("/viewPackage")
-    public List<PackageDTO> viewPackage(){
-        return packageService.viewPackages();
+    @GetMapping("/get")
+    public List<Package> getAllPackage(){
+        return PackageRepo.findAll();
     }
 
-    @PutMapping("/updatePackage")
-    public PackageDTO updatePackage(@RequestBody PackageDTO packageDTO){
-        return packageService.updatePackage(packageDTO);
-    }
 }

@@ -14,6 +14,7 @@ import CardContent from '@mui/material/CardContent';
 import CountUp, { useCountUp } from 'react-countup';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Footer from '../components/HomepageFooter';
+
 import ContactUs from '../components/ContactUs';
 import Location from '../assets/location_logo.png'
 import Phone from '../assets/phone_logo.png'
@@ -174,18 +175,18 @@ function Home() {
                     <ContactUs />
                 </div>
                 <div className='contact'>
-                    <div className='location'>
+                    <div className='linklocation'>
                         <img src={Location} alt='location' />
                         <h6>No.23 , Garden Rd, Dehiwala</h6>
                     </div>
-                    <div className='phone'>
+                    <div className='linkphone'>
                         <img src={Phone} alt='phone' />
                         <div className='phone_no'>
                             <h6>+ 94 117901360</h6>
                             <h6>+ 94 117901360</h6>
                         </div>
                     </div>
-                    <div className='mail'>
+                    <div className='linkmail'>
                         <img src={Mail} alt='mail' />
                         <h6>info@Carefello.com</h6>
                     </div>
