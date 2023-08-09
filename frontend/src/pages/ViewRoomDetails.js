@@ -13,6 +13,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
@@ -83,7 +84,7 @@ export default function ViewRoomDetails() {
             <Header />
             <Box height={80} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Paper sx={{ width: '100%' }}>
                         <TableContainer sx={{ maxHeight: 600 }}>

@@ -13,9 +13,16 @@ import ManagerDashboard from './pages/ManagerDashboard';
 import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
 import AddCaregiver from './pages/AddCaregiver';
+
+
 import ViewRoomDetails from './pages/ViewRoomDetails'
 import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
+import GuardianRequest from './pages/GuardianRequest';
+import SendRequest from './pages/SendRequest';
+import Registration from './pages/Registration';
+import AddElder from './pages/AddElder';
+import Meal from './pages/Meal'
 
 
 import Caregiverprofile from './pages/caregiverprofile';
@@ -32,9 +39,27 @@ function App() {
           <Route path="/home" element={<Home1 />} />
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
-          <Route path="/list" element={<Caregiverlist/>}/>
+
+         
           <Route path="/profile" element={<Caregiverprofile/>}/>
-          <Route path="/md" element={<ManagerDashboard/>}/>
+          
+
+          <Route path="/sel" element={<Sel />} />
+          <Route path="/Registration" element={<Registration />} />
+
+          <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+          <Route path="/AddDoctor" element={<AddDoctor />} />
+          <Route path="/AddCaregiver" element={<AddCaregiver />} />
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
+          <Route path="/ViewRoomDetails" element={<ViewRoomDetails />} />
+          <Route path="/MealPlan" element={<MealPlan />} />
+          <Route path="/RoomPackage" element={<RoomPackage />} />
+          <Route path="/SendRequest" element={<SendRequest />} />
+          <Route path="/AddElder" element={<AddElder />} />
+          <Route path="/Meal" element={<Meal />} />
+          <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
+
         </Routes>
       </Router>
 
