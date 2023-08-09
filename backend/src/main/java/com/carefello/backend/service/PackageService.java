@@ -1,4 +1,4 @@
-package com.carefello.backend.service;
+/*package com.carefello.backend.service;
 
 import com.carefello.backend.DTO.PackageDTO;
 import com.carefello.backend.model.Package;
@@ -33,4 +33,4 @@ public class PackageService {
         packageRepo.save(modelMapper.map(packageDTO, Package.class));
         return packageDTO;
     }
-}
+}*/
