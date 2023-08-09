@@ -20,6 +20,9 @@ import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
 import GuardianRequest from './pages/GuardianRequest';
 
+import GuardianDashboard from './pages/Guardian/GuardianDashboard';
+import ElderProfile from './pages/Guardian/ElderProfile';
+import EditElderProfile from './pages/Guardian/EditElderProfile';
 
 
 function App() {
@@ -48,6 +51,10 @@ function App() {
 
 
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
+          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/ElderProfile" element={<ElderProfile />} />
+          <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
         </Routes>
       </Router>
