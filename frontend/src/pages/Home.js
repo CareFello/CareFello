@@ -175,18 +175,18 @@ function Home() {
                     <ContactUs />
                 </div>
                 <div className='contact'>
-                    <div className='location'>
+                    <div className='linklocation'>
                         <img src={Location} alt='location' />
                         <h6>No.23 , Garden Rd, Dehiwala</h6>
                     </div>
-                    <div className='phone'>
+                    <div className='linkphone'>
                         <img src={Phone} alt='phone' />
                         <div className='phone_no'>
                             <h6>+ 94 117901360</h6>
                             <h6>+ 94 117901360</h6>
                         </div>
                     </div>
-                    <div className='mail'>
+                    <div className='linkmail'>
                         <img src={Mail} alt='mail' />
                         <h6>info@Carefello.com</h6>
                     </div>
