@@ -19,6 +19,8 @@ import ViewRoomDetails from './pages/ViewRoomDetails'
 import MealPlan from './pages/MealPlan';
 import RoomPackage from './pages/RoomPackage';
 import GuardianRequest from './pages/GuardianRequest';
+import SendRequest from './pages/SendRequest';
+import Registration from './pages/Registration';
 
 import GuardianDashboard from './pages/Guardian/GuardianDashboard';
 import ElderProfile from './pages/Guardian/ElderProfile';
@@ -39,15 +41,16 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/sel" element={<Sel />} />
+          <Route path="/Registration" element={<Registration />} />
 
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
           <Route path="/AddCaregiver" element={<AddCaregiver />} />
-
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/ViewRoomDetails" element={<ViewRoomDetails />} />
           <Route path="/MealPlan" element={<MealPlan />} />
           <Route path="/RoomPackage" element={<RoomPackage />} />
-
+          <Route path="/SendRequest" element={<SendRequest />} />
 
 
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
