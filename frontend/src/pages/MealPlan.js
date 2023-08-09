@@ -21,6 +21,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import meal1 from "../assets/meal1.jpg"
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -49,7 +50,7 @@ export default function MealPlan() {
             <Header />
             <Box height={80} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={5} >
 

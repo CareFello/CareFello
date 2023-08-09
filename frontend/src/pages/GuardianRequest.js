@@ -19,6 +19,7 @@ import CardContent from '@mui/material/CardContent'
 import { CardActionArea } from '@mui/material';
 import LivingIcon from '@mui/icons-material/Living';
 import RequestCard from '../components/RequestCard'
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 
 const students = [
@@ -65,7 +66,7 @@ export default function GuardianRequest() {
             <Header />
             <Box height={100} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={5} >
 
