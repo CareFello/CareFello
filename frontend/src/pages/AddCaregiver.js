@@ -117,7 +117,7 @@ function AddCaregiver() {
                                                 />
                                                 <TextField
                                                     required
-                                                    id="outlined-multiline-flexible"
+                                                    id="outlined-required"
                                                     label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
                                                     sx={{ m: 1, width: '30ch' }}
 
@@ -128,7 +128,7 @@ function AddCaregiver() {
                                                     const nicPattern = /^\d{12}$/;
                                                     setIsValidnic(nicPattern.test(inputnic));
                                                     }}
-                                                    style={{ borderColor: isValid ? 'green' : 'red' }}
+                                                    style={{ borderColor: isValidnic ? 'green' : 'red' }}
                                                 />
                                                 
                                                 <TextField
