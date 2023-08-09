@@ -14,20 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useAppStore } from '../appStore';
 import { useNavigate } from "react-router-dom"
-import { FaTh } from 'react-icons/fa';
-import { FaUserNurse } from 'react-icons/fa';
-import { TbListDetails } from "react-icons/tb";
-import { TbNurse } from "react-icons/tb";
-import { GiMeal } from "react-icons/gi";
-import { MdOutlineBedroomParent } from "react-icons/md";
-import { MdOutlineFileOpen } from "react-icons/md";
-
-
-import { AiOutlineUserAdd } from "react-icons/ai";
-import { BiUserCheck } from "react-icons/bi";
-import { VscRequestChanges } from "react-icons/vsc";
-import { TbAlertSquareRounded } from "react-icons/tb";
-import { MdOutlineElderlyWoman } from "react-icons/md";
+import { ManagerMenuItem } from './ManagerMenuItem';
 
 import { NavLink } from 'react-router-dom';
 
@@ -87,89 +74,39 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function Sidebar() {
+export default function Sidebar({ menuItems }) {
     const theme = useTheme();
-    //const [open, setOpen] = React.useState(true);
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
     const navigate = useNavigate();
 
-
-    const menuItem = [
-        {
-            path: "/ManagerDashboard",
-            name: "Dashboard",
-            icon: <FaTh />
-        },
-        {
-            path: "/AddDoctor",
-            name: "Add Doctor",
-            icon: <AiOutlineUserAdd />,
-            subItems: [
-                { path: "/", name: "For Doctor" },
-                { path: "/", name: "For Caregiver" }
-            ]
-        },
-        {
-            path: "/AddCaregiver",
-            name: "Add Caregiver",
-            icon: <BiUserCheck />
-        },
-        {
-            path: "/RoomPackage",
-            name: "Packages",
-            icon: <TbListDetails />
-        },
-        {
-            path: "/GuardianRequest",
-            name: "Guardian Request",
-            icon: <VscRequestChanges />
-        },
-        {
-            path: "/MealPlan",
-            name: "Meal Plan",
-            icon: <TbAlertSquareRounded />
-        },
-        {
-            path: "/",
-            name: "View Elders",
-            icon: <MdOutlineElderlyWoman />
-        },
-        {
-            path: "/Caregiverlist",
-            name: "View Caregivers",
-            icon: <TbNurse />
-        },
-        {
-            path: "/SendRequest",
-            name: "View Doctors",
-            icon: <FaUserNurse />
-        },
-    ]
-
     return (
         <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <Box height={80} />
+            {/* ... Rest of your code ... */}
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <IconButton >
+                    <IconButton>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                {menuItem.map((item, index) => (
-                    <NavLink to={item.path} key={index} className="link" activeclassName="active">
+                {menuItems.map((item, index) => (
+                    <NavLink to={item.path} key={index} className="link" activeClassName="active">
                         <div className='icon'>{item.icon}</div>
-                        {<div style={{ display: open ? "block" : "none" }} className="link_text">{item.name}</div>}
+                        <div style={{ display: open ? "block" : "none" }} className="link_text">{item.name}</div>
                     </NavLink>
                 ))}
-
             </Drawer>
-
         </Box>
     );
 }
+
+
+
+
+
+
+
 
 
 

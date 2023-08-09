@@ -23,6 +23,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import "../styles/form.css"
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 function SendRequest() {
     return (
@@ -30,7 +31,7 @@ function SendRequest() {
             <Header />
             <Box height={80} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={0} >
                         <Grid item xs={8} >

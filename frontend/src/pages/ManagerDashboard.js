@@ -20,6 +20,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 import '../styles/ManagerDashboard.css';
 
@@ -45,7 +46,7 @@ function ManagerDashboard() {
       <Header />
       <Box height={80} />
       <Box sx={{ display: 'flex' }}>
-        <Sidebar />
+        <Sidebar menuItems={ManagerMenuItem} />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
           <Grid container spacing={1} >
             <Grid item xs={12}>
