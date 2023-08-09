@@ -25,6 +25,7 @@ import AddElder from './pages/AddElder';
 import Meal from './pages/Meal'
 
 
+import Caregiverprofile from './pages/caregiverprofile';
 function App() {
   return (
     <div className="App">
@@ -38,6 +39,11 @@ function App() {
           <Route path="/home" element={<Home1 />} />
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
+
+         
+          <Route path="/profile" element={<Caregiverprofile/>}/>
+          
+
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
 
@@ -52,6 +58,7 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
 
         </Routes>
       </Router>
