@@ -17,6 +17,7 @@ import Single from '../assets/Single.jpg'
 import Luxury from '../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../styles/form.css"
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
 
 
 
@@ -30,7 +31,7 @@ export default function RoomPackage() {
             <Header />
             <Box height={100} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={5} >
 
