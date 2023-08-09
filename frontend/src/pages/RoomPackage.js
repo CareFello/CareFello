@@ -36,7 +36,7 @@ export default function RoomPackage() {
                     <Grid container spacing={5} >
 
                         <Grid item xs={12}>
-                            <Button onClick={() => setVisible(true)}>Add New Package</Button>
+                            <Button onClick={() => setVisible(true)}>Add New Package </Button>
                             <Model isOpen={visible} onRequestClose={() => setVisible(false)} style={{
                                 content: { width: "500px", marginLeft: "30%", marginTop: "40px" }
                             }}>
