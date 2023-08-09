@@ -14,6 +14,7 @@ import CardContent from '@mui/material/CardContent';
 import CountUp, { useCountUp } from 'react-countup';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Footer from '../components/HomepageFooter';
+
 import ContactUs from '../components/ContactUs';
 import Location from '../assets/location_logo.png'
 import Phone from '../assets/phone_logo.png'

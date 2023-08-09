@@ -89,9 +89,11 @@ export default function Sidebar({ menuItems }) {
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </DrawerHeader>
+
                 <Divider />
                 {menuItems.map((item, index) => (
                     <NavLink to={item.path} key={index} className="link" activeClassName="active">
+
                         <div className='icon'>{item.icon}</div>
                         <div style={{ display: open ? "block" : "none" }} className="link_text">{item.name}</div>
                     </NavLink>
