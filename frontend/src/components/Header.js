@@ -114,7 +114,7 @@ export default function Header() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
         </Menu>
     );
 
@@ -174,86 +174,86 @@ export default function Header() {
     return (
         <div className='header'>
             <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color='#05445E'
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                        onClick={() => updateOpen(!dOpen)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography className='logo'
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ 
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontSize: '13px',
-                            color: '#05445E',
-                         }}
-                    >
-                        <div style={{ marginRight: '2px', marginTop: '4px'}}>
-                            <img src={Logo} alt='logo' height={45} width={45}/> 
-                        </div>
-                        <div style={{ marginTop: '2px', color: '#189AB4'}}>
-                            <i style={{ fontWeight: 'bold' }}>CareFello</i>
-                        </div>
-                    </Typography>
+                <AppBar position="fixed">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color='#05445E'
+                            aria-label="open drawer"
+                            sx={{ mr: 2 }}
+                            onClick={() => updateOpen(!dOpen)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography className='logo'
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                fontSize: '13px',
+                                color: '#05445E',
+                            }}
+                        >
+                            <div style={{ marginRight: '2px', marginTop: '4px' }}>
+                                <img src={Logo} alt='logo' height={45} width={45} />
+                            </div>
+                            <div style={{ marginTop: '2px', color: '#189AB4' }}>
+                                <i style={{ fontWeight: 'bold' }}>CareFello</i>
+                            </div>
+                        </Typography>
 
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
-        </Box>
-   
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                <Badge badgeContent={4} color="error">
+                                    <MailIcon />
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                size="large"
+                                aria-label="show 17 new notifications"
+                                color="inherit"
+                            >
+                                <Badge badgeContent={17} color="error">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </Box>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="show more"
+                                aria-controls={mobileMenuId}
+                                aria-haspopup="true"
+                                onClick={handleMobileMenuOpen}
+                                color="inherit"
+                            >
+                                <MoreIcon />
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+                {renderMenu}
+            </Box>
+
         </div>
-     );
-        
+    );
+
 }
 
 
