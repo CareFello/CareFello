@@ -21,6 +21,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
+import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
+import Tooltip from '@mui/material/Tooltip'
+import { axisClasses } from '@mui/x-charts';
 
 import '../styles/ManagerDashboard.css';
 
@@ -28,15 +33,38 @@ function createData(Room_No, Type, Bed_1, Bed_2, Bed_3) {
   return { Room_No, Type, Bed_1, Bed_2, Bed_3 };
 }
 
-const rows = [
-  createData('A1', 'Shared', 'Available', '-', '-'),
-  createData('A2', 'Shared', 'Available', '-', 'Available'),
-  createData('B3', 'Shared', 'Available', '-', '-'),
-  createData('C3', 'Luxury', 'Available', '-', '-'),
-  createData('A1', 'Shared', 'Available', '-', '-'),
-  createData('A1', 'Single', 'Available', '-', '-'),
+
+
+const chartSetting = {
+  yAxis: [
+
+  ],
+  width: 300,
+  height: 300,
+  sx: {
+    [`.${axisClasses.left} .${axisClasses.label}`]: {
+      transform: 'rotate(-90deg) translate(0px, -20px)',
+    },
+  },
+};
+const dataset = [
+  {
+    '35-45': 2,
+    '45-55': 12,
+    Other: 6,
+    Gender: 'Male',
+  },
+  {
+    '35-45': 1,
+    '45-55': 9,
+    Other: 3,
+
+    Gender: 'Female',
+  },
 
 ];
+
+const valueFormatter = (value) => `${value}`;
 
 
 
@@ -120,41 +148,47 @@ function ManagerDashboard() {
           </Grid>
           <Box height={40} />
           <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Card sx={{ height: 60 + "vh" }}>
-                <CardContent>
-                  <h2>Available Room Details</h2><br />
-                  <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Room No</TableCell>
-                          <TableCell align="right">Room Type</TableCell>
-                          <TableCell align="right">Bed 1</TableCell>
-                          <TableCell align="right">Bed 2</TableCell>
-                          <TableCell align="right">Bed 3</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rows.map((row) => (
-                          <TableRow
+            <Grid item xs={4}>
 
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.Room_No}
-                            </TableCell>
-                            <TableCell align="right">{row.Type}</TableCell>
-                            <TableCell align="right">{row.Bed_1}</TableCell>
-                            <TableCell align="right">{row.Bed_2}</TableCell>
-                            <TableCell align="right">{row.Bed_3}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </CardContent>
-              </Card>
+
+              <h2>Available Room Details</h2><br />
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 10, label: 'Classic' },
+                      { id: 1, value: 15, label: 'Luxury' },
+                      { id: 2, value: 5, label: 'Basic(M)' },
+                      { id: 2, value: 5, label: 'Basic(F)' },
+                    ],
+                  },
+                ]}
+                width={400}
+                height={200}
+              />
+
+
+
+            </Grid>
+            <Grid item xs={4}>
+
+
+              <h2>Available Caregiver Details</h2><br />
+              <BarChart
+                dataset={dataset}
+                xAxis={[{ scaleType: 'band', dataKey: 'Gender' }]}
+                series={[
+                  { dataKey: '35-45', label: 'Age 35-45', valueFormatter },
+                  { dataKey: '45-55', label: 'Age 45 -55', valueFormatter },
+                  { dataKey: 'Other', label: 'Other', valueFormatter },
+
+                ]}
+                {...chartSetting}
+              />
+
+
+
+
             </Grid>
             <Grid item xs={4}>
               <Card sx={{ height: 60 + "vh" }}>
