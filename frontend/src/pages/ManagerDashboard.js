@@ -23,7 +23,7 @@ import Paper from '@mui/material/Paper';
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
+//import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
 import Tooltip from '@mui/material/Tooltip'
 import { axisClasses } from '@mui/x-charts';
 

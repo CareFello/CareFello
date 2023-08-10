@@ -52,3 +52,73 @@
 ul li {
     list-style: none;
 }
+
+/* StudentCard.css */
+
+.student-card {
+    border: none;
+    width: 98%;
+    height: 100px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: white;
+    border-radius: 50px;
+    margin-top: 0;
+}
+
+.student-card .cardCollapsed{
+    height: 100px;
+    color:#05445E;
+}
+
+.student-card .cardExpand{
+    height: 100px;
+    color:#05445E;
+}
+
+.basic-info {
+    display: block;
+}
+
+.basic-info-hover {
+    display: none;
+}
+
+.hover-info {
+    border: none;
+    border-radius: 50px;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #75E6DA;
+    /* padding: 10px; */
+    transition: all 0.3s ease;
+}
+
+.student-card:hover .hover-info {
+    display: block;
+}
+
+.student-card:hover .basic-info {
+    display: none;
+}
+
+.student-card:hover .basic-info-hover {
+    display: block;
+}
+
+.student-card:hover {
+    /* Set the desired width and height for the expanded card */
+    width: 98%;
+    height: 150px;
+}
+
+ul li {
+    list-style: none;
+}
