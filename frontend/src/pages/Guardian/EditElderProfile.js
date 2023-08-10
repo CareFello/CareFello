@@ -4,14 +4,16 @@ import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
 import { CardActionArea } from '@mui/material';
 import Header from '../../components/Header'
+import { GuardianMenuItem } from '../../components/GuardianMenuItem'
 
+import '../../styles/Guardian/EditElderProfile.css';
 const EditElderProfile = () => {
     return (
       <div className='profile'>
         <Header />
         <Box height={80} />
         <Box sx={{ display: 'flex' }}>
-          <Sidebar />
+        <Sidebar menuItems={GuardianMenuItem} />
         </Box>
         </div>
     )

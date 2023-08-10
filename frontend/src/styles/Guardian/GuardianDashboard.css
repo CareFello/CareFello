@@ -1,7 +1,20 @@
 /* Background - #F9FFFE
  Text colours - #05445E, #189AB4
  Cards, boxes & tables - #D4F1F4 */
-.card{
-    background-color: #40b6c3;
-    
+ .dashboard{
+    background-color: #F9FFFE;
+}
+
+.title{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 1.6rem;
+}
+
+.title::after{
+    content: "";
+    height: 2px;
+    background-color:#D4F1F4 ;
+    display: block;
 }

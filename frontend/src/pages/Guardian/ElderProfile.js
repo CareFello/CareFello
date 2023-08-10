@@ -10,8 +10,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Stack from '@mui/material/Stack';
 import img_1 from '../../assets/guardian/elder1.jpeg'
+import { GuardianMenuItem } from '../../components/GuardianMenuItem'
 
-import '../../styles/ManagerDashboard.css';
+import '../../styles/Guardian/ElderProfile.css';
 
 
 const ElderProfile = () => {
@@ -20,7 +21,7 @@ const ElderProfile = () => {
       <Header />
       <Box height={80} />
       <Box sx={{ display: 'flex' }}>
-        <Sidebar />
+        <Sidebar menuItems={GuardianMenuItem} />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
           <Grid container spacing={1}>
             <Grid item xs={9}>
@@ -46,129 +47,131 @@ const ElderProfile = () => {
                     alt="Elder Image"
                   />
                 </Card>
-                <Grid sx={{ flexGrow: 1, p: 3 ,flexDirection: 'row'}} >
-                  <Card sx={{ maxWidth: 345 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Caregiver
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ minWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Medication
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ minWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Daily Activities
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ mixWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Daily Reports
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ mixWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Contact Caregiver
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ mixWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Request Accommodation
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                  <Card sx={{ mixWidth: 175 }}>
-                    <CardActionArea>
-                      <CardContent>
-                        <Typography variant="h5" component="div">
-                          Complaints
-                        </Typography>
-
-                      </CardContent>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_1}
-                        alt="Caregiver"
-                      />
-                    </CardActionArea>
-                  </Card>
-                </Grid>
 
 
 
-            </Stack>
+              </Stack>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid sx={{ flexGrow: 1, p: 3, flexDirection: 'row' }} >
+                <Card sx={{ maxWidth: 345 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Caregiver
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ minWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Medication
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ minWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Daily Activities
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ mixWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Daily Reports
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ mixWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Contact Caregiver
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ minWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Request Accommodation
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+                <Card sx={{ minWidth: 175 }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Complaints
+                      </Typography>
+
+                    </CardContent>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={img_1}
+                      alt="Caregiver"
+                    />
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
 
-    </Box>
+      </Box>
 
 
 
