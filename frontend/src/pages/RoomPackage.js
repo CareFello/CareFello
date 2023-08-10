@@ -31,7 +31,11 @@ export default function RoomPackage() {
     const [name11, setName] = useState("");
     const [price11, setPrice] = useState("");
     const [conten11, setConten] = useState("");
-    const [feature1, setFeature] = useState("");
+    const [feature1, setFeature] = useState([]);
+    const [des, setDes] = useState("");
+    const [pri, setPri] = useState("");
+    const [id1, setId1] = useState("");
+    const [fea, setFea] = useState([]);
 
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
@@ -41,13 +45,49 @@ export default function RoomPackage() {
       }, []);
 
     const handlePack = async (id,name,price,conten,feature) => {
-        console.log(id,name);
+        
         setName(name);
         setPrice(price);
         setConten(conten);
         setFeature(feature);
+        setId1(id);
         setVisible(true);
     }  
+
+    async function updat(event){
+        event.preventDefault();
+        try {
+            await axios.put(`http://localhost:8085/api/package/update/${id1}`,{ 
+                conten: des,
+                price: pri,
+                feature: fea
+        });
+            axios.get('http://localhost:8085/api/package/get')
+            .then((response) => setPack(response.data))
+            .catch((error) => console.error(error));
+          } catch (error) {
+            console.error(error);
+            alert(error);
+          }
+    }
+
+    // const handleUpdate = async (id1,des,pri,fea) => {
+    //     console.log(id1, des, pri, fea);
+    
+    //     try {
+    //         await axios.put(`http://localhost:8085/api/package/update/${id1}`, 
+    //             conten: des,
+    //             price: pri,
+    //             feature: fea
+    //         );
+    //         axios.get('http://localhost:8085/api/package/get')
+    //         .then((response) => setPack(response.data))
+    //         .catch((error) => console.error(error));
+    //       } catch (error) {
+    //         console.error(error);
+    //         alert(error);
+    //       }
+    // }
 
     return (
         <div>
@@ -71,26 +111,48 @@ export default function RoomPackage() {
                                     </div>
                                     <div className="input-box">
                                         <label>Package description</label><br />
-                                        <textarea rows="4" cols="50" required placeholder={conten11} />
+                                        <textarea rows="4" cols="50" required placeholder={conten11} 
+                                            value={des}
+                                            onChange={(event) => {
+                                            setDes(event.target.value);
+                                            }}
+                                        />
                                     </div>
                                     <div className="column">
                                         <div className="input-box">
                                             <label>Price</label>
-                                            <input type="number" placeholder={price11} required />
+                                            <input type="text" placeholder={price11} required 
+                                                value={pri}
+                                                onChange={(event) => {
+                                                setPri(event.target.value);
+                                                }}
+                                            />
                                         </div>
                                     </div>
 
-                                    {feature1.map((tag,index) =>(
+                                    {feature1.map((tag, index) => (
                                     <div className="column" key={index}>
                                         <div className="input-box">
-                                            <label>Feature {index+1}</label>
-                                            <input type="text" placeholder={tag} required />
+                                            <label>Feature {index + 1}</label>
+                                            <input
+                                                type="text"
+                                                placeholder={tag}
+                                                required
+                                                id={index}
+                                                value={fea[index] || ""}
+                                                onChange={(event) => {
+                                                const updatedFea = [...fea]; // Create a copy of the current state array
+                                                updatedFea[index] = event.target.value; // Update the value for the current index
+                                                setFea(updatedFea); // Update the state with the new array
+                                                }}
+                                            />
                                         </div>
                                     </div>
                                     ))}
 
+
                                     <div className='column'>
-                                        <Button>Submit</Button>
+                                        <Button onClick={updat}>Submit</Button>
                                         <Button onClick={() => setVisible(false)}>Close</Button>
                                     </div>
                                 </form>
