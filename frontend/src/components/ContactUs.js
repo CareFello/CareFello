@@ -56,9 +56,9 @@ export default function ContactUs() {
                     </button>
                 </form>
             </div>
-            <div className="img">
+            {/* <div className="img">
                 <img src={Relax} alt='relax' />
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -31,6 +31,7 @@ export default function RoomPackage() {
     const [name11, setName] = useState("");
     const [price11, setPrice] = useState("");
     const [conten11, setConten] = useState("");
+    const [feature1, setFeature] = useState("");
 
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
@@ -39,11 +40,12 @@ export default function RoomPackage() {
           .catch((error) => console.error(error));
       }, []);
 
-    const handlePack = async (id,name,price,conten) => {
+    const handlePack = async (id,name,price,conten,feature) => {
         console.log(id,name);
         setName(name);
         setPrice(price);
         setConten(conten);
+        setFeature(feature);
         setVisible(true);
     }  
 
@@ -77,6 +79,16 @@ export default function RoomPackage() {
                                             <input type="number" placeholder={price11} required />
                                         </div>
                                     </div>
+
+                                    {feature1.map((tag,index) =>(
+                                    <div className="column" key={index}>
+                                        <div className="input-box">
+                                            <label>Feature {index+1}</label>
+                                            <input type="text" placeholder={tag} required />
+                                        </div>
+                                    </div>
+                                    ))}
+
                                     <div className='column'>
                                         <Button>Submit</Button>
                                         <Button onClick={() => setVisible(false)}>Close</Button>
@@ -112,7 +124,7 @@ export default function RoomPackage() {
                                         </ul>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small" onClick={() => handlePack(pack1.id,pack1.name,pack1.price,pack1.conten)}>Update</Button>
+                                        <Button size="small" onClick={() => handlePack(pack1.id,pack1.name,pack1.price,pack1.conten,pack1.feature)}>Update</Button>
 
                                     </CardActions>
                                 </Card>
