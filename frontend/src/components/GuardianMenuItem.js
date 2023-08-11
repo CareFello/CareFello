@@ -20,13 +20,9 @@ export const GuardianMenuItem = [
         path: "/GuardianAddElder",
         name: "Add Elder",
         icon: <AiOutlineUserAdd />,
-        // subItems: [
-        //     { path: "/", name: "For Doctor" },
-        //     { path: "/", name: "For Caregiver" }
-        // ]
     },
     {
-        path: "/RequestAccommodation",
+        path: "/GuardianSendRequest",
         name: " Send Request",
         icon: <FaUserNurse />
     },

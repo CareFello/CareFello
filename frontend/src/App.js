@@ -25,7 +25,8 @@ import Registration from './pages/Registration';
 import GuardianDashboard from './pages/Guardian/GuardianDashboard';
 import ElderProfile from './pages/Guardian/ElderProfile';
 import EditElderProfile from './pages/Guardian/EditElderProfile';
-
+import GuardianRoomPackages from './pages/Guardian/GuardianRoomPackages';
+import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
 
 function App() {
   return (
@@ -58,7 +59,8 @@ function App() {
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
-
+          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
+          <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
         </Routes>
       </Router>
 
