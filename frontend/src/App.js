@@ -24,6 +24,13 @@ import Registration from './pages/Registration';
 import AddElder from './pages/AddElder';
 import Meal from './pages/Meal'
 
+//Guardians' Pages
+import GuardianDashboard from './pages/Guardian/GuardianDashboard';
+import ElderProfile from './pages/Guardian/ElderProfile';
+import EditElderProfile from './pages/Guardian/EditElderProfile';
+import GuardianRoomPackages from './pages/Guardian/GuardianRoomPackages';
+import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
+import GuardianAddElder from './pages/Guardian/GuardianAddElder';
 
 import Caregiverprofile from './pages/caregiverprofile';
 function App() {
@@ -59,6 +66,12 @@ function App() {
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
 
+          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/ElderProfile" element={<ElderProfile />} />
+          <Route path="/EditElderProfile" element={<EditElderProfile />} />
+          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
+          <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
+          <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
 
         </Routes>
       </Router>
