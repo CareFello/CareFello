@@ -22,6 +22,9 @@ import GuardianRequest from './pages/GuardianRequest';
 import SendRequest from './pages/SendRequest';
 import Registration from './pages/Registration';
 
+import GuardianDashboard from './pages/Guardian/GuardianDashboard';
+import GuardianComplain from './pages/Guardian/GuardianComplain';
+
 
 
 function App() {
@@ -51,6 +54,9 @@ function App() {
 
 
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
+          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/GuardianComplain" element={<GuardianComplain />} />
 
         </Routes>
       </Router>

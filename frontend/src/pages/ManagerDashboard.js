@@ -43,9 +43,12 @@ const rows = [
 function ManagerDashboard() {
   return (
     <div className='dashboard'>
+
       <Header />
+      
       <Box height={80} />
       <Box sx={{ display: 'flex' }}>
+
         <Sidebar menuItems={ManagerMenuItem} />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
           <Grid container spacing={1} >
@@ -72,6 +75,7 @@ function ManagerDashboard() {
                     alt="Live from space album cover"
                   />
                 </Card>
+                
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto', }}>
