@@ -32,6 +32,8 @@ import GuardianRoomPackages from './pages/Guardian/GuardianRoomPackages';
 import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
 import GuardianAddElder from './pages/Guardian/GuardianAddElder';
 import GuardianComplain from './pages/Guardian/GuardianComplain';
+import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
+ 
 
 import Caregiverprofile from './pages/caregiverprofile';
 function App() {
@@ -74,6 +76,9 @@ function App() {
           <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
           <Route path="/GuardianComplain" element={<GuardianComplain />} />
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
+          
+
 
         </Routes>
       </Router>

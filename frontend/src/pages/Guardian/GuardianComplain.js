@@ -37,7 +37,7 @@ export default function GuardianComplain() {
   };
 
   return (
-    <div>
+    <div style={{justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor:"#F9FFFE" }}>
       <Header />
       <Box height={80} />
       <Box sx={{ display: "flex" }}>
@@ -45,6 +45,7 @@ export default function GuardianComplain() {
 
         <Container>
           <Grid container spacing={3}>
+
             <Grid item xs={12} md={6}>
               <Typography variant="h6">Add Complaint</Typography>
               <Card>
