@@ -47,9 +47,9 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
 
-         
-          <Route path="/profile" element={<Caregiverprofile/>}/>
-          
+
+          <Route path="/profile" element={<Caregiverprofile />} />
+
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />

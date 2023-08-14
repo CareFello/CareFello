@@ -1,19 +1,52 @@
-import React from 'react'
-import Sidebar from '../../components/Sidebar'
-import Header from '../../components/Header'
-import { Box } from '@mui/material'
-import Grid from '@mui/material/Grid'
+// GuardianSendRequest.js
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { LinearProgress } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
 import Card from '@mui/material/Card';
-
 import CardContent from '@mui/material/CardContent';
-
 import Typography from '@mui/material/Typography';
-import "../../styles/form.css"
-import { GuardianMenuItem } from '../../components/GuardianMenuItem'
+import Button from '@mui/material/Button'; // Don't forget to import Button
+
+import StepOne from '../../components/StepOne';
+import StepTwo from '../../components/StepTwo';
+import { GuardianMenuItem } from '../../components/GuardianMenuItem';
+
+import Header from '../../components/Header';
+import Sidebar from '../../components/Sidebar';
 
 function GuardianSendRequest() {
+    const [currentStep, setCurrentStep] = useState(1);
+    const [formData, setFormData] = useState({
+        // Initialize your form data here
+    });
+
+    const handleNextStep = () => {
+        setCurrentStep(currentStep + 1);
+    };
+
+    const handlePrevStep = () => {
+        setCurrentStep(currentStep - 1);
+    };
+
+    const handleSubmit = () => {
+        // Handle form submission here
+    };
+
+    const renderStepContent = () => {
+        switch (currentStep) {
+            case 1:
+                return <StepOne formData={formData} setFormData={setFormData} />;
+            case 2:
+                return <StepTwo formData={formData} setFormData={setFormData} />;
+            // Add more cases for other steps
+            default:
+                return null;
+        }
+    };
+
     return (
         <div>
             <Header />
@@ -22,96 +55,36 @@ function GuardianSendRequest() {
                 <Sidebar menuItems={GuardianMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={0} >
-                        <Grid item xs={8} >
-                            <Stack spacing={9} direction={'row'}>
-                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 100 + "%" }}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                        <CardContent sx={{ flex: '1 0 auto' }}>
-                                            <Typography component="div" variant="h4">
-                                                Request Form
-                                            </Typography>
-                                            <form action="#" className="form">
-                                                <div className="column">
-                                                    <div className="input-box">
-                                                        <label>Elder Name</label>
-                                                        <input type="text" placeholder="Enter full name" required />
-                                                    </div>
-                                                    <div className="input-box">
-                                                        <label>Elder Id</label>
-                                                        <input type="text" placeholder="Enter email address" required />
-                                                    </div>
-                                                </div>
-                                                <div className="input-box">
-                                                    <label>Reason</label>
-                                                    <input type="text" placeholder="Enter full name" required />
-                                                </div>
-                                                <div className="column">
-                                                    <div className="input-box">
-                                                        <label>Starting Date</label>
-                                                        <input type="date" placeholder="Enter phone number" required />
-                                                    </div>
-                                                    <div className="input-box">
-                                                        <label>Duration</label>
-                                                        <input type="number" placeholder="Enter number of date" required />
-                                                    </div>
-                                                </div>
+                        <Card>
+                            <CardContent>
+                                <Typography variant="h6" gutterBottom>
+                                    Step {currentStep} of 3
+                                </Typography>
+                                <LinearProgress variant="determinate" value={(currentStep / 3) * 100} />
+                                {renderStepContent()}
+                                <Stack direction="row" spacing={2}>
+                                    {currentStep === 1 && (
+                                        <>
+                                            <Button onClick={handleNextStep}>Next</Button>
+                                            {/* Additional Next button */}
 
-                                                <div className="input-box address">
-                                                    <label>Caregiver Type</label>
-                                                    <div className="column">
-                                                        <div className="select-box">
-                                                            <select>
-                                                                <option hidden>Gender</option>
-                                                                <option>Male</option>
-                                                                <option>Female</option>
-                                                                <option>Any</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="select-box">
-                                                            <select>
-                                                                <option hidden>Age Limit of Caregiver</option>
-                                                                <option>30-40</option>
-                                                                <option>40-50</option>
-                                                                <option>50-60</option>
-                                                                <option>Any</option>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                    <div className="column">
-                                                        <div className="select-box">
-                                                            <select>
-                                                                <option hidden>Package</option>
-                                                                <option>Basic</option>
-                                                                <option>Classic</option>
-                                                                <option>Luxury</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="select-box">
-                                                            <select>
-                                                                <option hidden>Meal Type</option>
-                                                                <option>Basic</option>
-                                                                <option>Diabetic Free</option>
-                                                                <option>Cholestrol Free</option>
-                                                                <option>Veg Only</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="input-box">
-                                                    <label>Special Notes</label>
-                                                    <textarea type="text" placeholder="Enter full name" required />
-                                                </div>
-                                                <button>Submit</button>
-                                            </form>
-                                        </CardContent>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                                        </Box>
-                                    </Box>
-                                </Card>
-                            </Stack>
-                        </Grid>
+                                        </>
+                                    )}
+                                    {currentStep === 2 && (
+                                        <>
+                                            <Button onClick={handlePrevStep}>Previous</Button>
+                                            <Button onClick={handleNextStep}>Next</Button>
+                                        </>
+                                    )}
+                                    {currentStep === 3 && (
+                                        <>
+                                            <Button onClick={handlePrevStep}>Previous</Button>
+                                            <Button onClick={handleSubmit}>Submit</Button>
+                                        </>
+                                    )}
+                                </Stack>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Box>
             </Box>
@@ -119,4 +92,5 @@ function GuardianSendRequest() {
     )
 }
 
-export default GuardianSendRequest
+export default GuardianSendRequest;
+
