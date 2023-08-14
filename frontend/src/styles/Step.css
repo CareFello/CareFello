@@ -1,0 +1,39 @@
+/* StepOne.css */
+
+.form-container {
+    display: grid;
+    grid-gap: 16px;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.form-container .MuiTextField-root,
+.form-container .MuiFormControl-root {
+    width: 100%;
+}
+
+.form-container .MuiSelect-root {
+    width: 100%;
+}
+
+.form-container .MuiInputBase-input {
+    font-size: 16px;
+}
+
+.form-container .MuiInputLabel-root {
+    font-size: 14px;
+    color: #333;
+}
+
+.form-container .MuiInput-underline:before,
+.form-container .MuiInput-underline:after {
+    border-bottom: 2px solid #007bff;
+}
+
+.form-container .MuiSelect-select:focus {
+    background-color: transparent;
+}
