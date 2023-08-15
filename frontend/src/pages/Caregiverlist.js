@@ -1,7 +1,7 @@
 
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import Table from 'react-bootstrap/Table';
 import "../styles/Caregiverlist.css"
 import Person from "./../assets/person.jpeg"
@@ -19,6 +19,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Paper';
+
 function createDataa(profileimg, name, Regno,Email,Mobile,Status,Action) {
   return { profileimg, name, Regno,Email,Mobile,Status,Action };
 }
@@ -30,10 +32,26 @@ const rows = [
   createDataa(Proimg, 'G.T.Gunawardena','cg-08','gtguna36@gmail.com','0771234567','Unassigned'),
   createDataa(Proimg, 'David Johnson','cg-02','johndavid@gmail.com','0771234567','Assigned'),
 ];
+
+const handleEdit = (rowData) => {
+  // Implement edit logic here using rowData
+};
+
+const handleView = (rowData) => {
+  // Implement view logic here using rowData
+};
+
+const handleDelete = (rowData) => {
+  // Implement delete logic here using rowData
+};
+
 const Caregiverlist = () => (
-  <div>
-
-
+ 
+  
+ 
+ 
+ 
+ <div>
 <Box height={80} />
     <Header />
     <div className="d-flex gap-4">
@@ -154,26 +172,27 @@ const Caregiverlist = () => (
         </tbody>
       </Table> */}
 
-<TableContainer component={Paper}>
+<TableContainer component={Paper} style={{ marginBottom: '20px' }}>
       <Table style={{  backgroundColor:'#D4F1F4', }} aria-label="simple table">
         
         <TableHead>
-          <TableRow>
-          <TableCell >#</TableCell>
-          <TableCell >Name</TableCell>
-            <TableCell >Reg No</TableCell>
-            <TableCell >E-Mail</TableCell>
-            <TableCell>Mobile</TableCell>
-            <TableCell >status</TableCell>
-            <TableCell >Action</TableCell>
+          <TableRow style={{ borderBottom: '1px solid #ccc' }}>
+          <TableCell align="center">#</TableCell>
+          <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Reg No</TableCell>
+            <TableCell align="center">E-Mail</TableCell>
+            <TableCell align="center">Mobile</TableCell>
+            <TableCell align="center">status</TableCell>
+            <TableCell align="center">Action</TableCell>
           </TableRow>
         </TableHead>
 
-        <TableBody sx={{}}>
-          {rows.map((row) => (
-            <TableRow key={row.from}>
+        <TableBody>
+          {rows.map((row,index) => (
+                       <TableRow key={row.from} style={{ borderBottom: '1px solid #ccc' }}>
+
             
-              <TableCell>
+              <TableCell align="center">
               <img src={row.profileimg} alt={`Photo ${Proimg}`} style={{ width: '50px', height: '50px' }} />
             </TableCell>
               <TableCell fontWeight=
@@ -182,8 +201,18 @@ const Caregiverlist = () => (
               <TableCell align="center">{row.Email}</TableCell>
               <TableCell align="center">{row.Mobile}</TableCell>
               <TableCell align="center">{row.Status}</TableCell>
-              <TableCell align="center">{row.Action}</TableCell>
-              <TableCell align="center">{row.time}</TableCell>
+              <TableCell align="center">
+  {index === rows.length - 1 ? (
+    <div className="d-flex flex-row" d-flex flex-column>
+      <Button variant="outlined" onClick={() => handleEdit(row)}><icon.MdEdit size="1.5rem" color="black" /></Button>
+      <Button variant="outlined" onClick={() => handleView(row)}><icon.MdPersonPin size="1.5rem" color="blue" /></Button>
+      <Button variant="outlined" onClick={() => handleDelete(row)}><icon.MdDelete size="1.5rem" color="red" /></Button>
+    </div>
+  ) : (
+    row.Action
+  )}
+</TableCell>
+          
             </TableRow>
           ))}
         </TableBody>
