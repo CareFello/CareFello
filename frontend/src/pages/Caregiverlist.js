@@ -2,7 +2,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Table from 'react-bootstrap/Table';
+// import Table from 'react-bootstrap/Table';
 import "../styles/Caregiverlist.css"
 import Person from "./../assets/person.jpeg"
 import Header from "../components/Header";
@@ -11,9 +11,25 @@ import Sidebar from '../components/Sidebar';
 import * as icon from "react-icons/md";
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import Box from '@mui/material/Box'
+import Proimg from '../assets/profile1.png';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+function createDataa(profileimg, name, Regno,Email,Mobile,Status,Action) {
+  return { profileimg, name, Regno,Email,Mobile,Status,Action };
+}
 
-
-
+const rows = [
+  createDataa(Proimg, 'R.J.Premasiri','cg-11','sanath@gmail.com','0771234567','Assigned'),
+  createDataa( Proimg, 'M.F.Abdulla','cg-15','mfAbdulla@gmail.com','0771234567','Assigned'),
+  createDataa(Proimg, 'M.Mahendran','cg-18','mahendran@gmail.com','0771234567','Unassigned'),
+  createDataa(Proimg, 'G.T.Gunawardena','cg-08','gtguna36@gmail.com','0771234567','Unassigned'),
+  createDataa(Proimg, 'David Johnson','cg-02','johndavid@gmail.com','0771234567','Assigned'),
+];
 const Caregiverlist = () => (
   <div>
 
@@ -26,7 +42,7 @@ const Caregiverlist = () => (
         {/* <Sidebar /> */}
       </div>
 
-      <Table striped bordered hover className="table-height">
+      {/* <Table striped bordered hover className="table-height">
         <thead>
           <tr>
             <th>#</th>
@@ -136,7 +152,44 @@ const Caregiverlist = () => (
             <td></td>
           </tr>
         </tbody>
+      </Table> */}
+
+<TableContainer component={Paper}>
+      <Table style={{  backgroundColor:'#D4F1F4', }} aria-label="simple table">
+        
+        <TableHead>
+          <TableRow>
+          <TableCell >#</TableCell>
+          <TableCell >Name</TableCell>
+            <TableCell >Reg No</TableCell>
+            <TableCell >E-Mail</TableCell>
+            <TableCell>Mobile</TableCell>
+            <TableCell >status</TableCell>
+            <TableCell >Action</TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody sx={{}}>
+          {rows.map((row) => (
+            <TableRow key={row.from}>
+            
+              <TableCell>
+              <img src={row.profileimg} alt={`Photo ${Proimg}`} style={{ width: '50px', height: '50px' }} />
+            </TableCell>
+              <TableCell fontWeight=
+              "bolder" align="center">{row.name}</TableCell>
+              <TableCell align="center">{row.Regno}</TableCell>
+              <TableCell align="center">{row.Email}</TableCell>
+              <TableCell align="center">{row.Mobile}</TableCell>
+              <TableCell align="center">{row.Status}</TableCell>
+              <TableCell align="center">{row.Action}</TableCell>
+              <TableCell align="center">{row.time}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
+    </TableContainer>
+
     </div>
     <div className='contactus'>
       {/* <Footer /> */}
