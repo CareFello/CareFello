@@ -1,6 +1,6 @@
 // GuardianSendRequest.js
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, duration } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { LinearProgress } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -16,6 +16,7 @@ import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
+import axios from "axios";
 
 function GuardianSendRequest() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -23,8 +24,24 @@ function GuardianSendRequest() {
         // Initialize your form data here
     });
 
-    const handleNextStep = () => {
-        setCurrentStep(currentStep + 1);
+    const handleNextStep = async () => {
+
+        try {
+            await axios.post("http://localhost:8085/api/request/check", formData).then((res) =>{
+                console.log(res.data);
+
+                if (res.data.message == "true"){
+                    setCurrentStep(currentStep + 1);
+                }else{
+                    alert("Rooms not exist");
+                }
+            });
+            
+            //console.log(formData);
+        } catch (err) {
+            alert(err);
+            //console.log(formData);
+        }
     };
 
     const handlePrevStep = () => {
@@ -32,7 +49,7 @@ function GuardianSendRequest() {
     };
 
     const handleSubmit = () => {
-        // Handle form submission here
+        console.log(formData);
     };
 
     const renderStepContent = () => {
