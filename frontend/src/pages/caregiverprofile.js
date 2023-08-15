@@ -16,7 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import ManagerMenuItem from '../components/ManagerMenuItem'
 
 
 const caregiverprofile = () => {
@@ -24,7 +24,7 @@ const caregiverprofile = () => {
     return { from, to, roomno, elders };
   }
   
-                            const rows = [
+        const rows = [
     createData('2022.09.15', '2023.02.25', 'A6', 'R.J.Premasiri'),
     createData('2023.03.02', '2023.06.01', 'B5', 'M.F.Abdulla'),
     createData('2023.06.12', '2023.08.11', 'B5', 'M.Mahendran'),
@@ -40,7 +40,8 @@ const caregiverprofile = () => {
      
         <div className="d-flex flex-row w-100"> 
         <Box height={80}/>
-        <Sidebar />
+        {/* <Sidebar menuItems={ManagerMenuItem} /> */}
+        {/* <Sidebar /> */}
           <div className="d-flex w-75 flex-column ">
           
             <div className="d-flex flex-lg-column flex-md-column flex-column align-items-center" style={{ gap: "1rem" }}>
@@ -87,8 +88,8 @@ const caregiverprofile = () => {
                   <p className="" style={{ marginTop:"10px",color: "#000000", fontSize: "20px" }}>Working History</p>
                         
                                             
-                          <div className="d-flex flex-column align-content-end">
-                          <TableContainer component={Paper}>
+     <div className="d-flex flex-column align-content-end">
+          <TableContainer component={Paper}>
       <Table sx={{  backgroundColor:'#D4F1F4' }} aria-label="simple table">
         
         <TableHead>
