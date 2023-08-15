@@ -29,6 +29,8 @@ import { axisClasses } from '@mui/x-charts';
 import '../styles/ManagerDashboard.css';
 import Proimg from '../assets/profile1.png';
 import "../styles/Doctordashboard.css"
+import { withTheme } from '@emotion/react'
+import { blueGrey } from '@mui/material/colors'
 // import dayjs, { Dayjs } from 'dayjs';
 // import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -87,14 +89,17 @@ function DoctorDashboard() {
       <Box height={80} />
       <Box sx={{ display: 'flex' }}>
         <Sidebar menuItems={DoctorMenuItem} />
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-          <Grid container spacing={1} >
-            <Grid item xs={12}>
-              <Stack spacing={9} direction={'row'}>
+       
+        <Box component="main" sx={{ flexGrow: 1, justifyContent:"center",alignItems:"center",margin:3}} >
+          <Grid container spacing={3} sx={{justifyContent:"center",alignItems:"center" }}>
+            
+            <Grid item xs={12} sx={{backgroundColor:"#cacaca38", p:3,alignItems:"center" }}>
+            <p style={{textAlign:"left", fontWeight:"bold",fontSize:20}}>Welcome Perera !</p>
+              <Stack spacing={4} direction={'row'}>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', width:'100%' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography component="div" variant="h5">
+                      <Typography  component="div" variant="h2">
                         18
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary" component="div">
@@ -105,17 +110,12 @@ function DoctorDashboard() {
 
                     </Box>
                   </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 75 + "%" }}
-                    image={img_1}
-                    alt="Live from space album cover"
-                  />
+                  
                 </Card>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', width:'100%' }}>
                     <CardContent sx={{ flex: '1 0 auto', }}>
-                      <Typography component="div" variant="h5">
+                      <Typography component="div" variant="h2">
                         06
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary" component="div">
@@ -126,17 +126,12 @@ function DoctorDashboard() {
 
                     </Box>
                   </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 75 + "%" }}
-                    image={img_2}
-                    alt="Live from space album cover"
-                  />
+                  
                 </Card>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', width:'100%' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography component="div" variant="h5">
+                      <Typography component="div" variant="h2">
                         03
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary" component="div">
@@ -147,12 +142,7 @@ function DoctorDashboard() {
 
                     </Box>
                   </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 75 + "%" }}
-                    image={img_3}
-                    alt="Live from space album cover"
-                  />
+                 
                 </Card>
 
               </Stack>
@@ -182,7 +172,7 @@ function DoctorDashboard() {
 
         <TableBody sx={{}}>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.name} style={{ borderBottom: '0.5px solid #ccc' }}>
               {/* <TableCell component="td" scope="row">
                 {row.from}
               </TableCell> */}
@@ -205,12 +195,12 @@ function DoctorDashboard() {
             </Grid>
 
 
+          
+            <Grid item xs={7} sx={{backgroundColor:"#fff", p:3,alignItems:"center" }}>
 
-            <Grid item xs={7}>
-
-
+           
               <h2>Desease ratio</h2><br />
-              <div className='doctor-pie-chart'>
+              <div className='doctor-pie-chart' style={{ backgroundColor: '#c5c7ca2e' }}>
               <PieChart className='piechart'
                 series={[
                   {
@@ -222,6 +212,7 @@ function DoctorDashboard() {
                     ],
                   },
                 ]}
+                backgroundColor={blueGrey}
                 width={500}
                 height={250}
 
@@ -230,6 +221,7 @@ function DoctorDashboard() {
 
 
             </Grid>
+            
             {/* <Grid item xs={4}>
               <h2>Available Caregiver Details</h2><br />
               <BarChart
@@ -247,6 +239,7 @@ function DoctorDashboard() {
             
           </Grid>
         </Box>
+       
 
       </Box>
 
