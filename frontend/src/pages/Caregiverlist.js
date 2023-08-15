@@ -172,7 +172,7 @@ const Caregiverlist = () => (
         </tbody>
       </Table> */}
 
-<TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+<TableContainer component={Paper} style={{ marginBottom: '10px' }}>
       <Table style={{  backgroundColor:'#D4F1F4', }} aria-label="simple table">
         
         <TableHead>
@@ -203,10 +203,10 @@ const Caregiverlist = () => (
               <TableCell align="center">{row.Status}</TableCell>
               <TableCell align="center">
   {index === rows.length - 1 ? (
-    <div className="d-flex flex-row" d-flex flex-column>
-      <Button variant="outlined" onClick={() => handleEdit(row)}><icon.MdEdit size="1.5rem" color="black" /></Button>
-      <Button variant="outlined" onClick={() => handleView(row)}><icon.MdPersonPin size="1.5rem" color="blue" /></Button>
-      <Button variant="outlined" onClick={() => handleDelete(row)}><icon.MdDelete size="1.5rem" color="red" /></Button>
+    <div className="d-flex flex-row flex-nowrap" style={{width:"63px"}} >
+      <Button variant="outlined" onClick={() => handleEdit(row)}><icon.MdEdit size="2.5rem" color="black" /></Button>
+      <Button variant="outlined" onClick={() => handleView(row)}><icon.MdPersonPin size="2.5rem" color="blue" /></Button>
+      <Button variant="outlined" onClick={() => handleDelete(row)}><icon.MdDelete size="2.5rem" color="red" /></Button>
     </div>
   ) : (
     row.Action
