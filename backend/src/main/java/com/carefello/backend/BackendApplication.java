@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
+
+
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class BackendApplication {
 
@@ -13,6 +15,7 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class , args);
 	}
 	@Bean
+
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}

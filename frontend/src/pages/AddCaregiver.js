@@ -131,19 +131,22 @@ function AddCaregiver() {
                                                         }}
                                                         style={{ borderColor: isValid ? 'green' : 'red' }}
                                                     />
-
                                                     <TextField
                                                         required
                                                         id="outlined-required"
-                                                        label=""
+                                                        label="Birthday"
                                                         sx={{ m: 1, width: '30ch' }}
                                                         type='date'
+                                                        InputProps={{
 
+                                                            style: { color: 'black' }, // Adjust the color as needed
+                                                        }}
                                                         value={dob}
                                                         onChange={(event) => {
                                                             setDob(event.target.value);
                                                         }}
                                                     />
+
                                                     <TextField
                                                         required
                                                         id="outlined-multiline-flexible"
