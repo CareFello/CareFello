@@ -7,21 +7,25 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import ManagerDashboard from "./pages/ManagerDashboard";
-import AddDoctor from "./pages/AddDoctor";
-import Caregiverlist from "./pages/Caregiverlist";
-import AddCaregiver from "./pages/AddCaregiver";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import ViewRoomDetails from "./pages/ViewRoomDetails";
-import MealPlan from "./pages/MealPlan";
-import RoomPackage from "./pages/RoomPackage";
-import GuardianRequest from "./pages/GuardianRequest";
-import SendRequest from "./pages/SendRequest";
-import Registration from "./pages/Registration";
-import AddElder from "./pages/AddElder";
-import Meal from "./pages/Meal";
+import ManagerDashboard from './pages/ManagerDashboard';
+import AddDoctor from './pages/AddDoctor';
+import Caregiverlist from './pages/Caregiverlist';
+import AddCaregiver from './pages/AddCaregiver';
+
+
+import ViewRoomDetails from './pages/ViewRoomDetails'
+import MealPlan from './pages/MealPlan';
+import RoomPackage from './pages/RoomPackage';
+import GuardianRequest from './pages/GuardianRequest';
+import SendRequest from './pages/SendRequest';
+import Registration from './pages/Registration';
+import AddElder from './pages/AddElder';
+import Meal from './pages/Meal'
+import RequestContinue from './pages/RequestContinue';
+
 
 //Guardians' Pages
 
@@ -33,7 +37,7 @@ import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
 import GuardianAddElder from './pages/Guardian/GuardianAddElder';
 import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
- 
+
 
 import Caregiverprofile from './pages/caregiverp
 function App() {
@@ -73,6 +77,7 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+          <Route path="/RequestContinue" element={<RequestContinue />} />
 
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
@@ -89,7 +94,7 @@ function App() {
 
           <Route path="/GuardianComplain" element={<GuardianComplain />} />
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
-          
+
 
 
 

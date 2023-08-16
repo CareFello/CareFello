@@ -58,8 +58,8 @@ function Meal() {
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
                                 <h3>Breakfast</h3>
-                                <Card sx={{ display: 'flex', width: 100 + "%", height: 220 }}>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
+                                <Card sx={{ display: 'flex', width: 100 + "%", height: 260 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -68,8 +68,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -77,7 +84,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -86,8 +93,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -95,7 +109,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -104,8 +118,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -113,7 +134,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -122,8 +143,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -131,45 +159,10 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
-                                    <Card sx={{ maxWidth: 200, height: 200, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
-
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
                                     {/* <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}> */}
                                     <IconButton aria-label="Add" color="primary" onClick={openModal}>
-                                        <AddCircleOutlineIcon style={{ width: 80, height: 80, marginLeft: 20, marginTop: 10 }} />
+                                        <AddCircleOutlineIcon style={{ width: 40, height: 40, marginLeft: 20, marginTop: 5 }} />
                                     </IconButton>
                                     {/* </Card> */}
                                     <Modal
@@ -199,6 +192,16 @@ function Meal() {
                                                     id="outlined-required"
                                                     label="Food Item Name"
                                                     sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Discription"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Calaories Pe Gram"
+                                                    sx={{ m: 1, width: '38ch' }} />
                                                 <input
                                                     accept="image/*"
                                                     type="file"
@@ -223,11 +226,12 @@ function Meal() {
 
                             </Stack>
                         </Grid>
+
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
                                 <h3>Lunch</h3>
-                                <Card sx={{ display: 'flex', width: 100 + "%", height: 200 }}>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                <Card sx={{ display: 'flex', width: 100 + "%", height: 260 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -236,8 +240,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -245,7 +256,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -254,8 +265,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -263,7 +281,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -272,8 +290,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -281,7 +306,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -290,8 +315,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -299,47 +331,66 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
-
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
                                     {/* <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}> */}
-                                    <IconButton aria-label="Add" color="primary">
-                                        <AddCircleOutlineIcon style={{ width: 80, height: 80, marginLeft: 20, marginTop: 10 }} />
+                                    <IconButton aria-label="Add" color="primary" onClick={openModal}>
+                                        <AddCircleOutlineIcon style={{ width: 40, height: 40, marginLeft: 20, marginTop: 5 }} />
                                     </IconButton>
                                     {/* </Card> */}
+                                    <Modal
+                                        isOpen={isModalOpen}
+                                        onRequestClose={closeModal}
+                                        contentLabel="Add Item"
+                                        className="modal"
+                                        overlayClassName="overlay"
+
+                                    >
+                                        <div className="modal-header">
+                                            <IconButton
+                                                aria-label="Close"
+                                                color="inherit"
+                                                onClick={closeModal}
+                                                className="close-button"
+                                            >
+                                                <CloseIcon />
+                                            </IconButton>
+                                        </div>
+                                        <div className="modal-content">
+                                            {/* Your popup form content */}
+                                            <h2>Add Item</h2>
+                                            <form>
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Food Item Name"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Discription"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Calaories Pe Gram"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <input
+                                                    accept="image/*"
+                                                    type="file"
+                                                    id="image-uploader"
+                                                    onChange={handleImageChange}
+                                                    style={{ display: 'none' }}
+                                                />
+                                                <label htmlFor="image-uploader">
+                                                    <Button >
+                                                        Upload Image
+                                                    </Button>
+                                                </label>
+                                                {selectedImage && <p>Selected image: {selectedImage.name}</p>}
+                                                <Button variant="contained" sx={{ m: 1, width: '49ch', height: '50px' }} >Add</Button>
+                                            </form>
+                                        </div>
+                                    </Modal>
 
 
                                 </Card>
@@ -347,11 +398,12 @@ function Meal() {
 
                             </Stack>
                         </Grid>
+
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
                                 <h3>Dinner</h3>
-                                <Card sx={{ display: 'flex', width: 100 + "%", height: 200 }}>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                <Card sx={{ display: 'flex', width: 100 + "%", height: 260 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -360,8 +412,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -369,7 +428,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -378,8 +437,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -387,7 +453,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -396,8 +462,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -405,7 +478,7 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
+                                    <Card sx={{ maxWidth: 200, height: 240, marginLeft: 4, marginTop: 1 }}>
                                         <CardMedia
                                             component="img"
                                             alt="green iguana"
@@ -414,8 +487,15 @@ function Meal() {
                                         />
                                         <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
+                                            <Typography variant="body2" color="text.primary">
                                                 Vegetable Salad
+                                            </Typography>
+
+                                            <Typography variant="body2" color="text.secondary">
+                                                Salad which made from fresh vegetables.
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                3 Calories Per Gram
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -423,47 +503,66 @@ function Meal() {
 
                                         </CardActions>
                                     </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
 
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
-                                    <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="90"
-                                            image={meal}
-                                        />
-                                        <CardContent>
-
-                                            <Typography variant="body2" color="text.secondary">
-                                                Vegetable Salad
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <DeleteIcon />
-
-                                        </CardActions>
-                                    </Card>
                                     {/* <Card sx={{ maxWidth: 200, height: 180, marginLeft: 4, marginTop: 1 }}> */}
-                                    <IconButton aria-label="Add" color="primary">
-                                        <AddCircleOutlineIcon style={{ width: 80, height: 80, marginLeft: 20, marginTop: 10 }} />
+                                    <IconButton aria-label="Add" color="primary" onClick={openModal}>
+                                        <AddCircleOutlineIcon style={{ width: 40, height: 40, marginLeft: 20, marginTop: 5 }} />
                                     </IconButton>
                                     {/* </Card> */}
+                                    <Modal
+                                        isOpen={isModalOpen}
+                                        onRequestClose={closeModal}
+                                        contentLabel="Add Item"
+                                        className="modal"
+                                        overlayClassName="overlay"
+
+                                    >
+                                        <div className="modal-header">
+                                            <IconButton
+                                                aria-label="Close"
+                                                color="inherit"
+                                                onClick={closeModal}
+                                                className="close-button"
+                                            >
+                                                <CloseIcon />
+                                            </IconButton>
+                                        </div>
+                                        <div className="modal-content">
+                                            {/* Your popup form content */}
+                                            <h2>Add Item</h2>
+                                            <form>
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Food Item Name"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Discription"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Calaories Pe Gram"
+                                                    sx={{ m: 1, width: '38ch' }} />
+                                                <input
+                                                    accept="image/*"
+                                                    type="file"
+                                                    id="image-uploader"
+                                                    onChange={handleImageChange}
+                                                    style={{ display: 'none' }}
+                                                />
+                                                <label htmlFor="image-uploader">
+                                                    <Button >
+                                                        Upload Image
+                                                    </Button>
+                                                </label>
+                                                {selectedImage && <p>Selected image: {selectedImage.name}</p>}
+                                                <Button variant="contained" sx={{ m: 1, width: '49ch', height: '50px' }} >Add</Button>
+                                            </form>
+                                        </div>
+                                    </Modal>
 
 
                                 </Card>
@@ -471,6 +570,7 @@ function Meal() {
 
                             </Stack>
                         </Grid>
+
 
 
                     </Grid>
