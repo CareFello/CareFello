@@ -52,7 +52,7 @@ const GuardianCaregiverRating = () => {
 
                                     <CardMedia
                                         component="img"
-                                        height="300"
+                                        height="200"
                                         width="200"
                                         image={caregiver.image}
                                         alt="caregiver-img"
