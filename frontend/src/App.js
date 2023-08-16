@@ -24,6 +24,16 @@ import Registration from './pages/Registration';
 import AddElder from './pages/AddElder';
 import Meal from './pages/Meal'
 
+//Guardians' Pages
+import GuardianDashboard from './pages/Guardian/GuardianDashboard';
+import ElderProfile from './pages/Guardian/ElderProfile';
+import EditElderProfile from './pages/Guardian/EditElderProfile';
+import GuardianRoomPackages from './pages/Guardian/GuardianRoomPackages';
+import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
+import GuardianAddElder from './pages/Guardian/GuardianAddElder';
+import GuardianComplain from './pages/Guardian/GuardianComplain';
+import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
+ 
 
 import Caregiverprofile from './pages/caregiverprofile';
 function App() {
@@ -40,9 +50,9 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
 
-         
-          <Route path="/profile" element={<Caregiverprofile/>}/>
-          
+
+          <Route path="/profile" element={<Caregiverprofile />} />
+
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
@@ -58,6 +68,16 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
+          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/ElderProfile" element={<ElderProfile />} />
+          <Route path="/EditElderProfile" element={<EditElderProfile />} />
+          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
+          <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
+          <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
+          <Route path="/GuardianComplain" element={<GuardianComplain />} />
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
+          
 
 
         </Routes>

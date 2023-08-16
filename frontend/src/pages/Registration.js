@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import Reg from "../assets/reg.png"
+import axios from 'axios'
 
 
 
@@ -22,6 +23,42 @@ function Registration() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [nic, setNic] = useState("");
+    const [cont, setCont] = useState("");
+    const [profession, setPro] = useState("");
+    const [Haddress, setHaddress] = useState("");
+    const [Waddress, setWaddress] = useState("");
+    const [isValid, setIsValid] = useState(true);
+    const [isValidnic, setIsValidnic] = useState(true);
+
+    async function save(event) {
+        event.preventDefault();
+        try {
+            await axios.post("http://localhost:8080/api/v1/guardian/save", {
+                email: email,
+                password: password,
+                nic: nic,
+                fname: fname,
+                lname: lname,
+                cont: cont,
+                profession: profession,
+                Haddress: Haddress,
+                Waddress: Waddress,
+
+            });
+            alert("Doctor registration Successfull");
+            window.location.reload();
+
+        } catch (err) {
+            alert(err);
+        }
+    }
+
     return (
         <div>
             <Navbar />
@@ -39,43 +76,115 @@ function Registration() {
                             required
                             id="outlined-required"
                             label="Fisrt name"
-                            sx={{ m: 1, width: '25ch' }} />
+                            sx={{ m: 1, width: '25ch' }}
+
+                            value={fname}
+                            onChange={(event) => {
+                                setFname(event.target.value);
+                            }}
+                        />
+
+
                         <TextField
                             required
                             id="outlined-required"
                             label="Last name"
-                            sx={{ m: 1, width: '25ch' }} />
+                            sx={{ m: 1, width: '25ch' }}
+
+                            value={lname}
+                            onChange={(event) => {
+                                setLname(event.target.value);
+                            }} />
+
+
 
                         <TextField
                             required
                             id="outlined-required"
                             label="Email"
-                            sx={{ m: 1, width: '52ch' }} />
+                            sx={{ m: 1, width: '52ch' }}
+
+                            value={email}
+                            onChange={(event) => {
+                                setEmail(event.target.value);
+                                const inputEmail = event.target.value;
+
+                                // Regular expression for email validation
+                                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
+
+                                // Check if the email matches the pattern
+                                setIsValid(emailPattern.test(inputEmail));
+                            }}
+
+                            style={{ borderColor: isValid ? 'green' : 'red' }} />
+
+
+
                         <TextField
                             required
                             id="outlined-required"
-                            label="NIC No"
-                            sx={{ m: 1, width: '25ch' }} />
+
+                            label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
+                            sx={{ m: 1, width: '25ch' }}
+
+                            value={nic}
+                            onChange={(event) => {
+                                setNic(event.target.value);
+                                const inputnic = event.target.value;
+                                const nicPattern = /^\d{12}$/;
+                                setIsValidnic(nicPattern.test(inputnic));
+                            }}
+                            style={{ borderColor: isValid ? 'green' : 'red' }} />
+
+
+
                         <TextField
                             required
                             id="outlined-required"
                             label="Mobile No"
-                            sx={{ m: 1, width: '25ch' }} />
+                            sx={{ m: 1, width: '25ch' }}
+
+                            value={cont}
+                            onChange={(event) => {
+                                setCont(event.target.value);
+                            }} />
+
+
                         <TextField
                             required
                             id="outlined-required"
                             label="Home Address"
-                            sx={{ m: 1, width: '52ch' }} />
+                            sx={{ m: 1, width: '52ch' }}
+
+                            value={Haddress}
+                            onChange={(event) => {
+                                setHaddress(event.target.value);
+                            }} />
+
+
                         <TextField
                             required
                             id="outlined-required"
                             label="Proffession"
-                            sx={{ m: 1, width: '52ch' }} />
+                            sx={{ m: 1, width: '52ch' }}
+
+
+                            value={profession}
+                            onChange={(event) => {
+                                setPro(event.target.value);
+                            }} />
+
                         <TextField
                             required
                             id="outlined-required"
                             label="Working Place Address"
-                            sx={{ m: 1, width: '52ch' }} />
+                            sx={{ m: 1, width: '52ch' }}
+
+
+                            value={Waddress}
+                            onChange={(event) => {
+                                setWaddress(event.target.value);
+                            }} />
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
@@ -115,10 +224,19 @@ function Registration() {
                                     </InputAdornment>
                                 }
                                 label="Confirm Password"
+                                value={password}
+                                onChange={(event) => {
+                                    setPassword(event.target.value);
+                                }}
 
 
                             /></FormControl>
-                        <Button variant="contained" sx={{ m: 1, width: '40ch', height: '50px' }} >
+                        <Button variant="contained" sx={{
+                            m: 1, width: '40ch', height: '50px', backgroundColor: ' #05445E', marginTop: '20px',
+                            '&:hover': {
+                                backgroundColor: '#189AB4', // Change this color to your desired hover color
+                            },
+                        }}>
                             Register
                         </Button>
                     </form>

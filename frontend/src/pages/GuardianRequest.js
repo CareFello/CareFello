@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
@@ -18,30 +19,72 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { CardActionArea } from '@mui/material';
 import LivingIcon from '@mui/icons-material/Living';
-import RequestCard from '../components/RequestCard'
-import { ManagerMenuItem } from '../components/ManagerMenuItem'
+import '../styles/GuardianRequest.css';
+import Elder from '../assets/Happy_Elder.jpeg';
+import { MdOutlineBedroomParent } from "react-icons/md";
+import {LiaUserNurseSolid} from "react-icons/lia";
+import pp1 from '../assets/pp1.jpg';
+import pp2 from '../assets/pp2.png';
+import pp3 from '../assets/pp3.png';
+import pp4 from '../assets/pp4.png';
+import pp5 from '../assets/pp5.jpg';
+import pp6 from '../assets/pp6.png';
+
+import { useTheme } from '@mui/material/styles';
+
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+
+
+import RequestCard from '../components/RequestCard';
+import { ManagerMenuItem } from '../components/ManagerMenuItem';
+
 
 
 const students = [
     {
-        name: 'John Doe',
-        indexNo: '12345',
-        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+        dp: pp1,
+        Gname: 'Senura',
+        Egender: 'Female',
+        Eage: '65',
+        // ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        name: 'John Doe',
-        indexNo: '12346',
-        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+        dp: pp2,
+        Gname: 'senali',
+        Egender: 'Male',
+        Eage: '72',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        name: 'John Doe',
-        indexNo: '12346',
-        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+        dp: pp3,
+        Gname: 'Kalyani',
+        Egender: 'Male',
+        Eage: '65',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        name: 'John Doe',
-        indexNo: '12346',
-        details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+        dp: pp4,
+        Gname: 'Kenesith',
+        Egender: 'Male',
+        Eage: '75',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+    },
+    {
+        dp: pp5,
+        Gname: 'Shehanya',
+        Egender: 'Female',
+        Eage: '84',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+    },
+    {
+        dp: pp6,
+        Gname: 'sandaruwan',
+        Egender: 'Female',
+        Eage: '67',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     // Add more student objects as needed
 ];
@@ -62,37 +105,18 @@ export default function GuardianRequest() {
     };
 
     return (
-        <div>
+        <div className='requestPage'>
             <Header />
+
             <Box height={100} />
             <Box sx={{ display: 'flex' }}>
                 <Sidebar menuItems={ManagerMenuItem} />
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-                    <Grid container spacing={5} >
 
-                        <Grid item xs={8}>
-                            <Stack spacing={5} direction={'row'}>
-                                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                                    <TableContainer sx={{ maxHeight: 600 }}>
-                                        <div>
-                                            {students.map((student, index) => (
-                                                <RequestCard key={index} {...student} />
-                                            ))}
-                                        </div>
-                                    </TableContainer>
-                                    {/* <TablePagination
-                                        rowsPerPageOptions={[10, 25, 100]}
-                                        component="div"
-                                        count={rows.length}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onPageChange={handleChangePage}
-                                        onRowsPerPageChange={handleChangeRowsPerPage}
-                                    /> */}
-                                </Paper>
-                            </Stack>
-                        </Grid>
-                        <Grid item xs={4}>
+                <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+                    <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+                    <Grid container spacing={5}>
+                    
+                    <Grid item xs={6}>
                             {/* <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
                                 <CardActionArea>
                                     <CardContent style={{ textAlign: 'left' }}>
@@ -117,54 +141,84 @@ export default function GuardianRequest() {
                                 </CardActionArea>
                             </Card> */}
                             <br />
-                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
+                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundImage: "linear-gradient(45deg, #05445E 10%, #189AB4 90%)",
+                                backgroundColor: "#D4f1f4",
+                                color: 'white', // Text color for better contrast
+                                }}>
+                                
                                 <CardActionArea>
-                                    <CardContent style={{ textAlign: 'left' }}>
-                                        <LivingIcon />
-                                        <Typography gutterBottom variant="h5" component="div">
+                                    <CardContent style={{ textAlign: 'left', display: 'flex', // Use flexbox
+                                alignItems: 'center', // Center vertically
+                                }}>
+                                        
+                                        <MdOutlineBedroomParent style={{ fontSize: 20, marginBottom: 2, marginRight: 8  }}/>
+                                        <Typography gutterBottom variant="h5" component="div" style={{ fontSize: 20, marginBottom: 0}}>
                                             Available Shared Rooms
                                         </Typography>
-                                        <Typography>
-                                            <ul style={{ marginLeft: 40 }}>
-                                                <li>Male : 7 Beds</li>
-                                                <li>Femaleale : 9 Beds</li>
-                                            </ul>
-                                        </Typography>
-
                                     </CardContent>
+                                    <Typography>
+                                    <ul style={{ marginLeft: 40, textAlign: 'left', marginBottom: 9 }}>
+                                        <li>
+                                        Male Beds <span style={{ color: '#75E6DA', marginLeft: 28 }}>7</span>
+                                        </li>
+                                        <li>
+                                        Female Beds <span style={{ color: '#75E6DA', marginLeft: 10,  marginBottom: 5}}>9</span>
+                                        </li>
+                                    </ul>
+                                        </Typography>
                                 </CardActionArea>
                             </Card>
                             <br />
-                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
+                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundImage: "linear-gradient(45deg, #05445E 10%, #189AB4 90%)",
+                                backgroundColor: "#D4f1f4",
+                                color: 'white', // Text color for better contrast
+                                }}>
                                 <CardActionArea>
-                                    <CardContent style={{ textAlign: 'left' }}>
-                                        <LivingIcon />
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            Available Male Caregivers : 3
+                                    <CardContent style={{ textAlign: 'left', display: 'flex', // Use flexbox
+                                alignItems: 'center', // Center vertically
+                                }}>
+                                        <LiaUserNurseSolid style={{ fontSize: 20, marginBottom: 2, marginRight: 8  }}/>
+                                        <Typography gutterBottom variant="h5" component="div" style={{ fontSize: 20, marginBottom: 0}}>
+                                            Available Caregivers
                                         </Typography>
 
                                     </CardContent>
-                                </CardActionArea>
-                            </Card>
-                            <br />
-                            <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
-                                <CardActionArea>
-                                    <CardContent style={{ textAlign: 'left' }}>
-                                        <LivingIcon />
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            Available Female Caregivers : 3
+                                    <Typography>
+                                    <ul style={{ marginLeft: 40, textAlign: 'left', marginBottom: 9 }}>
+                                        <li>
+                                        Male  <span style={{ color: '#75E6DA', marginLeft: 28 }}>7</span>
+                                        </li>
+                                        <li>
+                                        Female  <span style={{ color: '#75E6DA', marginLeft: 10  }}>9</span>
+                                        </li>
+                                    </ul>
                                         </Typography>
-
-                                    </CardContent>
                                 </CardActionArea>
                             </Card>
                             <br />
 
 
                         </Grid>
+
+                        <Grid item xs={6}>
+                            <Stack spacing={5} direction={'row'}>
+                               
+                                    <TableContainer sx={{ maxHeight: 600 }}>
+                                        <div>
+                                            {students.map((student, index) => (
+                                                <RequestCard key={index} {...student} imageSrc={Elder} />
+                                            ))}
+                                        </div>
+                                    </TableContainer>
+                                   
+                            </Stack>
+                        </Grid>
+                        
                     </Grid>
 
                 </Box>
+                </Box>
+                
 
             </Box>
         </div>

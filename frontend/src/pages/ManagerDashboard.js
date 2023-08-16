@@ -23,9 +23,10 @@ import Paper from '@mui/material/Paper';
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import { PieChart } from '@mui/x-charts/PieChart';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
+//import { ChartsLegend } from '@mui/x-charts/ChartsLegend';
 import Tooltip from '@mui/material/Tooltip'
 import { axisClasses } from '@mui/x-charts';
+import { ScheduleView } from 'react-schedule-view'
 
 import '../styles/ManagerDashboard.css';
 
@@ -64,8 +65,45 @@ const dataset = [
 
 ];
 
+const data = [
+  {
+    name: "17 August 2023 , Thursday",
+    events: [
+      {
+        startTime: 10,
+        endTime: 12,
+        title: "Check-in",
+        description:
+          "Follow the signs to the registration desk inside the north entrance",
+      },
+      {
+        startTime: 16.5,
+        endTime: 17.75,
+        title: "Dinner & Team Forming",
+      },
+      {
+        startTime: 18,
+        endTime: 19,
+        title: "Opening Keynote",
+      },
+    ],
+  },
+
+];
+
 const valueFormatter = (value) => `${value}`;
 
+const doctorSlots = [
+  {
+    name: 'Dr. R.M. Sampath Rathnayake',
+    slots: [
+      { day: 'Monday', time: '8.30 am - 10.30 am' },
+      { day: 'Thursday', time: '4.30 pm - 5.30 pm' },
+      { day: 'Sunday', time: '7.00 am - 9.00 am' },
+    ],
+  },
+  // Add more doctors and their slots here
+];
 
 
 function ManagerDashboard() {
@@ -79,6 +117,27 @@ function ManagerDashboard() {
           <Grid container spacing={1} >
             <Grid item xs={12}>
               <Stack spacing={9} direction={'row'}>
+              <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
+                      <Typography component="div" variant="h5">
+                        06
+                      </Typography>
+                      <Typography variant="subtitle1" color="text.secondary" component="div">
+                        Guardians' Requests
+                      </Typography>
+                    </CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+
+                    </Box>
+                  </Box>
+                  <CardMedia
+                    component="img"
+                    sx={{ width: 75 + "%" }}
+                    image={img_3}
+                    alt="Live from space album cover"
+                  />
+                </Card>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
@@ -121,99 +180,48 @@ function ManagerDashboard() {
                     alt="Live from space album cover"
                   />
                 </Card>
-                <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography component="div" variant="h5">
-                        06
-                      </Typography>
-                      <Typography variant="subtitle1" color="text.secondary" component="div">
-                        Guardian Requests
-                      </Typography>
-                    </CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                    </Box>
-                  </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 75 + "%" }}
-                    image={img_3}
-                    alt="Live from space album cover"
-                  />
-                </Card>
+                
 
               </Stack>
             </Grid>
           </Grid>
           <Box height={40} />
           <Grid container spacing={2}>
-            <Grid item xs={4}>
+            <Grid item xs={6} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
 
-
-              <h2>Available Room Details</h2><br />
-              <PieChart
-                series={[
-                  {
-                    data: [
-                      { id: 0, value: 10, label: 'Classic' },
-                      { id: 1, value: 15, label: 'Luxury' },
-                      { id: 2, value: 5, label: 'Basic(M)' },
-                      { id: 2, value: 5, label: 'Basic(F)' },
-                    ],
-                  },
-                ]}
-                width={400}
-                height={200}
-              />
-
-
-
-            </Grid>
-            <Grid item xs={4}>
-
-
-              <h2>Available Caregiver Details</h2><br />
-              <BarChart
-                dataset={dataset}
-                xAxis={[{ scaleType: 'band', dataKey: 'Gender' }]}
-                series={[
-                  { dataKey: '35-45', label: 'Age 35-45', valueFormatter },
-                  { dataKey: '45-55', label: 'Age 45 -55', valueFormatter },
-                  { dataKey: 'Other', label: 'Other', valueFormatter },
-
-                ]}
-                {...chartSetting}
-              />
-
-
-
-
-            </Grid>
-            <Grid item xs={4}>
-              <Card sx={{ height: 60 + "vh" }}>
+              <Card sx={{ flex: 1 }}>
                 <CardContent>
-                  <Typography component="div" variant="h5">
-                    Available Time Slots for Doctors
-                  </Typography>
-                  <br />
-                  <Typography variant="subtitle1" component="div" >
-                    <ul style={{ listStyle: 'none', marginLeft: 10, textAlign: 'left' }}>
-                      <li>Dr.R.M. Sampath Rathnayake</li>
-                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize: '12px', textAlign: 'left' }}>
-                        <li>Monday : 8.30 am - 10.30 am</li>
-                        <li>Thursday : 4.30 pm - 5.30 pm </li>
-                        <li>Sunday : 7.00 am - 9.00 am</li>
-                      </ul>
-                      <br></br>
-                      <li>Dr.R.M. Sampath Rathnayake</li>
-                      <ul style={{ listStyle: 'none', marginLeft: 25, fontSize: '12px', textAlign: 'left' }}>
-                        <li>Monday : 8.30 am - 10.30 am</li>
-                        <li>Thursday : 4.30 pm - 5.30 pm </li>
-                        <li>Sunday : 7.00 am - 9.00 am</li>
-                      </ul>
-                    </ul>
-                  </Typography>
+                  <h2>Available Room Details</h2><br />
+                  <PieChart
+                    series={[
+                      {
+                        data: [
+                          { id: 0, value: 10, label: 'Classic' },
+                          { id: 1, value: 15, label: 'Luxury' },
+                          { id: 2, value: 5, label: 'Basic(M)' },
+                          { id: 2, value: 5, label: 'Basic(F)' },
+                        ],
+                      },
+                    ]}
+                    width={500}
+                    height={200}
+                  />
+                </CardContent>
+              </Card>
+              <Card sx={{ flex: 1, mt: 2 }}>
+                <CardContent>
+                  {/* Content for the new card */}
+                </CardContent>
+              </Card>
+
+            </Grid>
+
+
+            <Grid item xs={6}>
+              <Card sx={{ height: '100vh' }}>
+
+                <CardContent>
+                  <ScheduleView daySchedules={data} viewStartTime={6} viewEndTime={20} theme="apple" />
                 </CardContent>
               </Card>
             </Grid>
