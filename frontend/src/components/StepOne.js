@@ -41,7 +41,6 @@ function StepOne({ formData, setFormData }) {
             <div>
                 <label htmlFor="elderAge">Elder Age:</label>
                 <TextField
-                    type="number"
                     id="elderAge"
                     value={formData.elderAge || ''}
                     onChange={(e) => setFormData({ ...formData, elderAge: e.target.value })}
@@ -71,9 +70,9 @@ function StepOne({ formData, setFormData }) {
                     value={formData.roomType || ''}
                     onChange={(e) => setFormData({ ...formData, roomType: e.target.value })}
                 >
-                    <MenuItem value="single">Single</MenuItem>
-                    <MenuItem value="double">Double</MenuItem>
-                    <MenuItem value="shared">Shared</MenuItem>
+                    <MenuItem value="basic">Basic</MenuItem>
+                    <MenuItem value="classic">Classic</MenuItem>
+                    <MenuItem value="luxury">Luxury</MenuItem>
                 </Select>
             </div>
         </div>

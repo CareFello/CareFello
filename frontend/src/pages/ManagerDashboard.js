@@ -106,7 +106,6 @@ const doctorSlots = [
 ];
 
 
-
 function ManagerDashboard() {
   return (
     <div className='dashboard'>
@@ -118,6 +117,27 @@ function ManagerDashboard() {
           <Grid container spacing={1} >
             <Grid item xs={12}>
               <Stack spacing={9} direction={'row'}>
+              <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <CardContent sx={{ flex: '1 0 auto' }}>
+                      <Typography component="div" variant="h5">
+                        06
+                      </Typography>
+                      <Typography variant="subtitle1" color="text.secondary" component="div">
+                        Guardians' Requests
+                      </Typography>
+                    </CardContent>
+                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+
+                    </Box>
+                  </Box>
+                  <CardMedia
+                    component="img"
+                    sx={{ width: 75 + "%" }}
+                    image={img_3}
+                    alt="Live from space album cover"
+                  />
+                </Card>
                 <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
@@ -160,27 +180,7 @@ function ManagerDashboard() {
                     alt="Live from space album cover"
                   />
                 </Card>
-                <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography component="div" variant="h5">
-                        06
-                      </Typography>
-                      <Typography variant="subtitle1" color="text.secondary" component="div">
-                        Guardian Requests
-                      </Typography>
-                    </CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                    </Box>
-                  </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 75 + "%" }}
-                    image={img_3}
-                    alt="Live from space album cover"
-                  />
-                </Card>
+                
 
               </Stack>
             </Grid>
@@ -216,8 +216,10 @@ function ManagerDashboard() {
 
             </Grid>
 
+
             <Grid item xs={6}>
               <Card sx={{ height: '100vh' }}>
+
                 <CardContent>
                   <ScheduleView daySchedules={data} viewStartTime={6} viewEndTime={20} theme="apple" />
                 </CardContent>

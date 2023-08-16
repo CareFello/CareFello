@@ -37,8 +37,8 @@ export const GuardianMenuItem = [
         icon: <PaymentsIcon />
     },
     {
-        path: "/GuardianAddComplaints",
-        name: "Add Complaints",
+        path: "/GuardianComplain",
+        name: "Complaints",
         icon: <VscRequestChanges />
     },
    

@@ -56,16 +56,22 @@ export default function RoomPackage() {
 
     async function updat(event) {
         event.preventDefault();
+
+        const finalDes = des || conten11;
+        const finalPri = pri || price11;
+
         try {
-            await axios.put(`http://localhost:8080/api/package/update/${id1}`, {
-                conten: des,
-                price: pri,
+
+            await axios.put(`http://localhost:8085/api/package/update/${id1}`,{ 
+                conten: finalDes,
+                price: finalPri,
                 feature: fea
-            });
-            axios.get('http://localhost:8080/api/package/get')
-                .then((response) => setPack(response.data))
-                .catch((error) => console.error(error));
-        } catch (error) {
+        });
+            axios.get('http://localhost:8085/api/package/get')
+            .then((response) => setPack(response.data))
+            .catch((error) => console.error(error));
+            window.location.reload();
+          } catch (error) {
             console.error(error);
             alert(error);
         }
