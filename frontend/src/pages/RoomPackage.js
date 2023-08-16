@@ -39,7 +39,7 @@ export default function RoomPackage() {
 
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
-        axios.get('http://localhost:8080/api/package/get')
+        axios.get('http://localhost:8085/api/package/get')
             .then((response) => setPack(response.data))
             .catch((error) => console.error(error));
     }, []);
