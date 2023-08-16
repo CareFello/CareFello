@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useState } from 'react';
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
@@ -15,6 +16,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal'
+import TextField from '@mui/material/TextField'
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -47,6 +50,28 @@ export default function MealPlan() {
         setExpanded(!expanded);
     };
 
+    const [expanded1, setExpanded1] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleExpandClick1 = () => {
+        setExpanded1(!expanded1);
+    };
+
+    const handleModalOpen = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+        // You can use the form data to create a new meal plan
+        handleModalClose();
+    };
+
     return (
         <div>
             <Header />
@@ -55,6 +80,73 @@ export default function MealPlan() {
                 <Sidebar menuItems={ManagerMenuItem} />
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={5} >
+
+                        <Button variant="outlined" onClick={handleModalOpen} sx={{
+
+                            top: '20px', // Adjust the margin top as needed
+                            marginLeft: "85%",
+                            zIndex: 1, // Ensure the button appears above other content
+                        }}>
+                            Add New Meal Plan
+                        </Button>
+
+                        {/* Modal for adding a new meal plan */}
+                        <Modal open={isModalOpen} onClose={handleModalClose}>
+                            <Box
+                                sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    bgcolor: 'background.paper',
+                                    boxShadow: 24,
+                                    p: 4,
+                                    maxWidth: 400,
+                                    width: '100%',
+                                }}
+                            >
+                                <Typography variant="h6">Add New Meal Plan</Typography>
+                                <form onSubmit={handleSubmit}>
+                                    <TextField
+                                        label="Meal Plan Name"
+                                        fullWidth
+                                        required
+                                        style={{ marginTop: "5px" }}
+                                    // Add state and onChange handler for input values
+                                    />
+                                    <br />
+                                    <TextField
+                                        label="Description"
+                                        multiline
+                                        rows={3}
+                                        fullWidth
+                                        required
+                                        style={{ marginTop: "5px" }}
+                                    // Add state and onChange handler for input values
+                                    />
+                                    <br />
+                                    <TextField
+                                        label="Price"
+                                        type="number"
+                                        fullWidth
+                                        required
+                                        style={{ marginTop: "5px" }}
+                                    // Add state and onChange handler for input values
+                                    />
+                                    <br />
+                                    <TextField
+                                        label="Image URL"
+                                        fullWidth
+                                        required
+                                        style={{ marginTop: "5px" }}
+                                    // Add state and onChange handler for input values
+                                    />
+                                    <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                                        Add Meal Plan
+                                    </Button>
+                                </form>
+                            </Box>
+                        </Modal>
 
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
@@ -92,6 +184,47 @@ export default function MealPlan() {
                                     </Box>
 
                                 </Card>
+
+
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Stack spacing={5} direction={'row'}>
+                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 140 }}>
+                                    <CardMedia
+                                        component="img"
+                                        sx={{ width: 25 + "%" }}
+                                        image={meal1}
+                                        alt="Live from space album cover"
+                                    />
+                                    <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                                        <CardContent sx={{ flex: '1 0 auto' }}>
+                                            <Grid container spacing={2}>
+                                                <Grid item xs={11}>
+                                                    <Typography component="div" variant="h5">
+                                                        Diabetic Free
+                                                    </Typography>
+
+                                                    <Typography variant="body2" color="text.secondary">
+                                                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.
+                                                    </Typography>
+                                                    <Typography variant="subtitle1" color="text.secondary" component="div">
+                                                        LKR 10000.00
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={1}>
+
+                                                    <NavLink to="/Meal">
+                                                        <ArrowForwardIosIcon style={{ marginTop: "80%", marginLeft: "80%" }} />
+                                                    </NavLink>
+                                                </Grid>
+                                            </Grid>
+                                        </CardContent>
+
+                                    </Box>
+
+                                </Card>
+
 
                             </Stack>
                         </Grid>

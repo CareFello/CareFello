@@ -125,7 +125,7 @@ function Registration() {
                             id="outlined-required"
 
                             label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                            sx={{ m: 1, width: '30ch' }}
+                            sx={{ m: 1, width: '25ch' }}
 
                             value={nic}
                             onChange={(event) => {
@@ -231,7 +231,12 @@ function Registration() {
 
 
                             /></FormControl>
-                        <Button variant="contained" sx={{ m: 1, width: '40ch', height: '50px' }} >
+                        <Button variant="contained" sx={{
+                            m: 1, width: '40ch', height: '50px', backgroundColor: ' #05445E', marginTop: '20px',
+                            '&:hover': {
+                                backgroundColor: '#189AB4', // Change this color to your desired hover color
+                            },
+                        }}>
                             Register
                         </Button>
                     </form>
