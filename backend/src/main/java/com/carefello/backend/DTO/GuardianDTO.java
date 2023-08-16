@@ -5,15 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
 public class GuardianDTO {
 
-    private int user_id;
+    // private int user_id;
     private String email;
     private String password;
-    private String Haddress;
-    private String Waddress;
+    private String haddress;
+    private String waddress;
     private String nic;
     private String fname;
     private String lname;
@@ -23,7 +23,7 @@ public class GuardianDTO {
 
 
     public GuardianDTO(String email, String password, String fname, String lname, String cont, String nic,
-                       String Haddress, String Waddress, String profession) {
+                       String haddress, String waddress, String profession) {
 
         this.email = email;
         this.password = password;
@@ -31,15 +31,15 @@ public class GuardianDTO {
         this.nic = nic;
         this.fname = fname;
         this.lname = lname;
-        this.Haddress = Haddress;
+        this.haddress = haddress;
         this.profession = profession;
-        this.Waddress = Waddress;
+        this.waddress = waddress;
 
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
+    // public int getUser_id() {
+    //     return user_id;
+    // }
 
     public String getEmail() {
         return email;
@@ -50,11 +50,11 @@ public class GuardianDTO {
     }
 
     public String getHaddress() {
-        return Haddress;
+        return haddress;
     }
 
     public String getWaddress() {
-        return Waddress;
+        return waddress;
     }
 
     public String getNic() {
