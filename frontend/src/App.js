@@ -1,45 +1,48 @@
-
-import './App.css';
-import Navbar from './components/Navbar';
+import "./App.css";
+import { Helmet } from "react-helmet";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Log from "./pages/Login";
 import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import ManagerDashboard from './pages/ManagerDashboard';
-import AddDoctor from './pages/AddDoctor';
-import Caregiverlist from './pages/Caregiverlist';
-import AddCaregiver from './pages/AddCaregiver';
+import ManagerDashboard from "./pages/ManagerDashboard";
+import AddDoctor from "./pages/AddDoctor";
+import Caregiverlist from "./pages/Caregiverlist";
+import AddCaregiver from "./pages/AddCaregiver";
 
-
-import ViewRoomDetails from './pages/ViewRoomDetails'
-import MealPlan from './pages/MealPlan';
-import RoomPackage from './pages/RoomPackage';
-import GuardianRequest from './pages/GuardianRequest';
-import SendRequest from './pages/SendRequest';
-import Registration from './pages/Registration';
-import AddElder from './pages/AddElder';
-import Meal from './pages/Meal'
+import ViewRoomDetails from "./pages/ViewRoomDetails";
+import MealPlan from "./pages/MealPlan";
+import RoomPackage from "./pages/RoomPackage";
+import GuardianRequest from "./pages/GuardianRequest";
+import SendRequest from "./pages/SendRequest";
+import Registration from "./pages/Registration";
+import AddElder from "./pages/AddElder";
+import Meal from "./pages/Meal";
 
 //Guardians' Pages
-import GuardianDashboard from './pages/Guardian/GuardianDashboard';
-import ElderProfile from './pages/Guardian/ElderProfile';
-import EditElderProfile from './pages/Guardian/EditElderProfile';
-import GuardianRoomPackages from './pages/Guardian/GuardianRoomPackages';
-import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
-import GuardianAddElder from './pages/Guardian/GuardianAddElder';
+import GuardianDashboard from "./pages/Guardian/GuardianDashboard";
+import ElderProfile from "./pages/Guardian/ElderProfile";
+import EditElderProfile from "./pages/Guardian/EditElderProfile";
+import GuardianRoomPackages from "./pages/Guardian/GuardianRoomPackages";
+import GuardianSendRequest from "./pages/Guardian/GuardianSendRequest";
+import GuardianAddElder from "./pages/Guardian/GuardianAddElder";
 
-import Caregiverprofile from './pages/caregiverprofile';
+import Caregiverprofile from "./pages/caregiverprofile";
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>CareFello</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta name="description" content="Helmet application" />
+      </Helmet>
 
       <Router>
-
-
         <Routes>
           <Route index element={<Home />} />
           <Route path="/Login" element={<Log />} />
@@ -47,9 +50,7 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
 
-         
-          <Route path="/profile" element={<Caregiverprofile/>}/>
-          
+          <Route path="/profile" element={<Caregiverprofile />} />
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
@@ -69,13 +70,17 @@ function App() {
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
-          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-          <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
+          <Route
+            path="/GuardianRoomPackages"
+            element={<GuardianRoomPackages />}
+          />
+          <Route
+            path="/GuardianSendRequest"
+            element={<GuardianSendRequest />}
+          />
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
-
         </Routes>
       </Router>
-
     </div>
   );
 }
