@@ -23,6 +23,7 @@ import SendRequest from './pages/SendRequest';
 import Registration from './pages/Registration';
 import AddElder from './pages/AddElder';
 import Meal from './pages/Meal'
+import RequestContinue from './pages/RequestContinue';
 
 //Guardians' Pages
 import GuardianDashboard from './pages/Guardian/GuardianDashboard';
@@ -33,7 +34,7 @@ import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
 import GuardianAddElder from './pages/Guardian/GuardianAddElder';
 import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
- 
+
 
 import Caregiverprofile from './pages/caregiverprofile';
 function App() {
@@ -68,6 +69,7 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+          <Route path="/RequestContinue" element={<RequestContinue />} />
 
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
@@ -77,7 +79,7 @@ function App() {
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
           <Route path="/GuardianComplain" element={<GuardianComplain />} />
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
-          
+
 
 
         </Routes>
