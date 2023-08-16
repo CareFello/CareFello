@@ -1,8 +1,10 @@
-/* Background - #F9FFFE
- Text colours - #05445E, #189AB4
- Cards, boxes & tables - #D4F1F4 */
+
+
+
+
  .dashboard{
     background-color: #F9FFFE;
+    font-family:
 }
 
 .title{
@@ -17,4 +19,59 @@
     height: 2px;
     background-color:#D4F1F4 ;
     display: block;
+}
+
+.horizontal-line {
+    width: 55.5%;
+    height: 1.5px;
+    background-color: #05445E;
+    margin-top: 15px; /* Adjust as needed */
+    margin-bottom: 35px; /* Adjust as needed */
+    margin-left: 10px;
+  }
+
+  .horizontal-line_2 {
+    width: 54%;
+    height: 2px;
+    background-color: #05445E;
+    margin-top: 15px; /* Adjust as needed */
+    margin-bottom: 35px; /* Adjust as needed */
+    margin-left: 10px;
+  }
+
+
+.topic{
+    color:#05445E;
+    margin-bottom: 15px;
+    padding-left: 30px;
+}
+
+.eldercards{
+    margin-left: 30px;
+    margin-bottom: 60px;
+}
+
+.CGcards{
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+/* styles.css */
+
+/* Apply styles to caregiver card when hovering over elder card */
+.elder-card:hover + .caregiver-card {
+    /* Add your desired styles here */
+    border: 2px solid black; /* Example: red border */
+    background-color: #6e2c50; /* Example: light gray background */
+  }
+  
+
+.payments{
+    color:black;
+    background-color: white;
+    font-size: medium;
+}
+
+.h6{
+    color:#05445E;
 }
