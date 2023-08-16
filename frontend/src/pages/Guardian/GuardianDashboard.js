@@ -1,405 +1,209 @@
-import React from 'react'
-import Sidebar from '../../components/Sidebar'
-import Box from '@mui/material/Box'
-import { Divider, Typography } from '@mui/material'
+import React from 'react';
+import Sidebar from '../../components/Sidebar';
+import Box from '@mui/material/Box';
+import { Divider, Typography } from '@mui/material';
 import { CardActionArea } from '@mui/material';
-//import DrawerHeader from '@mui/material/Drawer'
-import Header from '../../components/Header'
-import Grid from '@mui/material/Grid'
+import Header from '../../components/Header';
+import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-
-//import ElderlyIcon from '@mui/icons-material/Elderly';
 import Stack from '@mui/material/Stack';
-import img_1 from '../../assets/guardian/elder1.jpeg'
-import img_2 from '../../assets/guardian/elder2.jpeg'
-import img_3 from '../../assets/guardian/elder3.jpeg'
-import img_4 from '../../assets/guardian/acc1.jpg'
-import img_5 from '../../assets/guardian/acc2.jpg'
-import img_6 from '../../assets/guardian/acc3.jpg'
-// import Paper from '@mui/material/Paper';
-// import { DateCalendar } from '/packages/x-date-pickers/src';
-import { GuardianMenuItem } from '../../components/GuardianMenuItem'
-
+import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import '../../styles/Guardian/GuardianDashboard.css';
+import elderProfiles from '../../components/ElderCard';// Import your elder profiles data here
+// import caregiverProfiles from './caregiverProfiles'; // Import your caregiver profiles data here
+// import accommodationImages from './accommodationImages'; // Import your accommodation images data here
 
+
+
+const caregiverProfiles = [
+  {
+    name: 'Ms.Pawani',
+    age: 30,
+    image: require('../../assets/C1.jpg'),
+  },
+  {
+    name: 'Mr.Kasun',
+    age: 28,
+    image: require('../../assets/C2.jpg'),
+  },
+  {
+    name: 'Ms.Deshani',
+    age: 28,
+    image: require('../../assets/C3.jpg'),
+  },
+  {
+    name: 'Mr.Viranga',
+    age: 28,
+    image: require('../../assets/C4.jpg'),
+  },
+  // {
+  //   name: 'Caregiver 2',
+  //   age: 28,
+  //   image: require('../../assets/C4.jpg'),
+  // },
+  
+];
+
+const accommodationImages = [
+  // require('../../assets/accommodations/accommodation1.jpg'),
+  // require('../../assets/accommodations/accommodation2.jpg'),
+  // require('../../assets/accommodations/accommodation3.jpg'),
+  // Add more accommodation images as needed
+];
 
 const GuardianDashboard = () => {
-  return (
 
+  return (
     <div className='dashboard'>
       <Header />
       <Box height={80} />
       <Box sx={{ display: 'flex' }}>
         <Sidebar menuItems={GuardianMenuItem} />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-          <Typography component="div" variant="h4">
-            Welcome Back, Ramza!
-          </Typography>
           <br />
           <Grid container spacing={1}>
-            <Grid container spacing={1}>
-              {/* Loved ones section */}
-              <Grid item xs={8}>
-                <Stack display="flex" flexDirection={'row'}>
-                  <Typography component="div" variant="h6">
+            {/* Other grid items */}
+            <Grid item xs={9} sx={{marginRight:"50px"}}>
+              <Grid item xs={12} spacing={1}>
+              <Stack display="flex" flexDirection={'row'}>
+                  <Typography component="div" variant="h6" className='topic'>
                     Your Loved Ones
-
                   </Typography>
-                  <hr className="title" width='500'></hr>
+                  <div className="horizontal-line"></div>
                 </Stack>
-
-                <Stack spacing={2} direction={'row'} >
-                  <Card sx={{ minWidth: 165 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <CardActionArea>
-                        <CardMedia
+                <Stack spacing={3.3} direction={'row'} className='eldercards'>
+                  {elderProfiles.map((elder, index) => (
+                    <Card key={index} sx={{ minWidth: 165 }}
+                    className={'elder-card'}>
+                      <CardActionArea >
+                        <CardMedia 
                           component="img"
-                          height="140"
-                          width="245"
-                          image={img_2}
-                          alt="Mrs.Priyanthi"
+                          height="110"
+                          width="205"
+                          image={elder.image}
+                          alt={elder.name}
+                          color='#05445E'
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            Mrs.Priyanthi
+                            {elder.name}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
-                            76 years
+                            {elder.age} years
                           </Typography>
                         </CardContent>
                       </CardActionArea>
-                      <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                      </Box>
-                    </Box>
-                  </Card>
-
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        width="165"
-                        image={img_1}
-                        alt="Mrs.Priyanthi"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mr.Sunil
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          76 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        width="245"
-                        image={img_1}
-                        alt="Mr.sunil"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mr.sunil
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          81 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        width="245"
-                        image={img_3}
-                        alt="Mrs.Sriyani"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mrs.Sriyani
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          70 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
+                    </Card>
+                  ))}
                 </Stack>
               </Grid>
-              {/* Pending Payments Section */}
-              <Box height={80} />
-              <Grid item xs={4}>
-                {/* <DateRangeCalendar /> */}
-                <Typography component="div" variant="h5">
-                  Pending Payments
-                </Typography>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                  <ListItem alignItems="flex-start">
-
-                    <ListItemText
-                      primary="Due on 24-08-2023"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            Reminder
-                          </Typography>
-                          {" — Invoice No. 1023 "}
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem alignItems="flex-start">
-
-                    <ListItemText
-                      primary="Today Due"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            Reminder
-                          </Typography>
-                          {" — Mrs. Priyanthis' medical expenditures"}
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem alignItems="flex-start">
-
-                    <ListItemText
-                      primary="Past Due payment"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            Reminder
-                          </Typography>
-                          {' — Invoice 234 is dued on 04-06-2023'}
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem alignItems="flex-start">
-
-                    <ListItemText
-                      primary="Today Due"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            Reminder
-                          </Typography>
-                          {" — Mrs. Priyanthis' medical expenditures"}
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                </List>
-              </Grid>
-            </Grid>
-            {/* Assigned Caregivers Section */}
-            <Box height={40} />
-            <Grid container spacing={1}>
-              <Grid item xs={8}>
+              <Grid item xs={12} spacing={1}>
               <Stack display="flex" flexDirection={'row'}>
-                  <Typography component="div" variant="h6">
+                  <Typography component="div" variant="h6" className='topic'>
                     Assigned Caregivers
-
                   </Typography>
-                  <hr className="title" width='500'></hr>
+                  <div className="horizontal-line_2"></div>
                 </Stack>
-                <Stack spacing={2} direction={'row'}>
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_2}
-                        alt="Mrs.Priyanthi"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mrs.Priyanthi
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          76 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        sx={{ height: 25 + "vh" }}
-                        image={img_1}
-                        alt="Mr.sunil"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mr.sunil
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          81 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-
-                  <Card sx={{ minWidth: 165 }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={img_3}
-                        alt="Mrs.Sriyani"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          Mrs.Sriyani
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          70 years
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
+                <Stack spacing={3.3} direction={'row'} className='CGcards'>
+                  {caregiverProfiles.map((caregiver, index) => (
+                    <Card key={index} sx={{ minWidth: 165 }}
+                    data-elder-index={caregiver.assignedTo} // Assign the corresponding elder's index
+                      className={`caregiver-card caregiver-${index}`}>
+                      <CardActionArea>
+                        <CardMedia
+                          component="img"
+                          height="100"
+                          width="190"
+                          image={caregiver.image}
+                          alt={caregiver.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {caregiver.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {caregiver.age} years
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  ))}
                 </Stack>
-
               </Grid>
-
-              {/* Special Notes Section */}
-              <Box height={40} />
-              <Grid item xs={4}>
-                <Card sx={{ minWidth: "vh" }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        Special Notes
-                      </Typography>
-                      <Typography gutterBottom variant="h5" component="div">
-
-                        <ul style={{ listStyle: 'none', marginLeft: 25, fontSize: '15px', textAlign: 'left' }}>
-                          <li>Should go to checkup every Saturday </li>
-                          <br></br>
-                          <li>Take mom for a walk everyday</li>
-                          <br></br>
-                          <li>+</li>
-                          <br></br>
-                          <li>+</li>
-                          <br></br>
-                          <li>+</li>
-                          <br></br>
-                          <li>+</li>
-                          <br></br>
-                        </ul>
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-
-              </Grid>
+              {/* Other grid items */}
             </Grid>
+            <Grid item xs={2} sx={{marginLeft: "10px"}}>
+            <div>
+              <Card sx={{ Width:'80px', height: '550px', backgroundColor: 'white', marginTop: "10px"}} className={'elder-card'}>
+                      <CardActionArea >
+                        <CardContent className='payments'>
+                        <Typography variant="h6" className='h6'>Pending Payments</Typography>
+                        {/* <Typography variant="body1">You have pending payments for the following services at ElderCare Home:</Typography> */}
+                        <List>
+                          <ListItem>
+                            <ListItemText primary="Monthly Residence Fee" secondary="$500" />
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText primary="Medication Management" secondary="$50" />
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText primary="Physical Therapy Sessions" secondary="$100" />
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText primary="Transportation Services" secondary="$25" />
+                          </ListItem>
+                        </List>
+                        {/* <Typography variant="body2">Please make the necessary payments to ensure continued care and support for your loved ones.</Typography> */}
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+              </div>
+            </Grid>
+            {/* Accommodations Section */}
             <Grid item xs={12}>
               <Typography component="div" variant="h6">
-                Accommodations
+                {/* Accommodations */}
               </Typography>
               <Stack spacing={2} direction={'row'}>
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    image={img_4}
-                  />
-
-
-                </Card>
-                <Card sx={{ height: 40 + "vh" }}>
-
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={img_4}
-                    alt="Luxury Room"
-                  />
-
-                </Card>
-                <Card sx={{ maxWidth: 245 }}>
-                  <CardActionArea>
+                {accommodationImages.map((image, index) => (
+                  <Card key={index} sx={{ maxWidth: 345 }}>
                     <CardMedia
                       component="img"
+                      alt={`Accommodation ${index}`}
                       height="140"
-                      image={img_5}
-                      alt="Luxury Room"
+                      image={image}
                     />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ maxWidth: 245 }}>
-
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={img_6}
-                    alt="Luxury Room"
-                  />
-
-                </Card>
-
+                  </Card>
+                ))}
               </Stack>
+              </Grid>
 
             </Grid>
-
-
+            <Grid container spacing={1}>
+              {/* Loved ones section
+              <Grid item xs={9}>
+                
+              
+              </Grid> */}
+              <Grid utem xs={3} className='Pending Payments' sx={{boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
+              
+              </Grid>
+              <br></br>
+              {/* Assigned Caregivers Section */}
+              <Box height={40} />
+              <Grid item xs={9}>
+                
+            </Grid>
           </Grid>
         </Box>
-
       </Box>
-
-
-
     </div>
-  )
+  );
 }
 
-export default GuardianDashboard
-
-
-
+export default GuardianDashboard;
