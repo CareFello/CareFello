@@ -66,21 +66,28 @@ function Login() {
   async function login(event) {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8085/api/v1/employee/login", {
+      await axios.post("http://localhost:8085/api/v1/guardian/login", {
         email: email,
         password: password,
       }).then((res) => {
         console.log(res.data);
 
-        if (res.data.message == "Email not exits") {
-          alert("Email not exits");
+        if (res.data.message == "Login Success") {
+          navigate('/GuardianDashboard');
         }
-        else if (res.data.message == "Login Success") {
+        else if (res.data.message == "Email not exits") {
 
-          navigate('/ManagerDashboard');
+          axios.post("http://localhost:8085/api/v1/employee/login",{
+            email: email,
+            password: password,
+          }).then((res) => {
+            if (res.data.message == "Login Success"){
+              navigate('/ManagerDashboard');
+            }
+          }) 
         }
         else {
-          alert("Incorrect Email and Password not match");
+          alert("Incorrect Email or Password");
         }
       }, fail => {
         console.error(fail); // Error!

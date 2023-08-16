@@ -31,15 +31,15 @@ function Registration() {
     const [nic, setNic] = useState("");
     const [cont, setCont] = useState("");
     const [profession, setPro] = useState("");
-    const [Haddress, setHaddress] = useState("");
-    const [Waddress, setWaddress] = useState("");
+    const [haddress, setHaddress] = useState("");
+    const [waddress, setWaddress] = useState("");
     const [isValid, setIsValid] = useState(true);
     const [isValidnic, setIsValidnic] = useState(true);
 
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8080/api/v1/guardian/save", {
+            await axios.post("http://localhost:8085/api/v1/guardian/save", {
                 email: email,
                 password: password,
                 nic: nic,
@@ -47,11 +47,11 @@ function Registration() {
                 lname: lname,
                 cont: cont,
                 profession: profession,
-                Haddress: Haddress,
-                Waddress: Waddress,
+                haddress: haddress,
+                waddress: waddress,
 
             });
-            alert("Doctor registration Successfull");
+            alert("Guardian registration Successfull");
             window.location.reload();
 
         } catch (err) {
@@ -156,7 +156,7 @@ function Registration() {
                             label="Home Address"
                             sx={{ m: 1, width: '52ch' }}
 
-                            value={Haddress}
+                            value={haddress}
                             onChange={(event) => {
                                 setHaddress(event.target.value);
                             }} />
@@ -181,7 +181,7 @@ function Registration() {
                             sx={{ m: 1, width: '52ch' }}
 
 
-                            value={Waddress}
+                            value={waddress}
                             onChange={(event) => {
                                 setWaddress(event.target.value);
                             }} />
@@ -231,7 +231,7 @@ function Registration() {
 
 
                             /></FormControl>
-                        <Button variant="contained" sx={{ m: 1, width: '40ch', height: '50px' }} >
+                        <Button variant="contained" sx={{ m: 1, width: '40ch', height: '50px' }} onClick={save}>
                             Register
                         </Button>
                     </form>
