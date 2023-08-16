@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
@@ -18,7 +19,6 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { CardActionArea } from '@mui/material';
 import LivingIcon from '@mui/icons-material/Living';
-import RequestCard from '../components/RequestCard';
 import '../styles/GuardianRequest.css';
 import Elder from '../assets/Happy_Elder.jpeg';
 import { MdOutlineBedroomParent } from "react-icons/md";
@@ -29,12 +29,19 @@ import pp3 from '../assets/pp3.png';
 import pp4 from '../assets/pp4.png';
 import pp5 from '../assets/pp5.jpg';
 import pp6 from '../assets/pp6.png';
+
 import { useTheme } from '@mui/material/styles';
+
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
+
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+
+
+import RequestCard from '../components/RequestCard';
+import { ManagerMenuItem } from '../components/ManagerMenuItem';
+
+
 
 const students = [
     {
@@ -103,8 +110,8 @@ export default function GuardianRequest() {
 
             <Box height={100} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
-                
+                <Sidebar menuItems={ManagerMenuItem} />
+
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <Grid container spacing={5}>
