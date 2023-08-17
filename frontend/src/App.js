@@ -1,5 +1,5 @@
 import "./App.css";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Log from "./pages/Login";
@@ -39,16 +39,16 @@ import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
-import Caregiverprofile from './pages/caregiverp
+import Caregiverprofile from './pages/caregiverprofile'
 function App() {
   return (
     <div className="App">
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>CareFello</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-        <meta name="description" content="Helmet application" />
-      </Helmet>
+      {/* //   <Helmet>
+    //     <meta charSet="utf-8" />
+    //     <title>CareFello</title>
+    //     <link rel="canonical" href="http://mysite.com/example" />
+    //     <meta name="description" content="Helmet application" />
+    //   </Helmet> */}
 
       <Router>
         <Routes>
@@ -100,7 +100,7 @@ function App() {
 
         </Routes>
       </Router>
-    </div>
+    </div >
   );
 }
 
