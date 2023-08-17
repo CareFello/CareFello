@@ -1,6 +1,6 @@
 import { useState } from "react";
 import '../styles/ContactUs.css';
-import Relax from '../assets/relax.png';
+import location from '../assets/location.png';
 
 export default function ContactUs() {
 
@@ -56,9 +56,9 @@ export default function ContactUs() {
                     </button>
                 </form>
             </div>
-            {/* <div className="img">
-                <img src={Relax} alt='relax' />
-            </div> */}
+            <div className="img">
+                <img src={location} alt='relax' />
+            </div>
         </div>
     )
 }

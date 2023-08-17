@@ -1,3 +1,5 @@
+/* ContactUs.css */
+
 .contactus h2 {
     color: #05445E;
     text-align: center;
@@ -8,10 +10,17 @@
     margin-top: 5%;
 }
 
-.name_email {
+/* .name_email {
     display: flex;
-    flex-direction: row;
-}
+    flex-direction: column; 
+    margin-right: 10px;
+} */
+
+/* Add margin between name and email */
+/* .name_email .form-control {
+    margin-bottom: 10px;
+    border: none; 
+} */
 
 .contactblock {
     display: flex;
@@ -25,35 +34,35 @@
 
 .form1 {
     padding: 50px;
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
     /* border: 1px solid #ccc; */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #F9FFFE;
+    background-color: #189AB4
 }
 
 .form-label {
-    color: #05445E;
+    color: white;
     font-weight: 500;
     font-size: small;
     margin-bottom: 5px;
     /* Add a little space between label and input */
 }
 
+/* Update the form-control styles */
 .form-control {
     border: none;
     margin-bottom: 20px;
     padding: 10px;
-    /* border: 0.05px solid #ccc; */
     border-radius: 5px;
     width: 100%;
     /* Make sure the input fields take up the available width */
     margin-right: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Add this new class for spacing between text boxes */
+/* New class for spacing between text boxes */
 .form-control-group {
     display: flex;
     margin-bottom: 20px;
@@ -66,6 +75,6 @@
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #189AB4;
-    color: white;
+    background-color: #05445E;
+    color: #D4F1F4;
 }
