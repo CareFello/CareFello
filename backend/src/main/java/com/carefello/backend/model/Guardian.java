@@ -2,10 +2,10 @@ package com.carefello.backend.model;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+
 
 @Entity
-@Table(name = "Guardian")
+@Table(name = "guardian2")
 
 public class Guardian {
 
@@ -18,9 +18,9 @@ public class Guardian {
     @Column(name = "password", length = 255)
     private String password;
     @Column(name = "Haddress", length = 255)
-    private String Haddress;
+    private String haddress;
     @Column(name = "Waddress", length = 255)
-    private String Waddress;
+    private String waddress;
     @Column(name = "nic", length = 255)
     private String nic;
     @Column(name = "fname", length = 255)
@@ -38,7 +38,7 @@ public class Guardian {
     }
 
     public Guardian(String email, String password, String fname, String lname, String cont, String nic,
-                    String Haddress, String Waddress, String profession) {
+                    String haddress, String waddress, String profession) {
 
         this.email = email;
         this.password = password;
@@ -46,9 +46,9 @@ public class Guardian {
         this.nic = nic;
         this.fname = fname;
         this.lname = lname;
-        this.Haddress = Haddress;
+        this.haddress = haddress;
         this.profession = profession;
-        this.Waddress = Waddress;
+        this.waddress = waddress;
 
     }
 
@@ -57,6 +57,10 @@ public class Guardian {
     }
 
     public String getGuardianPassword(){
+        return password;
+    }
+
+    public String getPassword() {
         return password;
     }
 }

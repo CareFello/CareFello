@@ -112,14 +112,14 @@ function Home() {
                             </CardContent>
                         </Card>
                     </div>
-                    <div className='card02'>
+                    <div className='card01'>
                         <Card>
                             <CardContent>
                                 <h4><CountUp end={50} enableScrollSpy /> + <br></br>working Staff</h4>
                             </CardContent>
                         </Card>
                     </div>
-                    <div className='card03'>
+                    <div className='card01'>
                         <Card>
                             <CardContent>
                                 <h4><CountUp end={15} enableScrollSpy /> + <br></br>Years of Experience</h4>
