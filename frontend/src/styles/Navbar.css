@@ -5,26 +5,32 @@
     display: flex;
     flex-direction: row;
     color: #05445E;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .left {
     flex: 60%;
     height: 20%;
     display: flex;
-    margin-top: 18px;
+    margin-top: 0px;
     align-items: center;
     color:#189AB4;
     font-size:smaller;
-    
+    position: sticky;
+    font-weight:500;
 }
 
 .navbar .left img {
     width: 6%;
     margin-left: 10px;
-    
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 35px;
 }
 
 
@@ -54,6 +60,9 @@
     height: 60px;
     display: flex;
     flex-direction: row;
+    position: sticky;
+    top: 56px; /* Adjust this value to match your header height */
+    z-index: 100;
 }
 
 .link .right {
@@ -62,8 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 40%;
-    
+    margin-left: 55%;
 }
 
 .link .right a {
@@ -80,3 +88,17 @@
     color: #189AB4;
 }
 
+.link a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: opacity 0.3s;
+  }
+  
+.link a.active {
+    opacity: 1;
+  }
+  
+  .link a:hover {
+    opacity: 0.8;
+  }
