@@ -56,7 +56,7 @@ function Home() {
                 <div className='grid'>
                     <div className='box'>
                         <img src={healthcare} alt='healthcare' />
-                        <div className='topic'>Health Care</div>
+                        <div className='topic'><b>Health Care</b></div>
                         <p>Caregiver Protection &<br></br>
                             Individual Attention<br></br>
                             Doctors’ Visit<br></br>
@@ -65,7 +65,7 @@ function Home() {
                     </div>
                     <div className='box'>
                         <img src={accomadation} alt='accomadation' />
-                        <div className='topic'>Accomodation</div>
+                        <div className='topic'><b>Accomodation</b></div>
                         <p>Both Single & Shared<br></br>
                             Rooms<br></br>
                             Attached Bathroom<br></br>
@@ -74,7 +74,7 @@ function Home() {
                     </div>
                     <div className='box'>
                         <img src={Relax} alt='relax' />
-                        <div className='topic'>Relax Environment</div>
+                        <div className='topic'><b>Relax Environment</b></div>
                         <p>
                             Large Garden Area &<br></br>
                             Sitting Rooms<br></br>

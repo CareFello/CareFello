@@ -55,7 +55,7 @@ export const ManagerMenuItem = [
         icon: <TbNurse />
     },
     {
-        path: "/SendRequest",
+        path: "/ManagerDoctorView",
         name: "View Doctors",
         icon: <FaUserNurse />
     },
