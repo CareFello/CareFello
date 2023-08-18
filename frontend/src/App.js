@@ -14,6 +14,7 @@ import ManagerDashboard from './pages/ManagerDashboard';
 import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
 import AddCaregiver from './pages/AddCaregiver';
+import ManagerDoctorView from './pages/ManagerDoctorView';
 
 
 import ViewRoomDetails from './pages/ViewRoomDetails'
@@ -77,7 +78,11 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
+          <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
+
           <Route path="/RequestContinue" element={<RequestContinue />} />
+
 
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
