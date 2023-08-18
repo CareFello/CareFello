@@ -5,14 +5,14 @@ table {
   
   th,
   td {
-    border: 1px solid black;
+    border: 1px solid black!important;
     padding: 10px;
   }
 
 
-  .sidbar-div{
+  /* .sidbar-div{
     width: inherit !important;
-  }
+  } */
 
   .table-height{
     height:fit-content !important;

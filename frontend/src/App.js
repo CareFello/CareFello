@@ -1,12 +1,13 @@
-
-import './App.css';
-import Navbar from './components/Navbar';
+import "./App.css";
+import { Helmet } from "react-helmet";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Log from "./pages/Login";
 import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import ManagerDashboard from './pages/ManagerDashboard';
@@ -24,8 +25,11 @@ import SendRequest from './pages/SendRequest';
 import Registration from './pages/Registration';
 import AddElder from './pages/AddElder';
 import Meal from './pages/Meal'
+import RequestContinue from './pages/RequestContinue';
+
 
 //Guardians' Pages
+
 import GuardianDashboard from './pages/Guardian/GuardianDashboard';
 import ElderProfile from './pages/Guardian/ElderProfile';
 import EditElderProfile from './pages/Guardian/EditElderProfile';
@@ -34,22 +38,27 @@ import GuardianSendRequest from './pages/Guardian/GuardianSendRequest';
 import GuardianAddElder from './pages/Guardian/GuardianAddElder';
 import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
- 
 
-import Caregiverprofile from './pages/caregiverprofile';
+
+import Caregiverprofile from './pages/caregiverp
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>CareFello</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta name="description" content="Helmet application" />
+      </Helmet>
 
       <Router>
-
-
         <Routes>
           <Route index element={<Home />} />
           <Route path="/Login" element={<Log />} />
           <Route path="/home" element={<Home1 />} />
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
+
 
 
           <Route path="/profile" element={<Caregiverprofile />} />
@@ -69,22 +78,33 @@ function App() {
           <Route path="/AddElder" element={<AddElder />} />
           <Route path="/Meal" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
+
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
+
+          <Route path="/RequestContinue" element={<RequestContinue />} />
+
 
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
-          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-          <Route path="/GuardianSendRequest" element={<GuardianSendRequest />} />
+          <Route
+            path="/GuardianRoomPackages"
+            element={<GuardianRoomPackages />}
+          />
+          <Route
+            path="/GuardianSendRequest"
+            element={<GuardianSendRequest />}
+          />
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
+
           <Route path="/GuardianComplain" element={<GuardianComplain />} />
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
-          
+
+
 
 
         </Routes>
       </Router>
-
     </div>
   );
 }
