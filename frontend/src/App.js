@@ -39,7 +39,7 @@ import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
-import Caregiverprofile from './pages/caregiverp
+import Caregiverprofile from './pages/caregiverprofile';
 function App() {
   return (
     <div className="App">
