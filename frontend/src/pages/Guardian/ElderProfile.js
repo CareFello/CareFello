@@ -5,7 +5,7 @@ import { Box, Typography, Grid, Card, CardContent, CardMedia, IconButton } from 
 import { Edit } from '@mui/icons-material'; // Import the Edit icon
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 
-import img_1 from '../../assets/guardian/elder2.jpeg';
+import img_1 from '../../assets/guardian/elder1.jpeg';
 import img_2 from '../../assets/guardian/cb.jpg';
 import '../../styles/Guardian/ElderProfile.css';
 
@@ -28,17 +28,21 @@ const ElderProfile = () => {
     }}>
       <Header />
       <Box height={80} />
+
       <Box sx={{ display: "flex" }}>
         <Sidebar menuItems={GuardianMenuItem} />
-        <Box>
-
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          
           {/* Elder's Image and Name */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1, p: 2 }}>
-            <CardMedia component="img" alt="Elder" height="150" width="500" src={img_1} />
-            <Typography variant="h5">Elder's Name</Typography>
-            <IconButton>
-              <Edit />
-            </IconButton>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, p: 2 }}>
+            <img component="img" alt="Elder" height="150" width="120" src={img_1} />
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", p: 2 }}>
+              <Typography variant="h5">Elder's Name</Typography>
+              <IconButton>
+                <Edit />
+              </IconButton>
+            </Box>
+
           </Box>
 
           {/* Sections */}
