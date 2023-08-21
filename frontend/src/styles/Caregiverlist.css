@@ -10,11 +10,7 @@ table {
   }
 
 
-  /* .sidbar-div{
-    width: inherit !important;
-  } */
-
-  .table-height{
+    .table-height{
     height:fit-content !important;
     margin-right: 1rem !important;
   }
