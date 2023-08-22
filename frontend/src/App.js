@@ -40,7 +40,12 @@ import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
+
 import Caregiverprofile from './pages/caregiverprofile';
+
+
+
+
 function App() {
   return (
     <div className="App">
@@ -61,7 +66,7 @@ function App() {
 
 
 
-          <Route path="/profile" element={<Caregiverprofile />} />
+          {/* <Route path="/profile" element={<Caregiverprofile />} /> */}
 
 
           <Route path="/sel" element={<Sel />} />
