@@ -56,14 +56,14 @@
 .profile-subsection .MuiTextField-root {
   margin-bottom: 15px;
   width: 100%;
-  color: #05445E;
+  color: #05445e;
 }
 
 /* Minimize text field height and font size */
 .profile-subsection .MuiInputBase-input {
   padding: 10px 12px; /* Adjust padding */
   font-size: 0.8rem; /* Adjust font size */
-  color: #05445E;
+  color: #05445e;
 }
 
 /* Style update buttons */
@@ -80,14 +80,18 @@
   background-color: #2c3e50;
 }
 
-.contact-item{
-    display: flex;
+.contact-item {
+  display: flex;
+  align-items: center;
 }
 
-.contact-item .MuiTextField-root{
-    margin-right: 0.5rem;
+.contact-item .MuiTextField-root {
+  margin-right: 0.5rem;
 }
 
-.contact-item .MuiButton-contained{
-    padding: 5px 15px;
+.contact-item .MuiButton-contained {
+  padding-left: 2.3rem;
+  padding-right: 2.3rem;
+  margin-bottom: 0.9rem;
+  align-items: center;
 }

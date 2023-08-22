@@ -13,7 +13,7 @@ function ElderProfile() {
   ]);
 
   const [profilePicture, setProfilePicture] = useState(elder);
-  const [elderName, setElderName] = useState('Elder Name');
+  const [elderName, setElderName] = useState('Steve Doe');
 
   const [medicalDetails, setMedicalDetails] = useState({
     medications: 'Medication A, Medication B',
