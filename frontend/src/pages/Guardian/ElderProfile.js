@@ -1,71 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-import { Box, Typography, Grid, Card, CardContent, CardMedia, IconButton } from '@mui/material';
-import { Edit } from '@mui/icons-material'; // Import the Edit icon
+import { Box, Container, TextField, Button, Typography, Avatar } from '@mui/material';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
-
-import img_1 from '../../assets/guardian/elder1.jpeg';
-import img_2 from '../../assets/guardian/cb.jpg';
+import elder from "../../assets/guardian/elder1.jpeg";
 import '../../styles/Guardian/ElderProfile.css';
 
-const sections = [
-  { title: 'Caregiver', image: img_2, description: 'Check out and rate/review caregiver' },
-  { title: 'Medication', image: img_2, description: 'Check out and add medication' },
-  { title: 'Daily Activities', image: img_2, description: 'Check out and add daily activities' },
-  { title: 'Daily Reports', image: img_2, description: 'Check out daily reports' },
-  { title: 'Contact Caregiver', image: img_2, description: 'Contact the caregiver' },
-  { title: 'Accommodation', image: img_2, description: 'Send accomodation requests' },
-];
+function ElderProfile() {
+  const [emergencyContacts, setEmergencyContacts] = useState([
+    { id: 1, name: 'John Doe', relation: 'Son', contactNo: '0712343242' },
+    { id: 2, name: 'Jane Smith', relation: 'Daughter', contactNo: '0717631824' },
+  ]);
 
-const ElderProfile = () => {
+  const [profilePicture, setProfilePicture] = useState(elder);
+  const [elderName, setElderName] = useState('Elder Name');
+
+  const [medicalDetails, setMedicalDetails] = useState({
+    medications: 'Medication A, Medication B',
+    allergies: 'Pollen, Nuts',
+    medicalHistory: 'Hypertension',
+    doctors: 'Dr. Smith, Dr. Johnson',
+  });
+
+  const [personalDetails, setPersonalDetails] = useState({
+    name: 'Elder Name',
+    NIC: '123456789',
+    dob: '01/01/1950',
+    age: '73',
+    guardianName: 'Guardian Name',
+  });
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center", height: "100vh", backgroundColor: "#F9FFFE"
-    }}>
+    <div className="elder-profile-container">
       <Header />
       <Box height={80} />
-
       <Box sx={{ display: "flex" }}>
         <Sidebar menuItems={GuardianMenuItem} />
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          
-          {/* Elder's Image and Name */}
-          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2, p: 2 }}>
-            <img component="img" alt="Elder" height="150" width="120" src={img_1} />
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", p: 2 }}>
-              <Typography variant="h5">Elder's Name</Typography>
-              <IconButton>
-                <Edit />
-              </IconButton>
-            </Box>
+        <Container>
+          <Typography className='page-topic' variant='h5'>Elder's Profile</Typography>
+          <div className="profile-section">
 
-          </Box>
+            {/* Emergency Contact Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Emergency Contact Details</Typography>
+              {emergencyContacts.map(contact => (
+                <div className="contact-item" key={contact.id}>
+                  <TextField label="Name" defaultValue={contact.name} />
+                  <TextField label="Relation" defaultValue={contact.relation} />
+                  <TextField label="Contact No" defaultValue={contact.contactNo} />
+                  <Button variant="contained" color="primary">Update</Button>
+                </div>
+              ))}
+            </div>
 
-          {/* Sections */}
+            {/* Elder's Profile */}
+            <div className="profile-subsection">
+              <Avatar src={profilePicture} alt="Elder's Profile Picture" className="profile-picture" />
+              <TextField label="Name" value={elderName} onChange={e => setElderName(e.target.value)} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
+          </div>
 
-          <Grid container spacing={2} p={2}>
-            {sections.map((section) => (
-              <Grid key={section.title} item xs={12} sm={6} md={4}>
-                <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" component="div">
-                      {section.title}
-                    </Typography>
-                    <Typography variant="body2">{section.description}</Typography>
-                  </CardContent>
-                  <CardMedia component="img" alt={section.title} height="100" src={section.image} />
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
+          <div className="profile-section">
+            {/* Medical Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Medical Details</Typography>
+              <TextField label="Current Medications" defaultValue={medicalDetails.medications} />
+              <TextField label="Allergies" defaultValue={medicalDetails.allergies} />
+              <TextField label="Medical History" defaultValue={medicalDetails.medicalHistory} />
+              <TextField label="Doctors" defaultValue={medicalDetails.doctors} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
+
+            {/* Personal Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Personal Details</Typography>
+              <TextField label="Name" value={personalDetails.name} onChange={e => setPersonalDetails({ ...personalDetails, name: e.target.value })} />
+              <TextField label="NIC No" value={personalDetails.NIC} onChange={e => setPersonalDetails({ ...personalDetails, NIC: e.target.value })} />
+              <TextField label="Date of Birth" value={personalDetails.dob} onChange={e => setPersonalDetails({ ...personalDetails, dob: e.target.value })} />
+              <TextField label="Age" value={personalDetails.age} onChange={e => setPersonalDetails({ ...personalDetails, age: e.target.value })} />
+              <TextField label="Guardian's Name" value={personalDetails.guardianName} onChange={e => setPersonalDetails({ ...personalDetails, guardianName: e.target.value })} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
+          </div>
+        </Container>
       </Box>
     </div>
   );
-};
+}
 
 export default ElderProfile;

@@ -1,3 +1,93 @@
-/* Background - #F9FFFE
-Text colours - #05445E, #189AB4
-Cards, boxes & tables - #D4F1F4 */
+/* Background - #F9FFFE Text colours - #05445E, #189AB4 Cards, boxes & tables - #D4F1F4 */
+
+.page-topic {
+  margin-bottom: 1rem;
+}
+
+/* Center the page content */
+.elder-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #f9fffe;
+  margin-top: 6rem;
+}
+
+/* Style the profile sections */
+.profile-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* Style the subsections within profile sections */
+.profile-subsection {
+  flex: 1;
+  margin: 0 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the profile picture */
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 20%;
+  margin: 0 auto; /* Center the image horizontally */
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Style headings */
+.profile-subsection h6 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Style form inputs */
+.profile-subsection .MuiTextField-root {
+  margin-bottom: 15px;
+  width: 100%;
+  color: #05445E;
+}
+
+/* Minimize text field height and font size */
+.profile-subsection .MuiInputBase-input {
+  padding: 10px 12px; /* Adjust padding */
+  font-size: 0.8rem; /* Adjust font size */
+  color: #05445E;
+}
+
+/* Style update buttons */
+.profile-subsection .MuiButton-containedPrimary {
+  background-color: #3f51b5;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.profile-subsection .MuiButton-containedPrimary:hover {
+  background-color: #2c3e50;
+}
+
+.contact-item{
+    display: flex;
+}
+
+.contact-item .MuiTextField-root{
+    margin-right: 0.5rem;
+}
+
+.contact-item .MuiButton-contained{
+    padding: 5px 15px;
+}
