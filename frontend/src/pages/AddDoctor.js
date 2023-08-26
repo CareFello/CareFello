@@ -60,6 +60,17 @@ function AddDoctor() {
                 cont: cont,
                 reg: reg,
             });
+            try {
+                const response = await axios.post('http://localhost:8085/api/email', {
+                  recipient: email,
+                  subject: 'Carefello doctor registration',
+                  content: 'You have been successfully registered as a doctor',
+                });
+                
+                console.log(response.data); // Handle success message
+              } catch (error) {
+                console.error('Error sending email:', error);
+              }
             alert("Doctor registration Successfull");
             window.location.reload();
 
