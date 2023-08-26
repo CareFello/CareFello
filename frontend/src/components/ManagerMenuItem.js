@@ -59,10 +59,6 @@ export const ManagerMenuItem = [
         name: "View Doctors",
         icon: <FaUserNurse />
     },
-    {
-        path: "/ViewRoomDetails",
-        name: "View Doctors",
-        icon: <FaUserNurse />
-    },
+
 ]
 

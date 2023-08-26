@@ -29,13 +29,13 @@ public class Package {
 
     }
 
-    public Package(String name, String price, String conten, int id) {
+    public Package(String name, String price, String conten, int id, List<String> feature) {
         
         this.name = name;
         this.price = price;
         this.conten = conten;
         this.id = id;
-       
+        this.feature = feature;
     }
 
     public String getName() {
@@ -47,5 +47,8 @@ public class Package {
     }
     public String getConten() {
         return conten;
+    }
+    public List<String> getFea() {
+        return feature;
     }
 }
