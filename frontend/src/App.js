@@ -1,6 +1,6 @@
 import "./App.css";
 import { Helmet } from "react-helmet";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Log from "./pages/Login";
 import Home1 from "./components/Test";
@@ -13,7 +13,7 @@ import ManagerDashboard from "./pages/ManagerDashboard";
 import AddDoctor from "./pages/AddDoctor";
 import Caregiverlist from "./pages/Caregiverlist";
 import AddCaregiver from "./pages/AddCaregiver";
-
+import ManagerGuardianProfile from "./pages/Manager/ManagerGuardianProfile";
 import ViewRoomDetails from "./pages/ViewRoomDetails";
 import MealPlan from "./pages/MealPlan";
 import RoomPackage from "./pages/RoomPackage";
@@ -25,11 +25,14 @@ import Meal from "./pages/Meal";
 
 //Guardians' Pages
 import GuardianDashboard from "./pages/Guardian/GuardianDashboard";
+import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import ElderProfile from "./pages/Guardian/ElderProfile";
 import EditElderProfile from "./pages/Guardian/EditElderProfile";
 import GuardianRoomPackages from "./pages/Guardian/GuardianRoomPackages";
 import GuardianSendRequest from "./pages/Guardian/GuardianSendRequest";
 import GuardianAddElder from "./pages/Guardian/GuardianAddElder";
+import GuardianPayments from "./pages/Guardian/GuardianPayments";
 
 import Caregiverprofile from "./pages/caregiverprofile";
 function App() {
@@ -56,6 +59,7 @@ function App() {
           <Route path="/Registration" element={<Registration />} />
 
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
+          <Route path="/ManagerGuardianProfile" element={<ManagerGuardianProfile />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
           <Route path="/AddCaregiver" element={<AddCaregiver />} />
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
@@ -68,6 +72,8 @@ function App() {
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
 
           <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/GuardianProfilePage" element={<GuardianProfilePage />} />
+          <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
           <Route
@@ -79,6 +85,7 @@ function App() {
             element={<GuardianSendRequest />}
           />
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
+          <Route path="/GuardianPayments" element={<GuardianPayments />} />
         </Routes>
       </Router>
     </div>
