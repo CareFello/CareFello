@@ -1,0 +1,22 @@
+/* MealPlanCard.css */
+
+.meal-plan-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.meal-plan-card {
+    width: calc(33.33% - 20px);
+    /* Three cards in a row with 20px gap */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+}

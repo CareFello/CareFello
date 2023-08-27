@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/MealPlan")
 @CrossOrigin
@@ -26,5 +28,11 @@ public class MealPlanController {
 
         mealPlanService.addMealPlan(mealPlanDTO);
         return ResponseEntity.ok("Meal Plan added succesfully");
+    }
+
+    @GetMapping("viewMealPlan")
+    public ResponseEntity<List<MealPlanDTO>> getAllMealPlans(){
+        List<MealPlanDTO> mealPlans = mealPlanService.getAllMealPlans();
+        return  ResponseEntity.ok(mealPlans);
     }
 }

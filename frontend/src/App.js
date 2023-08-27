@@ -42,10 +42,7 @@ import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
 
-import Caregiverprofile from './pages/caregiverprofile';
-
-
-
+import Caregiverprofile from './pages/caregiverprofile'
 
 function App() {
   return (
@@ -83,7 +80,7 @@ function App() {
           <Route path="/RoomPackage" element={<RoomPackage />} />
           <Route path="/SendRequest" element={<SendRequest />} />
           <Route path="/AddElder" element={<AddElder />} />
-          <Route path="/Meal" element={<Meal />} />
+          <Route path="/MealPlan/:id" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
 
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
