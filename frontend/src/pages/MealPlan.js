@@ -28,6 +28,7 @@ import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
+import MealPlanCard from '../components/MealPlanCard';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -81,7 +82,7 @@ export default function MealPlan() {
                 description: description,
                 price: price,
             });
-            alert("Meal added successfully");
+            alert("Meal Plan added successfully");
             window.location.reload();
 
         } catch (err) {
@@ -175,47 +176,13 @@ export default function MealPlan() {
 
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
-                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 140 }}>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{ width: 25 + "%" }}
-                                        image={meal1}
-                                        alt="Live from space album cover"
-                                    />
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                                        <CardContent sx={{ flex: '1 0 auto' }}>
-                                            <Grid container spacing={2}>
-                                                <Grid item xs={11}>
-                                                    <Typography component="div" variant="h5">
-                                                        Diabetic Free
-                                                    </Typography>
-
-                                                    <Typography variant="body2" color="text.secondary">
-
-                                                    </Typography>
-                                                    <Typography variant="subtitle1" color="text.secondary" component="div">
-                                                        LKR 10000.00
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={1}>
-
-                                                    <NavLink to="/Meal">
-                                                        <ArrowForwardIosIcon style={{ marginTop: "80%", marginLeft: "80%" }} />
-                                                    </NavLink>
-                                                </Grid>
-                                            </Grid>
-                                        </CardContent>
-
-                                    </Box>
-
-                                </Card>
-
-
+                                <MealPlanCard />
                             </Stack>
                         </Grid>
 
 
                     </Grid>
+
                 </Box>
 
             </Box>
