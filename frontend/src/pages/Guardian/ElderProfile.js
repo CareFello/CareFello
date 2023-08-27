@@ -1,185 +1,92 @@
-import React from 'react'
-import Sidebar from '../../components/Sidebar'
-import Box from '@mui/material/Box'
-import { Typography } from '@mui/material'
-import { CardActionArea } from '@mui/material';
-import Header from '../../components/Header'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Stack from '@mui/material/Stack';
-import img_1 from '../../assets/guardian/elder1.jpeg'
-import { GuardianMenuItem } from '../../components/GuardianMenuItem'
-
+import React, { useState } from 'react';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
+import { Box, Container, TextField, Button, Typography, Avatar } from '@mui/material';
+import { GuardianMenuItem } from '../../components/GuardianMenuItem';
+import elder from "../../assets/guardian/elder1.jpeg";
 import '../../styles/Guardian/ElderProfile.css';
 
+function ElderProfile() {
+  const [emergencyContacts, setEmergencyContacts] = useState([
+    { id: 1, name: 'John Doe', relation: 'Son', contactNo: '0712343242' },
+    { id: 2, name: 'Jane Smith', relation: 'Daughter', contactNo: '0717631824' },
+  ]);
 
-const ElderProfile = () => {
+  const [profilePicture, setProfilePicture] = useState(elder);
+  const [elderName, setElderName] = useState('Steve Doe');
+
+  const [medicalDetails, setMedicalDetails] = useState({
+    medications: 'Medication A, Medication B',
+    allergies: 'Pollen, Nuts',
+    medicalHistory: 'Hypertension',
+    doctors: 'Dr. Smith, Dr. Johnson',
+  });
+
+  const [personalDetails, setPersonalDetails] = useState({
+    name: 'Elder Name',
+    NIC: '123456789',
+    dob: '01/01/1950',
+    age: '73',
+    guardianName: 'Guardian Name',
+  });
+
   return (
-    <div className='profile'>
+    <div className="elder-profile-container">
       <Header />
       <Box height={80} />
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: "flex" }}>
         <Sidebar menuItems={GuardianMenuItem} />
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-          <Grid container spacing={1}>
-            <Grid item xs={9}>
-              <Stack spacing={2} direction={'row'}>
-                <Card sx={{ display: 'flex', minWidth: 30 + "%", height: 140 }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                      <Typography component="div" variant="h5">
-                        78
-                      </Typography>
-                      <Typography variant="subtitle1" color="text.secondary" component="div">
-                        Active Elders
-                      </Typography>
-                    </CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+        <Container>
+          <Typography className='page-topic' variant='h5'>Elder's Profile</Typography>
+          <div className="profile-section">
 
-                    </Box>
-                  </Box>
-                  <CardMedia
-                    component="img"
-                    sx={{ Maxwidth: 75 + "%" }}
-                    image={img_1}
-                    alt="Elder Image"
-                  />
-                </Card>
+            {/* Emergency Contact Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Emergency Contact Details</Typography>
+              {emergencyContacts.map(contact => (
+                <div className="contact-item" key={contact.id}>
+                  <TextField label="Name" defaultValue={contact.name} />
+                  <TextField label="Relation" defaultValue={contact.relation} />
+                  <TextField label="Contact No" defaultValue={contact.contactNo} />
+                  <Button variant="contained" color="primary">Update</Button>
+                </div>
+              ))}
+            </div>
 
+            {/* Elder's Profile */}
+            <div className="profile-subsection">
+              <Avatar src={profilePicture} alt="Elder's Profile Picture" className="profile-picture" />
+              <TextField label="Name" value={elderName} onChange={e => setElderName(e.target.value)} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
+          </div>
 
+          <div className="profile-section">
+            {/* Medical Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Medical Details</Typography>
+              <TextField label="Current Medications" defaultValue={medicalDetails.medications} />
+              <TextField label="Allergies" defaultValue={medicalDetails.allergies} />
+              <TextField label="Medical History" defaultValue={medicalDetails.medicalHistory} />
+              <TextField label="Doctors" defaultValue={medicalDetails.doctors} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
 
-              </Stack>
-            </Grid>
-            <Grid container spacing={2}>
-              <Grid sx={{ flexGrow: 1, p: 3, flexDirection: 'row' }} >
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Caregiver
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ minWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Medication
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ minWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Daily Activities
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ mixWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Daily Reports
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ mixWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Contact Caregiver
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ minWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Request Accommodation
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-                <Card sx={{ minWidth: 175 }}>
-                  <CardActionArea>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Complaints
-                      </Typography>
-
-                    </CardContent>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={img_1}
-                      alt="Caregiver"
-                    />
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Box>
-
+            {/* Personal Details */}
+            <div className="profile-subsection">
+              <Typography variant="h6">Personal Details</Typography>
+              <TextField label="Name" value={personalDetails.name} onChange={e => setPersonalDetails({ ...personalDetails, name: e.target.value })} />
+              <TextField label="NIC No" value={personalDetails.NIC} onChange={e => setPersonalDetails({ ...personalDetails, NIC: e.target.value })} />
+              <TextField label="Date of Birth" value={personalDetails.dob} onChange={e => setPersonalDetails({ ...personalDetails, dob: e.target.value })} />
+              <TextField label="Age" value={personalDetails.age} onChange={e => setPersonalDetails({ ...personalDetails, age: e.target.value })} />
+              <TextField label="Guardian's Name" value={personalDetails.guardianName} onChange={e => setPersonalDetails({ ...personalDetails, guardianName: e.target.value })} />
+              <Button variant="contained" color="primary">Update</Button>
+            </div>
+          </div>
+        </Container>
       </Box>
-
-
-
-    </div >
-  )
+    </div>
+  );
 }
 
-export default ElderProfile
-
-
-
+export default ElderProfile;

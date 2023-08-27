@@ -12,8 +12,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Basic from '../assets/SharedRoom.jpg'
-import Classic from '../assets/Single.jpg'
+import Basic from '../assets/Basic.jpg'
+import Classic from '../assets/Classic.jpg'
 import Luxury from '../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../styles/form.css"
@@ -36,6 +36,16 @@ export default function RoomPackage() {
     const [pri, setPri] = useState("");
     const [id1, setId1] = useState("");
     const [fea, setFea] = useState([]);
+
+    const addFeatureInput = () => {
+        setFeature([...feature1, '']); // Add an empty string to the feature1 state array
+    };
+
+    const packageImages = {
+        Basic: Basic,
+        Classic: Classic,
+        Luxury: Luxury,
+    };
 
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
@@ -135,6 +145,7 @@ export default function RoomPackage() {
                                             />
                                         </div>
                                     </div>
+                                    
 
                                     {feature1.map((tag, index) => (
                                         <div className="column" key={index}>
@@ -156,7 +167,7 @@ export default function RoomPackage() {
                                         </div>
                                     ))}
 
-
+                                    <Button onClick={addFeatureInput}>Add feature</Button>
                                     <div className='column'>
                                         <Button onClick={updat}>Submit</Button>
                                         <Button onClick={() => setVisible(false)}>Close</Button>
@@ -174,7 +185,7 @@ export default function RoomPackage() {
                                             component="img"
                                             alt={pack1.name}
                                             height="300"
-                                            src={Basic}
+                                            src={packageImages[pack1.name]}
                                         />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="div">
