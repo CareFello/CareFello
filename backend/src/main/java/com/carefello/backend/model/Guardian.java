@@ -2,65 +2,130 @@ package com.carefello.backend.model;
 
 import jakarta.persistence.*;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "guardian2")
 
 public class Guardian {
 
     @Id
-    @Column(name = "user_id", length = 45)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int user_id;
-    @Column(name = "email", length = 255)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String email;
-    @Column(name = "password", length = 255)
-    private String password;
-    @Column(name = "Haddress", length = 255)
-    private String haddress;
-    @Column(name = "Waddress", length = 255)
-    private String waddress;
-    @Column(name = "nic", length = 255)
-    private String nic;
-    @Column(name = "fname", length = 255)
     private String fname;
-    @Column(name = "lname", length = 255)
     private String lname;
-    @Column(name = "cont", length = 255)
+    private String nic;
     private String cont;
-    @Column(name = "profession", length = 255)
+    private String hAddress;
+    private String wAddress;
     private String profession;
-
+    private String password;
 
     public Guardian() {
-
     }
 
-    public Guardian(String email, String password, String fname, String lname, String cont, String nic,
-                    String haddress, String waddress, String profession) {
-
+    public Guardian(int id, String email, String fname, String lname, String nic, String cont, String hAddress, String wAddress, String profession, String password) {
+        this.id = id;
         this.email = email;
-        this.password = password;
-        this.cont = cont;
-        this.nic = nic;
         this.fname = fname;
         this.lname = lname;
-        this.haddress = haddress;
+        this.nic = nic;
+        this.cont = cont;
+        this.hAddress = hAddress;
+        this.wAddress = wAddress;
         this.profession = profession;
-        this.waddress = waddress;
-
+        this.password = password;
     }
 
-    public String getGuardianEmail(){
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
         return email;
     }
 
-    public String getGuardianPassword(){
-        return password;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
+    public String gethAddress() {
+        return hAddress;
+    }
+
+    public void sethAddress(String hAddress) {
+        this.hAddress = hAddress;
+    }
+
+    public String getwAddress() {
+        return wAddress;
+    }
+
+    public void setwAddress(String wAddress) {
+        this.wAddress = wAddress;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @OneToMany(mappedBy = "guardian",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Elder> elders = new ArrayList<>();
+
+    public List<Elder> getElders(){
+        return elders;
+    }
+
+    public void setElders(List<Elder> elders){
+        this.elders = elders;
     }
 }
