@@ -1,8 +1,6 @@
 import React from 'react'
 import Sidebar from '../../components/Sidebar'
-import Box from '@mui/material/Box'
-import { Typography } from '@mui/material'
-import { CardActionArea } from '@mui/material';
+import { Box } from '@mui/material'
 import Header from '../../components/Header'
 import { GuardianMenuItem } from '../../components/GuardianMenuItem'
 

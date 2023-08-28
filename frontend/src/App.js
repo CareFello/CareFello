@@ -7,6 +7,7 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+import Email from "./pages/Email";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -40,7 +41,9 @@ import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
+
 import Caregiverprofile from './pages/caregiverprofile'
+
 function App() {
   return (
     <div className="App">
@@ -58,10 +61,11 @@ function App() {
           <Route path="/home" element={<Home1 />} />
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
+          <Route path="/email" element={<Email />} />
 
 
 
-          <Route path="/profile" element={<Caregiverprofile />} />
+          {/* <Route path="/profile" element={<Caregiverprofile />} /> */}
 
 
           <Route path="/sel" element={<Sel />} />
