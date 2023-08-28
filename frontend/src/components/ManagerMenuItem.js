@@ -16,6 +16,11 @@ export const ManagerMenuItem = [
         icon: <FaTh />
     },
     {
+        path: "/ManagerGuardianProfile",
+        name: "Guardian Profiles",
+        icon: <TbListDetails />
+    },
+    {
         path: "/AddDoctor",
         name: "Add Doctor",
         icon: <AiOutlineUserAdd />,
