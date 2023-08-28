@@ -1,49 +1,60 @@
 package com.carefello.backend.service.impl;
 
-
+import com.carefello.backend.DTO.ElderDTO;
 import com.carefello.backend.DTO.GuardianDTO;
-
 import com.carefello.backend.DTO.LoginDTO;
 import com.carefello.backend.model.Guardian;
-
 import com.carefello.backend.payload.response.LoginMesage;
-import com.carefello.backend.service.GuardianService;
+import com.carefello.backend.repo.ElderRepo;
 import com.carefello.backend.repo.GuardianRepo;
-
-import java.util.Optional;
+import com.carefello.backend.service.GuardianService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class GuardianImpl implements GuardianService {
+
     @Autowired
     private GuardianRepo guardianRepo;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String addGuardian(GuardianDTO guardianDTO){
-        Guardian Guardian = new Guardian(
-                guardianDTO.getEmail(),
-                this.passwordEncoder.encode(guardianDTO.getPassword()),
-                guardianDTO.getFname(),
-                guardianDTO.getLname(),
-                guardianDTO.getCont(),
-                guardianDTO.getNic(),
-                guardianDTO.getHaddress(),
-                guardianDTO.getWaddress(),
-                guardianDTO.getProfession()
+    @Autowired
+    public GuardianImpl(GuardianRepo guardianRepo, PasswordEncoder passwordEncoder){
+        this.guardianRepo = guardianRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-        );
+    @Override
+    public Guardian addGuardian(GuardianDTO guardianDTO){
+        if(guardianRepo.findByEmail(guardianDTO.getEmail()) != null){
+            throw new RuntimeException("Email already registered");
+        }
 
-        guardianRepo.save(Guardian);
-        return Guardian.getGuardianEmail();
+        Guardian guardian = new Guardian();
+        guardian.setId(guardianDTO.getId());
+        guardian.setFname(guardianDTO.getFname());
+        guardian.setLname(guardianDTO.getLname());
+        guardian.setEmail(guardianDTO.getEmail());
+        guardian.sethAddress(guardianDTO.gethAddress());
+        guardian.setwAddress(guardianDTO.getwAddress());
+        guardian.setNic(guardianDTO.getNic());
+        guardian.setProfession(guardianDTO.getProfession());
+        guardian.setCont(guardianDTO.getCont());
+        guardian.setPassword(passwordEncoder.encode(guardianDTO.getPassword()));
+
+        guardianRepo.save(guardian);
+        return guardian;
     }
 
     GuardianDTO GuardianDTO;
     @Override
-    public LoginMesage  loginGuardian(LoginDTO loginDTO) {
+    public LoginMesage loginGuardian(LoginDTO loginDTO) {
         String msg = "";
         Guardian guardian1 = guardianRepo.findByEmail(loginDTO.getEmail());
         if (guardian1 != null) {
@@ -59,11 +70,11 @@ public class GuardianImpl implements GuardianService {
                 }
             } else {
                 return new LoginMesage(encodedPassword, false);
-                
+
             }
         }else {
             return new LoginMesage("Email not exits", false);
         }
     }
-   
+
 }
