@@ -60,6 +60,17 @@ function AddDoctor() {
                 cont: cont,
                 reg: reg,
             });
+            try {
+                const response = await axios.post('http://localhost:8085/api/email', {
+                  recipient: email,
+                  subject: 'Carefello doctor registration',
+                  content: 'You have been successfully registered as a doctor',
+                });
+                
+                console.log(response.data); // Handle success message
+              } catch (error) {
+                console.error('Error sending email:', error);
+              }
             alert("Doctor registration Successfull");
             window.location.reload();
 
@@ -92,7 +103,7 @@ function AddDoctor() {
                                                         required
                                                         id="outlined-required"
                                                         label="Fisrt name"
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={name1}
                                                         onChange={(event) => {
@@ -103,7 +114,7 @@ function AddDoctor() {
                                                         required
                                                         id="outlined-required"
                                                         label="Last name"
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={name2}
                                                         onChange={(event) => {
@@ -114,7 +125,7 @@ function AddDoctor() {
                                                         required
                                                         id="outlined-required"
                                                         label="Register Number"
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={reg}
                                                         onChange={(event) => {
@@ -126,7 +137,7 @@ function AddDoctor() {
                                                         required
                                                         id="outlined-required"
                                                         label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={nic}
                                                         onChange={(event) => {
@@ -142,7 +153,7 @@ function AddDoctor() {
                                                         required
                                                         id="outlined-required"
                                                         label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={email}
                                                         onChange={(event) => {
@@ -163,7 +174,7 @@ function AddDoctor() {
                                                         label="Mobile No"
                                                         multiline
                                                         maxRows={4}
-                                                        sx={{ m: 1, width: '30ch' }}
+                                                        sx={{ m: 1, width: '25ch' }}
 
                                                         value={cont}
                                                         onChange={(event) => {
@@ -171,7 +182,7 @@ function AddDoctor() {
                                                         }}
                                                     />
 
-                                                    <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
+                                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                                         <OutlinedInput
                                                             id="outlined-adornment-password"
@@ -195,7 +206,7 @@ function AddDoctor() {
                                                             }}
                                                         />
                                                     </FormControl>
-                                                    <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
+                                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                                         <InputLabel htmlFor="outlined-adornment-password">Re- Enter Password</InputLabel>
                                                         <OutlinedInput
                                                             id="outlined-adornment-password"

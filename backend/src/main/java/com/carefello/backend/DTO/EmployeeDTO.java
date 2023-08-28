@@ -6,6 +6,7 @@ public class EmployeeDTO {
     private String employeename;
     private String email;
     private String password;
+    private int code;
     public EmployeeDTO() {
     }
     public EmployeeDTO(int employeeid, String employeename, String email, String password) {
@@ -25,5 +26,8 @@ public class EmployeeDTO {
     }
     public CharSequence getPassword() {
         return password;
+    }
+    public int getCode() {
+        return code;
     }
 }

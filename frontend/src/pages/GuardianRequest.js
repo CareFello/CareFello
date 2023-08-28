@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
@@ -18,15 +19,16 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { CardActionArea } from '@mui/material';
 import LivingIcon from '@mui/icons-material/Living';
-import RequestCard from '../components/RequestCard';
 import '../styles/GuardianRequest.css';
-
 import Elder from '../assets/Happy_Elder.jpeg';
-
 import { MdOutlineBedroomParent } from "react-icons/md";
 import {LiaUserNurseSolid} from "react-icons/lia";
-
-import Person from '../assets/person.jpeg';
+import pp1 from '../assets/pp1.jpg';
+import pp2 from '../assets/pp2.png';
+import pp3 from '../assets/pp3.png';
+import pp4 from '../assets/pp4.png';
+import pp5 from '../assets/pp5.jpg';
+import pp6 from '../assets/pp6.png';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -34,35 +36,54 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 
+
+import RequestCard from '../components/RequestCard';
+import { ManagerMenuItem } from '../components/ManagerMenuItem';
 
 
 
 const students = [
     {
-        Gname: 'John Doe',
-        Ename: 'Sirisena',
-        Age: '65',
+        dp: pp1,
+        Gname: 'Senura',
+        Egender: 'Female',
+        Eage: '65',
         // ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        Gname: 'John Doe',
-        Ename: 'Sirisena',
-        Age: '65',
+        dp: pp2,
+        Gname: 'senali',
+        Egender: 'Male',
+        Eage: '72',
         // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        Gname: 'John Doe',
-        Ename: '12346',
-        Age: '65',
+        dp: pp3,
+        Gname: 'Kalyani',
+        Egender: 'Male',
+        Eage: '65',
         // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     {
-        Gname: 'John Doe',
-        Ename: '12346',
-        Age: '65',
+        dp: pp4,
+        Gname: 'Kenesith',
+        Egender: 'Male',
+        Eage: '75',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+    },
+    {
+        dp: pp5,
+        Gname: 'Shehanya',
+        Egender: 'Female',
+        Eage: '84',
+        // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
+    },
+    {
+        dp: pp6,
+        Gname: 'sandaruwan',
+        Egender: 'Female',
+        Eage: '67',
         // details: ['Age: 20', 'Major: Computer Science', 'GPA: 3.8'],
     },
     // Add more student objects as needed
@@ -86,13 +107,16 @@ export default function GuardianRequest() {
     return (
         <div className='requestPage'>
             <Header />
+
             <Box height={100} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar />
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-                    <Grid container spacing={5} >
+                <Sidebar menuItems={ManagerMenuItem} />
 
-                    <Grid item xs={4}>
+                <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+                    <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+                    <Grid container spacing={5}>
+                    
+                    <Grid item xs={6}>
                             {/* <Card sx={{ maxWidth: 100 + "%" }} style={{ backgroundColor: "#D4f1f4" }}>
                                 <CardActionArea>
                                     <CardContent style={{ textAlign: 'left' }}>
@@ -157,7 +181,6 @@ export default function GuardianRequest() {
                                         <Typography gutterBottom variant="h5" component="div" style={{ fontSize: 20, marginBottom: 0}}>
                                             Available Caregivers
                                         </Typography>
-                                        
 
                                     </CardContent>
                                     <Typography>
@@ -177,13 +200,13 @@ export default function GuardianRequest() {
 
                         </Grid>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={6}>
                             <Stack spacing={5} direction={'row'}>
                                
                                     <TableContainer sx={{ maxHeight: 600 }}>
                                         <div>
-                                            {students.map((student) => (
-                                                <RequestCard {...student.Gname} imageSrc={Elder} />
+                                            {students.map((student, index) => (
+                                                <RequestCard key={index} {...student} imageSrc={Elder} />
                                             ))}
                                         </div>
                                     </TableContainer>
@@ -194,6 +217,8 @@ export default function GuardianRequest() {
                     </Grid>
 
                 </Box>
+                </Box>
+                
 
             </Box>
         </div>

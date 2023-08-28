@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
@@ -12,8 +12,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Basic from '../assets/SharedRoom.jpg'
-import Classic from '../assets/Single.jpg'
+import Basic from '../assets/Basic.jpg'
+import Classic from '../assets/Classic.jpg'
 import Luxury from '../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../styles/form.css"
@@ -37,43 +37,59 @@ export default function RoomPackage() {
     const [id1, setId1] = useState("");
     const [fea, setFea] = useState([]);
 
+    const addFeatureInput = () => {
+        setFeature([...feature1, '']); // Add an empty string to the feature1 state array
+    };
+
+    const packageImages = {
+        Basic: Basic,
+        Classic: Classic,
+        Luxury: Luxury,
+    };
+
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
         axios.get('http://localhost:8085/api/package/get')
-          .then((response) => setPack(response.data))
-          .catch((error) => console.error(error));
-      }, []);
+            .then((response) => setPack(response.data))
+            .catch((error) => console.error(error));
+    }, []);
 
-    const handlePack = async (id,name,price,conten,feature) => {
-        
+    const handlePack = async (id, name, price, conten, feature) => {
+
         setName(name);
         setPrice(price);
         setConten(conten);
         setFeature(feature);
         setId1(id);
         setVisible(true);
-    }  
+    }
 
-    async function updat(event){
+    async function updat(event) {
         event.preventDefault();
+
+        const finalDes = des || conten11;
+        const finalPri = pri || price11;
+
         try {
+
             await axios.put(`http://localhost:8085/api/package/update/${id1}`,{ 
-                conten: des,
-                price: pri,
+                conten: finalDes,
+                price: finalPri,
                 feature: fea
         });
             axios.get('http://localhost:8085/api/package/get')
             .then((response) => setPack(response.data))
             .catch((error) => console.error(error));
+            window.location.reload();
           } catch (error) {
             console.error(error);
             alert(error);
-          }
+        }
     }
 
     // const handleUpdate = async (id1,des,pri,fea) => {
     //     console.log(id1, des, pri, fea);
-    
+
     //     try {
     //         await axios.put(`http://localhost:8085/api/package/update/${id1}`, 
     //             conten: des,
@@ -104,53 +120,54 @@ export default function RoomPackage() {
 
                             <Model isOpen={visible} onRequestClose={() => setVisible(false)} style={{
                                 content: { width: "500px", marginLeft: "30%", marginTop: "40px" }
-                                }}>
+                            }}>
                                 <form action="#" className="form">
                                     <div className="input-box">
                                         <label>{name11}</label>
                                     </div>
                                     <div className="input-box">
                                         <label>Package description</label><br />
-                                        <textarea rows="4" cols="50" required placeholder={conten11} 
+                                        <textarea rows="4" cols="50" required placeholder={conten11}
                                             value={des}
                                             onChange={(event) => {
-                                            setDes(event.target.value);
+                                                setDes(event.target.value);
                                             }}
                                         />
                                     </div>
                                     <div className="column">
                                         <div className="input-box">
                                             <label>Price</label>
-                                            <input type="text" placeholder={price11} required 
+                                            <input type="text" placeholder={price11} required
                                                 value={pri}
                                                 onChange={(event) => {
-                                                setPri(event.target.value);
+                                                    setPri(event.target.value);
                                                 }}
                                             />
                                         </div>
                                     </div>
+                                    
 
                                     {feature1.map((tag, index) => (
-                                    <div className="column" key={index}>
-                                        <div className="input-box">
-                                            <label>Feature {index + 1}</label>
-                                            <input
-                                                type="text"
-                                                placeholder={tag}
-                                                required
-                                                id={index}
-                                                value={fea[index] || ""}
-                                                onChange={(event) => {
-                                                const updatedFea = [...fea]; // Create a copy of the current state array
-                                                updatedFea[index] = event.target.value; // Update the value for the current index
-                                                setFea(updatedFea); // Update the state with the new array
-                                                }}
-                                            />
+                                        <div className="column" key={index}>
+                                            <div className="input-box">
+                                                <label>Feature {index + 1}</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder={tag}
+                                                    required
+                                                    id={index}
+                                                    value={fea[index] || ""}
+                                                    onChange={(event) => {
+                                                        const updatedFea = [...fea]; // Create a copy of the current state array
+                                                        updatedFea[index] = event.target.value; // Update the value for the current index
+                                                        setFea(updatedFea); // Update the state with the new array
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
                                     ))}
 
-
+                                    <Button onClick={addFeatureInput}>Add feature</Button>
                                     <div className='column'>
                                         <Button onClick={updat}>Submit</Button>
                                         <Button onClick={() => setVisible(false)}>Close</Button>
@@ -160,39 +177,39 @@ export default function RoomPackage() {
 
                             </Model>
                             <Stack spacing={5} direction={'row'}>
-                                
-                                    {pack.map((pack1) => (
-                                    
-                                <Card sx={{ maxWidth: 32 + "%" }}  key={pack1.id}>
-                                    <CardMedia
-                                        component="img"
-                                        alt={pack1.name}
-                                        height="300"
-                                        src={Basic}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {pack1.name} 
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {pack1.conten} {pack1.price}
-                                        </Typography><br />
-                                        <ul>
-                                            {pack1.feature.map((tag,index) =>(
-                                                <li key={index} style={{ textAlign: 'left', marginLeft: 40 }}>
-                                                {tag}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" onClick={() => handlePack(pack1.id,pack1.name,pack1.price,pack1.conten,pack1.feature)}>Update</Button>
 
-                                    </CardActions>
-                                </Card>
-                                
+                                {pack.map((pack1) => (
+
+                                    <Card sx={{ maxWidth: 32 + "%" }} key={pack1.id}>
+                                        <CardMedia
+                                            component="img"
+                                            alt={pack1.name}
+                                            height="300"
+                                            src={packageImages[pack1.name]}
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                {pack1.name}
+                                            </Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {pack1.conten} {pack1.price}
+                                            </Typography><br />
+                                            <ul>
+                                                {pack1.feature.map((tag, index) => (
+                                                    <li key={index} style={{ textAlign: 'left', marginLeft: 40 }}>
+                                                        {tag}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small" onClick={() => handlePack(pack1.id, pack1.name, pack1.price, pack1.conten, pack1.feature)}>Update</Button>
+
+                                        </CardActions>
+                                    </Card>
+
                                 ))}
-                            
+
                             </Stack>
                         </Grid>
                     </Grid>
