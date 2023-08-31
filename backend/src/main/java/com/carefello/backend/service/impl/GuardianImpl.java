@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,5 +78,31 @@ public class GuardianImpl implements GuardianService {
             return new LoginMesage("Email not exits", false);
         }
     }
+
+    @Override
+    public List<com.carefello.backend.DTO.GuardianDTO.GuardianElderCountDTO> getGuardiansWithElderCount(){
+        List<com.carefello.backend.DTO.GuardianDTO.GuardianElderCountDTO> result = new ArrayList<>();
+
+        List<Guardian> guardians = guardianRepo.findAll();
+
+        for (Guardian guardian : guardians) {
+            com.carefello.backend.DTO.GuardianDTO.GuardianElderCountDTO dto = new GuardianDTO.GuardianElderCountDTO();
+            dto.setId(guardian.getId());
+            dto.setFname(guardian.getFname());
+            dto.setLname(guardian.getLname());
+            dto.setEmail(guardian.getEmail());
+            dto.setElderCount(guardian.getElders().size()); // Assuming you have a getElders() method
+            result.add(dto);
+        }
+
+        return result;
+    }
+
+    @Override
+    public Optional<Guardian> getGuardianWithElders(int id) {
+        return guardianRepo.findById(id);
+    }
+
+
 
 }
