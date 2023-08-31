@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
@@ -27,6 +27,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import Tooltip from '@mui/material/Tooltip'
 import { axisClasses } from '@mui/x-charts';
 import { ScheduleView } from 'react-schedule-view'
+import React, { useState, useEffect } from 'react'
 
 import '../styles/ManagerDashboard.css';
 
@@ -107,6 +108,18 @@ const doctorSlots = [
 
 
 function ManagerDashboard() {
+
+  const [storedData, setStoredData] = useState('');
+
+  useEffect(() => {
+    // Retrieve data from localStorage
+    const data = localStorage.getItem('myData');
+    
+    if (data) {
+      setStoredData(data);
+    }
+  }, []);
+  
   return (
     <div className='dashboard'>
       <Header />
@@ -191,7 +204,7 @@ function ManagerDashboard() {
 
               <Card sx={{ flex: 1 }}>
                 <CardContent>
-                  <h2>Available Room Details</h2><br />
+                  <h2>{storedData}</h2><br />
                   <PieChart
                     series={[
                       {
