@@ -11,6 +11,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/guardian/{guardianId}/elders")
+@CrossOrigin
 
 public class ElderController {
 
