@@ -16,13 +16,13 @@ function HomepageFooter() {
     return (
         <div className='footer'>
             <div className='left'>
-                <div><img src={playstoreLogo} alt='logo' /></div>
-                <div><img src={AppstoreLogo} alt='logo2' /></div>
+                <div className='footer01'><img src={playstoreLogo} alt='logo' /></div>
+                <div className='footer02'><img src={AppstoreLogo} alt='logo2' /></div>
             </div>
             <div className='middle'>
                 <div className='address'>
                     <img src={address} alt='location' />
-                    <p>No.23 , Garden Rd, Dehiwal</p>
+                    <p>No.23 , Garden Rd, Dehiwala</p>
                 </div>
                 <div className='address'>
                     <img src={phone} alt='location' />

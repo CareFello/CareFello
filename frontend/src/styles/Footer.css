@@ -11,15 +11,20 @@
     width: 33.34%;
 }
 
+.footer01{
+    margin-left: 50px;
+}
+
 .footer .left img{
-    width: 25%;
-    height: 60%;
-    margin-top: 3%;
+    width: 60%;
+    height: 30%;
+    margin-top: 30%;
+    margin-left: 20px;
 }
 
 .footer .middle{
     width: 33.34%;
-    margin-left: 5%;
+    margin-left: 140px
 }
 
 .footer .middle .address{
