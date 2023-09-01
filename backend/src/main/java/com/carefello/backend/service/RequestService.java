@@ -4,5 +4,5 @@ import com.carefello.backend.DTO.RequestDTO;
 import com.carefello.backend.payload.response.Response;
 
 public interface RequestService {
-    Response validateRequest(RequestDTO requestDTO);
+
 }

@@ -1,28 +1,11 @@
-package com.carefello.backend.model;
+package com.carefello.backend.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+public class RoomDTO {
 
-@Entity
-public class Room {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String type;
     private int availability;
-
-    public Room() {
-    }
-
-    public Room(int id, String type, int availability) {
-        this.id = id;
-        this.type = type;
-        this.availability = availability;
-    }
 
     public int getId() {
         return id;
