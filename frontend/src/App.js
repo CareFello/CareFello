@@ -39,7 +39,11 @@ import GuardianComplain from './pages/Guardian/GuardianComplain';
 import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 
 
-import Caregiverprofile from './pages/caregiverp
+import Caregiverprofile from './pages/caregiverprofile';
+import Elderslist from'./pages/Elderslist'
+
+// import Caregiverprofile from './pages/caregiverprofile';
+import DoctorDashboard from './pages/DoctorDashboard';
 function App() {
   return (
     <div className="App">
@@ -62,6 +66,9 @@ function App() {
 
           <Route path="/profile" element={<Caregiverprofile />} />
 
+         
+          <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
+          
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
@@ -98,6 +105,11 @@ function App() {
 
 
 
+          <Route path="/Caregiverlist" element={<Caregiverlist/>}/>
+          <Route path="/DoctorDashboard" element={<DoctorDashboard/>}/>
+          <Route path="/Elderslist" element={<Elderslist/>}/>
+          {/* <Route path="" exact component={Caregiverlist} />
+          <Route path="/Caregiverprofile" component={Caregiverprofile} /> */}
         </Routes>
       </Router>
     </div>

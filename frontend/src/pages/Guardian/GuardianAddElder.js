@@ -163,6 +163,8 @@ function GuardianAddElder() {
                             sx={{ m: 1, width: "25ch" }}
                           />
 
+                          
+
                           <div
                             style={{
                               display: "flex",
@@ -199,6 +201,91 @@ function GuardianAddElder() {
                                 />
                               </RadioGroup>
                             </FormControl>
+                          </div>
+                          <br />
+                          <div>
+                          <Typography component="div" variant="h4" align="left">
+                          Medical History
+                        </Typography>
+                        <br />
+                      
+                          <TextField
+                            required
+                            id="outlined-required"
+                            label={
+                              isValidnic ? (
+                                "Desease"
+                              ) : (
+                                <p style={{ color: "red" }}>type disease</p>
+                              )
+                            }
+                            sx={{ m: 1, width: "25ch" }}
+                            value={nic}
+                            onChange={(event) => {
+                              setNic(event.target.value);
+                              const inputnic = event.target.value;
+                              const nicPattern = /^\d{12}$/;
+                              setIsValidnic(nicPattern.test(inputnic));
+                            }}
+                            style={{
+                              borderColor: isValid ? "green" : "red",
+                            }}
+                          />
+
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label={
+                              isValidnic ? (
+                                "Doctor"
+                              ) : (
+                                <p style={{ color: "red" }}>type Doctor name </p>
+                              )
+                            }
+                            sx={{ m: 1, width: "25ch" }}
+                            value={nic}
+                            onChange={(event) => {
+                              setNic(event.target.value);
+                              const inputnic = event.target.value;
+                              const nicPattern = /^\d{12}$/;
+                              setIsValidnic(nicPattern.test(inputnic));
+                            }}
+                            style={{
+                              borderColor: isValid ? "green" : "red",
+                            }}
+                          />
+                          </div>
+
+                          <div>
+                          <Typography component="div" variant="h4" align="left">
+                          Allergies
+                        </Typography>
+                        <br />
+                      
+                          <TextField
+                            required
+                            id="outlined-required"
+                            label={
+                              isValidnic ? (
+                                "Allergies food items"
+                              ) : (
+                                <p style={{ color: "red" }}>type disease</p>
+                              )
+                            }
+                            sx={{ m: 1, width: "25ch" }}
+                            value={nic}
+                            onChange={(event) => {
+                              setNic(event.target.value);
+                              const inputnic = event.target.value;
+                              const nicPattern = /^\d{12}$/;
+                              setIsValidnic(nicPattern.test(inputnic));
+                            }}
+                            style={{
+                              borderColor: isValid ? "green" : "red",
+                            }}
+                          />
+
+                      
                           </div>
 
                           <br />
