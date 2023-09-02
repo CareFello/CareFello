@@ -132,6 +132,7 @@ function Login() {
             password: password,
           }).then((res) => {
             if (res.data.message == "Login Success"){
+              localStorage.setItem('myData',email);
               navigate('/ManagerDashboard');
             }else{
               alert("Incorrect Email or Password")
