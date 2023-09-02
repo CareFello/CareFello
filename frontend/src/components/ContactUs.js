@@ -1,8 +1,6 @@
 import { useState } from "react";
 import '../styles/ContactUs.css';
-
 import location from '../assets/location.png';
-
 
 export default function ContactUs() {
 
@@ -23,6 +21,7 @@ export default function ContactUs() {
         <div className="contactblock">
             <div className="form1">
                 <form onSubmit={onSubmit}>
+
                     <div className="name_email">
                         <div className="mb-3">
                             <label className="form-label" htmlFor="name">
@@ -38,6 +37,8 @@ export default function ContactUs() {
                             <input className="form-control" type="email" id="email" required />
                         </div>
                     </div>
+
+
                     <div className="mb-3">
                         <label className="form-label" htmlFor="subject">
                             Subject
@@ -56,9 +57,7 @@ export default function ContactUs() {
                 </form>
             </div>
             <div className="img">
-
-                <img src={location} alt='relax' />
-
+                {/* <img src={location} alt='relax' /> */}
             </div>
         </div>
     )
