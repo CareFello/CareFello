@@ -10,6 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Optional;
 @Service
 
@@ -20,6 +24,14 @@ public class CaregiverImpl implements CaregiverService {
     private PasswordEncoder passwordEncoder;
     @Override
     public String addCaregiver(CaregiverDTO caregiverDTO) {
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dob = caregiverDTO.getdob().toInstant()
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate();
+
+        Period period = Period.between(dob, currentDate);
+
         Caregiver caregiver = new Caregiver(
                 
                 caregiverDTO.getEmail(),
@@ -31,7 +43,8 @@ public class CaregiverImpl implements CaregiverService {
                 caregiverDTO.getAvailability(),
                 caregiverDTO.getName1(),
                 caregiverDTO.getName2(),
-                caregiverDTO.getCont()
+                caregiverDTO.getCont(),
+                period.getYears()
                 
         );
         caregiverRepo.save(caregiver);
