@@ -2,7 +2,7 @@ import React from "react";
 
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import { Box } from "@mui/material";
+import { Box, TextareaAutosize } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -34,6 +34,8 @@ import { GuardianMenuItem } from "../../components/GuardianMenuItem";
 import img_4 from "../../assets/guardian/addelder.jpg";
 import "../../styles/Guardian/GuardianAddElder.css";
 
+
+
 function GuardianAddElder() {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -49,6 +51,16 @@ function GuardianAddElder() {
   const [gender, setGender] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [isValidnic, setIsValidnic] = useState(true);
+  const [allergyfoods, setallergyfoods] = useState("");
+  const [doc1, setdoc1] = useState("");
+  const [doc2, setdoc2] = useState("");
+  const [desease, setdesease] = useState("");
+  const [doctordetails, setdoctordetails] = useState("");
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const handlePdfChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedPdf(file);
+  };
 
   async function save(event) {
     event.preventDefault();
@@ -60,6 +72,11 @@ function GuardianAddElder() {
         cont: cont,
         age: age,
         gender: gender,
+        allergyfoods: allergyfoods,
+        desease: desease,
+        doc1: doc1,
+        doc2: doc2,
+        doctordetails: doctordetails,
       });
       alert("Your request for add elder is successfully sent to Manager");
       window.location.reload();
@@ -208,52 +225,68 @@ function GuardianAddElder() {
                           Medical History
                         </Typography>
                         <br />
-                      
-                          <TextField
-                            required
-                            id="outlined-required"
-                            label={
-                              isValidnic ? (
-                                "Desease"
-                              ) : (
-                                <p style={{ color: "red" }}>type disease</p>
-                              )
-                            }
-                            sx={{ m: 1, width: "25ch" }}
-                            value={nic}
-                            onChange={(event) => {
-                              setNic(event.target.value);
-                              const inputnic = event.target.value;
-                              const nicPattern = /^\d{12}$/;
-                              setIsValidnic(nicPattern.test(inputnic));
-                            }}
-                            style={{
-                              borderColor: isValid ? "green" : "red",
-                            }}
-                          />
-
+                        <Box display="flex" justifyContent="flex-start">
                         <TextField
                             required
                             id="outlined-required"
-                            label={
-                              isValidnic ? (
-                                "Doctor"
-                              ) : (
-                                <p style={{ color: "red" }}>type Doctor name </p>
-                              )
-                            }
-                            sx={{ m: 1, width: "25ch" }}
-                            value={nic}
+                            label="Desease"
+                            sx={{ m: 1, width: "35ch",}}
+                            value={desease}
                             onChange={(event) => {
-                              setNic(event.target.value);
-                              const inputnic = event.target.value;
-                              const nicPattern = /^\d{12}$/;
-                              setIsValidnic(nicPattern.test(inputnic));
-                            }}
-                            style={{
-                              borderColor: isValid ? "green" : "red",
+                              setdesease(event.target.value);
                             }}
                           />
+
+                    <TextField
+                            required
+                            id="outlined-required"
+                            label="Doctor Name"
+                            sx={{ m: 1, width: "35ch" }}
+                            value={doc1}
+                            onChange={(event) => {
+                              setdoc1(event.target.value);
+                            }}
+                          />
+                         </Box>
+                       <div className="medi_detail">
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="Medical Details"
+                            sx={{ m: 1, width: "85ch",height:"15ch", }}
+                            multiline // Enable multiline input
+                            rows={4} // Specify the number of rows (adjust as needed)
+                            variant="outlined"
+                            fullWidth // Take up the full width of the container
+                            value={doctordetails}
+                            onChange={(event) => {
+                              setdoctordetails(event.target.value);
+                            }}
+                          />
+                           <br />
+        <input
+          accept=".pdf"
+          id="pdf-upload-input"
+          type="file"
+          style={{ display: 'none' }}
+          onChange={handlePdfChange}
+        />
+        <label htmlFor="pdf-upload-input">
+          <Button
+            variant="contained"
+            component="span"
+            sx={{ m: 1, width: "85ch" }}
+          >
+            Upload PDF Document
+          </Button>
+        </label>
+        {selectedPdf && (
+          <div>
+            <p>Selected PDF: {selectedPdf.name}</p>
+          </div>
+        )}
+      </div>
+                        </div>
                           </div>
 
                           <div>
@@ -262,26 +295,18 @@ function GuardianAddElder() {
                         </Typography>
                         <br />
                       
-                          <TextField
+                        <TextField
                             required
                             id="outlined-required"
-                            label={
-                              isValidnic ? (
-                                "Allergies food items"
-                              ) : (
-                                <p style={{ color: "red" }}>type disease</p>
-                              )
-                            }
-                            sx={{ m: 1, width: "25ch" }}
-                            value={nic}
+                            label="Allergies Food"
+                            sx={{ m: 1, width: "85ch",height:"15ch", }}
+                            multiline // Enable multiline input
+                            rows={4} // Specify the number of rows (adjust as needed)
+                            variant="outlined"
+                            fullWidth
+                            value={allergyfoods}
                             onChange={(event) => {
-                              setNic(event.target.value);
-                              const inputnic = event.target.value;
-                              const nicPattern = /^\d{12}$/;
-                              setIsValidnic(nicPattern.test(inputnic));
-                            }}
-                            style={{
-                              borderColor: isValid ? "green" : "red",
+                              setallergyfoods(event.target.value);
                             }}
                           />
 
@@ -296,7 +321,7 @@ function GuardianAddElder() {
                           >
                             Register
                           </Button>
-                        </div>
+                     
                       </CardContent>
                       <Box
                         sx={{
