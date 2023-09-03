@@ -32,4 +32,7 @@ public interface BedRepo extends JpaRepository<Bed,Integer>{
     Bed findNotOccupiedBeds3();
 
     Bed findByAssElderId(int assElderId);
+
+    @Query("select b from Bed b where b.bed_id = :bed_id")
+    List<Bed> findAllBeds(@Param("bed_id") int bed_id);
 }
