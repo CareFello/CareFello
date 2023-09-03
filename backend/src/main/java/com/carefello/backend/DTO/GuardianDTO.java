@@ -8,72 +8,143 @@ import lombok.NoArgsConstructor;
 // @AllArgsConstructor
 @NoArgsConstructor
 public class GuardianDTO {
-
-    // private int user_id;
+    private int id;
     private String email;
-    private String password;
-    private String haddress;
-    private String waddress;
-    private String nic;
     private String fname;
     private String lname;
+    private String nic;
     private String cont;
+    private String hAddress;
+    private String wAddress;
     private String profession;
+    private String password;
 
-
-
-    public GuardianDTO(String email, String password, String fname, String lname, String cont, String nic,
-                       String haddress, String waddress, String profession) {
-
-        this.email = email;
-        this.password = password;
-        this.cont = cont;
-        this.nic = nic;
-        this.fname = fname;
-        this.lname = lname;
-        this.haddress = haddress;
-        this.profession = profession;
-        this.waddress = waddress;
-
+    public int getId() {
+        return id;
     }
 
-    // public int getUser_id() {
-    //     return user_id;
-    // }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getHaddress() {
-        return haddress;
-    }
-
-    public String getWaddress() {
-        return waddress;
-    }
-
-    public String getNic() {
-        return nic;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFname() {
         return fname;
     }
 
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
     public String getLname() {
         return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
     }
 
     public String getCont() {
         return cont;
     }
 
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
+    public String gethAddress() {
+        return hAddress;
+    }
+
+    public void sethAddress(String hAddress) {
+        this.hAddress = hAddress;
+    }
+
+    public String getwAddress() {
+        return wAddress;
+    }
+
+    public void setwAddress(String wAddress) {
+        this.wAddress = wAddress;
+    }
+
     public String getProfession() {
         return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public static class GuardianElderCountDTO{
+        private int id;
+        private String fname;
+        private String lname;
+        private String email;
+        private int elderCount;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getFname() {
+            return fname;
+        }
+
+        public void setFname(String fname) {
+            this.fname = fname;
+        }
+
+        public String getLname() {
+            return lname;
+        }
+
+        public void setLname(String lname) {
+            this.lname = lname;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public int getElderCount() {
+            return elderCount;
+        }
+
+        public void setElderCount(int elderCount) {
+            this.elderCount = elderCount;
+        }
     }
 }

@@ -33,18 +33,63 @@ function Login() {
     setFirstModalIsOpen(false);
   };
 
-  const openSecondModal = () => {
-    setSecondModalIsOpen(true);
-    closeFirstModal(); // Close the first modal when opening the second
+  const openSecondModal = async () => {
+        try {
+            await axios.post("http://localhost:8085/api/resetemail", {
+                recipient: resetemail,
+    
+            }).then((res) => {
+              console.log(res.data.message);
+
+              if (res.data.message == "true"){
+                setSecondModalIsOpen(true);
+                closeFirstModal(); 
+              }else{
+                alert("Invalid email");
+              }
+            });
+        } catch (err) {
+            alert(err);
+        }
+
+    
   };
 
   const closeSecondModal = () => {
     setSecondModalIsOpen(false);
   };
 
-  const openThirdModal = () => {
-    setThirdModalIsOpen(true);
-    closeSecondModal(); // Close the first modal when opening the second
+  const openThirdModal = async () => {
+    try {
+      await axios.post("http://localhost:8085/api/checkcode", {
+          code: code,
+
+      }).then((res) => {
+        console.log(res.data.message);
+
+        if (res.data.message == "true"){
+          setThirdModalIsOpen(true);
+          closeSecondModal();  
+        }else{
+          alert("Invalid code");
+        }
+      });
+  } catch (err) {
+      alert(err);
+  }
+ 
+  };
+
+  const reset = async () => {
+    try {
+      await axios.put(`http://localhost:8085/api/v1/employee/updatepass/${resetemail}`, {
+          password: newpassword,
+      });
+      window.location.reload();
+  } catch (err) {
+      alert(err);
+  }
+    //  console.log({resetemail});
   };
 
   const closeThirdModal = () => {
@@ -59,6 +104,10 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [resetemail, setResetemail] = useState("");
+  const [newpassword, setNewpassword] = useState("");
+  const [newpassword1, setNewpassword1] = useState("");
+  const [code, setCode] = useState("");
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
 
@@ -72,8 +121,7 @@ function Login() {
         email: email,
         password: password,
       }).then((res) => {
-        console.log(res.data);
-
+        
         if (res.data.message == "Login Success") {
           navigate('/GuardianDashboard');
         }
@@ -84,7 +132,10 @@ function Login() {
             password: password,
           }).then((res) => {
             if (res.data.message == "Login Success"){
+              localStorage.setItem('myData',email);
               navigate('/ManagerDashboard');
+            }else{
+              alert("Incorrect Email or Password")
             }
           }) 
         }
@@ -153,6 +204,10 @@ function Login() {
                 required
                 id="outlined-required"
                 label="Email Address"
+                value={resetemail}
+                onChange={(event) => {
+                  setResetemail(event.target.value);
+                }}
                 sx={{ m: 1, width: '38ch' }} />
               <Button onClick={openSecondModal}>
                 Send
@@ -173,6 +228,10 @@ function Login() {
                 required
                 id="outlined-required"
                 label="Verification Code"
+                value={code}
+                onChange={(event) => {
+                  setCode(event.target.value);
+                }}
                 sx={{ m: 1, width: '38ch' }} />
               <Button onClick={openThirdModal}>
                 Verify
@@ -207,7 +266,10 @@ function Login() {
                     </InputAdornment>
                   }
                   label="Password"
-
+                  value={newpassword}
+                  onChange={(event) => {
+                    setNewpassword(event.target.value);
+                  }}
 
                 /></FormControl>
               <FormControl sx={{ m: 1, width: '38ch' }} variant="outlined">
@@ -228,10 +290,13 @@ function Login() {
                     </InputAdornment>
                   }
                   label="Confirm Password"
-
+                  value={newpassword1}
+                  onChange={(event) => {
+                    setNewpassword1(event.target.value);
+                  }}
 
                 /></FormControl>
-              <Button  >
+              <Button  onClick={reset}>
                 Reset
               </Button>
             </form>

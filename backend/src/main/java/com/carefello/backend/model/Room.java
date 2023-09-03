@@ -1,41 +1,50 @@
 package com.carefello.backend.model;
-import lombok.Data;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Data
 @Entity
-@Table(name="room")
 public class Room {
 
     @Id
-    @Column(name="room_id", length = 45)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int roomId;
-    @Column(name="type", length = 255)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String type;
-    @Column(name="availability", length = 255)
     private int availability;
-   
-    
-    
 
     public Room() {
-
     }
 
-    public Room(String type, int availability) {
-        
+    public Room(int id, String type, int availability) {
+        this.id = id;
         this.type = type;
         this.availability = availability;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public int getAvailability() {
         return availability;
     }
-    
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
 }

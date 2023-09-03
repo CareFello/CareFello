@@ -25,19 +25,6 @@ import com.carefello.backend.service.RequestService;
 @RequestMapping("/api/request")
 
 public class RequestController{
-    @Autowired
-    private RequestService requestService; 
 
-    // @GetMapping("/get")
-    // public List<Room> getAllRoom(){
-    //     room = roomRepo.findAll();
-    // }
-
-    @PostMapping(path = "/check")
-    public ResponseEntity<?> getRequest(@RequestBody RequestDTO requestDTO)
-    {
-        Response request = requestService.validateRequest(requestDTO);
-        return ResponseEntity.ok(request);
-    }
     
 }

@@ -30,11 +30,10 @@ function Navbar() {
                 <div className='left'></div>
                 <div className='right'>
                     <NavLink to="/" exact activeClassName="active"> Home </NavLink>
-                    <NavLink to="/" activeClassName="inactive"> About Us </NavLink>
-                    <NavLink to="/GuardianDashboard" activeClassName="inactive"> Our Services </NavLink>
-                    <NavLink to="/Reg" activeClassName="inactive"> Contact Us </NavLink>
-                    <NavLink to="/Managerdashboard" activeClassName="inactive"> Manager </NavLink>
-                    <NavLink to="/Login" activeClassName="inactive"> Login </NavLink>
+                    <NavLink to="/1" activeClassName="inactive"> About Us </NavLink>
+                    <NavLink to="/2" activeClassName="inactive"> Our Services </NavLink>
+                    <NavLink to="/3" activeClassName="inactive"> Contact Us </NavLink>
+                    <NavLink to="/Login" activeClassName="inactive"> Login/Signup </NavLink>
                 </div>
             </div>
         </div>

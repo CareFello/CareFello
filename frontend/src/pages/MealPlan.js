@@ -27,6 +27,8 @@ import meal1 from "../assets/meal1.jpg"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { NavLink } from "react-router-dom";
+import axios from 'axios';
+import MealPlanCard from '../components/MealPlanCard';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -39,13 +41,9 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-
-
-
 export default function MealPlan() {
 
     const [expanded, setExpanded] = React.useState(false);
-
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -71,6 +69,26 @@ export default function MealPlan() {
         // You can use the form data to create a new meal plan
         handleModalClose();
     };
+
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+
+    async function save(event) {
+        event.preventDefault();
+        try {
+            await axios.post("http://localhost:8080/api/v1/MealPlan/addMealPlan", {
+                name: name,
+                description: description,
+                price: price,
+            });
+            alert("Meal Plan added successfully");
+            window.location.reload();
+
+        } catch (err) {
+            alert(err);
+        }
+    }
 
     return (
         <div>
@@ -112,7 +130,12 @@ export default function MealPlan() {
                                         fullWidth
                                         required
                                         style={{ marginTop: "5px" }}
-                                    // Add state and onChange handler for input values
+                                        // Add state and onChange handler for input values
+
+                                        value={name}
+                                        onChange={(event) => {
+                                            setName(event.target.value);
+                                        }}
                                     />
                                     <br />
                                     <TextField
@@ -122,7 +145,12 @@ export default function MealPlan() {
                                         fullWidth
                                         required
                                         style={{ marginTop: "5px" }}
-                                    // Add state and onChange handler for input values
+                                        // Add state and onChange handler for input values
+
+                                        value={description}
+                                        onChange={(event) => {
+                                            setDescription(event.target.value);
+                                        }}
                                     />
                                     <br />
                                     <TextField
@@ -131,17 +159,15 @@ export default function MealPlan() {
                                         fullWidth
                                         required
                                         style={{ marginTop: "5px" }}
-                                    // Add state and onChange handler for input values
+                                        // Add state and onChange handler for input values
+                                        value={price}
+                                        onChange={(event) => {
+                                            setPrice(event.target.value);
+                                        }}
                                     />
                                     <br />
-                                    <TextField
-                                        label="Image URL"
-                                        fullWidth
-                                        required
-                                        style={{ marginTop: "5px" }}
-                                    // Add state and onChange handler for input values
-                                    />
-                                    <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+
+                                    <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} onClick={save}>
                                         Add Meal Plan
                                     </Button>
                                 </form>
@@ -150,86 +176,13 @@ export default function MealPlan() {
 
                         <Grid item xs={12}>
                             <Stack spacing={5} direction={'row'}>
-                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 140 }}>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{ width: 25 + "%" }}
-                                        image={meal1}
-                                        alt="Live from space album cover"
-                                    />
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                                        <CardContent sx={{ flex: '1 0 auto' }}>
-                                            <Grid container spacing={2}>
-                                                <Grid item xs={11}>
-                                                    <Typography component="div" variant="h5">
-                                                        Diabetic Free
-                                                    </Typography>
-
-                                                    <Typography variant="body2" color="text.secondary">
-                                                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.
-                                                    </Typography>
-                                                    <Typography variant="subtitle1" color="text.secondary" component="div">
-                                                        LKR 10000.00
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={1}>
-
-                                                    <NavLink to="/Meal">
-                                                        <ArrowForwardIosIcon style={{ marginTop: "80%", marginLeft: "80%" }} />
-                                                    </NavLink>
-                                                </Grid>
-                                            </Grid>
-                                        </CardContent>
-
-                                    </Box>
-
-                                </Card>
-
-
+                                <MealPlanCard />
                             </Stack>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Stack spacing={5} direction={'row'}>
-                                <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 140 }}>
-                                    <CardMedia
-                                        component="img"
-                                        sx={{ width: 25 + "%" }}
-                                        image={meal1}
-                                        alt="Live from space album cover"
-                                    />
-                                    <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                                        <CardContent sx={{ flex: '1 0 auto' }}>
-                                            <Grid container spacing={2}>
-                                                <Grid item xs={11}>
-                                                    <Typography component="div" variant="h5">
-                                                        Diabetic Free
-                                                    </Typography>
 
-                                                    <Typography variant="body2" color="text.secondary">
-                                                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica.
-                                                    </Typography>
-                                                    <Typography variant="subtitle1" color="text.secondary" component="div">
-                                                        LKR 10000.00
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item xs={1}>
-
-                                                    <NavLink to="/Meal">
-                                                        <ArrowForwardIosIcon style={{ marginTop: "80%", marginLeft: "80%" }} />
-                                                    </NavLink>
-                                                </Grid>
-                                            </Grid>
-                                        </CardContent>
-
-                                    </Box>
-
-                                </Card>
-
-
-                            </Stack>
-                        </Grid>
 
                     </Grid>
+
                 </Box>
 
             </Box>

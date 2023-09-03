@@ -5,6 +5,7 @@ import com.carefello.backend.DTO.LoginDTO;
 import com.carefello.backend.model.Employee;
 import com.carefello.backend.repo.EmployeeRepo;
 import com.carefello.backend.service.EmployeeService;
+import com.carefello.backend.service.RandomNumberService;
 import com.carefello.backend.payload.response.LoginMesage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,13 +20,15 @@ public class EmployeeImpl implements EmployeeService {
     private EmployeeRepo employeeRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private RandomNumberService randomNumber;
     @Override
     public String addEmployee(EmployeeDTO employeeDTO) {
         Employee employee = new Employee(
                 employeeDTO.getEmployeeid(),
                 employeeDTO.getEmployeename(),
                 employeeDTO.getEmail(),
-               this.passwordEncoder.encode(employeeDTO.getPassword())
+               this.passwordEncoder.encode(employeeDTO.getPassword()),
+               randomNumber.generateRandom6DigitNumber()
         );
         employeeRepo.save(employee);
         return employee.getEmployeename();

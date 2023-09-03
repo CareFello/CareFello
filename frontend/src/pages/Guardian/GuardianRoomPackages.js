@@ -12,8 +12,8 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Shared from '../../assets/SharedRoom.jpg'
-import Single from '../../assets/Single.jpg'
+import Shared from '../../assets/Basic.jpg'
+import Single from '../../assets/Classic.jpg'
 import Luxury from '../../assets/Luxury.jpg'
 import Model from "react-modal"
 import "../../styles/form.css"
