@@ -39,7 +39,7 @@ function Registration() {
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8085/api/v1/guardian/save", {
+            await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
                 email: email,
                 password: password,
                 nic: nic,
@@ -232,7 +232,7 @@ function Registration() {
 
                             /></FormControl>
 
-                       
+
 
                         <Button onClick={save} variant="contained" sx={{
                             m: 1, width: '40ch', height: '50px', backgroundColor: ' #05445E', marginTop: '20px',

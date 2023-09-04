@@ -1,6 +1,7 @@
 package com.carefello.backend.model;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,9 @@ public class Elder {
     private String name;
     private String nic;
     private LocalDate dob;
+    private String relationship;
+
+    private byte[] image;
 
     @ManyToOne
     @JoinColumn(name = "guardian_id")
@@ -60,14 +64,32 @@ public class Elder {
         this.guardian = guardian;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
     public Elder() {
     }
 
-    public Elder(int id, String name, String nic, LocalDate dob, Guardian guardian) {
+    public Elder(int id, String name, String nic, LocalDate dob, String relationship, byte[] image, Guardian guardian) {
         this.id = id;
         this.name = name;
         this.nic = nic;
         this.dob = dob;
+        this.relationship = relationship;
+        this.image = image;
         this.guardian = guardian;
     }
 }
