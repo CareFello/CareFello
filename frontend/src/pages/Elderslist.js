@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 import * as icon from "react-icons/md";
 import { ManagerMenuItem } from "../components/ManagerMenuItem";
 import Box from "@mui/material/Box";
-import Proimg from "../assets/profile.png";
+import Profimg from "../assets/profile1.png";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -21,51 +21,39 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 
-function createDataa(profileimg, name, Regno, Email, Mobile, Status) {
-  return { profileimg, name, Regno, Email, Mobile, Status };
+function createDataa(profileimg, name, guardian, age,) {
+  return { profileimg, name, guardian, age, };
 }
 
 const rows = [
   createDataa(
-    Proimg,
-    "R.J.Premasiri",
-    "cg-11",
-    "sanath@gmail.com",
-    "0771234567",
-    "Assigned"
+    Profimg,
+    "Piyadasa",
+    "G.M.Perera",
+    "68",
   ),
   createDataa(
-    Proimg,
-    "M.F.Abdulla",
-    "cg-15",
-    "mfAbdulla@gmail.com",
-    "0771234567",
-    "Assigned"
+    Profimg,
+    "G.L.Lahiru",
+    "Pathirana",
+    "72",
+    
   ),
   createDataa(
-    Proimg,
-    "M.Mahendran",
-    "cg-18",
-    "mahendran@gmail.com",
-    "0771234567",
-    "Unassigned"
+    Profimg,
+    "M.Priyani",
+    "Jayani",
+    "73",
+ 
   ),
   createDataa(
-    Proimg,
-    "G.T.Gunawardena",
-    "cg-08",
-    "gtguna36@gmail.com",
-    "0771234567",
-    "Unassigned"
+    Profimg,
+    "sehin David",
+    "michelle David",
+    "80",
+    
   ),
-  createDataa(
-    Proimg,
-    "David Johnson",
-    "cg-02",
-    "johndavid@gmail.com",
-    "0771234567",
-    "Assigned"
-  ),
+ 
 ];
 
 // const handleEdit = (rowData) => {
@@ -203,15 +191,15 @@ const Caregiverlist = () => (
       </Table> */}
 
       <TableContainer component={Paper} style={{ marginBottom: "10px" }}>
-        <Table style={{ backgroundColor: "#D4F1F4" }} aria-label="simple table">
+        <Table style={{ backgroundColor: "#d4d4d459" }} aria-label="simple table">
           <TableHead>
             <TableRow style={{ borderBottom: "1px solid #ccc" }}>
-              <TableCell align="center">#</TableCell>
+              <TableCell align="center">Image</TableCell>
               <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Reg No</TableCell>
-              <TableCell align="center">E-Mail</TableCell>
-              <TableCell align="center">Mobile</TableCell>
-              <TableCell align="center">status</TableCell>
+              <TableCell align="center">Guardian</TableCell>
+              <TableCell align="center">Age</TableCell>
+              {/* <TableCell align="center">Mobile</TableCell>
+              <TableCell align="center">status</TableCell> */}
             </TableRow>
           </TableHead>
 
@@ -220,26 +208,24 @@ const Caregiverlist = () => (
               <TableRow
                 key={row.name}
                 style={{ borderBottom: "1px solid #ccc" }}
-                component={Link} // Use Link as the component
-                to={`/Caregiverprofile`} // Set the path to the profile page
                 sx={{
                   "&:hover": {
-                    backgroundColor: "#68c8e887", // Change background color on hover
-                    cursor: "pointer", // Change cursor to pointer on hover
+                    backgroundColor: "#d4d4d459", // Change background color on hover
+
                   },
                   // Add any other custom styles you want
                 }}
               >
                 <TableCell align="center">
-                  <img src={row.profileimg} alt={`Photo ${Proimg}`} style={{ width: "50px", height: "50px" }}/>
+                  <img src={row.profileimg} alt={`Photo ${Profimg}`} style={{ width: "50px", height: "50px" }}/>
                 </TableCell>
                 <TableCell fontWeight="bolder" align="center">
                   {row.name}
                 </TableCell>
-                <TableCell align="center">{row.Regno}</TableCell>
-                <TableCell align="center">{row.Email}</TableCell>
-                <TableCell align="center">{row.Mobile}</TableCell>
-                <TableCell align="center">{row.Status}</TableCell>
+                <TableCell align="center">{row.guardian}</TableCell>
+                <TableCell align="center">{row.age}</TableCell>
+                {/* <TableCell align="center">{row.Mobile}</TableCell>
+                <TableCell align="center">{row.Status}</TableCell> */}
 
  
               </TableRow>

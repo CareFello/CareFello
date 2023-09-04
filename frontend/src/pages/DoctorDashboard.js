@@ -46,7 +46,7 @@ const rows = [
   createDataa( Proimg, 'M.F.Abdulla','10.00 A.M'),
   createDataa(Proimg, 'M.Mahendran','11.30 A.M'),
   createDataa(Proimg, 'G.T.Gunawardena','12.30 p.M'),
-  createDataa(Proimg, 'David Johnson','01.30 p.M'),
+
 ];
 
 const chartSetting = {
@@ -205,10 +205,10 @@ function DoctorDashboard() {
                 series={[
                   {
                     data: [
-                      { id: 0, value: 10, label: 'Diabeties' },
-                      { id: 1, value: 15, label: 'Heart Desease' },
-                      { id: 2, value: 5, label: 'Stroke' },
-                      { id: 2, value: 5, label: 'High Blood Pressure' },
+                      { id: 0, value: 10, label: 'Diabeties',color: '#FF5733' },
+                      { id: 1, value: 15, label: 'Heart Desease',color: '#007BFF' },
+                      { id: 2, value: 5, label: 'Stroke' ,color: '#33C67F'},
+                      { id: 2, value: 5, label: 'High Blood Pressure',color: '#FFC107' },
                     ],
                   },
                 ]}
