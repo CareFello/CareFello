@@ -34,25 +34,25 @@ function Login() {
   };
 
   const openSecondModal = async () => {
-        try {
-            await axios.post("http://localhost:8085/api/resetemail", {
-                recipient: resetemail,
-    
-            }).then((res) => {
-              console.log(res.data.message);
+    try {
+      await axios.post("http://localhost:8085/api/resetemail", {
+        recipient: resetemail,
 
-              if (res.data.message == "true"){
-                setSecondModalIsOpen(true);
-                closeFirstModal(); 
-              }else{
-                alert("Invalid email");
-              }
-            });
-        } catch (err) {
-            alert(err);
+      }).then((res) => {
+        console.log(res.data.message);
+
+        if (res.data.message == "true") {
+          setSecondModalIsOpen(true);
+          closeFirstModal();
+        } else {
+          alert("Invalid email");
         }
+      });
+    } catch (err) {
+      alert(err);
+    }
 
-    
+
   };
 
   const closeSecondModal = () => {
@@ -62,33 +62,33 @@ function Login() {
   const openThirdModal = async () => {
     try {
       await axios.post("http://localhost:8085/api/checkcode", {
-          code: code,
+        code: code,
 
       }).then((res) => {
         console.log(res.data.message);
 
-        if (res.data.message == "true"){
+        if (res.data.message == "true") {
           setThirdModalIsOpen(true);
-          closeSecondModal();  
-        }else{
+          closeSecondModal();
+        } else {
           alert("Invalid code");
         }
       });
-  } catch (err) {
+    } catch (err) {
       alert(err);
-  }
- 
+    }
+
   };
 
   const reset = async () => {
     try {
       await axios.put(`http://localhost:8085/api/v1/employee/updatepass/${resetemail}`, {
-          password: newpassword,
+        password: newpassword,
       });
       window.location.reload();
-  } catch (err) {
+    } catch (err) {
       alert(err);
-  }
+    }
     //  console.log({resetemail});
   };
 
@@ -116,28 +116,29 @@ function Login() {
     event.preventDefault();
     try {
 
-      await axios.post("http://localhost:8085/api/v1/guardian/login", {
+      await axios.post("http://localhost:8080/api/v1/guardian/login", {
 
         email: email,
         password: password,
       }).then((res) => {
-        
+
         if (res.data.message == "Login Success") {
           navigate('/GuardianDashboard');
         }
         else if (res.data.message == "Email not exits") {
 
-          axios.post("http://localhost:8085/api/v1/employee/login",{
+          axios.post("http://localhost:8080/api/v1/employee/login", {
             email: email,
             password: password,
           }).then((res) => {
+
             if (res.data.message == "Login Success"){
               localStorage.setItem('myData',email);
               navigate('/ManagerDashboard');
-            }else{
+            } else {
               alert("Incorrect Email or Password")
             }
-          }) 
+          })
         }
         else {
           alert("Incorrect Email or Password");
@@ -296,7 +297,7 @@ function Login() {
                   }}
 
                 /></FormControl>
-              <Button  onClick={reset}>
+              <Button onClick={reset}>
                 Reset
               </Button>
             </form>

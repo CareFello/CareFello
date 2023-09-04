@@ -16,10 +16,8 @@ import java.util.Optional;
 public interface GuardianService {
 
     Guardian addGuardian(GuardianDTO guardianDTO);
-
-  LoginMesage loginGuardian(LoginDTO loginDTO);
-
-  List<GuardianDTO.GuardianElderCountDTO> getGuardiansWithElderCount();
+    LoginMesage loginGuardian(LoginDTO loginDTO);
+    List<GuardianDTO.GuardianElderCountDTO> getGuardiansWithElderCount();
 
     Optional<Guardian> getGuardianWithElders(int id);
 }

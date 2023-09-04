@@ -98,11 +98,12 @@ public class GuardianImpl implements GuardianService {
         return result;
     }
 
+    @Autowired
+    private ElderRepo elderRepo;
+
     @Override
     public Optional<Guardian> getGuardianWithElders(int id) {
         return guardianRepo.findById(id);
     }
-
-
 
 }
