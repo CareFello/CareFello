@@ -54,11 +54,11 @@ import GuardianDetailsPage from "./components/GuardianDetailPage";
 
 
 
-import Caregiverprofile from './pages/caregiverprofile';
-import Elderslist from'./pages/Elderslist'
+
+import Elderslist from './pages/Elderslist'
 
 // import Caregiverprofile from './pages/caregiverprofile';
-import DoctorDashboard from './pages/DoctorDashboard';
+
 
 function App() {
   return (
@@ -83,9 +83,9 @@ function App() {
 
           {/* <Route path="/profile" element={<Caregiverprofile />} /> */}
 
-         
-          <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
-          
+
+          {/* <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/> */}
+
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
@@ -110,7 +110,7 @@ function App() {
           <Route path="/RequestContinue" element={<RequestContinue />} />
 
 
-          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
+          <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />
           <Route path="/GuardianProfilePage" element={<GuardianProfilePage />} />
           <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
@@ -136,9 +136,9 @@ function App() {
 
 
 
-          <Route path="/Caregiverlist" element={<Caregiverlist/>}/>
-          <Route path="/DoctorDashboard" element={<DoctorDashboard/>}/>
-          <Route path="/Elderslist" element={<Elderslist/>}/>
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
+          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
+          <Route path="/Elderslist" element={<Elderslist />} />
           {/* <Route path="" exact component={Caregiverlist} />
           <Route path="/Caregiverprofile" component={Caregiverprofile} /> */}
 

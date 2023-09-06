@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, CardContent, Typography, CardMedia, Grid } from '@mui/material';
 
-function ElderCard() {
+function ElderCard({ guardianId }) {
 
   const [elderList, setElderList] = useState([]);
-  const guardianId = 1;
+
 
   const url = 'http://localhost:8080/api/v1/guardian/' + guardianId + '/elders/viewElderByGuardianId'
   const url2 = 'http://localhost:8080/api/v1/guardian/' + guardianId + '/elders/viewElderImagesByGuardianId'
@@ -33,6 +33,7 @@ function ElderCard() {
     <div>
       <Grid container spacing={2}>
         {elderList.map(elder => (
+
           <Grid item key={elder.id} xs={12} sm={4} md={1} lg={4}>
             <Card
               style={{
