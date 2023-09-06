@@ -24,4 +24,5 @@ public class RequestDTO {
     private int occupied;
     private int assigned;
     private int caregiverId;
+    private int age;
 }
