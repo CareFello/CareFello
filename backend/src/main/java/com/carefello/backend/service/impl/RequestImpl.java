@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.carefello.backend.DTO.RequestDTO;
 import com.carefello.backend.model.Bed;
-import com.carefello.backend.model.Caregiver;
+import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.service.RequestService;
 import com.carefello.backend.repo.BedRepo;
-import com.carefello.backend.repo.CaregiverRepo;
-import com.carefello.backend.payload.response.Response;
+import com.carefello.backend.repo.Caregiver1Repo;
+
 
 @Service
 
@@ -24,77 +24,65 @@ public class RequestImpl implements RequestService {
     @Autowired
     private BedRepo bedRepo;
     @Autowired
-    private CaregiverRepo caregiverRepo;
+    private Caregiver1Repo caregiver1Repo;
     @Override
-    public Response validateRequest(RequestDTO requestDTO) {
-        Bed bed = bedRepo.findNotOccupiedBeds(requestDTO.getAssStartDate());
-        Bed bed1 = bedRepo.findNotOccupiedBeds1(requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
-        Bed bed2 = bedRepo.findNotOccupiedBeds2(requestDTO.getAssStartDate());
-        Bed bed4 = bedRepo.findNotOccupiedBeds4(requestDTO.getAssStartDate());
-        Bed bed5 = bedRepo.findNotOccupiedBeds5(requestDTO.getAssEndDate());
-        Bed bed3 = bedRepo.findNotOccupiedBeds3();
-        if (bed != null){
-            int id = bed.getId();
-            return new Response("true",id);
-        }else if (bed1 != null){
-            int id = bed1.getId();
-            return new Response("true",id);
-        }else if (bed2 != null){
-            int id = bed2.getId();
-            return new Response("true",id);
-        }else if (bed3 != null){
-            int id = bed3.getId();
-            return new Response("true",id);
-        }else if (bed4 != null){
-            int id = bed4.getId();
-            return new Response("true",id);
-        }else if (bed5 != null){
-            int id = bed5.getId();
-            return new Response("true",id);
+    public List<Bed> validateRequest(RequestDTO requestDTO) {
+        List<Bed> bed = bedRepo.findNotOccupiedBeds(requestDTO.getAssStartDate());
+        List<Bed> bed1 = bedRepo.findNotOccupiedBeds1(requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
+        List<Bed> bed2 = bedRepo.findNotOccupiedBeds2(requestDTO.getAssStartDate());
+        List<Bed> bed4 = bedRepo.findNotOccupiedBeds4(requestDTO.getAssStartDate());
+        List<Bed> bed5 = bedRepo.findNotOccupiedBeds5(requestDTO.getAssEndDate());
+        List<Bed> bed3 = bedRepo.findNotOccupiedBeds3();
+        if (!bed.isEmpty()){
+            return bed;
+        }else if (!bed1.isEmpty()){
+            return bed1;
+        }else if (!bed2.isEmpty()){
+            return bed2;
+        }else if (!bed3.isEmpty()){
+            return bed3;
+        }else if (!bed4.isEmpty()){
+            return bed4;
+        }else if (!bed5.isEmpty()){
+            return bed5;
         }else{
-            return new Response("false",0);
+            return null;
         }
     }
 
-    public Response validateRequest1(RequestDTO requestDTO){
-        Caregiver caregiver1 = caregiverRepo.findAvailability1(requestDTO.getGender(), 
+    public List<Caregiver1> validateRequest1(RequestDTO requestDTO){
+        List<Caregiver1> caregiver1 = caregiver1Repo.findAvailability1(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage());
 
-        Caregiver caregiver2 = caregiverRepo.findAvailability2(requestDTO.getGender(), 
+        List<Caregiver1> caregiver2 = caregiver1Repo.findAvailability2(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
 
-        Caregiver caregiver3 = caregiverRepo.findAvailability3(requestDTO.getGender(), 
+        List<Caregiver1> caregiver3 = caregiver1Repo.findAvailability3(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
 
-        Caregiver caregiver4 = caregiverRepo.findAvailability4(requestDTO.getGender(), 
+        List<Caregiver1> caregiver4 = caregiver1Repo.findAvailability4(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
 
-        Caregiver caregiver5 = caregiverRepo.findAvailability5(requestDTO.getGender(), 
+        List<Caregiver1> caregiver5 = caregiver1Repo.findAvailability5(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
 
-        Caregiver caregiver6 = caregiverRepo.findAvailability6(requestDTO.getGender(), 
+        List<Caregiver1> caregiver6 = caregiver1Repo.findAvailability6(requestDTO.getGender(), 
         requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssEndDate());
 
-        if (caregiver1 != null){
-            int id = caregiver1.getUser_id();
-            return new Response("true",id);
-        }else if (caregiver2 != null){
-            int id = caregiver2.getUser_id();
-            return new Response("true",id);
-        }else if (caregiver3 != null){
-            int id = caregiver3.getUser_id();
-            return new Response("true",id);
-        }else if (caregiver4 != null){
-            int id = caregiver4.getUser_id();
-            return new Response("true",id);
-        }else if (caregiver5 != null){
-            int id = caregiver5.getUser_id();
-            return new Response("true",id);
-        }else if (caregiver6 != null){
-            int id = caregiver6.getUser_id();
-            return new Response("true",id);  
+        if (!caregiver1.isEmpty()){
+            return caregiver1;
+        }else if (!caregiver2.isEmpty()){
+            return caregiver2;
+        }else if (!caregiver3.isEmpty()){
+            return caregiver3;
+        }else if (!caregiver4.isEmpty()){
+            return caregiver4;
+        }else if (!caregiver5.isEmpty()){
+            return caregiver5;
+        }else if (!caregiver6.isEmpty()){
+            return caregiver6;  
         }else{
-            return new Response("false",0);
+            return null;
         }      
     }
 
@@ -112,6 +100,19 @@ public class RequestImpl implements RequestService {
         return requestDTO.getType();
     }
 
+    public String assignCaregiver(RequestDTO requestDTO){
+
+        Caregiver1 caregiver1 = new Caregiver1(requestDTO.getGender(),
+        requestDTO.getFree(), requestDTO.getAge(),
+        requestDTO.getAssigned(),requestDTO.getOccupied(),
+        requestDTO.getOccuStartDate(),requestDTO.getOccuEndDate(),
+        requestDTO.getAssStartDate(),requestDTO.getAssEndDate()
+         );
+
+        caregiver1Repo.save(caregiver1);
+        return requestDTO.getType();
+    }
+
     public String validateRequest2(int id, RequestDTO requestDTO){
         List<Bed> beds = bedRepo.findAllBeds(id);
         String result = "good";
@@ -123,6 +124,43 @@ public class RequestImpl implements RequestService {
             Date assStartDateBed = bed.getAssStartDate();
             Date assEndDateBed = bed.getAssEndDate();
             Date occuEndDateBed = bed.getOccuEndDate();
+
+            int cr1 = assEndDateBed.compareTo(requestDTO.getAssStartDate());
+            int cr2 = occuEndDateBed.compareTo(requestDTO.getAssStartDate());
+            int cr3 = assStartDateBed.compareTo(requestDTO.getAssEndDate());
+
+            if ((assigned == 1) && (occupied == 1) && (cr1 < 0)){
+                
+            }else if ((assigned == 1) && (occupied == 1) && (cr2 < 0) && (cr3 > 0)){
+                
+            }else if ((assigned == 0) && (occupied == 1) && (cr2 < 0)){
+                
+            }else if ((assigned == 1) && (occupied == 0) && (cr1 < 0)){
+                
+            }else if ((assigned == 1) && (occupied == 0) && (cr3 > 0)){
+                
+            }else if (free == 1){
+                
+            }else{
+                result = "bad";
+            }
+            
+        }
+        return result;
+        
+    }
+
+    public String validateRequest3(int id, RequestDTO requestDTO){
+        List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(id);
+        String result = "good";
+        for (Caregiver1 caregiver : caregivers){
+            
+            int free = caregiver.getFree();
+            int assigned = caregiver.getAssigned();
+            int occupied = caregiver.getOccupied();
+            Date assStartDateBed = caregiver.getAssStartDate();
+            Date assEndDateBed = caregiver.getAssEndDate();
+            Date occuEndDateBed = caregiver.getOccuEndDate();
 
             int cr1 = assEndDateBed.compareTo(requestDTO.getAssStartDate());
             int cr2 = occuEndDateBed.compareTo(requestDTO.getAssStartDate());
