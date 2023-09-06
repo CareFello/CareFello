@@ -16,6 +16,8 @@ import Stack from '@mui/material/Stack';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import '../../styles/Guardian/GuardianDashboard.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 import elderProfiles from '../../components/ElderCard';// Import your elder profiles data here
 import ElderCard from '../../components/ElderCard';
@@ -51,6 +53,9 @@ const caregiverProfiles = [
 
 const GuardianDashboard = () => {
 
+  // Inside your component function
+  const { guardianId } = useParams();
+  console.log(guardianId)
 
   return (
     <div className='dashboard'>
@@ -72,7 +77,7 @@ const GuardianDashboard = () => {
                 </Stack>
                 <Stack spacing={3.3} direction={'row'} className='eldercards'>
 
-                  <ElderCard />
+                  <ElderCard guardianId={guardianId} />
 
                 </Stack>
               </Grid>

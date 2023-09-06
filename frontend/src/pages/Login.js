@@ -112,6 +112,8 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
+
+
   async function login(event) {
     event.preventDefault();
     try {
@@ -123,7 +125,9 @@ function Login() {
       }).then((res) => {
 
         if (res.data.message == "Login Success") {
-          navigate('/GuardianDashboard');
+
+          const guardianId = res.data.id;
+          navigate(`/GuardianDashboard/${guardianId}`);
         }
         else if (res.data.message == "Email not exits") {
 
@@ -132,8 +136,8 @@ function Login() {
             password: password,
           }).then((res) => {
 
-            if (res.data.message == "Login Success"){
-              localStorage.setItem('myData',email);
+            if (res.data.message == "Login Success") {
+              localStorage.setItem('myData', email);
               navigate('/ManagerDashboard');
             } else {
               alert("Incorrect Email or Password")
