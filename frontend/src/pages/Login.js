@@ -118,7 +118,7 @@ function Login() {
     event.preventDefault();
     try {
 
-      await axios.post("http://localhost:8080/api/v1/guardian/login", {
+      await axios.post("http://localhost:8085/api/v1/guardian/login", {
 
         email: email,
         password: password,
@@ -131,7 +131,7 @@ function Login() {
         }
         else if (res.data.message == "Email not exits") {
 
-          axios.post("http://localhost:8080/api/v1/employee/login", {
+          axios.post("http://localhost:8085/api/v1/employee/login", {
             email: email,
             password: password,
           }).then((res) => {
