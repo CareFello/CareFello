@@ -1,0 +1,62 @@
+/* GuardianPayments.css */
+
+/* Page styles */
+.payment {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #F9FFFE;
+  font-family: Arial, sans-serif;
+}
+
+.payment-content {
+  display: flex;
+  flex: 1;
+}
+
+.payment-body {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+Typography {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* TextField styles */
+.TextField-root {
+  margin-bottom: 15px;
+}
+
+/* Button styles */
+
+.pay-btn {
+  background-color: #04366e !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 8px 10px !important;
+  cursor: pointer !important;
+  border-radius: 5px !important;
+  font-size: 14px !important; 
+  transition: background-color 0.3s !important;
+  width: 30% !important;
+  margin-top: 15px !important;
+  left: 250px;
+}
+
+.pay-btn:hover {
+  background-color: #0056b3 !important;
+}

@@ -44,12 +44,10 @@ import GuardianCaregiverRating from './pages/Guardian/GuardianCaregiverRating';
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
-import ManagerGuardianProfile from "./pages/Manager/ManagerGuardianProfile"
-import DoctorDashboard from './pages/DoctorDashboard'
+import ManagerGuardianProfile from "./pages/Manager/ManagerGuardianProfile";
+// import DoctorDashboard from './pages/DoctorDashboard';
 import GuardianList from "./pages/GuardianList";
-
-
-import Caregiverprofile from './pages/caregiverprofile'
+// import Caregiverprofile from './pages/caregiverprofile';
 import GuardianDetailsPage from "./components/GuardianDetailPage";
 
 
