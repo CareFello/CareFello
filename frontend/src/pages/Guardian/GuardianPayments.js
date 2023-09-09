@@ -30,10 +30,11 @@ const GuardianPayments = () => {
       <Box className="payment-content">
         <Sidebar menuItems={GuardianMenuItem} />
         <main className="payment-body">
-          <Typography variant="h6" gutterBottom>
-            Payment Page
-          </Typography>
+
           <form onSubmit={handleSubmit}>
+            <Typography variant="h6" gutterBottom>
+              Payment Data
+            </Typography>
             <Grid container spacing={2}> {/* Use Grid container */}
               <Grid item xs={6}> {/* Adjust width for Currency */}
                 <TextField
