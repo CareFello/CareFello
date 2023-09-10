@@ -17,20 +17,20 @@
     color:#05445E;
 }
 
-.student-card .cardExpand{
+/* .student-card .cardExpand{
     height: 100px;
     color:#05445E;
-}
+} */
 
-.basic-info {
+/* .basic-info {
     display: block;
 }
 
 .basic-info-hover {
     display: none;
-}
+} */
 
-.hover-info {
+/* .hover-info {
     border: none;
     color: white;
     border-radius: 50px;
@@ -40,37 +40,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color:#19A7CE;
-    /* padding: 10px; */
-    transition: all 0.3s ease;
-}
+    background-color:#19A7CE;   
+} */
 
-.student-card:hover .hover-info {
+/* .student-card:hover .hover-info {
     display: block;
-}
+} */
 
-.student-card:hover .basic-info {
+/* .student-card:hover .basic-info {
     display: none;
-}
-
-.student-card:hover .basic-info-hover {
-    display: block;
-}
-
-.student-card:hover {
-    /* Set the desired width and height for the expanded card */
-    width: 98%;
-    height: 150px;
 }
 
 ul li {
     list-style: none;
-}
-/* 
-.btn{
-    color:#D4F1F4;
-    font-weight:normal;
-    background-color:#05445E; 
-    border-radius: 20px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
 } */
+
+
