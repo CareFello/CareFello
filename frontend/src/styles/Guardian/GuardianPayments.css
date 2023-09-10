@@ -6,7 +6,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #F9FFFE;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins" !important;
 }
 
 .payment-content {

@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid"; // Import Material-UI Grid
 import "../../styles/Guardian/GuardianPayments.css";
 
 const GuardianPayments = () => {
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("LKR");
   const [amount, setAmount] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -26,13 +26,13 @@ const GuardianPayments = () => {
   return (
     <div className="payment">
       <Header />
-      <Box height={80} />
+      <Box height={120} />
       <Box className="payment-content">
         <Sidebar menuItems={GuardianMenuItem} />
         <main className="payment-body">
 
           <form onSubmit={handleSubmit}>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Payment Data
             </Typography>
             <Grid container spacing={2}> {/* Use Grid container */}
@@ -46,6 +46,7 @@ const GuardianPayments = () => {
                   fullWidth
                   margin="normal"
                 >
+                  <MenuItem value="LKR">LKR</MenuItem>
                   <MenuItem value="USD">USD</MenuItem>
                   <MenuItem value="EUR">EUR</MenuItem>
                   {/* Add more currency options as needed */}
