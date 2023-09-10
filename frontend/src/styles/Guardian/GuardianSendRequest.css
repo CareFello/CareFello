@@ -1,27 +1,2 @@
-.cardContent{
-    
-    font-size: smaller;
-}
 
-.field{
-    display: flex;
-    flex-direction: row;
-}
-
-.cardContent {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-  }
-  
-  .field {
-    display: flex;
-    flex-wrap: wrap;
-    
-  }
-  
-  .subfield {
-    flex: 1; /* Subfields take equal width within a field */
-    max-width: calc(50% - 10px); 
-  }
   

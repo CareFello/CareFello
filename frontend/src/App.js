@@ -48,7 +48,6 @@ import ManagerGuardianProfile from "./pages/Manager/ManagerGuardianProfile"
 import DoctorDashboard from './pages/DoctorDashboard'
 import GuardianList from "./pages/GuardianList";
 
-
 import Caregiverprofile from './pages/caregiverprofile'
 import GuardianDetailsPage from "./components/GuardianDetailPage";
 

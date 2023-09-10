@@ -13,28 +13,6 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 
-const inputStyle = {
-  width: '100%',
-  padding: '10px',
-  marginBottom: '10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-
-};
-
-const smallInputStyle = {
-  ...inputStyle,
-  height: '38px',
-};
-
-const selectBoxStyle = {
-    ...smallInputStyle,
-    height: '30px', // Adjust the height as needed
-  };
-
-const cardStyle = {
-  padding: '0 400px',
-};
 
 const GuardianSendRequest = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -61,46 +39,43 @@ const GuardianSendRequest = () => {
       <div style={{ display: 'flex' }}>
         <Header />
         <Sidebar menuItems={GuardianMenuItem} />
-        <div style={{marginTop: '100px'}}>
-        <h5>Send Request for Accommodation</h5>
-            <CardContent style={{ width: '100%', margin: '0 auto', marginTop: '100px', marginBottom: '20px' }}>
-              <div className='cardContent'>
-                <div className='field' style={{gap: '20px'}}>
-                  <div className='subfield'>
-                    <label htmlFor="yourElder">Your Elder's Name</label>
-                    <Select
-                      id="yourElder"
-                      style={inputStyle}
-                      value={formData.yourElder || ''}
-                      onChange={(e) => setFormData({ ...formData, yourElder: e.target.value })}
-                    >
-                      <MenuItem value="Somasiri">Somasiri</MenuItem>
-                      <MenuItem value="Keerthi">Keerthi</MenuItem>
-                      <MenuItem value="Senarath">Senarath</MenuItem>
-                    </Select>
-                  </div>
+        <div style={{ marginTop: '100px' }}>
+          <h5>Send Request for Accommodation</h5>
+          <CardContent>
+            <div className='cardContent'>
+              <div className='field' style={{ gap: '20px' }}>
+                <div className='subfield'>
+                  <label htmlFor="yourElder">Your Elder's Name</label>
+                  <Select
+                    id="yourElder"
+                    value={formData.yourElder || ''}
+                    onChange={(e) => setFormData({ ...formData, yourElder: e.target.value })}
+                  >
+                    <MenuItem value="Somasiri">Somasiri</MenuItem>
+                    <MenuItem value="Keerthi">Keerthi</MenuItem>
+                    <MenuItem value="Senarath">Senarath</MenuItem>
+                  </Select>
+                </div>
 
-                  <div className='subfield'>
-                    <label htmlFor="elderAge">Age</label>
-                    <input
-                      type="number"
-                      id="elderAge"
-                      style={smallInputStyle}
-                      value={formData.elderAge || ''}
-                      onChange={(e) => {
-                        const inputAge = parseInt(e.target.value, 10);
-                        if (!isNaN(inputAge) && inputAge >= 0) {
-                          setFormData({ ...formData, elderAge: inputAge });
-                        }
-                      }}
-                    />
-                  </div>
-                
+                <div className='subfield'>
+                  <label htmlFor="elderAge">Age</label>
+                  <input
+                    type="number"
+                    id="elderAge"
+                    value={formData.elderAge || ''}
+                    onChange={(e) => {
+                      const inputAge = parseInt(e.target.value, 10);
+                      if (!isNaN(inputAge) && inputAge >= 0) {
+                        setFormData({ ...formData, elderAge: inputAge });
+                      }
+                    }}
+                  />
+                </div>
+
                 <div className='subfield'>
                   <label htmlFor="elderGender">Gender</label>
                   <Select
                     id="elderGender"
-                    style={smallInputStyle}
                     value={formData.elderGender || ''}
                     onChange={(e) => setFormData({ ...formData, elderGender: e.target.value })}
                   >
@@ -108,18 +83,17 @@ const GuardianSendRequest = () => {
                     <MenuItem value="female">Female</MenuItem>
                   </Select>
                 </div>
-                </div>
+              </div>
 
-                <div className='field'>
+              <div className='field'>
                 <div className='subfield'>
                   <label htmlFor="enrollDate">Enroll Date</label>
                   <input
                     type="date"
                     id="enrollDate"
                     placeholder="Enroll Date"
-                    style={smallInputStyle}
                     value={formData.enrollDate || ''}
-                    onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })}/>
+                    onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })} />
                 </div>
                 <div className='subfield'>
                   <label htmlFor="endDate">Check-Out Date</label>
@@ -127,7 +101,6 @@ const GuardianSendRequest = () => {
                     type="date"
                     id="endDate"
                     placeholder="End Date"
-                    style={smallInputStyle}
                     value={formData.endDate || ''}
                     onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
                   />
@@ -138,18 +111,16 @@ const GuardianSendRequest = () => {
                   <input
                     type="text"
                     id="duration"
-                    style={inputStyle}
                     value={formData.duration || ''}
                     onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                   />
                 </div>
-                </div>
-                <div className='field'>
+              </div>
+              <div className='field'>
                 <div className='subfield'>
                   <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
                   <Select
                     id="roomPackage"
-                    style={inputStyle}
                     value={formData.roomPackage || ''}
                     onChange={(e) => setFormData({ ...formData, roomPackage: e.target.value })}
                   >
@@ -163,7 +134,6 @@ const GuardianSendRequest = () => {
                   <label htmlFor="mealPlan">Meal Plan</label>
                   <Select
                     id="mealPlan"
-                    style={inputStyle}
                     value={formData.mealPlan || ''}
                     onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
                   >
@@ -172,15 +142,14 @@ const GuardianSendRequest = () => {
                     <MenuItem value="Luxery">Meal plan 03</MenuItem>
                   </Select>
                 </div>
-                </div>
-                <div className='field'>
+              </div>
+              <div className='field'>
                 <div className='subfield'>
                   <FormControl>
                     <label>Remove meal items with allergies on your elder</label>
                     <Select
                       id="mealItemsDropdown"
                       multiple
-                      style={inputStyle}
                       value={selectedMealItems}
                       onChange={(e) => setSelectedMealItems(e.target.value)}
                     >
@@ -220,18 +189,16 @@ const GuardianSendRequest = () => {
                   <input
                     type="text"
                     id="otherMealItems"
-                    style={inputStyle}
                     value={formData.otherMealItems || ''}
                     onChange={(e) => setFormData({ ...formData, otherMealItems: e.target.value })}
                   />
                 </div>
-                </div>
-                <div className='field'>
+              </div>
+              <div className='field'>
                 <div className='subfield'>
                   <label htmlFor="gender">Select Caregiver's Type</label>
                   <Select
                     id="gender"
-                    style={inputStyle}
                     value={formData.gender || ''}
                     onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                   >
@@ -244,15 +211,15 @@ const GuardianSendRequest = () => {
                   <textarea
                     id="medicationDetails"
                     rows="4"
-                    style={inputStyle}
+
                     value={formData.medicationDetails || ''}
                     onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
                   />
                 </div>
-                </div>
               </div>
-            </CardContent>
-          
+            </div>
+          </CardContent>
+
         </div>
       </div>
     </div>
