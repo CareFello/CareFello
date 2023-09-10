@@ -18,6 +18,7 @@ import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
 import AddCaregiver from './pages/AddCaregiver';
 import ManagerDoctorView from './pages/ManagerDoctorView';
+
 import ManagerRoomDetailsView from './pages/ManagerRoomDetailsView';
 
 
