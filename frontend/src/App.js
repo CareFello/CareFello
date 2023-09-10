@@ -18,6 +18,7 @@ import AddDoctor from './pages/AddDoctor';
 import Caregiverlist from './pages/Caregiverlist';
 import AddCaregiver from './pages/AddCaregiver';
 import ManagerDoctorView from './pages/ManagerDoctorView';
+import ManagerRoomDetailsView from './pages/ManagerRoomDetailsView';
 
 
 import ViewRoomDetails from './pages/ViewRoomDetails'
@@ -106,6 +107,7 @@ function App() {
           <Route path="/guardians/:guardianId" element={<GuardianDetailsPage />} />
 
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
+          <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
 
           <Route path="/RequestContinue" element={<RequestContinue />} />
 
