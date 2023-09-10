@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.carefello.backend.model.Person;
 
+import com.carefello.backend.DTO.ContactusDTO;
+import com.carefello.backend.model.Contactus;
+import com.carefello.backend.model.Person;
+import com.carefello.backend.repo.ContactusRepo;
 import com.carefello.backend.repo.PersonRepo;
 
 @CrossOrigin
@@ -25,6 +27,7 @@ public class PersonController{
     private final PersonRepo personRepo;
 
     @Autowired
+    private ContactusRepo contactusRepo;
     public PersonController(PersonRepo personRepo){
         this.personRepo = personRepo;
     }
@@ -38,6 +41,18 @@ public class PersonController{
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         personRepo.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/contact")
+    public String getContactUs(@RequestBody ContactusDTO contactusDTO){
+        Contactus contactus = new Contactus(
+            contactusDTO.getName(),
+            contactusDTO.getEmail(),
+            contactusDTO.getSubject(),
+            contactusDTO.getMessage()
+        );
+        contactusRepo.save(contactus);
+        return contactus.getName();
     }
 }
 
