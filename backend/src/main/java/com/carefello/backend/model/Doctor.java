@@ -1,6 +1,10 @@
 package com.carefello.backend.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="doctor")
 public class Doctor {
@@ -47,5 +51,16 @@ public class Doctor {
 
     public String getDoctorPassword() {
         return password;
+    }
+
+    @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TimeSlot> timeSlots = new ArrayList<>();
+
+    public List<TimeSlot> getTimeSlots() {
+        return timeSlots;
+    }
+
+    public void setTimeSlots(List<TimeSlot> timeSlots) {
+        this.timeSlots = timeSlots;
     }
 }

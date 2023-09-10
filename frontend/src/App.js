@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
 import Email from "./pages/Email";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import AddDoctor from "./pages/AddDoctor";
@@ -43,6 +44,7 @@ import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 
+
 function App() {
   return (
     <div className="App">
@@ -61,7 +63,9 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/email" element={<Email />} />
+
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
+
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
@@ -79,10 +83,16 @@ function App() {
           <Route path="/GuardianList" element={<GuardianList />} />
           <Route path="/guardians/:guardianId" element={<GuardianDetailsPage />}/>
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
+
+          <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
+
           <Route path="/RequestContinue" element={<RequestContinue />} />
-          <Route path="/GuardianDashboard" element={<GuardianDashboard />} />
-          <Route path="/GuardianProfilePage"element={<GuardianProfilePage />}/>
-          <Route path="/EditGuardianProfile"element={<EditGuardianProfile />}/>
+
+
+          <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />
+          <Route path="/GuardianProfilePage" element={<GuardianProfilePage />} />
+          <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
+
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
@@ -91,11 +101,13 @@ function App() {
           <Route path="/GuardianPayments" element={<GuardianPayments />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/GuardianComplain" element={<GuardianComplain />} />
+
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />}/>
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
+
         </Routes>
       </Router>
     </div>

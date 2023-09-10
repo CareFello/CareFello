@@ -112,28 +112,32 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
+
+
   async function login(event) {
     event.preventDefault();
     try {
 
-      await axios.post("http://localhost:8080/api/v1/guardian/login", {
+      await axios.post("http://localhost:8085/api/v1/guardian/login", {
 
         email: email,
         password: password,
       }).then((res) => {
 
         if (res.data.message == "Login Success") {
-          navigate('/GuardianDashboard');
+
+          const guardianId = res.data.id;
+          navigate(`/GuardianDashboard/${guardianId}`);
         }
         else if (res.data.message == "Email not exits") {
 
-          axios.post("http://localhost:8080/api/v1/employee/login", {
+          axios.post("http://localhost:8085/api/v1/employee/login", {
             email: email,
             password: password,
           }).then((res) => {
 
-            if (res.data.message == "Login Success"){
-              localStorage.setItem('myData',email);
+            if (res.data.message == "Login Success") {
+              localStorage.setItem('myData', email);
               navigate('/ManagerDashboard');
             } else {
               alert("Incorrect Email or Password")

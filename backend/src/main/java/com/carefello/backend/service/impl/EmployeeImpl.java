@@ -8,10 +8,9 @@ import com.carefello.backend.service.EmployeeService;
 import com.carefello.backend.service.RandomNumberService;
 import com.carefello.backend.payload.response.LoginMesage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import jakarta.annotation.Resource;
+
 import java.util.Optional;
 @Service
 
@@ -45,16 +44,16 @@ public class EmployeeImpl implements EmployeeService {
             if (isPwdRight) {
                 Optional<Employee> employee = employeeRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
                 if (employee.isPresent()) {
-                    return new LoginMesage("Login Success", true);
+                    return new LoginMesage("Login Success", true, employee.get().getEmployeeid());
                 } else {
-                    return new LoginMesage("Login Failed", false);
+                    return new LoginMesage("Login Failed", false, 0);
                 }
             } else {
-                return new LoginMesage(encodedPassword, false);
+                return new LoginMesage(encodedPassword, false, 0);
                 
             }
         }else {
-            return new LoginMesage("Email not exits", false);
+            return new LoginMesage("Email not exits", false, 0);
         }
     }
 }

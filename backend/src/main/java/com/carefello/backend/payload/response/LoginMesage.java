@@ -3,6 +3,7 @@ package com.carefello.backend.payload.response;
 public class LoginMesage {
     String message;
     Boolean status;
+    int id;
 
     public String getMessage() {
         return message;
@@ -20,8 +21,23 @@ public class LoginMesage {
         this.status = status;
     }
 
-    public LoginMesage(String message, Boolean status) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LoginMesage(String message, Boolean status, int id) {
         this.message = message;
         this.status = status;
+        this.id = id;
     }
+
+
+
+
 }
+
+
