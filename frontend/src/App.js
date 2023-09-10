@@ -135,7 +135,6 @@ function App() {
 
 
 
-
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
