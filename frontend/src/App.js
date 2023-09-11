@@ -43,6 +43,7 @@ import Caregiverprofile from "./pages/caregiverprofile";
 import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
+import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 
 
 function App() {
@@ -107,6 +108,7 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
+          
 
         </Routes>
       </Router>
