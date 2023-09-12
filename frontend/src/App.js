@@ -47,7 +47,9 @@ import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
 import ManagerGuardianProfile from "./pages/Manager/ManagerGuardianProfile"
 import DoctorDashboard from './pages/DoctorDashboard'
 import GuardianList from "./pages/GuardianList";
-
+import Image from "./pages/Image";
+import Image1 from "./pages/Image1";
+import Image2 from "./pages/Image2";
 
 import Caregiverprofile from './pages/caregiverprofile'
 import GuardianDetailsPage from "./components/GuardianDetailPage";
@@ -78,6 +80,10 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/email" element={<Email />} />
+
+          <Route path="/image" element={<Image />} />
+          <Route path="/image1" element={<Image1 />} />
+          <Route path="/image2" element={<Image2 />} />
 
 
 
@@ -116,20 +122,20 @@ function App() {
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
           <Route
-            path="/GuardianRoomPackages"
+            path="/GuardianRoomPackages/:guardianId"
             element={<GuardianRoomPackages />}
           />
           <Route
-            path="/GuardianSendRequest"
+            path="/GuardianSendRequest/:guardianId"
             element={<GuardianSendRequest />}
           />
-          <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
+          <Route path="/GuardianAddElder/:guardianId" element={<GuardianAddElder />} />
 
-          <Route path="/GuardianPayments" element={<GuardianPayments />} />
+          <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
 
 
-          <Route path="/GuardianComplain" element={<GuardianComplain />} />
+          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
 
 
