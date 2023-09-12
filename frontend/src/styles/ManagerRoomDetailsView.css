@@ -1,0 +1,95 @@
+/* ManagerRoomDetailsView.css */
+
+/* Font Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Use the custom font */
+    margin: 0;
+    background-color: #F9FFFE;
+    color: #333; /* Text color */
+  }
+  
+  /* Page Layout */
+  .room-details {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .room-details-content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .room-details-body {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Add gap between cards */
+  }
+  
+  /* Room Cards */
+  .room-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Add gap between cards */
+  }
+  
+  .room-card {
+    flex-basis: calc(25% - 20px);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    max-width: 250px;
+    height: 330px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .room-card:last-child {
+    margin-right: 0;
+  }
+  
+  .room-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Improved hover shadow */
+  }
+  
+  .room-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  /* Text Styles */
+  .caregiver {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #2276d1; /* Caregiver name color */
+  }
+  
+  .elders {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .elder-name {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: #555; /* Elder name color */
+  }
+  
+  .img-grid {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  

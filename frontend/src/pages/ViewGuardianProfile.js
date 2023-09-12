@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/Sidebar";
-import Header from "../../components/Header";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 import Box from "@mui/material/Box";
 import { Typography, autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
-
 import Divider, { dividerClasses } from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import MuiGrid from "@mui/material/Grid";
-
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-
 import IconButton from "@mui/material/IconButton";
-import img_1 from "../../assets/guardian/guardian.jpg";
-import { GuardianMenuItem } from "../../components/GuardianMenuItem";
+import img_1 from "../assets/guardian/guardian.jpg";
+import { GuardianMenuItem } from "../components/GuardianMenuItem";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import "../../styles/Guardian/GuardianProfilePage.css";
+import "../styles/Guardian/GuardianProfilePage.css";
 import { grey, red } from "@mui/material/colors";
-import { ManagerMenuItem } from "../../components/ManagerMenuItem";
+import { ManagerMenuItem } from "../components/ManagerMenuItem";
 
 const ManagerGuardianProfile = () => {
   const StyledBadge = styled(Badge)(({ theme }) => ({}));
@@ -144,8 +141,6 @@ const ManagerGuardianProfile = () => {
                     {/* <Typography>Full Name:</Typography>
                     <Typography>{personalDetails.fullName}</Typography> */}
                   </Box>
-                  
-
                   <TextField
                     disabled
                     label="Full Name"
