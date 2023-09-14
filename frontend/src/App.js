@@ -38,6 +38,7 @@ import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
+import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
