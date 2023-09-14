@@ -46,6 +46,8 @@ public class BedController{
     
     }
 
+    
+
     @PostMapping("/request1")
     public List<Caregiver1> elderRequest1(@RequestBody RequestDTO requestDTO){
         return requestService.validateRequest1(requestDTO);
