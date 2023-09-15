@@ -44,6 +44,7 @@ import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
+import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
+          <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
           
 
         </Routes>
