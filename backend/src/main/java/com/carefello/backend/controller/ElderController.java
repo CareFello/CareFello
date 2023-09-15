@@ -21,11 +21,10 @@ public class ElderController {
     @PostMapping("/addElder")
     public ResponseEntity<Elder> addElderToGuardian(
             @PathVariable int guardianId,
-            @ModelAttribute ElderDTO elderDTO // Use @ModelAttribute to handle file upload
+            @RequestBody ElderDTO elderDTO // Use @ModelAttribute to handle file upload
     ) {
         Elder elder = elderService.addElderToGuardian(guardianId, elderDTO);
-        return ResponseEntity.created(URI.create("api/v1/guardian/" + guardianId + "/elders/" + elder.getId()))
-                .body(elder);
+        return new ResponseEntity<>(elder, HttpStatus.CREATED);
     }
 
     @GetMapping("/viewElderByGuardianId")
@@ -34,13 +33,6 @@ public class ElderController {
         return new ResponseEntity<>(elders, HttpStatus.OK);
     }
 
-    @GetMapping("/viewElderImagesByGuardianId")
-    public ResponseEntity<List<byte[]>> getElderImagesByGuardianId(@PathVariable int guardianId) {
-        List<byte[]> elderImages = elderService.getElderImagesByGuardianId(guardianId);
-        if (elderImages.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(elderImages);
-    }
+
 }
 

@@ -53,7 +53,9 @@ import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
+
 import ViewDonationRequests from "./pages/ViewDonationRequests";
+
 
 
 function App() {
@@ -91,7 +93,7 @@ function App() {
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
-          <Route path="/ViewGuardianProfile"element={<ViewGuardianProfile />}/>
+          <Route path="/ViewGuardianProfile" element={<ViewGuardianProfile />} />
           <Route path="/AddDoctor" element={<AddDoctor />} />
           <Route path="/AddCaregiver" element={<AddCaregiver />} />
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
@@ -103,7 +105,7 @@ function App() {
           <Route path="/MealPlan/:id" element={<Meal />} />
           <Route path="/GuardianRequest" element={<GuardianRequest />} />
           <Route path="/GuardianList" element={<GuardianList />} />
-          <Route path="/guardians/:guardianId" element={<GuardianDetailsPage />}/>
+          <Route path="/guardians/:guardianId" element={<GuardianDetailsPage />} />
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
 
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
@@ -118,10 +120,11 @@ function App() {
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
-          <Route
-            path="/GuardianRoomPackages/:guardianId"
-            element={<GuardianRoomPackages />}
-          />
+          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
+         
+
+
+
           <Route
             path="/GuardianSendRequest/:guardianId"
             element={<GuardianSendRequest />}
@@ -142,13 +145,16 @@ function App() {
           
 
 
-          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />}/>
+
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
+
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
           
+
 
         </Routes>
       </Router>

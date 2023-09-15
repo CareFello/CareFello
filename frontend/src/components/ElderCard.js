@@ -1,40 +1,30 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, CardContent, Typography, CardMedia, Grid } from '@mui/material';
 
 function ElderCard({ guardianId }) {
-
   const [elderList, setElderList] = useState([]);
 
+  const url = "http://localhost:8080/api/v1/guardian/${guardianId}/elders/viewElderByGuardianId";
 
-  const url = 'http://localhost:8080/api/v1/guardian/' + guardianId + '/elders/viewElderByGuardianId'
-  const url2 = 'http://localhost:8080/api/v1/guardian/' + guardianId + '/elders/viewElderImagesByGuardianId'
   useEffect(() => {
-    // Make an HTTP GET request to your backend
-    axios.get(url)
+    // Make an HTTP GET request to fetch elders' details and images
+    axios.get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/viewElderByGuardianId`)
       .then((response) => {
-        console.log(response.data); // Add this line to log the data received
+        console.log(response.data);
         setElderList(response.data);
       })
       .catch((error) => {
         console.error('Error fetching elders:', error);
       });
-    axios.get(url2)
-      .then(response => {
-        const elderImages = response.data;
-        // Handle elder images as needed
-      })
-      .catch(error => {
-        // Handle error
-      });
   }, [guardianId]);
+
   return (
     <div>
       <Grid container spacing={2}>
-        {elderList.map(elder => (
-
+        {elderList.map((elder) => (
           <Grid item key={elder.id} xs={12} sm={4} md={1} lg={4}>
+
             <Card
               style={{
                 minWidth: 165,
@@ -45,22 +35,26 @@ function ElderCard({ guardianId }) {
             >
               <CardMedia
                 component="img"
+                height="140"
                 alt={elder.name}
-                height="160"
-                image={"data:image/jpg;base64," + elder.imageData}
+                image={elder.imagePath} // Use the image path directly from the elder object
               />
               <CardContent style={{ flex: 1 }}>
                 <Typography variant="h6">{elder.name}</Typography>
                 <Typography variant="body2">{elder.relationship}</Typography>
+                <Typography variant="body2">{elder.image}</Typography>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
     </div>
-  )
+  );
 }
 
 export default ElderCard;
+
+
+
 
 
