@@ -127,6 +127,7 @@ function Login() {
         if (res.data.message == "Login Success") {
 
           const guardianId = res.data.id;
+          localStorage.setItem('myData', res.data.id);
           navigate(`/GuardianDashboard/${guardianId}`);
         }
         else if (res.data.message == "Email not exits") {
