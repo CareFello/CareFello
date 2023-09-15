@@ -41,17 +41,8 @@ public class ElderImpl implements ElderService {
         elder.setNic(elderDTO.getNic());
         elder.setGuardian(guardian);
         elder.setRelationship(elderDTO.getRelationship());
+        elder.setGender(elderDTO.getGender());
 
-        // Handle the image file upload
-        MultipartFile image = elderDTO.getImage();
-        if (elderDTO.getImage() != null) {
-            try {
-                byte[] imageData = elderDTO.getImage().getBytes();
-                elder.setImage(imageData);
-            } catch (IOException e) {
-                throw new RuntimeException("Error uploading image: " + e.getMessage());
-            }
-        }
 
         // Save the elder and update the guardian's elders list
         guardian.getElders().add(elder);
@@ -78,25 +69,13 @@ public class ElderImpl implements ElderService {
             elderDTO.setNic(elder.getNic());
             elderDTO.setDob(elder.getDob());
             elderDTO.setRelationship(elder.getRelationship());
+            elderDTO.setGender(elder.getGender());
             elderDTOs.add(elderDTO);
         }
 
         return elderDTOs;
     }
 
-    @Override
-    public List<byte[]> getElderImagesByGuardianId(int guardianId) {
-        List<Elder> elders = elderRepo.findByGuardianId(guardianId);
-        List<byte[]> elderImages = new ArrayList<>();
-
-        for (Elder elder : elders) {
-            if (elder.getImage() != null) {
-                elderImages.add(elder.getImage());
-            }
-        }
-
-        return elderImages;
-    }
 
 
 }
