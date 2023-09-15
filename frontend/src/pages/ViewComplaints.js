@@ -17,6 +17,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import ComplaintModal from '../components/ComplaintModel';
 
 
 const complaints = [
@@ -68,6 +69,22 @@ export default function ViewComplaints() {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+
+    const [selectedComplaint, setSelectedComplaint] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleReplyClick = (complaint) => {
+        if (complaint) {
+          setSelectedComplaint(complaint);
+          setIsModalOpen(true);
+        }
+      };
+
+    const handleCloseModal = () => {
+        setSelectedComplaint(null);
+        setIsModalOpen(false);
+    };
+
 
 
 
@@ -143,29 +160,26 @@ export default function ViewComplaints() {
                             </div>
                     </div>
                     <div className="bottom">
-                            {/* <div className="vertical-part">Complaint 01</div>
-                            <div className="vertical-part">Complaint 02</div>
-                            <div className="vertical-part">Complaint 03</div>
-                            <div className="vertical-part">Complaint 04</div>
-                            <div className="vertical-part">Complaint 05</div>
-                            <div className="vertical-part">Complaint 06</div> */}
-
                             {complaints.map((complaint, index) => (
                             <div className="complaint-row" key={index}>
                                 <img src={complaint.dp} alt={`DP for ${complaint.Name}`} className="complaint-dp" />
                                 <div className="complaint-text">{complaint.Complaint}</div>
-                                <div className="Rlybutton">Reply</div>
+                                <div className="Rlybutton" onClick={() => handleReplyClick(complaint)}>
+                                    Reply
+                                </div>
                                 <div className="drop-down">
                                     <FormControl fullWidth>
                                         <Select
+                                        style={{fontSize: 'small'}}
+                                        inputProps={{ style: { border: 'none' } }}
                                         labelId="select-label"
                                         id="select"
                                         value={selectedOption}
                                         onChange={handleChange}
                                         >
-                                        <MenuItem value="opened">Opened</MenuItem>
-                                        <MenuItem value="closed">Closed</MenuItem>
-                                        <MenuItem value="in-progress">In Progress</MenuItem>
+                                        <MenuItem style={{fontSize: 'small'}} value="opened" className="dropdown-menu-item">Opened</MenuItem>
+                                        <MenuItem style={{fontSize: 'small'}} value="closed" className="dropdown-menu-item">Closed</MenuItem>
+                                        <MenuItem style={{fontSize: 'small'}} value="in-progress" className="dropdown-menu-item">In Progress</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </div>
@@ -174,6 +188,11 @@ export default function ViewComplaints() {
                     </div>
                 </div>
             </Box>
+            <ComplaintModal
+            open={isModalOpen}
+            handleClose={handleCloseModal}
+            complaint={selectedComplaint}
+        />
         </div>
     )
 }

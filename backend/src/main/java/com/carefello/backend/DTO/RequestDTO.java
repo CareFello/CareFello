@@ -25,4 +25,7 @@ public class RequestDTO {
     private int assigned;
     private int caregiverId;
     private int age;
+    private String name;
+    private String mealType;  
+    private char eldergender; 
 }

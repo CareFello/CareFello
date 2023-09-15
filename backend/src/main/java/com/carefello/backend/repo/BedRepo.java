@@ -35,4 +35,21 @@ public interface BedRepo extends JpaRepository<Bed,Integer>{
 
     @Query("select b from Bed b where b.bed_id = :bed_id")
     List<Bed> findAllBeds(@Param("bed_id") int bed_id);
+
+    // @Query("SELECT b\n" + //
+    //         "FROM Bed b\n" + //
+    //         "WHERE\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 1 and b.assEndDate < :assStartDate)\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.assStartDate > :assEndDate)\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 0 and b.occupied = 1 and b.occuEndDate < :assStartDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 0 and b.assEndDate < :assStartDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 0 and b.assStartDate > :assEndDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.free = 1);\n" + //
+    //         "")
+    // List<Bed> findNotOccupiedBedsss(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate);
 }
