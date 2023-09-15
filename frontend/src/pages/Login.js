@@ -52,7 +52,6 @@ function Login() {
       alert(err);
     }
 
-
   };
 
   const closeSecondModal = () => {
@@ -112,13 +111,11 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
-
-
   async function login(event) {
     event.preventDefault();
     try {
 
-      await axios.post("http://localhost:8085/api/v1/guardian/login", {
+      await axios.post("http://localhost:8080/api/v1/guardian/login", {
 
         email: email,
         password: password,
@@ -152,7 +149,6 @@ function Login() {
         console.error(fail); // Error!
       });
     }
-
 
     catch (err) {
       alert(err);
@@ -315,3 +311,4 @@ function Login() {
 };
 
 export default Login;
+
