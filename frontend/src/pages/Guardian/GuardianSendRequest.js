@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Checkbox from '@mui/material/Checkbox';
+import {Box, Checkbox, Container} from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
@@ -36,14 +36,18 @@ const GuardianSendRequest = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex' }}>
+      <div>
         <Header />
+        <Box height={100} />
+        <Box sx={{ display: "flex" }}>
         <Sidebar menuItems={GuardianMenuItem} />
-        <div style={{ marginTop: '100px' }}>
+        <main>
           <h5>Send Request for Accommodation</h5>
-          <CardContent>
-            <div className='cardContent'>
-              <div className='field' style={{ gap: '20px' }}>
+
+            <div className='form-body'>
+
+              <div className='field'>
+                
                 <div className='subfield'>
                   <label htmlFor="yourElder">Your Elder's Name</label>
                   <Select
@@ -116,6 +120,7 @@ const GuardianSendRequest = () => {
                   />
                 </div>
               </div>
+
               <div className='field'>
                 <div className='subfield'>
                   <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
@@ -143,6 +148,7 @@ const GuardianSendRequest = () => {
                   </Select>
                 </div>
               </div>
+
               <div className='field'>
                 <div className='subfield'>
                   <FormControl>
@@ -194,6 +200,7 @@ const GuardianSendRequest = () => {
                   />
                 </div>
               </div>
+
               <div className='field'>
                 <div className='subfield'>
                   <label htmlFor="gender">Select Caregiver's Type</label>
@@ -218,9 +225,11 @@ const GuardianSendRequest = () => {
                 </div>
               </div>
             </div>
-          </CardContent>
+        </main>
 
-        </div>
+        </Box>
+
+
       </div>
     </div>
   );
