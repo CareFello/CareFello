@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import {Box, Checkbox, Container} from '@mui/material';
+import { Box, Checkbox, Container, Button } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
@@ -34,38 +34,59 @@ const GuardianSendRequest = () => {
 
   const isMealItemSelected = (mealItem) => selectedMealItems.indexOf(mealItem) !== -1;
 
+  // Calculate the duration between two dates
+  function calculateDuration(enrollDate, endDate) {
+    if (!enrollDate || !endDate) {
+      return '';
+    }
+
+    const start = new Date(enrollDate);
+    const end = new Date(endDate);
+
+    // Calculate the difference in milliseconds
+    const durationMs = end - start;
+
+    // Calculate the number of days
+    const days = Math.floor(durationMs / (1000 * 60 * 60 * 24));
+
+    return `${days} days`;
+  }
+
+
   return (
     <div>
-      <div>
+      <div className='page-body'>
         <Header />
         <Box height={100} />
         <Box sx={{ display: "flex" }}>
-        <Sidebar menuItems={GuardianMenuItem} />
-        <main>
-          <h5>Send Request for Accommodation</h5>
-
+          <Sidebar menuItems={GuardianMenuItem} />
+          <main className="main-content">
             <div className='form-body'>
+              <h5>Send Request for Accommodation</h5>
 
-              <div className='field'>
-                
-                <div className='subfield'>
-                  <label htmlFor="yourElder">Your Elder's Name</label>
-                  <Select
-                    id="yourElder"
-                    value={formData.yourElder || ''}
-                    onChange={(e) => setFormData({ ...formData, yourElder: e.target.value })}
-                  >
-                    <MenuItem value="Somasiri">Somasiri</MenuItem>
-                    <MenuItem value="Keerthi">Keerthi</MenuItem>
-                    <MenuItem value="Senarath">Senarath</MenuItem>
-                  </Select>
-                </div>
+              <div className="form-container">
+                <label htmlFor="yourElder" className="your-elder-label">
+                  Your Elder's Name
+                </label>
+                <Select
+                  id="yourElder"
+                  className='yourElder'
+                  value={formData.yourElder || ''}
+                  onChange={(e) => setFormData({ ...formData, yourElder: e.target.value })}
+                >
+                  <MenuItem value="Somasiri">Somasiri</MenuItem>
+                  <MenuItem value="Keerthi">Keerthi</MenuItem>
+                  <MenuItem value="Senarath">Senarath</MenuItem>
+                </Select>
 
-                <div className='subfield'>
-                  <label htmlFor="elderAge">Age</label>
+                <div className="age-gender-container">
+                  <label htmlFor="elderAge" className="elder-age-label">
+                    Age
+                  </label>
                   <input
                     type="number"
                     id="elderAge"
+                    className="elderAge"
                     value={formData.elderAge || ''}
                     onChange={(e) => {
                       const inputAge = parseInt(e.target.value, 10);
@@ -74,87 +95,102 @@ const GuardianSendRequest = () => {
                       }
                     }}
                   />
-                </div>
 
-                <div className='subfield'>
-                  <label htmlFor="elderGender">Gender</label>
+                  <label htmlFor="elderGender" className="elder-gender-label">
+                    Gender
+                  </label>
                   <Select
                     id="elderGender"
+                    className="elderGender"
                     value={formData.elderGender || ''}
                     onChange={(e) => setFormData({ ...formData, elderGender: e.target.value })}
                   >
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
                   </Select>
-                </div>
-              </div>
 
-              <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="enrollDate">Enroll Date</label>
-                  <input
-                    type="date"
-                    id="enrollDate"
-                    placeholder="Enroll Date"
-                    value={formData.enrollDate || ''}
-                    onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })} />
-                </div>
-                <div className='subfield'>
-                  <label htmlFor="endDate">Check-Out Date</label>
-                  <input
-                    type="date"
-                    id="endDate"
-                    placeholder="End Date"
-                    value={formData.endDate || ''}
-                    onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                  />
                 </div>
 
-                <div className='subfield'>
-                  <label htmlFor="duration">Duration</label>
-                  <input
-                    type="text"
-                    id="duration"
-                    value={formData.duration || ''}
-                    onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                  />
+                {/* Enroll Date, Check-Out Date, and Duration */}
+                <div className="date-duration-container">
+                  <div className="date-inputs">
+                    <label htmlFor="enrollDate" className="enroll-date-label">
+                      Enroll Date
+                    </label>
+                    <input
+                      type="date"
+                      id="enrollDate"
+                      className="enrollDate"
+                      placeholder="Enroll Date"
+                      value={formData.enrollDate || ''}
+                      onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })}
+                    />
+                  </div>
+                  <div className="date-inputs">
+                    <label htmlFor="endDate" className="end-date-label">
+                      Check-Out Date
+                    </label>
+                    <input
+                      type="date"
+                      id="endDate"
+                      className="endDate"
+                      placeholder="End Date"
+                      value={formData.endDate || ''}
+                      onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+                    />
+                  </div>
+                  <div className="duration-input">
+                    <label htmlFor="duration" className="duration-label">
+                      Duration
+                    </label>
+                    <input
+                      type="text"
+                      id="duration"
+                      className="duration"
+                      value={calculateDuration(formData.enrollDate, formData.endDate)}
+                      readOnly
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
-                  <Select
-                    id="roomPackage"
-                    value={formData.roomPackage || ''}
-                    onChange={(e) => setFormData({ ...formData, roomPackage: e.target.value })}
-                  >
-                    <MenuItem value="Basic">Basic</MenuItem>
-                    <MenuItem value="Classic">Classic</MenuItem>
-                    <MenuItem value="Luxery">Luxery</MenuItem>
-                  </Select>
-                </div>
 
-                <div className='subfield'>
-                  <label htmlFor="mealPlan">Meal Plan</label>
-                  <Select
-                    id="mealPlan"
-                    value={formData.mealPlan || ''}
-                    onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
-                  >
-                    <MenuItem value="Basic">Meal plan 01</MenuItem>
-                    <MenuItem value="Classic">Meal plan 02</MenuItem>
-                    <MenuItem value="Luxery">Meal plan 03</MenuItem>
-                  </Select>
-                </div>
-              </div>
+                <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
+                <Select
+                  id="roomPackage"
+                  className="roomPackage"
+                  value={formData.roomPackage || ''}
+                  onChange={(e) => setFormData({ ...formData, roomPackage: e.target.value })}
+                >
+                  <MenuItem value="Basic">Basic</MenuItem>
+                  <MenuItem value="Classic">Classic</MenuItem>
+                  <MenuItem value="Luxery">Luxery</MenuItem>
+                </Select>
 
-              <div className='field'>
-                <div className='subfield'>
-                  <FormControl>
-                    <label>Remove meal items with allergies on your elder</label>
+                {/* Meal Plan and Allergy Items */}
+                <div className="meal-plan-allergy-container">
+                  <div className="meal-plan-input">
+                    <label htmlFor="mealPlan" className="meal-plan-label">
+                      Meal Plan
+                    </label>
+                    <Select
+                      id="mealPlan"
+                      className="mealPlan"
+                      value={formData.mealPlan || ''}
+                      onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
+                    >
+                      <MenuItem value="Basic">Meal plan 01</MenuItem>
+                      <MenuItem value="Classic">Meal plan 02</MenuItem>
+                      <MenuItem value="Luxery">Meal plan 03</MenuItem>
+                    </Select>
+                  </div>
+
+                  <div className="allergy-items-input">
+                    <label htmlFor="mealItemsDropdown" className="allergy-items-label">
+                      Remove meal items with allergies on your elder
+                    </label>
                     <Select
                       id="mealItemsDropdown"
+                      className="mealItemsDropdown"
                       multiple
                       value={selectedMealItems}
                       onChange={(e) => setSelectedMealItems(e.target.value)}
@@ -187,45 +223,44 @@ const GuardianSendRequest = () => {
                         String Hoppers
                       </MenuItem>
                     </Select>
-                  </FormControl>
+                  </div>
                 </div>
 
-                <div className='subfield'>
-                  <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
-                  <input
-                    type="text"
-                    id="otherMealItems"
-                    value={formData.otherMealItems || ''}
-                    onChange={(e) => setFormData({ ...formData, otherMealItems: e.target.value })}
-                  />
-                </div>
-              </div>
+                <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
+                <input
+                  type="text"
+                  id="otherMealItems"
+                  className="otherMealItems"
+                  value={formData.otherMealItems || ''}
+                  onChange={(e) => setFormData({ ...formData, otherMealItems: e.target.value })}
+                />
 
-              <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="gender">Select Caregiver's Type</label>
-                  <Select
-                    id="gender"
-                    value={formData.gender || ''}
-                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                  >
-                    <MenuItem value="female">Female</MenuItem>
-                    <MenuItem value="male">Male</MenuItem>
-                  </Select>
-                </div>
-                <div className='subfield'>
-                  <label htmlFor="medicationDetails">Current Medication Details of your elder</label>
-                  <textarea
-                    id="medicationDetails"
-                    rows="4"
+                <label htmlFor="Caregivergender">Select Caregiver's Type</label>
+                <Select
+                  id="Caregivergender"
+                  className="Caregivergender"
+                  value={formData.gender || ''}
+                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                >
+                  <MenuItem value="female">Female</MenuItem>
+                  <MenuItem value="male">Male</MenuItem>
+                </Select>
 
-                    value={formData.medicationDetails || ''}
-                    onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
-                  />
-                </div>
+                <label htmlFor="medicationDetails">Current Medication Details of your elder</label>
+                <textarea
+                  id="medicationDetails"
+                  className="medicationDetails"
+                  rows="4"
+
+                  value={formData.medicationDetails || ''}
+                  onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
+                />
+
+                <Button className="send-btn" variant="contained">Send</Button>
+
               </div>
             </div>
-        </main>
+          </main>
 
         </Box>
 
