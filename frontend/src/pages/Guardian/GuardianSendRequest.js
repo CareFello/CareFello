@@ -14,6 +14,7 @@ import Header from '../../components/Header';
 import Button from '@mui/material/Button';
 import axios from "axios";
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
+import { useNavigate } from 'react-router-dom';
 
 const inputStyle = {
   width: '100%',
@@ -51,6 +52,7 @@ const GuardianSendRequest = () => {
   const [gender, setGender] = useState('');
   const [str, setStr] = useState('bad');
   const [ids, setIds] = useState([]);
+  const navigate = useNavigate();
 
   const handleMealItemToggle = (mealItem) => () => {
     const currentIndex = selectedMealItems.indexOf(mealItem);
@@ -99,7 +101,8 @@ const GuardianSendRequest = () => {
           if (res.data === "bad"){
             
           }else{
-            setStr("good");
+            // setStr("good");
+            navigate('/ManagerDashboard');
           }
           
         
@@ -108,11 +111,11 @@ const GuardianSendRequest = () => {
         });
         
       });
-      // if (str === 'good') {
-      //     console.log('good');
-      // } else {
-      //     console.log('bad');
-      // }
+      if (str === 'good') {
+          console.log('good');
+      } else {
+          alert("bad");
+      }
       // window.location.reload();
       }else{
         alert("bad");
