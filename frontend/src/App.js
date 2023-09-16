@@ -54,11 +54,12 @@ import GuardianDetailsPage from "./components/GuardianDetailPage";
 
 
 
-import Caregiverprofile from './pages/caregiverprofile';
+
 import Elderslist from'./pages/Elderslist'
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
 // import Caregiverprofile from './pages/caregiverprofile';
-import DoctorDashboard from './pages/DoctorDashboard';
+
 
 function App() {
   return (
@@ -115,6 +116,13 @@ function App() {
           <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
           <Route path="/ElderProfile" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
+
+          <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
+         
+          <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
+
+
+
           <Route
             path="/GuardianRoomPackages"
             element={<GuardianRoomPackages />}
@@ -125,7 +133,14 @@ function App() {
           />
           <Route path="/GuardianAddElder" element={<GuardianAddElder />} />
 
-          <Route path="/GuardianPayments" element={<GuardianPayments />} />
+          <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
+          
+
+
+          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
+          
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
 
 
