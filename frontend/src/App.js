@@ -8,7 +8,6 @@ import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
 
-
 import Email from "./pages/Email";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -86,7 +85,6 @@ function App() {
 
          
           <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
-          
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/Registration" element={<Registration />} />
@@ -120,7 +118,6 @@ function App() {
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
          
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
-
 
 
           <Route

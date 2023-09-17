@@ -51,7 +51,7 @@ const DoctorUpdateAvailability = () => {
     setSelectedDateTime(dateTime);
   };
 
-  
+
   const handleAddTimeSlot = () => {
     if (selectedDateTime) {
       const formattedDateTime = dayjs(selectedDateTime).format('MM/DD/YYYY, h:mm A');
@@ -72,7 +72,9 @@ const DoctorUpdateAvailability = () => {
     <div className='dashboard'>
       <Header />
       <Box height={80} />
+
       <Box sx={{ display: 'flex' }}>
+        
         <Sidebar menuItems={DoctorMenuItem} />
 
         <Box component="main" sx={{ flexGrow: 1, justifyContent: "center", alignItems: "center", margin: 3 }}>
@@ -103,7 +105,6 @@ const DoctorUpdateAvailability = () => {
                     </Box>
                   </Card>
                 </Button>
-
                 <Card sx={{ display: 'flex', minWidth: '30%', height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardContent sx={{ flex: '1 0 auto', }}>
@@ -118,7 +119,6 @@ const DoctorUpdateAvailability = () => {
 
                     </Box>
                   </Box>
-
                 </Card>
                 <Card sx={{ display: 'flex', minWidth: '30%', height: 140 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -134,9 +134,7 @@ const DoctorUpdateAvailability = () => {
 
                     </Box>
                   </Box>
-
                 </Card>
-
               </Stack>
             </Grid>
           </Grid>
