@@ -58,6 +58,13 @@ import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 
 
+
+
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+// import Caregiverprofile from './pages/caregiverprofile';
+
+
 function App() {
   return (
     <div className="App">
@@ -84,7 +91,8 @@ function App() {
 
 
 
-          
+         
+          <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
 
 
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
@@ -122,7 +130,7 @@ function App() {
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
          
-
+          <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
 
 
           <Route
@@ -144,6 +152,15 @@ function App() {
 
           
 
+          <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
+          
+
+
+          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
+          
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
+          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
 
 
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
