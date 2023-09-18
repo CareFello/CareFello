@@ -1,5 +1,7 @@
 package com.carefello.backend.DTO;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 
 public class ElderDTO {
@@ -8,6 +10,10 @@ public class ElderDTO {
     private String name;
     private String nic;
     private LocalDate dob;
+    private String relationship;
+    private String gender;
+
+
 
     public int getId() {
         return id;
@@ -39,5 +45,21 @@ public class ElderDTO {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

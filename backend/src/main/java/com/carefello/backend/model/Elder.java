@@ -15,6 +15,9 @@ public class Elder {
     private String name;
     private String nic;
     private LocalDate dob;
+    private String relationship;
+    private String gender;
+
 
     @ManyToOne
     @JoinColumn(name = "guardian_id")
@@ -60,14 +63,32 @@ public class Elder {
         this.guardian = guardian;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
     public Elder() {
     }
 
-    public Elder(int id, String name, String nic, LocalDate dob, Guardian guardian) {
+    public Elder(int id, String name, String nic, LocalDate dob, String relationship, String gender, Guardian guardian) {
         this.id = id;
         this.name = name;
         this.nic = nic;
         this.dob = dob;
+        this.relationship = relationship;
+        this.gender = gender;
         this.guardian = guardian;
     }
 }

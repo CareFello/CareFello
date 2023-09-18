@@ -14,22 +14,42 @@ import org.springframework.data.repository.query.Param;
 
 public interface BedRepo extends JpaRepository<Bed,Integer>{
     @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.assEndDate < :assStartDate")
-    Bed findNotOccupiedBeds(@Param("assStartDate") Date assStartDate);
+    List<Bed> findNotOccupiedBeds(@Param("assStartDate") Date assStartDate);
 
     @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.assStartDate > :assEndDate")
-    Bed findNotOccupiedBeds1(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate);
+    List<Bed> findNotOccupiedBeds1(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate);
 
     @Query("SELECT b FROM Bed b WHERE b.assigned = 0 and b.occupied = 1 and b.occuEndDate < :assStartDate")
-    Bed findNotOccupiedBeds2(@Param("assStartDate") Date assStartDate);
+    List<Bed> findNotOccupiedBeds2(@Param("assStartDate") Date assStartDate);
 
     @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assEndDate < :assStartDate")
-    Bed findNotOccupiedBeds4(@Param("assStartDate") Date assStartDate);
+    List<Bed> findNotOccupiedBeds4(@Param("assStartDate") Date assStartDate);
 
     @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assStartDate > :assEndDate")
-    Bed findNotOccupiedBeds5(@Param("assEndDate") Date assEndDate);
+    List<Bed> findNotOccupiedBeds5(@Param("assEndDate") Date assEndDate);
 
     @Query("SELECT b FROM Bed b WHERE b.free = 1")
-    Bed findNotOccupiedBeds3();
+    List<Bed> findNotOccupiedBeds3();
 
     Bed findByAssElderId(int assElderId);
+
+    @Query("select b from Bed b where b.bed_id = :bed_id")
+    List<Bed> findAllBeds(@Param("bed_id") int bed_id);
+
+    // @Query("SELECT b\n" + //
+    //         "FROM Bed b\n" + //
+    //         "WHERE\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 1 and b.assEndDate < :assStartDate)\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.assStartDate > :assEndDate)\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 0 and b.occupied = 1 and b.occuEndDate < :assStartDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 0 and b.assEndDate < :assStartDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.assigned = 1 and b.occupied = 0 and b.assStartDate > :assEndDate);\n" + //
+    //         "  OR\n" + //
+    //         "  (b.free = 1);\n" + //
+    //         "")
+    // List<Bed> findNotOccupiedBedsss(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate);
 }

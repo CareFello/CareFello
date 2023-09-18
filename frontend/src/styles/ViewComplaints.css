@@ -1,0 +1,185 @@
+.app {
+    display: grid;
+    grid-template-rows: 150px 1px 1fr; /* Dividing into two horizontal parts */
+    gap: 10px;
+  }
+  
+  .top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Dividing the top part into four vertical parts */
+    grid-template-columns: repeat(4, 310px);
+  }
+  
+  .vertical-part {
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .line {
+    margin-right: 1000px;
+    padding-bottom: 300px;
+  } 
+  
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: 13px;
+  }
+  
+  .bottom-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid #ccc; */
+    padding: 10px;
+    margin: 10px;
+    margin-top: 30px;
+  }
+
+  .bottom-part:nth-child(2) {
+    height: 100px; /* Height of the second horizontal part */
+  }
+  
+  .bottom-part:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .bottom-part:nth-child(3) .vertical-part:nth-child(2) {
+    width: 200px; /* Width of the second vertical part in the third horizontal part */
+  }
+
+  .boxname-1{
+    font-size: xx-large;
+  }
+
+  .boxname-2{
+    font-size: x-large;
+  }
+
+  .vertical-line_1 {
+    width: 3px; /* Width of the vertical line */
+    background-color: orange; /* Color of the vertical line */
+    height: 75%; /* Height of the vertical line (matches the height of the third horizontal part) */
+    margin-right: 10px; /* Adjust the margin to control spacing */
+  }
+
+  .vertical-line_2 {
+    width: 3px; /* Width of the vertical line */
+    background-color: green; /* Color of the vertical line */
+    height: 75%; /* Height of the vertical line (matches the height of the third horizontal part) */
+    margin-right: 10px; /* Adjust the margin to control spacing */
+  }
+
+  .vertical-line_3 {
+    width: 3px; /* Width of the vertical line */
+    background-color: blue; /* Color of the vertical line */
+    height: 75%; /* Height of the vertical line (matches the height of the third horizontal part) */
+    margin-right: 10px; /* Adjust the margin to control spacing */
+  }
+
+  .box-text{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .vertical-part_total {
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .circle {
+    width: 100px; /* Adjust the circle's size as needed */
+    height: 100px; /* Adjust the circle's size as needed */
+    border: 5px solid transparent; 
+    border-image: conic-gradient(#FF5733, #33FF57, #5733FF); /* Three colors like a pie chart */
+    border-image-slice: 1;
+    border-radius: 50% 50% 50%;
+    position: relative;
+    color: #333; /* Text color */
+    font-weight: bold;
+    font-size: 16px; /* Adjust the font size as needed */
+  }
+  
+  .circle-text {
+    margin-top: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .tab {
+    padding: 10px;
+    font-size:14px;
+    cursor: pointer;
+    transition: border-bottom 0.3s ease; /* Add a transition effect for the border */
+    position: relative; /* Position relative for pseudo-element */
+  }
+  
+  .tab.active {
+    font-weight: bold;
+  }
+
+  .tab.active::after {
+    content: ''; /* Create a pseudo-element */
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Adjust the position of the line */
+    transform: translateX(-50%); /* Center the line horizontally */
+    width: 50%; /* Adjust the line width (e.g., 50% for half the text width) */
+    height: 2px; /* Adjust the line height (thickness) */
+    background-color: #333; /* Line color */
+  }
+
+  .complaint-row{
+    display: flex;
+    flex-direction: row;
+}
+  
+  .complaint-text{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 60%;
+    display: flex;
+    align-content: flex-start;
+  }
+
+  .drop-down{
+    width: 10%;
+    margin-right: 50px;
+    margin-left: 30px;
+    border: none;
+  }
+
+  .complaint-dp{
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+  }
+
+  .Rlybutton{
+    width: 10%;
+    margin: 20px;
+    margin-left: 200px;
+    color: #5733FF;
+    border: #5733FF;
+    padding: 5px;
+  }
+
+  /* .dropdown-menu-item {
+    font-size: smaller;
+  } */

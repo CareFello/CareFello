@@ -10,6 +10,9 @@ import jakarta.persistence.*;
 public class Bed {
 
     @Id
+    @Column(name="id", length = 45)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Column(name="bed_id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bed_id;
@@ -33,16 +36,20 @@ public class Bed {
     private int assElderId;
     @Column(name="caregiverid", length = 45)
     private int caregiverId;
+    @Column(name="type", length = 255)
+    private String type;
+
     
 
     public Bed() {
 
     }
 
-    public Bed(int free, int assigned, int occupied, Date assStarDate,
+    public Bed(int bed_id, int free, int assigned, int occupied, Date assStarDate,
     Date assEndDate, Date occuStarDate, Date occuEnDate, int occuElderId,
-    int assElderId){
+    int assElderId, String type, int caregiverId){
 
+        this.bed_id = bed_id;
         this.free = free;
         this.assigned = assigned;
         this.occupied = occupied;
@@ -52,7 +59,8 @@ public class Bed {
         this.occuEndDate = occuEnDate;
         this.occuElderId = occuElderId;
         this.assElderId = assElderId;
-        
+        this.type = type;
+        this.caregiverId = caregiverId;
     }
     
 }

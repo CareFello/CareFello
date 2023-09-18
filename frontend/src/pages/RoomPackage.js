@@ -49,7 +49,7 @@ export default function RoomPackage() {
 
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
-        axios.get('http://localhost:8085/api/package/get')
+        axios.get('http://localhost:8080/api/package/get')
             .then((response) => setPack(response.data))
             .catch((error) => console.error(error));
     }, []);
@@ -72,16 +72,16 @@ export default function RoomPackage() {
 
         try {
 
-            await axios.put(`http://localhost:8085/api/package/update/${id1}`,{ 
+            await axios.put(`http://localhost:8080/api/package/update/${id1}`, {
                 conten: finalDes,
                 price: finalPri,
                 feature: fea
-        });
-            axios.get('http://localhost:8085/api/package/get')
-            .then((response) => setPack(response.data))
-            .catch((error) => console.error(error));
+            });
+            axios.get('http://localhost:8080/api/package/get')
+                .then((response) => setPack(response.data))
+                .catch((error) => console.error(error));
             window.location.reload();
-          } catch (error) {
+        } catch (error) {
             console.error(error);
             alert(error);
         }
@@ -145,7 +145,7 @@ export default function RoomPackage() {
                                             />
                                         </div>
                                     </div>
-                                    
+
 
                                     {feature1.map((tag, index) => (
                                         <div className="column" key={index}>
@@ -192,7 +192,7 @@ export default function RoomPackage() {
                                                 {pack1.name}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
-                                                {pack1.conten} {pack1.price}
+                                                {pack1.conten}<br /> LKR {pack1.price}
                                             </Typography><br />
                                             <ul>
                                                 {pack1.feature.map((tag, index) => (

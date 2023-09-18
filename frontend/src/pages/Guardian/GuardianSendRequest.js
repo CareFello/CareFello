@@ -1,113 +1,362 @@
-// GuardianSendRequest.js
-import React, { useState } from 'react';
-import { Box, duration } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { LinearProgress } from '@mui/material';
-import Stack from '@mui/material/Stack';
-
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button'; // Don't forget to import Button
-
-import StepOne from '../../components/StepOne';
-import StepTwo from '../../components/StepTwo';
-import { GuardianMenuItem } from '../../components/GuardianMenuItem';
-
-import Header from '../../components/Header';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from '@mui/material/TextField';
+import '../../styles/Guardian/GuardianSendRequest.css';
 import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
+import Button from '@mui/material/Button';
 import axios from "axios";
+import { GuardianMenuItem } from '../../components/GuardianMenuItem';
+import { useNavigate } from 'react-router-dom';
 
-function GuardianSendRequest() {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState({
-        // Initialize your form data here
-    });
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  marginBottom: '10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
 
-    const handleNextStep = async () => {
+};
 
-        try {
-            await axios.post("http://localhost:8085/api/request/check", formData).then((res) =>{
-                console.log(res.data);
+const smallInputStyle = {
+  ...inputStyle,
+  height: '38px',
+};
 
-                if (res.data.message == "true"){
-                    setCurrentStep(currentStep + 1);
-                }else{
-                    alert("Rooms not exist");
-                }
-            });
+const selectBoxStyle = {
+    ...smallInputStyle,
+    height: '30px', // Adjust the height as needed
+  };
+
+const cardStyle = {
+  padding: '0 400px',
+};
+
+const GuardianSendRequest = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({});
+  const [selectedMealItems, setSelectedMealItems] = useState([]);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [elderGender, setElderGender] = useState('');
+  const [assStartDate, setAssStartDate] = useState('');
+  const [assEndDate, setAssEndDate] = useState('');
+  const [type, setType] = useState('');
+  const [gender, setGender] = useState('');
+  const [str, setStr] = useState('bad');
+  const [ids, setIds] = useState([]);
+  const navigate = useNavigate();
+
+  const handleMealItemToggle = (mealItem) => () => {
+    const currentIndex = selectedMealItems.indexOf(mealItem);
+    const newSelected = [...selectedMealItems];
+
+    if (currentIndex === -1) {
+      newSelected.push(mealItem);
+    } else {
+      newSelected.splice(currentIndex, 1);
+    }
+
+    setSelectedMealItems(newSelected);
+  };
+
+  
+
+  const isMealItemSelected = (mealItem) => selectedMealItems.indexOf(mealItem) !== -1;
+
+  async function Send(event) {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8085/api/beds/request", {
+        name: name,
+        age: age,
+        elderGender: elderGender,
+        gender: gender,
+        assStartDate: assStartDate,
+        assEndDate: assEndDate,
+        type: type,
+      });
+      console.log(response.data)
+  
+      if (response.data.length !== 0){
+        const bedIds = response.data.map((item) => item.bed_id);
+        bedIds.map((item) => {
+        axios.post(`http://localhost:8085/api/beds/request5/${item}`,{
+          name: name,
+          age: age,
+          elderGender: elderGender,
+          gender: gender,
+          assStartDate: assStartDate,
+          assEndDate: assEndDate,
+          type: type,
+        }).then((res) => {
+          console.log(res.data)
+          if (res.data === "bad"){
             
-            //console.log(formData);
-        } catch (err) {
-            alert(err);
-            //console.log(formData);
-        }
-    };
+          }else{
+            // setStr("good");
+            navigate('/ManagerDashboard');
+          }
+          
+        
+        }).catch((error) => {
+          console.error(error); // Log the error for debugging
+        });
+        
+      });
+      if (str === 'good') {
+          console.log('good');
+      } else {
+          alert("bad");
+      }
+      // window.location.reload();
+      }else{
+        alert("bad");
+      }
+      
 
-    const handlePrevStep = () => {
-        setCurrentStep(currentStep - 1);
-    };
+    } catch (err) {
+      alert(err);
+    }
 
-    const handleSubmit = () => {
-        console.log(formData);
-    };
+  }
 
-    const renderStepContent = () => {
-        switch (currentStep) {
-            case 1:
-                return <StepOne formData={formData} setFormData={setFormData} />;
-            case 2:
-                return <StepTwo formData={formData} setFormData={setFormData} />;
-            // Add more cases for other steps
-            default:
-                return null;
-        }
-    };
+  // useEffect(() => {
+  //   // This code will run whenever the 'str' state variable changes
+  //   if (str === 'good') {
+  //     console.log('good');
+  //   } else {
+  //     console.log('bad');
+  //   }
+  // }, [str]);
 
-    return (
-        <div>
-            <Header />
-            <Box height={80} />
-            <Box sx={{ display: 'flex' }}>
-                <Sidebar menuItems={GuardianMenuItem} />
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-                    <Grid container spacing={0} >
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6" gutterBottom>
-                                    Step {currentStep} of 3
-                                </Typography>
-                                <LinearProgress variant="determinate" value={(currentStep / 3) * 100} />
-                                {renderStepContent()}
-                                <Stack direction="row" spacing={2}>
-                                    {currentStep === 1 && (
-                                        <>
-                                            <Button onClick={handleNextStep}>Next</Button>
-                                            {/* Additional Next button */}
+  
+  
 
-                                        </>
-                                    )}
-                                    {currentStep === 2 && (
-                                        <>
-                                            <Button onClick={handlePrevStep}>Previous</Button>
-                                            <Button onClick={handleNextStep}>Next</Button>
-                                        </>
-                                    )}
-                                    {currentStep === 3 && (
-                                        <>
-                                            <Button onClick={handlePrevStep}>Previous</Button>
-                                            <Button onClick={handleSubmit}>Submit</Button>
-                                        </>
-                                    )}
-                                </Stack>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Box>
-            </Box>
+
+  return (
+    <div>
+      <form>
+      <div style={{ display: 'flex' }}>
+        <Header />
+        <Sidebar menuItems={GuardianMenuItem} />
+        <div style={{marginTop: '100px'}}>
+        <h5>Send Request for Accommodation</h5>
+            <CardContent style={{ width: '100%', margin: '0 auto', marginTop: '100px', marginBottom: '20px' }}>
+              <div className='cardContent'>
+                <div className='field' style={{gap: '20px'}}>
+                  <div className='subfield'>
+                    <label htmlFor="yourElder">Your Elder's Name</label>
+                    <Select
+                      id="yourElder"
+                      style={inputStyle}
+                      value={name}
+                      onChange={(event) => {
+                      setName(event.target.value);
+                      }}
+                    >
+                      <MenuItem value="Somasiri">Somasiri</MenuItem>
+                      <MenuItem value="Keerthi">Keerthi</MenuItem>
+                      <MenuItem value="Senarath">Senarath</MenuItem>
+                    </Select>
+                  </div>
+
+                  <div className='subfield'>
+                    <label htmlFor="elderAge">Age</label>
+                    <input
+                      type="number"
+                      id="elderAge"
+                      style={smallInputStyle}
+                      value={age}
+                      onChange={(event) => {
+                      setAge(event.target.value);
+                      }}
+                    />
+                  </div>
+                
+                <div className='subfield'>
+                  <label htmlFor="elderGender">Gender</label>
+                  <Select
+                    id="elderGender"
+                    style={smallInputStyle}
+                    value={elderGender}
+                      onChange={(event) => {
+                      setElderGender(event.target.value);
+                    }}
+                  >
+                    <MenuItem value="M">Male</MenuItem>
+                    <MenuItem value="F">Female</MenuItem>
+                  </Select>
+                </div>
+                </div>
+
+                <div className='field'>
+                <div className='subfield'>
+                  <label htmlFor="enrollDate">Enroll Date</label>
+                  <input
+                    type="date"
+                    id="enrollDate"
+                    placeholder="Enroll Date"
+                    style={smallInputStyle}
+                    value={assStartDate}
+                      onChange={(event) => {
+                      setAssStartDate(event.target.value);
+                      }}/>
+                </div>
+                <div className='subfield'>
+                  <label htmlFor="endDate">Check-Out Date</label>
+                  <input
+                    type="date"
+                    id="endDate"
+                    placeholder="End Date"
+                    style={smallInputStyle}
+                    value={assEndDate}
+                      onChange={(event) => {
+                      setAssEndDate(event.target.value);
+                      }}
+                  />
+                </div>
+
+                <div className='subfield'>
+                  <label htmlFor="duration">Duration</label>
+                  <input
+                    type="text"
+                    id="duration"
+                    style={inputStyle}
+                    value={formData.duration || ''}
+                    onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
+                  />
+                </div>
+                </div>
+                <div className='field'>
+                <div className='subfield'>
+                  <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
+                  <Select
+                    id="roomPackage"
+                    style={inputStyle}
+                    value={type}
+                      onChange={(event) => {
+                      setType(event.target.value);
+                    }}
+                  >
+                    <MenuItem value="basic">Basic</MenuItem>
+                    <MenuItem value="classic">Classic</MenuItem>
+                    <MenuItem value="luxury">Luxury</MenuItem>
+                  </Select>
+                </div>
+
+                <div className='subfield'>
+                  <label htmlFor="mealPlan">Meal Plan</label>
+                  <Select
+                    id="mealPlan"
+                    style={inputStyle}
+                    value={formData.mealPlan || ''}
+                    onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
+                  >
+                    <MenuItem value="Basic">Meal plan 01</MenuItem>
+                    <MenuItem value="Classic">Meal plan 02</MenuItem>
+                    <MenuItem value="Luxery">Meal plan 03</MenuItem>
+                  </Select>
+                </div>
+                </div>
+                <div className='field'>
+                <div className='subfield'>
+                  <FormControl>
+                    <label>Remove meal items with allergies on your elder</label>
+                    <Select
+                      id="mealItemsDropdown"
+                      multiple
+                      style={inputStyle}
+                      value={selectedMealItems}
+                      onChange={(e) => setSelectedMealItems(e.target.value)}
+                    >
+                      <MenuItem disabled value="">
+                        <em>Select meal items</em>
+                      </MenuItem>
+                      <MenuItem value="Dhal Curry">
+                        <Checkbox checked={isMealItemSelected("Dhal Curry")} />
+                        Dhal Curry
+                      </MenuItem>
+                      <MenuItem value="Chicken Curry">
+                        <Checkbox checked={isMealItemSelected("Chicken Curry")} />
+                        Chicken Curry
+                      </MenuItem>
+                      <MenuItem value="Polsambol">
+                        <Checkbox checked={isMealItemSelected("Polsambol")} />
+                        Polsambol
+                      </MenuItem>
+                      <MenuItem value="Boiled Egg">
+                        <Checkbox checked={isMealItemSelected("Boiled Egg")} />
+                        Boiled Egg
+                      </MenuItem>
+                      <MenuItem value="Bread">
+                        <Checkbox checked={isMealItemSelected("Bread")} />
+                        Bread
+                      </MenuItem>
+                      <MenuItem value="String Hoppers">
+                        <Checkbox checked={isMealItemSelected("String Hoppers")} />
+                        String Hoppers
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className='subfield'>
+                  <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
+                  <input
+                    type="text"
+                    id="otherMealItems"
+                    style={inputStyle}
+                    value={formData.otherMealItems || ''}
+                    onChange={(e) => setFormData({ ...formData, otherMealItems: e.target.value })}
+                  />
+                </div>
+                </div>
+                <div className='field'>
+                <div className='subfield'>
+                  <label htmlFor="gender">Select Caregiver's Type</label>
+                  <Select
+                    id="gender"
+                    style={inputStyle}
+                    value={gender}
+                      onChange={(event) => {
+                      setGender(event.target.value);
+                    }}
+                  >
+                    <MenuItem value="F">Female</MenuItem>
+                    <MenuItem value="M">Male</MenuItem>
+                  </Select>
+                </div>
+                <div className='subfield'>
+                  <label htmlFor="medicationDetails">Current Medication Details of your elder</label>
+                  <textarea
+                    id="medicationDetails"
+                    rows="4"
+                    style={inputStyle}
+                    value={formData.medicationDetails || ''}
+                    onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
+                  />
+
+<Button variant="contained" sx={{ m: 1, width: '30ch' }} onClick={Send}>
+                                                        Send
+                                                    </Button>
+                </div>
+                </div>
+              </div>
+            </CardContent>
+          
         </div>
-    )
-}
+      </div>
+      </form>
+    </div>
+  );
+};
 
 export default GuardianSendRequest;
-
