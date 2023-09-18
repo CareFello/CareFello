@@ -56,11 +56,9 @@ import ViewComplaints from "./pages/ViewComplaints";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
-
-
-
-
 import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
 // import Caregiverprofile from './pages/caregiverprofile';
 
@@ -146,12 +144,6 @@ function App() {
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
           
 
-
-
-
-
-          
-
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
           
 
@@ -170,7 +162,7 @@ function App() {
 
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
-          
+          <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
 
 
         </Routes>
