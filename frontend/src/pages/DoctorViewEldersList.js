@@ -14,13 +14,15 @@ const dataFromDatabase = [
   {
     id: 1,
     Name: 'P. Perera',
-    description: 'Description for Elder 1',
+    Age: '55',
+    Guardian: 'Kamal Perera',
     imageUrl: Img1,
   },
   {
     id: 2,
     Name: 'G.K Gunasekara',
-    description: 'Description for Elder 2',
+    Age: '76',
+    Guardian: 'Shehan Gunasekara', 
     imageUrl: Img2,
   },
   // Add more data items as needed
@@ -28,7 +30,7 @@ const dataFromDatabase = [
 
 const cardImageStyle = {
     width: '100%', // Set the desired width
-    height: '200px', // Set the desired height
+    height: '300px', // Set the desired height
     objectFit: 'cover', // Preserve aspect ratio and cover the entire space
   };
 
@@ -43,9 +45,9 @@ const DoctorViewEldersList = () => {
      
       <div className='dashboard__content'> 
       
-        <Grid container spacing={2}>
+        <Grid container spacing={5}>
           {dataFromDatabase.map((elder) => (
-            <Grid item xs={2} sm={2} md={2} key={elder.id}>
+            <Grid item xs={2.5} sm={2.5} md={2.5} key={elder.id}>
               <Link to={`/elder-details/${elder.id}`} style={{ textDecoration: 'none' }}>
                 <Card>
                 <img src={elder.imageUrl} alt={elder.title} style={cardImageStyle} />
@@ -54,7 +56,10 @@ const DoctorViewEldersList = () => {
                       {elder.Name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {elder.description}
+                     Age: {elder.Age}
+                    </Typography>
+                    <Typography variant="body2" color="primary.main">
+                     Guardian: {elder.Guardian}
                     </Typography>
                   </CardContent>
                 </Card>
