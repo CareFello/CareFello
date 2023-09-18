@@ -17,32 +17,42 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
+  max-width: 700px;
 }
 
 /* Headings */
-h5 {
-  font-size: 24px;
+h4 {
+  font-size: 24px !important;
+  margin-top: 20px !important;
   margin-bottom: 20px;
   color: #333;
 }
 
 /* Labels */
 label {
-  font-weight: bold;
   display: block;
-  margin-top: 15px;
-  color: #555;
+  margin-top: 40px !important;
+  color: #070e72;
+  text-align: left;
+  
 }
 
 /* Input Fields and Selects */
 input[type="text"],
 input[type="number"],
-input[type="date"],
-select {
+input[type="date"]{
   width: 100%;
   padding: 12px;
-  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+select {
+  width: 100%;
+  height: 50px !important;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -63,7 +73,9 @@ select:focus {
 .checkbox-label {
   display: flex;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 0px;
+  padding: 0;
+  margin: 0;
   color: #555;
 }
 
@@ -71,8 +83,8 @@ select:focus {
 .send-btn {
   background-color: #007bff;
   color: #fff;
-  padding: 12px 20px;
-  margin-top: 20px;
+  padding: 12px 20px !important;
+  margin-top: 40px !important;
   border: none;
   border-radius: 5px;
   font-size: 18px;
@@ -88,7 +100,7 @@ select:focus {
 .form-container {
   display: grid;
   grid-template-rows: repeat(8, auto);
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 /* Page Layout */
@@ -98,13 +110,6 @@ select:focus {
   justify-content: center;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 250px;
-  background-color: #007bff;
-  color: #fff;
-  padding: 20px;
-}
 
 /* Main Content Area */
 .main-content {
@@ -116,41 +121,30 @@ select:focus {
 .age-gender-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 8px;
+  justify-content: space-between !important;
 }
-
-.age-gender-container label {
-  flex: 1;
-  margin-right: 10px;
+.elderAge{
+  width: 320px !important;
+}
+.elderGender{
+  width: 320px;
+  padding: 0;
   margin-left: 20px;
+  height: 48px;
 }
 
 /* Date and Duration Container */
+
 .date-duration-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-top: 8px;
-}
-
-.date-inputs,
-.duration-input {
-  display: flex;
-  align-items: center;
-}
-
-.date-inputs label,
-.duration-input label {
-  margin-right: 10px;
 }
 
 /* Enroll Date Input */
 .enrollDate,
 .endDate {
-  width: 100%;
+  width: 215px !important;
   padding: 10px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -160,7 +154,6 @@ select:focus {
 .duration {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -176,26 +169,28 @@ select:focus {
   margin-top: 8px;
 }
 
-.meal-plan-input,
-.allergy-items-input {
-  display: flex;
-  align-items: center;
-}
-
-.meal-plan-input label,
-.allergy-items-input label {
-  margin-right: 10px;
-}
 
 /* Meal Plan Selection */
-.mealPlan,
-/* Allergy Items Selection */
-.mealItemsDropdown {
-  width: 100%;
-  padding: 10px;
+.mealPlan {
+  width: 200px;
+  padding: 0px;
   margin-top: 5px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   background-color: #fff;
 }
+
+/* Allergy Items Selection */
+.mealItemsDropdown {
+  width: 440px;
+  margin-left: 20px;
+  padding: 0px;
+  margin-top: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+
+
+

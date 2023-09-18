@@ -62,7 +62,7 @@ const GuardianSendRequest = () => {
           <Sidebar menuItems={GuardianMenuItem} />
           <main className="main-content">
             <div className='form-body'>
-              <h5>Send Request for Accommodation</h5>
+              <h4>Send Request for Accommodation</h4>
 
               <div className="form-container">
                 <label htmlFor="yourElder" className="your-elder-label">
@@ -80,43 +80,49 @@ const GuardianSendRequest = () => {
                 </Select>
 
                 <div className="age-gender-container">
-                  <label htmlFor="elderAge" className="elder-age-label">
-                    Age
-                  </label>
-                  <input
-                    type="number"
-                    id="elderAge"
-                    className="elderAge"
-                    value={formData.elderAge || ''}
-                    onChange={(e) => {
-                      const inputAge = parseInt(e.target.value, 10);
-                      if (!isNaN(inputAge) && inputAge >= 0) {
-                        setFormData({ ...formData, elderAge: inputAge });
-                      }
-                    }}
-                  />
 
-                  <label htmlFor="elderGender" className="elder-gender-label">
-                    Gender
-                  </label>
-                  <Select
-                    id="elderGender"
-                    className="elderGender"
-                    value={formData.elderGender || ''}
-                    onChange={(e) => setFormData({ ...formData, elderGender: e.target.value })}
-                  >
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                  </Select>
+                  <div>
+                    <label htmlFor="elderAge" className="elder-age-label">
+                      Age
+                    </label>
+                    <input
+                      type="number"
+                      id="elderAge"
+                      className="elderAge"
+                      value={formData.elderAge || ''}
+                      onChange={(e) => {
+                        const inputAge = parseInt(e.target.value, 10);
+                        if (!isNaN(inputAge) && inputAge >= 0) {
+                          setFormData({ ...formData, elderAge: inputAge });
+                        }
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="elderGender" className="elder-gender-label">
+                      Gender
+                    </label>
+                    <Select
+                      id="elderGender"
+                      className="elderGender"
+                      value={formData.elderGender || ''}
+                      onChange={(e) => setFormData({ ...formData, elderGender: e.target.value })}
+                    >
+                      <MenuItem value="male">Male</MenuItem>
+                      <MenuItem value="female">Female</MenuItem>
+                    </Select>
+                  </div>
 
                 </div>
 
                 {/* Enroll Date, Check-Out Date, and Duration */}
                 <div className="date-duration-container">
+
                   <div className="date-inputs">
                     <label htmlFor="enrollDate" className="enroll-date-label">
                       Enroll Date
-                    </label>
+                    </label> <br />
                     <input
                       type="date"
                       id="enrollDate"
@@ -126,6 +132,7 @@ const GuardianSendRequest = () => {
                       onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })}
                     />
                   </div>
+
                   <div className="date-inputs">
                     <label htmlFor="endDate" className="end-date-label">
                       Check-Out Date
@@ -139,6 +146,7 @@ const GuardianSendRequest = () => {
                       onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
                     />
                   </div>
+                  
                   <div className="duration-input">
                     <label htmlFor="duration" className="duration-label">
                       Duration
@@ -168,6 +176,7 @@ const GuardianSendRequest = () => {
 
                 {/* Meal Plan and Allergy Items */}
                 <div className="meal-plan-allergy-container">
+
                   <div className="meal-plan-input">
                     <label htmlFor="mealPlan" className="meal-plan-label">
                       Meal Plan
@@ -224,6 +233,7 @@ const GuardianSendRequest = () => {
                       </MenuItem>
                     </Select>
                   </div>
+                  
                 </div>
 
                 <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
