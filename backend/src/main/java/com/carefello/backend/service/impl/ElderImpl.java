@@ -76,6 +76,25 @@ public class ElderImpl implements ElderService {
         return elderDTOs;
     }
 
+    @Override
+    public ElderDTO getElderById(int guardianId, int elderId) {
+        // Retrieve the elder by elderId and guardianId
+        Elder elder = elderRepo.findByIdAndGuardianId(elderId, guardianId)
+                .orElseThrow(() -> new EntityNotFoundException("Elder not found"));
+
+        // Create an ElderDTO instance and populate it with elder data
+        ElderDTO elderDTO = new ElderDTO();
+        elderDTO.setId(elder.getId());
+        elderDTO.setName(elder.getName());
+        elderDTO.setNic(elder.getNic());
+        elderDTO.setDob(elder.getDob());
+        elderDTO.setRelationship(elder.getRelationship());
+        elderDTO.setGender(elder.getGender());
+
+        return elderDTO;
+    }
+
+
 
 
 }

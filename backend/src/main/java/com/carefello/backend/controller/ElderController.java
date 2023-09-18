@@ -33,6 +33,17 @@ public class ElderController {
         return new ResponseEntity<>(elders, HttpStatus.OK);
     }
 
+    @GetMapping("/{elderId}")
+    public ResponseEntity<ElderDTO> getElderById(@PathVariable int guardianId, @PathVariable int elderId) {
+        ElderDTO elder = elderService.getElderById(guardianId, elderId);
+
+        if (elder != null) {
+            return new ResponseEntity<>(elder, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }
 
