@@ -44,6 +44,7 @@ const GuardianSendRequest = () => {
   const [formData, setFormData] = useState({});
   const [selectedMealItems, setSelectedMealItems] = useState([]);
   const [name, setName] = useState('');
+  const [elderid, setElderid] = useState(33);
   const [age, setAge] = useState('');
   const [elderGender, setElderGender] = useState('');
   const [assStartDate, setAssStartDate] = useState('');
@@ -51,8 +52,9 @@ const GuardianSendRequest = () => {
   const [type, setType] = useState('');
   const [gender, setGender] = useState('');
   const [str, setStr] = useState('');
-  const [ids, setIds] = useState([]);
+  const [ids, setIds] = useState('');
   const navigate = useNavigate();
+  const [uniqueArray, setUniqueArray] = useState([]);
 
   const handleMealItemToggle = (mealItem) => () => {
     const currentIndex = selectedMealItems.indexOf(mealItem);
@@ -71,6 +73,90 @@ const GuardianSendRequest = () => {
 
   const isMealItemSelected = (mealItem) => selectedMealItems.indexOf(mealItem) !== -1;
 
+
+  // async function Send(event){
+  //   event.preventDefault();
+  //   try {
+  //     const response = await axios.post("http://localhost:8080/api/beds/request", {
+  //       name: name,
+  //       age: age,
+  //       elderGender: elderGender,
+  //       gender: gender,
+  //       assStartDate: assStartDate,
+  //       assEndDate: assEndDate,
+  //       type: type,
+  //       assElderId: elderid,
+  //     });
+  //     func1(response.data);
+
+  //   } catch (err) {
+  //     alert(err);
+  //   }
+  // }
+
+  // async function func1(myArray){
+  //   if (myArray.length !== 0){
+  //     const bedIds = myArray.map((item) => item.bed_id);
+  //     const uniqueElements = [];
+    
+  //     bedIds.forEach((element) => {
+  //     if (!uniqueElements.includes(element)) {
+  //       uniqueElements.push(element);
+  //     }
+  //     });
+
+  //     setUniqueArray(uniqueElements);
+  //     func2(uniqueArray);
+  //   }else{
+  //     alert("bad");
+  //   }
+  // }
+
+  // async function func2(myArray1){
+  //       myArray1.map(async (item) => {
+  //       try{
+  //         const response1 = await axios.post(`http://localhost:8080/api/beds/request5/${item}`,{
+  //           name: name,
+  //           age: age,
+  //           elderGender: elderGender,
+  //           gender: gender,
+  //           assStartDate: assStartDate,
+  //           assEndDate: assEndDate,
+  //           type: type,
+  //           assElderId: elderid,
+  //         });
+
+  //         if (response1.data.str === "bad"){
+            
+  //         }else{
+  //           setIds(response1.data.id)
+  //           setStr("good");
+  //         }
+
+  //       } catch(err){
+  //         alert(err);
+  //       }
+        
+  //     });
+      
+  // }
+
+  //   useEffect(() => {
+  //     // This code will run whenever the 'str' state variable changes
+      
+  //     if (str === 'good') {
+  //       console.log('good');
+  //       axios.post("http://localhost:8080/api/beds/request8",{id: ids, assElderId: elderid});
+  //       // setStr("bad");
+  //       alert("hello");
+  //     } 
+  //   }, [str]);
+ 
+
+  
+
+
+
   async function Send(event) {
     event.preventDefault();
     try {
@@ -82,13 +168,26 @@ const GuardianSendRequest = () => {
         assStartDate: assStartDate,
         assEndDate: assEndDate,
         type: type,
+        assElderId: elderid,
       });
       console.log(response.data)
   
       if (response.data.length !== 0){
         const bedIds = response.data.map((item) => item.bed_id);
-        bedIds.map((item) => {
-        axios.post(`http://localhost:8080/api/beds/request5/${item}`,{
+
+        const uniqueElements = [];
+    
+    bedIds.forEach((element) => {
+      if (!uniqueElements.includes(element)) {
+        uniqueElements.push(element);
+      }
+    });
+
+    setUniqueArray(uniqueElements);
+        
+
+        
+        axios.post(`http://localhost:8080/api/beds/request5/${uniqueArray}`,{
           name: name,
           age: age,
           elderGender: elderGender,
@@ -96,27 +195,29 @@ const GuardianSendRequest = () => {
           assStartDate: assStartDate,
           assEndDate: assEndDate,
           type: type,
+          assElderId: elderid,
         }).then((res) => {
           
           if (res.data.str === "good"){
             console.log(res.data.id);
-            navigate('/ManagerDashboard');
+
+            axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid});
+
+            alert("good");
       
           }else{
-            setStr("bad");
+            alert("bad");
             
           }
           
         
         }).catch((error) => {
-          console.error(error); // Log the error for debugging
+          console.error(error); 
         });
         
-      });
-      if (str === 'bad') {
-          alert("bad");
-      } 
-      // window.location.reload();
+     
+       
+      
       }else{
         alert("bad");
       }
@@ -128,14 +229,7 @@ const GuardianSendRequest = () => {
 
   }
 
-  // useEffect(() => {
-  //   // This code will run whenever the 'str' state variable changes
-  //   if (str === 'good') {
-  //     console.log('good');
-  //   } else {
-  //     console.log('bad');
-  //   }
-  // }, [str]);
+  
 
   
   

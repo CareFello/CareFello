@@ -3,8 +3,8 @@ import lombok.Data;
 
 @Data
 public class BedResponse {
-    int id;
-    String str; 
+    public int id;
+    public String str; 
     
     public BedResponse(int id, String str){
         this.id = id;
