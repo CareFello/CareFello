@@ -17,8 +17,10 @@ import com.carefello.backend.DTO.RequestDTO;
 import org.springframework.web.bind.annotation.RestController;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
+import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.repo.BedRepo;
+import com.carefello.backend.repo.TempreqRepo;
 import com.carefello.backend.service.RequestService;
 
 @CrossOrigin
@@ -30,6 +32,9 @@ public class BedController{
 
     @Autowired
     private RequestService requestService;
+
+    @Autowired
+    private TempreqRepo tempreqRepo;
 
     public BedController(BedRepo bedRepo){
         this.bedRepo = bedRepo;
@@ -77,7 +82,7 @@ public class BedController{
     }
 
     @PostMapping("/request5/{id}")
-    public ResponseEntity<?> findBeds1(@PathVariable int id, @RequestBody RequestDTO requestDTO){
+    public ResponseEntity<?> findBeds1(@PathVariable int[] id, @RequestBody RequestDTO requestDTO){
         BedResponse str = requestService.validateRequest2(id, requestDTO);
         return ResponseEntity.ok(str);
     }
@@ -86,6 +91,13 @@ public class BedController{
     public String findCaregivers(@PathVariable int id, @RequestBody RequestDTO requestDTO){
         String str = requestService.validateRequest3(id, requestDTO);
         return str;
+    }
+
+    @PostMapping("/request8")
+    public String tempreq(@RequestBody RequestDTO requestDTO){
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId());
+        tempreqRepo.save(tempreq);
+        return "hi";
     }
 
 }
