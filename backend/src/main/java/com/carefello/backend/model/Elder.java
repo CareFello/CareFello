@@ -3,6 +3,7 @@ package com.carefello.backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 
@@ -22,6 +23,9 @@ public class Elder {
     @ManyToOne
     @JoinColumn(name = "guardian_id")
     private Guardian guardian;
+
+    @OneToMany(mappedBy = "elder")
+    private List<DailyTask> dailyTasks;
 
     public int getId() {
         return id;
