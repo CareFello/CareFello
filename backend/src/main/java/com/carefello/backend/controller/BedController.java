@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import com.carefello.backend.DTO.RequestDTO;
 import org.springframework.web.bind.annotation.RestController;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
-
+import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.service.RequestService;
 
@@ -77,9 +77,9 @@ public class BedController{
     }
 
     @PostMapping("/request5/{id}")
-    public String findBeds1(@PathVariable int id, @RequestBody RequestDTO requestDTO){
-        String str = requestService.validateRequest2(id, requestDTO);
-        return str;
+    public ResponseEntity<?> findBeds1(@PathVariable int id, @RequestBody RequestDTO requestDTO){
+        BedResponse str = requestService.validateRequest2(id, requestDTO);
+        return ResponseEntity.ok(str);
     }
 
     @PostMapping("/request6/{id}")
