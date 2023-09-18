@@ -50,7 +50,7 @@ const GuardianSendRequest = () => {
   const [assEndDate, setAssEndDate] = useState('');
   const [type, setType] = useState('');
   const [gender, setGender] = useState('');
-  const [str, setStr] = useState('bad');
+  const [str, setStr] = useState('');
   const [ids, setIds] = useState([]);
   const navigate = useNavigate();
 
@@ -74,7 +74,7 @@ const GuardianSendRequest = () => {
   async function Send(event) {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8085/api/beds/request", {
+      const response = await axios.post("http://localhost:8080/api/beds/request", {
         name: name,
         age: age,
         elderGender: elderGender,
@@ -88,7 +88,7 @@ const GuardianSendRequest = () => {
       if (response.data.length !== 0){
         const bedIds = response.data.map((item) => item.bed_id);
         bedIds.map((item) => {
-        axios.post(`http://localhost:8085/api/beds/request5/${item}`,{
+        axios.post(`http://localhost:8080/api/beds/request5/${item}`,{
           name: name,
           age: age,
           elderGender: elderGender,
@@ -97,12 +97,14 @@ const GuardianSendRequest = () => {
           assEndDate: assEndDate,
           type: type,
         }).then((res) => {
-          console.log(res.data)
-          if (res.data === "bad"){
-            
-          }else{
-            // setStr("good");
+          
+          if (res.data.str === "good"){
+            console.log(res.data.id);
             navigate('/ManagerDashboard');
+      
+          }else{
+            setStr("bad");
+            
           }
           
         
@@ -111,11 +113,9 @@ const GuardianSendRequest = () => {
         });
         
       });
-      if (str === 'good') {
-          console.log('good');
-      } else {
+      if (str === 'bad') {
           alert("bad");
-      }
+      } 
       // window.location.reload();
       }else{
         alert("bad");

@@ -7,7 +7,7 @@ const Select = () => {
 
   useEffect(() => {
     // Make the GET request using Axios to fetch data from the backend
-    axios.get('http://localhost:8085/api/persons/get')
+    axios.get('http://localhost:8080/api/persons/get')
       .then((response) => setPeople(response.data))
       .catch((error) => console.error(error));
   }, []);
@@ -16,8 +16,8 @@ const Select = () => {
 
     console.log(id);
     try {
-      await axios.delete(`http://localhost:8085/api/persons/delete/${id}`);
-      axios.get('http://localhost:8085/api/persons/get')
+      await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
+      axios.get('http://localhost:8080/api/persons/get')
       .then((response) => setPeople(response.data))
       .catch((error) => console.error(error));
       
