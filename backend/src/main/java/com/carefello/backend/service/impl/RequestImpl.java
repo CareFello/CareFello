@@ -2,6 +2,7 @@ package com.carefello.backend.service.impl;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,11 +14,18 @@ import org.springframework.stereotype.Service;
 import com.carefello.backend.DTO.RequestDTO;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
+import com.carefello.backend.model.Elder1;
+import com.carefello.backend.model.Elderguar;
+import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
+import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.service.RequestService;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.Caregiver1Repo;
+import com.carefello.backend.repo.Elder1Repo;
+import com.carefello.backend.repo.ElderguarRepo;
 import com.carefello.backend.repo.TempreqRepo;
+
 
 
 @Service
@@ -28,6 +36,12 @@ public class RequestImpl implements RequestService {
     private BedRepo bedRepo;
     @Autowired
     private Caregiver1Repo caregiver1Repo;
+    @Autowired
+    private TempreqRepo tempreqRepo;
+    @Autowired
+    private Elder1Repo elder1Repo;
+    @Autowired
+    private ElderguarRepo elderguarRepo;
     @Override
     public List<Bed> validateRequest(RequestDTO requestDTO) {
         List<Bed> bed = bedRepo.findNotOccupiedBeds(requestDTO.getAssStartDate());
@@ -205,6 +219,19 @@ public class RequestImpl implements RequestService {
         }
         return result;
         
+    }
+
+    public List<ElderRequest> func1(){
+        List<Tempreq> tempreqs = tempreqRepo.findAll();
+        List<ElderRequest> myObjectList = new ArrayList<>();
+        for (Tempreq tempreq : tempreqs){
+            Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
+            Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
+            ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid());
+            myObjectList.add(elderRequest);
+        }
+
+        return myObjectList;
     }
     
 }

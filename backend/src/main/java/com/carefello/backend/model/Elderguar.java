@@ -4,24 +4,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tempreq")
+@Table(name = "elderguar")
 
-public class Tempreq {
+public class Elderguar {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private int guardianid;
     private int elderid;
-    private int bed_id;
 
 
-    public Tempreq(int elderid, int bed_id){
+    public Elderguar(int guardianid, int elderid){
+        this.guardianid = guardianid;
         this.elderid = elderid;
-        this.bed_id = bed_id;
     }
 
-    public Tempreq(){
+    public Elderguar(){
         
     }
 
 }
-
