@@ -19,6 +19,7 @@ import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
+import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.TempreqRepo;
 import com.carefello.backend.service.RequestService;
@@ -98,6 +99,12 @@ public class BedController{
         Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId());
         tempreqRepo.save(tempreq);
         return "hi";
+    }
+
+    @GetMapping("/request9")
+    public List<ElderRequest> func(){
+        List<ElderRequest> str = requestService.func1();
+        return str;
     }
 
 }
