@@ -7,6 +7,7 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+
 import Email from "./pages/Email";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -47,6 +48,10 @@ import Image2 from "./pages/Image2";
 
 
 
+
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+
 import GuardianDetailsPage from "./components/GuardianDetailPage";
 import Caregiverprofile from "./pages/caregiverprofile";
 import Elderslist from "./pages/Elderslist";
@@ -61,6 +66,7 @@ import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
 // import Caregiverprofile from './pages/caregiverprofile';
+
 
 
 function App() {
@@ -89,8 +95,7 @@ function App() {
 
 
 
-         
-          <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
+
 
 
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
@@ -128,7 +133,10 @@ function App() {
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
          
+
+
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
+
 
 
           <Route
@@ -139,6 +147,7 @@ function App() {
 
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
           
+
 
 
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />

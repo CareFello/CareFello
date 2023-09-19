@@ -28,4 +28,5 @@ public class RequestDTO {
     private String name;
     private String mealType;  
     private char eldergender; 
+    private int id;
 }

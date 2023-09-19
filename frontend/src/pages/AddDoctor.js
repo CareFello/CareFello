@@ -51,7 +51,7 @@ function AddDoctor() {
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8085/api/v1/doctor/save", {
+            await axios.post("http://localhost:8080/api/v1/doctor/save", {
                 email: email,
                 password: password,
                 nic: nic,
@@ -61,7 +61,7 @@ function AddDoctor() {
                 reg: reg,
             });
             try {
-                const response = await axios.post('http://localhost:8085/api/email', {
+                const response = await axios.post('http://localhost:8080/api/email', {
                   recipient: email,
                   subject: 'Carefello doctor registration',
                   content: 'You have been successfully registered as a doctor',

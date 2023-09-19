@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface ElderRepo extends JpaRepository<Elder , Integer> {
 
     List<Elder> findByGuardianId(int guardianId);
-
+    Optional<Elder> findByIdAndGuardianId(int elderId, int guardianId);
 
 }
