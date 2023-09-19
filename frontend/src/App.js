@@ -61,6 +61,11 @@ import ViewComplaints from "./pages/ViewComplaints";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+import DoctorViewEldersList from "./pages/DoctorViewEldersList";
+
+// import Caregiverprofile from './pages/caregiverprofile';
 
 
 
@@ -87,6 +92,7 @@ function App() {
           <Route path="/image" element={<Image />} />
           <Route path="/image1" element={<Image1 />} />
           <Route path="/image2" element={<Image2 />} />
+
 
 
 
@@ -128,6 +134,7 @@ function App() {
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
          
 
+
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
 
 
@@ -146,12 +153,15 @@ function App() {
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
           
 
-
-
-
-
+          <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
           
 
+
+          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
+          
+          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
+          <Route path="/Caregiverlist" element={<Caregiverlist />} />
+          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
 
 
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
@@ -161,7 +171,7 @@ function App() {
 
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
-          
+          <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
 
 
         </Routes>
