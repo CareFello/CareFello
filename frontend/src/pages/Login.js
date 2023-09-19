@@ -35,7 +35,7 @@ function Login() {
 
   const openSecondModal = async () => {
     try {
-      await axios.post("http://localhost:8085/api/resetemail", {
+      await axios.post("http://localhost:8080/api/resetemail", {
         recipient: resetemail,
 
       }).then((res) => {
@@ -52,7 +52,6 @@ function Login() {
       alert(err);
     }
 
-
   };
 
   const closeSecondModal = () => {
@@ -61,7 +60,7 @@ function Login() {
 
   const openThirdModal = async () => {
     try {
-      await axios.post("http://localhost:8085/api/checkcode", {
+      await axios.post("http://localhost:8080/api/checkcode", {
         code: code,
 
       }).then((res) => {
@@ -82,7 +81,7 @@ function Login() {
 
   const reset = async () => {
     try {
-      await axios.put(`http://localhost:8085/api/v1/employee/updatepass/${resetemail}`, {
+      await axios.put(`http://localhost:8080/api/v1/employee/updatepass/${resetemail}`, {
         password: newpassword,
       });
       window.location.reload();
@@ -112,13 +111,11 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
-
-
   async function login(event) {
     event.preventDefault();
     try {
 
-      await axios.post("http://localhost:8085/api/v1/guardian/login", {
+      await axios.post("http://localhost:8080/api/v1/guardian/login", {
 
         email: email,
         password: password,
@@ -127,11 +124,12 @@ function Login() {
         if (res.data.message == "Login Success") {
 
           const guardianId = res.data.id;
+          localStorage.setItem('myData', res.data.id);
           navigate(`/GuardianDashboard/${guardianId}`);
         }
         else if (res.data.message == "Email not exits") {
 
-          axios.post("http://localhost:8085/api/v1/employee/login", {
+          axios.post("http://localhost:8080/api/v1/employee/login", {
             email: email,
             password: password,
           }).then((res) => {
@@ -151,7 +149,6 @@ function Login() {
         console.error(fail); // Error!
       });
     }
-
 
     catch (err) {
       alert(err);
@@ -314,3 +311,4 @@ function Login() {
 };
 
 export default Login;
+

@@ -4,11 +4,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { NavLink } from "react-router-dom";
 
-
-
 const RequestCard = ({ Gname, Egender, Eage, dp }) => {
-
-
 
     return (
         <div className='student-card'>
@@ -20,7 +16,6 @@ const RequestCard = ({ Gname, Egender, Eage, dp }) => {
                     <Grid item xs={11} className='cardCollapsed' style={{ width: "500px", height: "200px", marginTop: "17px" }}>
                         <p>Guardian : {Gname}</p>
                         <p>Elderly : {Egender}, {Eage}</p>
-                        {/* <p>Age of the Elderly : {Eage}</p> */}
                     </Grid>
                 </Grid>
             </div>

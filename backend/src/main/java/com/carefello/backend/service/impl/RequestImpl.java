@@ -2,6 +2,7 @@ package com.carefello.backend.service.impl;
 
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 import com.carefello.backend.DTO.RequestDTO;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
+import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.service.RequestService;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.Caregiver1Repo;
+import com.carefello.backend.repo.TempreqRepo;
 
 
 @Service
@@ -33,21 +36,24 @@ public class RequestImpl implements RequestService {
         List<Bed> bed4 = bedRepo.findNotOccupiedBeds4(requestDTO.getAssStartDate());
         List<Bed> bed5 = bedRepo.findNotOccupiedBeds5(requestDTO.getAssEndDate());
         List<Bed> bed3 = bedRepo.findNotOccupiedBeds3();
-        if (!bed.isEmpty()){
-            return bed;
-        }else if (!bed1.isEmpty()){
-            return bed1;
-        }else if (!bed2.isEmpty()){
-            return bed2;
-        }else if (!bed3.isEmpty()){
+        if (!bed3.isEmpty()){
             return bed3;
         }else if (!bed4.isEmpty()){
             return bed4;
+        }else if (!bed2.isEmpty()){
+            return bed2;
+        }else if (!bed.isEmpty()){
+            return bed;
+        }else if (!bed1.isEmpty()){
+            return bed1;
         }else if (!bed5.isEmpty()){
             return bed5;
         }else{
-            return null;
+            return Collections.emptyList();
         }
+
+        // List<Bed> bed =bedRepo.findNotOccupiedBedsss(requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
+        // return bed;
     }
 
     public List<Caregiver1> validateRequest1(RequestDTO requestDTO){
@@ -113,9 +119,11 @@ public class RequestImpl implements RequestService {
         return requestDTO.getType();
     }
 
-    public String validateRequest2(int id, RequestDTO requestDTO){
+    public BedResponse validateRequest2(int[] ids, RequestDTO requestDTO){
+
+        for (int id : ids){
         List<Bed> beds = bedRepo.findAllBeds(id);
-        String result = "good";
+        BedResponse result = new BedResponse(id,"good");
         for (Bed bed : beds){
             
             int free = bed.getFree();
@@ -142,11 +150,23 @@ public class RequestImpl implements RequestService {
             }else if (free == 1){
                 
             }else{
-                result = "bad";
+                result = new BedResponse(0, "bad");
             }
             
         }
-        return result;
+
+        if (result.str == "good"){
+            return result;
+        }
+        }
+        
+
+        // if (result.getStr() == "good"){
+        //     Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), id);
+        //     tempreqRepo.save(tempreq);
+        // }
+        BedResponse result1 = new BedResponse(0, "bad");
+        return result1;
         
     }
 
