@@ -9,6 +9,5 @@ import java.util.List;
 public interface ElderService {
     Elder addElderToGuardian(int guardianId, ElderDTO elderDTO);
     List<ElderDTO> getEldersByGuardianId(int guardianId);
-
-    List<byte[]> getElderImagesByGuardianId(int guardianId);
+    ElderDTO getElderById(int guardianId, int elderId);
 }

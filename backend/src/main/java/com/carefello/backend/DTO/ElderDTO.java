@@ -11,8 +11,9 @@ public class ElderDTO {
     private String nic;
     private LocalDate dob;
     private String relationship;
+    private String gender;
 
-    private MultipartFile image;
+
 
     public int getId() {
         return id;
@@ -46,19 +47,19 @@ public class ElderDTO {
         this.dob = dob;
     }
 
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImageFile(MultipartFile image) {
-        this.image = image;
-    }
-
     public String getRelationship() {
         return relationship;
     }
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
