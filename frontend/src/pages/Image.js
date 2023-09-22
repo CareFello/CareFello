@@ -12,7 +12,7 @@ function ImageUpload() {
     const formData = new FormData();
     formData.append('file', selectedImage);
 
-    axios.post('http://localhost:8085/api/persons/upload', formData, {
+    axios.post('http://localhost:8080/api/persons/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
