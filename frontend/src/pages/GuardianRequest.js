@@ -1,5 +1,6 @@
 
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
@@ -29,6 +30,7 @@ import pp3 from '../assets/pp3.png';
 import pp4 from '../assets/pp4.png';
 import pp5 from '../assets/pp5.jpg';
 import pp6 from '../assets/pp6.png';
+import axios from 'axios';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -40,6 +42,8 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
 import RequestCard from '../components/RequestCard';
 import { ManagerMenuItem } from '../components/ManagerMenuItem';
+
+
 
 
 
@@ -94,6 +98,7 @@ export default function GuardianRequest() {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [people, setPeople] = useState([]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -103,6 +108,13 @@ export default function GuardianRequest() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    useEffect(() => {
+        // Make the GET request using Axios to fetch data from the backend
+        axios.get('http://localhost:8080/api/beds/request9')
+          .then((response) => setPeople(response.data))
+          .catch((error) => console.error(error));
+      }, []);
 
     return (
         <div className='requestPage'>
@@ -204,11 +216,12 @@ export default function GuardianRequest() {
                             <Stack spacing={5} direction={'row'}>
                                
                                     <TableContainer sx={{ maxHeight: 600 }}>
-                                        <div>
-                                            {students.map((student, index) => (
-                                                <RequestCard key={index} {...student} imageSrc={Elder} />
-                                            ))}
-                                        </div>
+                                        {people.map((person) =>(
+                                            <div>
+                                                {person.guardianName}
+                                            </div>
+                                        ))}
+                                        
                                     </TableContainer>
                                    
                             </Stack>

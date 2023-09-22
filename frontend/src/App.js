@@ -7,6 +7,7 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+
 import Email from "./pages/Email";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -47,6 +48,10 @@ import Image2 from "./pages/Image2";
 
 
 
+
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+
 import GuardianDetailsPage from "./components/GuardianDetailPage";
 import Caregiverprofile from "./pages/caregiverprofile";
 import Elderslist from "./pages/Elderslist";
@@ -54,7 +59,15 @@ import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 
 
+
 import ViewDonationRequests from "./pages/ViewDonationRequests";
+
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+import DoctorViewEldersList from "./pages/DoctorViewEldersList";
+
+// import Caregiverprofile from './pages/caregiverprofile';
+
 
 
 
@@ -124,6 +137,9 @@ function App() {
 
 
 
+          <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
+
+
 
           <Route
             path="/GuardianSendRequest/:guardianId"
@@ -135,13 +151,11 @@ function App() {
 
 
 
+
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
 
-
-
-
-
-
+          <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
+          
 
 
 
@@ -151,8 +165,10 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
 
-          <Route path="/ViewComplaints" element={<ViewComplaints />} />
-          <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
+
+          <Route path="/ViewComplaints" element={<ViewComplaints/>} />
+          <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
+          <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
 
 
 
