@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/dailyTask")
 @CrossOrigin
@@ -31,5 +35,11 @@ public class DailyTaskController {
         DailyTask dailyTask = dailyTaskService.updateDailyTask(taskId, dailyTaskDTO);
         return ResponseEntity.ok("Task updated succefully with ID : "+ dailyTask.getId());
 
+    }
+    @GetMapping("/viewTask/{elderId}")
+    public ResponseEntity<List<DailyTask>> getTasksByElderIdAndDate(@PathVariable int elderId){
+        LocalDate currentDate = LocalDate.now();
+        List<DailyTask> dailyTasks = dailyTaskService.getTaskByElderIdAndDate(elderId , currentDate);
+        return ResponseEntity.ok(dailyTasks);
     }
 }
