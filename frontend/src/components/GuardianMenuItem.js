@@ -29,7 +29,7 @@ export const GuardianMenuItem = [
         icon: <FaUserNurse />
     },
     {
-        path: `/GuardianRoomPackages/${data}`,
+        path: `/GuardianRoomPackages`,
         name: "Packages",
         icon: <TbListDetails />
     },
@@ -43,6 +43,6 @@ export const GuardianMenuItem = [
         name: "Complaints",
         icon: <VscRequestChanges />
     },
-   
+
 ]
 

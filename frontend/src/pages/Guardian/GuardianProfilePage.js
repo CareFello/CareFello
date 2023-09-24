@@ -1,47 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
 import Box from "@mui/material/Box";
-import { Typography, autocompleteClasses } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
-
-import Divider, { dividerClasses } from "@mui/material/Divider";
+import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import MuiGrid from "@mui/material/Grid";
-
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-
 import IconButton from "@mui/material/IconButton";
+import { useParams } from "react-router-dom"; // Import useParams to get the guardian ID from the URL
 import img_1 from "../../assets/guardian/guardian.jpg";
-import { GuardianMenuItem } from "../../components/GuardianMenuItem";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import "../../styles/Guardian/GuardianProfilePage.css";
 import { grey, red } from "@mui/material/colors";
-// import { NextLinkComposed } from '../../src/Link';
+import { GuardianMenuItem } from "../../components/GuardianMenuItem"
 
 const GuardianProfilePage = () => {
   const StyledBadge = styled(Badge)(({ theme }) => ({}));
-  const Grid = styled(MuiGrid)(({ theme }) => ({
-    width: "100%",
-    ...theme.typography.body2,
-    '& [role="separator"]': {
-      margin: theme.spacing(0, 2),
-    },
-  }));
   const [personalDetails, setPersonalDetails] = useState({
-    fullName: "Priyanthi De Silva",
-    email: "pereraDehiwala@gmail.com",
-    nic: "2000120304",
-    mobile: "0773485994",
-    homeAddress: "No.75, School Lane, Cross Street, Dehiwala",
-    workingPlaceAddress: "No.5, Ward Place, Colombo 7",
-    profession: "Software Engineer",
-    lovedOnes: "K.Sampath Perera, Nimali Perera",
+    fullName: "",
+    email: "",
+    nic: "",
+    mobile: "",
+    homeAddress: "",
+    workingPlaceAddress: "",
+    profession: "",
+    lovedOnes: "",
   });
+
+  // Use useParams to get the guardian ID from the URL
+  const { guardianId } = useParams();
+
+  useEffect(() => {
+    // Fetch guardian details from your API using the guardian ID
+    // Replace 'YOUR_API_URL' with your actual API endpoint
+    fetch(`/api/v1/guardian/${guardianId}/details`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPersonalDetails(data); // Update the state with the fetched data
+      })
+      .catch((error) => {
+        console.error("Error fetching guardian details:", error);
+      });
+  }, [guardianId]);
 
   return (
     <div className="guardian-profile-page">
@@ -50,9 +55,8 @@ const GuardianProfilePage = () => {
 
       <Box
         sx={{
-          // display: "flex",
-          mx: 45, //margin left and right
-          my: 5, //margin top and bottom
+          mx: 45, // margin left and right
+          my: 5, // margin top and bottom
           p: 3,
         }}
       >
@@ -70,29 +74,13 @@ const GuardianProfilePage = () => {
             p: 2,
           }}
         >
-          {/* <Grid xs={6}>
-            <Typography
-              variant="h5"
-              color="#05445E"
-              sx={{ mx: 30, textAlign: "left" }}
-            >
-              Profile
-            </Typography>
-          </Grid> */}
-
           <Typography variant="h5" color="#05445E" sx={{ textAlign: "left" }}>
             Profile
           </Typography>
 
           <Grid xs={3} sx={{ p: 3 }}>
             <Grid display={"flex"} flexDirection={"column"}>
-              <Grid
-                xs={3}
-                spacing={24}
-                // display="flex"
-                // align-items="center"
-                // justify-content="center"
-              >
+              <Grid xs={3} spacing={24}>
                 <StyledBadge>
                   <Avatar
                     alt="user-image"
@@ -101,9 +89,6 @@ const GuardianProfilePage = () => {
                     sx={{
                       width: 150,
                       height: 150,
-                      // display: "flex",
-                      // alignItems: "center",
-                      // justifyContent: "center",
                     }}
                   />
                 </StyledBadge>
@@ -115,11 +100,6 @@ const GuardianProfilePage = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              {/* <Grid xs={12} sx={{ border: 2, m: 2 }}>
-                <Typography color="#0544E" sx={{ mx: 2 }}>
-                  {personalDetails.fullName}
-                </Typography>
-              </Grid> */}
             </Grid>
           </Grid>
           <Divider orientation="vertical" flexItem sx={{ m: 2 }} />
@@ -133,44 +113,11 @@ const GuardianProfilePage = () => {
                 autoComplete="off"
               >
                 <div>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "left",
-                    }}
-                  >
-                    {/* <Typography>Full Name:</Typography>
-                    <Typography>{personalDetails.fullName}</Typography> */}
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
-                      p: 2,
-                    }}
-                  >
-                    <Button
-                      variant="outlined"
-                      size="medium"
-                      // component={NextLinkComposed}
-                      // to={{
-                      //   pathname: "/EditGuardianProfile",
-                      //   query: { name: "test" },
-                      // }}
-                    >
-                      Edit Profile
-                    </Button>
-                    {/* <Typography>Full Name:</Typography>
-                    <Typography>{personalDetails.fullName}</Typography> */}
-                  </Box>
-
                   <TextField
                     disabled
                     label="Full Name"
                     id="standard-size-small"
-                    defaultValue={personalDetails.fullName}
+                    value={personalDetails.fullName}
                     size="small"
                     variant="standard"
                   />
@@ -178,7 +125,7 @@ const GuardianProfilePage = () => {
                     disabled
                     label="Email"
                     id="standard-size-small"
-                    defaultValue={personalDetails.email}
+                    value={personalDetails.email}
                     size="small"
                     variant="standard"
                   />
@@ -191,7 +138,7 @@ const GuardianProfilePage = () => {
                       disabled
                       label="NIC"
                       id="standard-size-small"
-                      defaultValue={personalDetails.nic}
+                      value={personalDetails.nic}
                       size="small"
                       variant="standard"
                     />
@@ -199,17 +146,16 @@ const GuardianProfilePage = () => {
                       disabled
                       label="Mobile Number"
                       id="standard-size-small"
-                      defaultValue={personalDetails.mobile}
+                      value={personalDetails.mobile}
                       size="small"
                       variant="standard"
                     />
                   </Box>
-
                   <TextField
                     disabled
                     label="Home Address"
                     id="standard-size-small"
-                    defaultValue={personalDetails.homeAddress}
+                    value={personalDetails.homeAddress}
                     size="small"
                     variant="standard"
                   />
@@ -217,7 +163,7 @@ const GuardianProfilePage = () => {
                     disabled
                     label="Profession"
                     id="standard-size-small"
-                    defaultValue={personalDetails.profession}
+                    value={personalDetails.profession}
                     size="small"
                     variant="standard"
                   />
@@ -225,7 +171,7 @@ const GuardianProfilePage = () => {
                     disabled
                     label="Working Place Address"
                     id="standard-size-small"
-                    defaultValue={personalDetails.workingPlaceAddress}
+                    value={personalDetails.workingPlaceAddress}
                     size="small"
                     variant="standard"
                     sx={{ pb: 2 }}
@@ -234,66 +180,11 @@ const GuardianProfilePage = () => {
                     disabled
                     label="Your Loved Ones"
                     id="standard-size-small"
-                    defaultValue={personalDetails.lovedOnes}
+                    value={personalDetails.lovedOnes}
                     size="small"
                     variant="standard"
                     sx={{ pb: 2 }}
                   />
-                  {/* <TextField
-                    disabled
-                    label="Working Place Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.workingPlaceAddresse}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Email"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.email}
-                    size="small"
-                  />
-                  <Box
-                    sx={{
-                      "& .MuiTextField-root": { width: "24ch" },
-                    }}
-                  >
-                    <TextField
-                      disabled
-                      label="NIC"
-                      id="outlined-size-small"
-                      defaultValue={personalDetails.nic}
-                      size="small"
-                    />
-                    <TextField
-                      disabled
-                      label="Mobile Number"
-                      id="outlined-size-small"
-                      defaultValue={personalDetails.mobile}
-                      size="small"
-                    />
-                  </Box>
-                  <TextField
-                    disabled
-                    label="Home Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.homeAddress}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Profession"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.profession}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Working Place Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.workingPlaceAddress}
-                    size="small"
-                  /> */}
                 </div>
               </Box>
             </Stack>

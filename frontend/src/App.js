@@ -59,6 +59,7 @@ import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 
+
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 // import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
@@ -126,14 +127,14 @@ function App() {
 
 
           <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />
-          <Route path="/GuardianProfilePage" element={<GuardianProfilePage />} />
+          <Route path="/GuardianProfilePage/:guardianId" element={<GuardianProfilePage />} />
           <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
 
-          <Route path="/ElderProfile" element={<ElderProfile />} />
+          <Route path="//elder/:elderId" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-         
+
 
 
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
@@ -147,22 +148,16 @@ function App() {
           <Route path="/GuardianAddElder/:guardianId" element={<GuardianAddElder />} />
 
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
-          
+
 
 
 
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
-          
 
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
           
 
 
-          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
-          
-          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
-          <Route path="/Caregiverlist" element={<Caregiverlist />} />
-          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
 
 
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
@@ -170,9 +165,11 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
 
+
           <Route path="/ViewComplaints" element={<ViewComplaints/>} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
+
 
 
         </Routes>

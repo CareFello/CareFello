@@ -3,7 +3,9 @@ package com.carefello.backend.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class DailyTask {
@@ -12,7 +14,8 @@ public class DailyTask {
     private int id;
     private String taskName;
     private String description;
-    private LocalDateTime time;
+    private LocalDate date;
+    private LocalTime time;
     private boolean status;
 
     @ManyToOne
@@ -59,22 +62,31 @@ public class DailyTask {
         this.elder = elder;
     }
 
-    public LocalDateTime getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public DailyTask() {
     }
 
-    public DailyTask(int id, String taskName, String description, LocalDateTime time, boolean status, Elder elder) {
+    public DailyTask(int id, String taskName, String description, LocalTime time, LocalDate date, boolean status, Elder elder) {
         this.id = id;
         this.taskName = taskName;
         this.description = description;
         this.time = time;
+        this.date = date;
         this.status = status;
         this.elder = elder;
     }
