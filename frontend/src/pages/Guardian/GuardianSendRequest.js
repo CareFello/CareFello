@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
@@ -11,28 +11,13 @@ import TextField from '@mui/material/TextField';
 import '../../styles/Guardian/GuardianSendRequest.css';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-import Button from '@mui/material/Button';
-import axios from "axios";
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
-import { useNavigate } from 'react-router-dom';
 
 
 const GuardianSendRequest = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
-  const [selectedMealItems, setSelectedMealItems] = useState([]);
-  const [name, setName] = useState('');
-  const [elderid, setElderid] = useState(1);
-  const [age, setAge] = useState('');
-  const [elderGender, setElderGender] = useState('');
-  const [assStartDate, setAssStartDate] = useState('');
-  const [assEndDate, setAssEndDate] = useState('');
-  const [type, setType] = useState('');
-  const [gender, setGender] = useState('');
-  const [str, setStr] = useState('');
-  const [ids, setIds] = useState('');
-  const navigate = useNavigate();
-  const [uniqueArray, setUniqueArray] = useState([]);
+  const [selectedMealItems, setSelectedMealItems] = React.useState([]);
 
   const handleMealItemToggle = (mealItem) => () => {
     const currentIndex = selectedMealItems.indexOf(mealItem);
@@ -47,10 +32,7 @@ const GuardianSendRequest = () => {
     setSelectedMealItems(newSelected);
   };
 
-  
-
   const isMealItemSelected = (mealItem) => selectedMealItems.indexOf(mealItem) !== -1;
-
 
   // Calculate the duration between two dates
   function calculateDuration(enrollDate, endDate) {
@@ -99,196 +81,6 @@ const GuardianSendRequest = () => {
 
                 <div className="age-gender-container">
 
-
-  // async function Send(event){
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.post("http://localhost:8080/api/beds/request", {
-  //       name: name,
-  //       age: age,
-  //       elderGender: elderGender,
-  //       gender: gender,
-  //       assStartDate: assStartDate,
-  //       assEndDate: assEndDate,
-  //       type: type,
-  //       assElderId: elderid,
-  //     });
-  //     func1(response.data);
-
-  //   } catch (err) {
-  //     alert(err);
-  //   }
-  // }
-
-  // async function func1(myArray){
-  //   if (myArray.length !== 0){
-  //     const bedIds = myArray.map((item) => item.bed_id);
-  //     const uniqueElements = [];
-    
-  //     bedIds.forEach((element) => {
-  //     if (!uniqueElements.includes(element)) {
-  //       uniqueElements.push(element);
-  //     }
-  //     });
-
-  //     setUniqueArray(uniqueElements);
-  //     func2(uniqueArray);
-  //   }else{
-  //     alert("bad");
-  //   }
-  // }
-
-  // async function func2(myArray1){
-  //       myArray1.map(async (item) => {
-  //       try{
-  //         const response1 = await axios.post(`http://localhost:8080/api/beds/request5/${item}`,{
-  //           name: name,
-  //           age: age,
-  //           elderGender: elderGender,
-  //           gender: gender,
-  //           assStartDate: assStartDate,
-  //           assEndDate: assEndDate,
-  //           type: type,
-  //           assElderId: elderid,
-  //         });
-
-  //         if (response1.data.str === "bad"){
-            
-  //         }else{
-  //           setIds(response1.data.id)
-  //           setStr("good");
-  //         }
-
-  //       } catch(err){
-  //         alert(err);
-  //       }
-        
-  //     });
-      
-  // }
-
-  //   useEffect(() => {
-  //     // This code will run whenever the 'str' state variable changes
-      
-  //     if (str === 'good') {
-  //       console.log('good');
-  //       axios.post("http://localhost:8080/api/beds/request8",{id: ids, assElderId: elderid});
-  //       // setStr("bad");
-  //       alert("hello");
-  //     } 
-  //   }, [str]);
- 
-
-  
-
-// 19.09.2023
-
-//   async function Send(event) {
-//     event.preventDefault();
-//     try {
-//       const response = await axios.post("http://localhost:8080/api/beds/request", {
-//         name: name,
-//         age: age,
-//         elderGender: elderGender,
-//         gender: gender,
-//         assStartDate: assStartDate,
-//         assEndDate: assEndDate,
-//         type: type,
-//         assElderId: elderid,
-//       });
-//       console.log(response.data)
-  
-//       if (response.data.length !== 0){
-//         const bedIds = response.data.map((item) => item.bed_id);
-
-//         const uniqueElements = [];
-    
-//     bedIds.forEach((element) => {
-//       if (!uniqueElements.includes(element)) {
-//         uniqueElements.push(element);
-//       }
-//     });
-
-//     setUniqueArray(uniqueElements);
-        
-
-        
-//         axios.post(`http://localhost:8080/api/beds/request5/${uniqueArray}`,{
-//           name: name,
-//           age: age,
-//           elderGender: elderGender,
-//           gender: gender,
-//           assStartDate: assStartDate,
-//           assEndDate: assEndDate,
-//           type: type,
-//           assElderId: elderid,
-//         }).then((res) => {
-          
-//           if (res.data.str === "good"){
-//             console.log(res.data.id);
-
-//             axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid});
-
-//             alert("good");
-      
-//           }else{
-//             alert("bad");
-            
-//           }
-          
-        
-//         }).catch((error) => {
-//           console.error(error); 
-//         });
-        
-     
-       
-      
-//       }else{
-//         alert("bad");
-//       }
-      
-
-//     } catch (err) {
-//       alert(err);
-//     }
-
-//   }
-
-  
-
-  
-  
-
-
-//   return (
-//     <div>
-//       <form>
-//       <div style={{ display: 'flex' }}>
-//         <Header />
-//         <Sidebar menuItems={GuardianMenuItem} />
-//         <div style={{marginTop: '100px'}}>
-//         <h5>Send Request for Accommodation</h5>
-//             <CardContent style={{ width: '100%', margin: '0 auto', marginTop: '100px', marginBottom: '20px' }}>
-//               <div className='cardContent'>
-//                 <div className='field' style={{gap: '20px'}}>
-//                   <div className='subfield'>
-//                     <label htmlFor="yourElder">Your Elder's Name</label>
-//                     <Select
-//                       id="yourElder"
-//                       style={inputStyle}
-//                       value={name}
-//                       onChange={(event) => {
-//                       setName(event.target.value);
-//                       }}
-//                     >
-//                       <MenuItem value="Somasiri">Somasiri</MenuItem>
-//                       <MenuItem value="Keerthi">Keerthi</MenuItem>
-//                       <MenuItem value="Senarath">Senarath</MenuItem>
-//                     </Select>
-//                   </div>
-// >>>>>>> main
-
                   <div>
                     <label htmlFor="elderAge" className="elder-age-label">
                       Age
@@ -296,7 +88,6 @@ const GuardianSendRequest = () => {
                     <input
                       type="number"
                       id="elderAge"
-
                       className="elderAge"
                       value={formData.elderAge || ''}
                       onChange={(e) => {
@@ -322,64 +113,6 @@ const GuardianSendRequest = () => {
                       <MenuItem value="female">Female</MenuItem>
                     </Select>
                   </div>
-
-
-
-                </div>
-
-                <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="enrollDate">Enroll Date</label>
-                  <input
-                    type="date"
-                    id="enrollDate"
-                    placeholder="Enroll Date"
-                    style={smallInputStyle}
-                    value={assStartDate}
-                      onChange={(event) => {
-                      setAssStartDate(event.target.value);
-                      }}/>
-                </div>
-                <div className='subfield'>
-                  <label htmlFor="endDate">Check-Out Date</label>
-                  <input
-                    type="date"
-                    id="endDate"
-                    placeholder="End Date"
-                    style={smallInputStyle}
-                    value={assEndDate}
-                      onChange={(event) => {
-                      setAssEndDate(event.target.value);
-                      }}
-                  />
-                </div>
-
-                <div className='subfield'>
-                  <label htmlFor="duration">Duration</label>
-                  <input
-                    type="text"
-                    id="duration"
-                    style={inputStyle}
-                    value={formData.duration || ''}
-                    onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                  />
-                </div>
-                </div>
-                <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
-                  <Select
-                    id="roomPackage"
-                    style={inputStyle}
-                    value={type}
-                      onChange={(event) => {
-                      setType(event.target.value);
-                    }}
-                  >
-                    <MenuItem value="basic">Basic</MenuItem>
-                    <MenuItem value="classic">Classic</MenuItem>
-                    <MenuItem value="luxury">Luxury</MenuItem>
-                  </Select>
 
                 </div>
 
@@ -503,7 +236,6 @@ const GuardianSendRequest = () => {
                   
                 </div>
 
-
                 <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
                 <input
                   type="text"
@@ -544,7 +276,6 @@ const GuardianSendRequest = () => {
 
 
       </div>
-      </form>
     </div>
   );
 };

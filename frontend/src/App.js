@@ -40,6 +40,7 @@ import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
+import ViewEldersList from "./pages/ViewEldersList";
 
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
@@ -59,10 +60,9 @@ import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
 
 
-
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
-import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+// import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
@@ -122,7 +122,7 @@ function App() {
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
 
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
-
+          <Route path="/ViewEldersList" element={<ViewEldersList />} />
           <Route path="/RequestContinue" element={<RequestContinue />} />
 
 
