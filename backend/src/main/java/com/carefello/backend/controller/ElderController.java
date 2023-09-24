@@ -44,6 +44,15 @@ public class ElderController {
         }
     }
 
+    @PutMapping("/{elderId}/updateImage")
+    public ResponseEntity<String> updateElderImage(
+            @PathVariable int elderId,
+            @RequestParam("imageFile") MultipartFile imageFile
+    ){
+        elderService.updateElderImage(elderId, imageFile);
+        return ResponseEntity.ok("ElderImage updated successfully with" + imageFile);
+    }
+
 
 }
 

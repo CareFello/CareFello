@@ -1,6 +1,7 @@
 package com.carefello.backend.service.impl;
 
 import com.carefello.backend.DTO.ElderDTO;
+import com.carefello.backend.Util.ImageUtil;
 import com.carefello.backend.model.Elder;
 import com.carefello.backend.model.Guardian;
 import com.carefello.backend.repo.ElderRepo;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ElderImpl implements ElderService {
@@ -70,6 +72,16 @@ public class ElderImpl implements ElderService {
             elderDTO.setDob(elder.getDob());
             elderDTO.setRelationship(elder.getRelationship());
             elderDTO.setGender(elder.getGender());
+
+
+            if (elder.getImage() != null) {
+                byte[] decompressedImage = ImageUtil.decompressImage(elder.getImage());
+                elderDTO.setImage(decompressedImage);
+            } else {
+                // Set the image field to null in ElderDTO
+                elderDTO.setImage(null);
+            }
+
             elderDTOs.add(elderDTO);
         }
 
@@ -94,8 +106,19 @@ public class ElderImpl implements ElderService {
         return elderDTO;
     }
 
+    @Override
+    public void updateElderImage(int elderId, MultipartFile imageFile){
+        Optional<Elder> elderOptional = elderRepo.findById(elderId);
+        if(elderOptional.isPresent()){
+            try {
+                Elder elder = elderOptional.get();
+                byte[] compressedImage = ImageUtil.compressImage(imageFile.getBytes());
+                elder.setImage(compressedImage);
+                elderRepo.save(elder);
+            }catch (IOException e){
+        }
+    }else {
 
-
-
-}
+        }
+}}
 

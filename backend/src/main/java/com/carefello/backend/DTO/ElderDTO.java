@@ -12,6 +12,7 @@ public class ElderDTO {
     private LocalDate dob;
     private String relationship;
     private String gender;
+    private byte[] image ;
 
 
 
@@ -61,5 +62,13 @@ public class ElderDTO {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] decompressedImage) {
+        this.image = decompressedImage;
     }
 }
