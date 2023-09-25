@@ -10,6 +10,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class DailyTaskImpl implements DailyTaskService {
     private final DailyTaskRepo dailyTaskRepo;
@@ -30,6 +34,7 @@ public class DailyTaskImpl implements DailyTaskService {
         dailyTask.setTaskName(dailyTaskDTO.getTaskName());
         dailyTask.setDescription(dailyTaskDTO.getDescription());
         dailyTask.setTime(dailyTaskDTO.getTime());
+        dailyTask.setDate(dailyTaskDTO.getDate());
         dailyTask.setStatus(false);
         dailyTask.setElder(elder);
 
@@ -44,7 +49,13 @@ public class DailyTaskImpl implements DailyTaskService {
         dailyTask.setTaskName(dailyTaskDTO.getTaskName());
         dailyTask.setDescription(dailyTaskDTO.getDescription());
         dailyTask.setTime(dailyTaskDTO.getTime());
+        dailyTask.setDate(dailyTaskDTO.getDate());
 
         return dailyTaskRepo.save(dailyTask);
+    }
+
+    @Override
+    public List<DailyTask> getTaskByElderIdAndDate(int elderId , LocalDate date){
+        return dailyTaskRepo.findByElderIdAndDate(elderId, date);
     }
 }

@@ -1,6 +1,8 @@
 package com.carefello.backend.DTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class DailyTaskDTO {
 
@@ -8,7 +10,8 @@ public class DailyTaskDTO {
     private String taskName;
     private String description;
     private boolean status;
-    private LocalDateTime time;
+    private LocalTime time;
+    private LocalDate date;
 
     public int getId() {
         return id;
@@ -42,11 +45,19 @@ public class DailyTaskDTO {
         this.status = status;
     }
 
-    public LocalDateTime getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

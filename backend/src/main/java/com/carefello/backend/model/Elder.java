@@ -19,6 +19,12 @@ public class Elder {
     private String relationship;
     private String gender;
 
+    private byte[] image;
+
+    @Transient
+    private byte[] decompressedImage;
+
+
 
     @ManyToOne
     @JoinColumn(name = "guardian_id")
@@ -81,6 +87,22 @@ public class Elder {
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getDecompressedImage() {
+        return decompressedImage;
+    }
+
+    public void setDecompressedImage(byte[] decompressedImage) {
+        this.decompressedImage = decompressedImage;
     }
 
     public Elder() {

@@ -74,14 +74,23 @@ export default function MealPlan() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
 
+    const [image, setImage] = useState(null);
+
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8080/api/v1/MealPlan/addMealPlan", {
-                name: name,
-                description: description,
-                price: price,
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("description", description);
+            formData.append("price", price);
+            formData.append("imageFile", image); // Append the image file
+
+            await axios.post("http://localhost:8080/api/v1/MealPlan/addMealPlan", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", // Set the content type for file upload
+                },
             });
+
             alert("Meal Plan added successfully");
             window.location.reload();
 
@@ -89,6 +98,7 @@ export default function MealPlan() {
             alert(err);
         }
     }
+
 
     return (
         <div>
@@ -166,6 +176,11 @@ export default function MealPlan() {
                                         }}
                                     />
                                     <br />
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => setImage(e.target.files[0])}
+                                    />
 
                                     <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} onClick={save}>
                                         Add Meal Plan

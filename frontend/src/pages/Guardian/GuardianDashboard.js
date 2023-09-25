@@ -42,11 +42,7 @@ const caregiverProfiles = [
     age: 28,
     image: require('../../assets/C3.jpg'),
   },
-  {
-    name: 'Mr.Viranga',
-    age: 28,
-    image: require('../../assets/C4.jpg'),
-  },
+
 
 ];
 
@@ -81,7 +77,7 @@ const GuardianDashboard = () => {
 
                 </Stack>
               </Grid>
-              <Grid item xs={12} spacing={1}>
+              <Grid item xs={10} spacing={1}>
                 <Stack display="flex" flexDirection={'row'}>
                   <Typography component="div" variant="h6" className='topic'>
                     Assigned Caregivers
