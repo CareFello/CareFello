@@ -62,6 +62,7 @@ import ViewComplaints from "./pages/ViewComplaints";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
+
 // import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
@@ -123,7 +124,7 @@ function App() {
 
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
           <Route path="/ViewEldersList" element={<ViewEldersList />} />
-          <Route path="/RequestContinue" element={<RequestContinue />} />
+          <Route path="/RequestContinue/:elderid" element={<RequestContinue />} />
 
 
           <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />

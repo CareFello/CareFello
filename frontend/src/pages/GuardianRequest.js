@@ -31,6 +31,7 @@ import pp4 from '../assets/pp4.png';
 import pp5 from '../assets/pp5.jpg';
 import pp6 from '../assets/pp6.png';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -99,6 +100,7 @@ export default function GuardianRequest() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [people, setPeople] = useState([]);
+    const navigate = useNavigate();
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -109,11 +111,32 @@ export default function GuardianRequest() {
         setPage(0);
     };
 
+    const handleDelete = async (id) => {
+
+        console.log(id);
+        try {
+          await axios.delete(`http://localhost:8080/api/beds/delete/${id}`);
+          axios.get('http://localhost:8080/api/beds/request9')
+          .then((response) => setPeople(response.data))
+          .catch((error) => console.error(error));
+          
+        } catch (error) {
+          console.error('Error deleting employee:', error);
+        }
+    };
+
+    const handleContinue = async (elderid) => {
+
+        console.log(elderid);
+        navigate(`/RequestContinue/${elderid}`);
+    };
+
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
         axios.get('http://localhost:8080/api/beds/request9')
           .then((response) => setPeople(response.data))
           .catch((error) => console.error(error));
+          console.log(people)
       }, []);
 
     return (
@@ -218,7 +241,9 @@ export default function GuardianRequest() {
                                     <TableContainer sx={{ maxHeight: 600 }}>
                                         {people.map((person) =>(
                                             <div>
-                                                {person.guardianName}
+                                                Name: {person.guardianName} Age: {person.age}
+                                                <button onClick={() => handleDelete(person.id)}>Delete</button>
+                                                <button onClick={() => handleContinue(person.elderid)}>Continue</button>
                                             </div>
                                         ))}
                                         
