@@ -62,7 +62,7 @@ import ViewComplaints from "./pages/ViewComplaints";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
-import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
