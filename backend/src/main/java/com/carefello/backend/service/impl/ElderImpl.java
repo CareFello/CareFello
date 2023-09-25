@@ -3,8 +3,15 @@ package com.carefello.backend.service.impl;
 import com.carefello.backend.DTO.ElderDTO;
 import com.carefello.backend.Util.ImageUtil;
 import com.carefello.backend.model.Elder;
+import com.carefello.backend.model.Elder1;
+import com.carefello.backend.model.Elderguar;
 import com.carefello.backend.model.Guardian;
+import com.carefello.backend.model.Tempreq;
+import com.carefello.backend.payload.response.ElderInfo;
+import com.carefello.backend.payload.response.ElderRequest;
+import com.carefello.backend.repo.Elder1Repo;
 import com.carefello.backend.repo.ElderRepo;
+import com.carefello.backend.repo.ElderguarRepo;
 import com.carefello.backend.repo.GuardianRepo;
 import com.carefello.backend.service.ElderService;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +28,12 @@ public class ElderImpl implements ElderService {
 
     @Autowired
     private GuardianRepo guardianRepo;
+
+    @Autowired
+    private ElderguarRepo elderguarRepo;
+
+    @Autowired
+    private Elder1Repo elder1Repo;
 
     @Autowired
     private ElderRepo elderRepo;
@@ -120,5 +133,19 @@ public class ElderImpl implements ElderService {
     }else {
 
         }
-}}
+}
+    @Override
+    public List<ElderInfo> getElders(int id){
+        List<Elderguar> elderguars = elderguarRepo.findByguardianid(id);
+        List<ElderInfo> myObjectList = new ArrayList<>();
+        for (Elderguar elderguar : elderguars){
+            Elder1 elder1 = elder1Repo.findByElderid(elderguar.getElderid());
+            ElderInfo elderInfo = new ElderInfo(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), elder1.getLastname(), elder1.getElderid());
+            myObjectList.add(elderInfo);
+        }
+        return myObjectList;
+    }
+
+
+}
 
