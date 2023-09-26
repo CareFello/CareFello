@@ -45,13 +45,14 @@ const Login = ({ navigation }) => {
           <Text style={{
             fontSize: 16,
             fontWeight: 400,
-            marginVertical: 8
+            marginVertical: 8,
+            color : COLORS.grey,
           }}>Email address</Text>
 
           <View style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: COLORS.lightGrey,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -60,7 +61,7 @@ const Login = ({ navigation }) => {
           }}>
             <TextInput
               placeholder='Enter your email address'
-              placeholderTextColor={COLORS.black}
+              placeholderTextColor={COLORS.grey}
               keyboardType='email-address'
               style={{
                 width: "100%"
@@ -73,13 +74,14 @@ const Login = ({ navigation }) => {
           <Text style={{
             fontSize: 16,
             fontWeight: 400,
-            marginVertical: 8
+            marginVertical: 8,
+            color : COLORS.grey
           }}>Password</Text>
 
           <View style={{
             width: "100%",
             height: 48,
-            borderColor: COLORS.black,
+            borderColor: COLORS.lightGrey,
             borderWidth: 1,
             borderRadius: 8,
             alignItems: "center",
@@ -88,7 +90,7 @@ const Login = ({ navigation }) => {
           }}>
             <TextInput
               placeholder='Enter your password'
-              placeholderTextColor={COLORS.black}
+              placeholderTextColor={COLORS.grey}
               secureTextEntry={isPasswordShown}
               style={{
                 width: "100%"
@@ -104,9 +106,9 @@ const Login = ({ navigation }) => {
             >
               {
                 isPasswordShown == true ? (
-                  <Ionicons name="eye-off" size={24} color={COLORS.black} />
+                  <Ionicons name="eye-off" size={24} color={COLORS.grey} />
                 ) : (
-                  <Ionicons name="eye" size={24} color={COLORS.black} />
+                  <Ionicons name="eye" size={24} color={COLORS.grey} />
                 )
               }
 
@@ -123,7 +125,7 @@ const Login = ({ navigation }) => {
               color={isChecked ? COLORS.primary : undefined}
             />
 
-            <Text>Remember Me</Text>
+            <Text style={{color : COLORS.grey,}}>Remember Me</Text>
           </View>
 
           <Pressable
@@ -132,6 +134,7 @@ const Login = ({ navigation }) => {
             <Text style={{
               textDecorationLine: 'underline',
               textAlign: 'right',
+              color : COLORS.grey,
             }}>Forgot Password?</Text>
           </Pressable>
         </View>
