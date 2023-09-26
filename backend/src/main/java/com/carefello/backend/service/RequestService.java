@@ -6,6 +6,7 @@ import com.carefello.backend.DTO.RequestDTO;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.payload.response.BedResponse;
+import com.carefello.backend.payload.response.BedResponse1;
 import com.carefello.backend.payload.response.ElderRequest;
 
 public interface RequestService {
@@ -17,4 +18,5 @@ public interface RequestService {
     BedResponse validateRequest2(int[] id, RequestDTO requestDTO);
     String validateRequest3(int id, RequestDTO requestDTO);
     List<ElderRequest> func1();
+    BedResponse1 func2(int id);
 }
