@@ -3,6 +3,7 @@ package com.carefello.backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -116,5 +117,24 @@ public class Elder {
         this.relationship = relationship;
         this.gender = gender;
         this.guardian = guardian;
+    }
+
+    @OneToMany(mappedBy = "elder",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ElderMedicalHistory> elderMedicalHistories = new ArrayList<>();
+
+    public List<DailyTask> getDailyTasks() {
+        return dailyTasks;
+    }
+
+    public void setDailyTasks(List<DailyTask> dailyTasks) {
+        this.dailyTasks = dailyTasks;
+    }
+
+    public List<ElderMedicalHistory> getElderMedicalHistories() {
+        return elderMedicalHistories;
+    }
+
+    public void setElderMedicalHistories(List<ElderMedicalHistory> elderMedicalHistories) {
+        this.elderMedicalHistories = elderMedicalHistories;
     }
 }
