@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { ManagerMenuItem } from "../components/ManagerMenuItem";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -31,6 +32,16 @@ function RequestContinue() {
 
   const { elderid } = useParams();
 
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/beds/request10/${elderid}`)
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.error(error));
+      console.log(people)
+  }, []);
+
   return (
     <div className="req-continue">
       <Header />
@@ -42,28 +53,28 @@ function RequestContinue() {
           <div className="request-details">
             <div className="left-details">
               <p className="label-topic">Guardian's Name:</p>
-              <p className="topic-content">{dummyData.guardianName}</p>
+              <p className="topic-content">{people.guradianName}</p>
 
               <p className="label-topic">Elder's Name:</p>
-              <p className="topic-content">{dummyData.elderName}</p>
+              <p className="topic-content">{people.elderName}</p>
 
               <p className="label-topic">Duration:</p>
-              <p className="topic-content">{dummyData.duration}</p>
+              <p className="topic-content">{people.duration}</p>
 
               <p className="label-topic">Requested Room Type:</p>
-              <p className="topic-content">{dummyData.roomType}</p>
+              <p className="topic-content">{people.type}</p>
 
             </div>
 
             <div className="right-details">
               <p className="label-topic">Requested Caregiver's Gender:</p>
-              <p className="topic-content">{dummyData.caregiverGender}</p>
+              <p className="topic-content">{people.caregiverGender}</p>
 
               <p className="label-topic">Date:</p>
-              <p className="topic-content">{dummyData.date}</p>
+              <p className="topic-content">{people.assStartDate}</p>
 
               <p className="label-topic">Special Requirements:</p>
-              <p className="topic-content">{dummyData.specialRequirements}</p>
+              <p className="topic-content">{people.specRe}</p>
 
             </div>
           </div>
@@ -81,11 +92,11 @@ function RequestContinue() {
             <FormControl>
               <InputLabel>Bed No</InputLabel>
               <Select>
-                {dummyData.bedOptions.map((bed, index) => (
-                  <MenuItem key={index} value={bed}>
-                    {bed}
+                
+                  <MenuItem value={people.bed_id}>
+                    {people.bed_id}
                   </MenuItem>
-                ))}
+               
               </Select>
             </FormControl>
             <FormControl>

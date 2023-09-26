@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,17 @@ import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Elder1;
 import com.carefello.backend.model.Elderguar;
+import com.carefello.backend.model.Guardian;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
+import com.carefello.backend.payload.response.BedResponse1;
 import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.service.RequestService;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.Caregiver1Repo;
 import com.carefello.backend.repo.Elder1Repo;
 import com.carefello.backend.repo.ElderguarRepo;
+import com.carefello.backend.repo.GuardianRepo;
 import com.carefello.backend.repo.TempreqRepo;
 
 
@@ -40,6 +44,8 @@ public class RequestImpl implements RequestService {
     private TempreqRepo tempreqRepo;
     @Autowired
     private Elder1Repo elder1Repo;
+    @Autowired
+    private GuardianRepo guardianRepo;
     @Autowired
     private ElderguarRepo elderguarRepo;
     @Override
@@ -231,6 +237,15 @@ public class RequestImpl implements RequestService {
         }
 
         return myObjectList;
+    }
+
+    public BedResponse1 func2(int id){
+        Elder1 elder1 = elder1Repo.findByElderid(id);
+        Elderguar elderguar = elderguarRepo.findByElderid(id);
+        Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
+        Tempreq tempreq = tempreqRepo.getTempreq(id);
+        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), 10, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id());
+        return elderResponse1;
     }
     
 }

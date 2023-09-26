@@ -19,6 +19,7 @@ import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
+import com.carefello.backend.payload.response.BedResponse1;
 import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.TempreqRepo;
@@ -96,7 +97,7 @@ public class BedController{
 
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType());
         tempreqRepo.save(tempreq);
         return "hi";
     }
@@ -111,6 +112,11 @@ public class BedController{
     public ResponseEntity<Void> deletePerson(@PathVariable int id) {
         tempreqRepo.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/request10/{id}")
+    public BedResponse1 findreq(@PathVariable int id){
+        return requestService.func2(id);
     }
 
 }

@@ -21,8 +21,9 @@ public class Tempreq {
     private String allergyMeal;
     private String currentMedication;
     private List<String> foodNot;
+    private String type;
 
-    public Tempreq(int elderid, int bed_id, Date assStartDate, Date assEndDate, char gender, String allergyMeal, String currentMedication, List<String> foodNot){
+    public Tempreq(int elderid, int bed_id, Date assStartDate, Date assEndDate, char gender, String allergyMeal, String currentMedication, List<String> foodNot, String type){
         this.elderid = elderid;
         this.bed_id = bed_id;
         this.assStartDate = assStartDate;
@@ -31,6 +32,7 @@ public class Tempreq {
         this.allergyMeal = allergyMeal;
         this.currentMedication = currentMedication;
         this.foodNot = foodNot;
+        this.type = type;
     }
 
     public Tempreq(){
