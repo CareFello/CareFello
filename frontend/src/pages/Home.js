@@ -3,6 +3,7 @@ import Background from "../assets/background.png";
 import healthcare from "../assets/healthcare.png";
 import accomadation from "../assets/accomadation.png";
 import Relax from "../assets/relax.png";
+import Food from "../assets/food.png";
 import Elders from "../assets/elders.png";
 import About from "../assets/about.png";
 import "../styles/Home.css";
@@ -13,10 +14,12 @@ import CardContent from "@mui/material/CardContent";
 import CountUp, { useCountUp } from "react-countup";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Footer from "../components/HomepageFooter";
-import ContactUs from "../components/ContactUs";
+// import ContactUs from "../components/ContactUs";
 import Location from "../assets/location_logo.png";
 import Phone from "../assets/phone_logo.png";
 import Mail from "../assets/mail_logo.png";
+import '../index.css';
+import { Button} from 'flowbite-react';
 
 import Logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
@@ -84,14 +87,14 @@ function Home() {
         <div className="container">
           <div className="quote-box">
             <div className="quote">
-              <h1>CareFello</h1>
-              <h3>Live Life Beyond the Age</h3>
+              <div className="main-topic">CareFello</div>
+              <div className="sub-topic">Live Life Beyond the Age</div>
             </div>
           </div>
         </div>
 
-        <div className="grid">
-          <div className="box">
+        <div className="grid-box">
+          <div className="s_box">
             <img src={healthcare} alt="healthcare" />
             <div className="topic">
               <b>Health Care</b>
@@ -101,14 +104,13 @@ function Home() {
               Individual Attention<br></br>
               Doctors’ Visit<br></br>
               On Call Doctor<br></br>
-              Healthy Foods<br></br>
               create checklists<br></br>
               connect with caregivers<br></br>
               shedule tracker
             </p>
           </div>
-          <div className="box">
-            <img src={healthcare} alt="healthcare" />
+          <div className="s_box">
+            <img src={Food} alt="food" />
             <div className="topic">
               <b>Food</b>
             </div>
@@ -118,7 +120,7 @@ function Home() {
               concerned with alergies
             </p>
           </div>
-          <div className="box">
+          <div className="s_box">
             <img src={accomadation} alt="accomadation" />
             <div className="topic">
               <b>Accomodation</b>
@@ -126,19 +128,19 @@ function Home() {
             <p>
               Both Single & Shared<br></br>
               Rooms<br></br>
-              Attached Bathroom<br></br>
-              Room TV<br></br>
+              Attached Bathrooms<br></br>
+              Room TVs<br></br>
               Room Services
             </p>
           </div>
-          <div className="box">
+          <div className="s_box">
             <img src={Relax} alt="relax" />
             <div className="topic">
               <b>Relax Environment</b>
             </div>
             <p>
               Large Garden Area &<br></br>
-              Sitting Rooms<br></br>
+              Sitting Room<br></br>
               Separate Balcony<br></br>
               Friendly Staff
             </p>
@@ -146,7 +148,7 @@ function Home() {
         </div>
         <div className="About">
           <h2>About Us</h2>
-          <div className="Aboutus" id="about">
+          <div className="Aboutus_txt" id="about">
             <div className="text">
               <p>
                 CareFello, Elder Care System is determined to create a nurturing
@@ -162,7 +164,7 @@ function Home() {
                 Quality and Trust.
               </p>
             </div>
-            <div className="image">
+            <div className="image_about">
               <img src={About} alt="about" />
             </div>
           </div>
@@ -200,8 +202,29 @@ function Home() {
           </div>
         </div>
         <div className="contactus" id="contact">
-          <h2>Contact Us Directly</h2>
-          <ContactUs />
+          <section class=" dark:bg-#05445E-900">
+  <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+  <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-#05445E dark:text-#05445E">Contact Us</h2>
+<p class="mb-8 ml-6 mr-6 lg:mb-16 font-light text-justify text-#05445E-500 sm:text-sm">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
+<form action="#" class="space-y-3">
+    <div>
+        <label for="email" class="block mb-2 text-sm font-medium text-#05445E-900 dark:text-#05445E-300">Your email</label>
+        <input type="email" id="email" class="shadow-sm bg-#05445E-50 border border-#05445E-300 text-#05445E-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-#05445E-700 dark:border-#05445E-600 dark:placeholder-#05445E-400 dark:text-#05445E dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required></input>
+    </div>
+    <div>
+        <label for="subject" class="block mb-2 text-sm font-medium text-#05445E-900 dark:text-#05445E-300">Subject</label>
+        <input type="text" id="subject" class="block p-3 w-full text-sm text-#05445E-900 bg-#05445E-50 rounded-lg border border-#05445E-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-#05445E-700 dark:border-#05445E-600 dark:placeholder-#05445E-400 dark:text-#05445E dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required></input>
+    </div>
+    <div class="sm:col-span-2">
+        <label for="message" class="block mb-2 text-sm font-medium text-#05445E-900 dark:text-#05445E-400">Your message</label>
+        <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-#05445E-900 bg-#05445E-50 rounded-lg shadow-sm border border-#05445E-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-#05445E-700 dark:border-#05445E-600 dark:placeholder-#05445E-400 dark:text-#05445E dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Leave a comment..."></textarea>
+    </div>
+    <button className="msg-btn" type="submit" class="py-3 px-3 ml- text-sm font-medium text-center text-white rounded-lg bg-#05445E sm:w-fit hover:bg-#05445E-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-#05445E-600 dark:hover:bg-#05445E-700 dark:focus:ring-primary-800">Send message</button>
+    <Button type="submit">Send message</Button>
+</form>
+
+  </div>
+</section>
         </div>
         <div className="contact">
           {/* <div className="linklocation">
@@ -220,7 +243,7 @@ function Home() {
             <h6>info@Carefello.com</h6>
           </div> */}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
