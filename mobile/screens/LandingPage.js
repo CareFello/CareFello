@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
     top: 62,
   },
   image2: {
-    height: 110,
+    height: 150,
     width: 225,
     position: "absolute",
-    top: 50,
+    top: 40,
   },
   button: {
     width: "75%",  // Set the width to 75%

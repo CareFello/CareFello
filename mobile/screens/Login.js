@@ -12,31 +12,34 @@ const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'rgba(212, 241, 244, 0.50)' }}>
-      {/* <View>
-        <View style={styles.Container}>
-          <Image
-            source={require("../assets/logo2.png")}
-            style={styles.image2}
-          />
-        </View>
-      </View> */}
+
+      <View style={{ marginVertical: 22 }}>
+        <Text style={{
+          fontSize: 22,
+          fontWeight: 'bold',
+          marginVertical: 30,
+          color: '#05445E',
+          textAlign: 'center',
+        }}>
+          Welcome Back ! 
+        </Text>
+
+        <Text style={{
+          fontSize: 16,
+          color: '#05445E',
+          textAlign: 'center',
+        }}>Hello again you have been missed!</Text>
+      </View>
+
+      <View style={styles.Container}>
+        <Image
+          source={require("../assets/logo2.png")}
+          style={styles.image2}
+        />
+      </View>
 
       <View style={{ flex: 1, marginHorizontal: 22 }}>
-        <View style={{ marginVertical: 22 }}>
-          <Text style={{
-            fontSize: 22,
-            fontWeight: 'bold',
-            marginVertical: 12,
-            color: '#05445E',
-          }}>
-            Hi Welcome Back ! 👋
-          </Text>
 
-          <Text style={{
-            fontSize: 16,
-            color: COLORS.black
-          }}>Hello again you have been missed!</Text>
-        </View>
 
         <View style={{ marginBottom: 12 }}>
           <Text style={{
@@ -111,18 +114,26 @@ const Login = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{
-          flexDirection: 'row',
-          marginVertical: 6
-        }}>
-          <Checkbox
-            style={{ marginRight: 8 }}
-            value={isChecked}
-            onValueChange={setIsChecked}
-            color={isChecked ? COLORS.primary : undefined}
-          />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 6 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Checkbox
+              style={{ marginRight: 8 }}
+              value={isChecked}
+              onValueChange={setIsChecked}
+              color={isChecked ? COLORS.primary : undefined}
+            />
 
-          <Text>Remember Me</Text>
+            <Text>Remember Me</Text>
+          </View>
+
+          <Pressable
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text style={{
+              textDecorationLine: 'underline',
+              textAlign: 'right',
+            }}>Forgot Password?</Text>
+          </Pressable>
         </View>
 
         <CustomButton
@@ -141,7 +152,7 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   Container: {
-    flex: 1,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -149,7 +160,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 250,
     position: "absolute",
-    top: 50,
+    top: 15,
   },
 
 });
