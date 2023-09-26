@@ -2,7 +2,7 @@ import { SafeAreaView, View, Image, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import CustomButton from '../components/CustomButton';
 
-const LandingPage = () => {
+const LandingPage = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.half, styles.upperBackground]}>
