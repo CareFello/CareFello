@@ -116,13 +116,14 @@ function AddDoctor() {
                                                 label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
                                                 value={nic}
                                                 onChange={(event) => {
-                                                    setname2(event.target.value);
+                                                    setNic(event.target.value);
                                                 }}
                                                 sizing="md"
                                                 type="text"
                                             />
                                         </div>
                                     </div>
+
                                     <div className='reg mb-2'>
                                         <div className="mb-1 block text-left">
                                             <Label
@@ -139,6 +140,7 @@ function AddDoctor() {
                                             sizing="md"
                                             type="text"
                                         />
+
                                     </div>
 
                                     <div className='nic mb-2'>

@@ -13,4 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface Elder1Repo extends JpaRepository<Elder1, Integer> {
     @Query("select e from Elder1 e where e.elderid = :elderid")
     Elder1 findByElderid(@Param("elderid") int elderid);
+
+    @Query("select e from Elder1 e where e.firstname = :firstname")
+    Elder1 findByName1(@Param("firstname") String firstname);
 }

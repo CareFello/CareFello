@@ -13,23 +13,23 @@ import org.springframework.data.repository.query.Param;
 @EnableJpaRepositories
 
 public interface BedRepo extends JpaRepository<Bed,Integer>{
-    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.assEndDate < :assStartDate")
-    List<Bed> findNotOccupiedBeds(@Param("assStartDate") Date assStartDate);
+    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.assEndDate < :assStartDate and b.type = :type")
+    List<Bed> findNotOccupiedBeds(@Param("assStartDate") Date assStartDate, @Param("type") String type);
 
-    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.assStartDate > :assEndDate")
-    List<Bed> findNotOccupiedBeds1(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate);
+    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.assStartDate > :assEndDate and b.type = :type")
+    List<Bed> findNotOccupiedBeds1(@Param("assStartDate") Date assStartDate, @Param("assEndDate") Date assEndDate, @Param("type") String type);
 
-    @Query("SELECT b FROM Bed b WHERE b.assigned = 0 and b.occupied = 1 and b.occuEndDate < :assStartDate")
-    List<Bed> findNotOccupiedBeds2(@Param("assStartDate") Date assStartDate);
+    @Query("SELECT b FROM Bed b WHERE b.assigned = 0 and b.occupied = 1 and b.occuEndDate < :assStartDate and b.type = :type")
+    List<Bed> findNotOccupiedBeds2(@Param("assStartDate") Date assStartDate, @Param("type") String type);
 
-    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assEndDate < :assStartDate")
-    List<Bed> findNotOccupiedBeds4(@Param("assStartDate") Date assStartDate);
+    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assEndDate < :assStartDate and b.type = :type")
+    List<Bed> findNotOccupiedBeds4(@Param("assStartDate") Date assStartDate, @Param("type") String type);
 
-    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assStartDate > :assEndDate")
-    List<Bed> findNotOccupiedBeds5(@Param("assEndDate") Date assEndDate);
+    @Query("SELECT b FROM Bed b WHERE b.assigned = 1 and b.occupied = 0 and b.assStartDate > :assEndDate and b.type = :type")
+    List<Bed> findNotOccupiedBeds5(@Param("assEndDate") Date assEndDate, @Param("type") String type);
 
-    @Query("SELECT b FROM Bed b WHERE b.free = 1")
-    List<Bed> findNotOccupiedBeds3();
+    @Query("SELECT b FROM Bed b WHERE b.free = 1 and b.type = :type")
+    List<Bed> findNotOccupiedBeds3(@Param("type") String type);
 
     Bed findByAssElderId(int assElderId);
 

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -96,7 +96,7 @@ public class BedController{
 
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot());
         tempreqRepo.save(tempreq);
         return "hi";
     }
@@ -105,6 +105,12 @@ public class BedController{
     public List<ElderRequest> func(){
         List<ElderRequest> str = requestService.func1();
         return str;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletePerson(@PathVariable int id) {
+        tempreqRepo.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
