@@ -44,12 +44,12 @@ public class RequestImpl implements RequestService {
     private ElderguarRepo elderguarRepo;
     @Override
     public List<Bed> validateRequest(RequestDTO requestDTO) {
-        List<Bed> bed = bedRepo.findNotOccupiedBeds(requestDTO.getAssStartDate());
-        List<Bed> bed1 = bedRepo.findNotOccupiedBeds1(requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
-        List<Bed> bed2 = bedRepo.findNotOccupiedBeds2(requestDTO.getAssStartDate());
-        List<Bed> bed4 = bedRepo.findNotOccupiedBeds4(requestDTO.getAssStartDate());
-        List<Bed> bed5 = bedRepo.findNotOccupiedBeds5(requestDTO.getAssEndDate());
-        List<Bed> bed3 = bedRepo.findNotOccupiedBeds3();
+        List<Bed> bed = bedRepo.findNotOccupiedBeds(requestDTO.getAssStartDate(), requestDTO.getType());
+        List<Bed> bed1 = bedRepo.findNotOccupiedBeds1(requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getType());
+        List<Bed> bed2 = bedRepo.findNotOccupiedBeds2(requestDTO.getAssStartDate(), requestDTO.getType());
+        List<Bed> bed4 = bedRepo.findNotOccupiedBeds4(requestDTO.getAssStartDate(), requestDTO.getType());
+        List<Bed> bed5 = bedRepo.findNotOccupiedBeds5(requestDTO.getAssEndDate(), requestDTO.getType());
+        List<Bed> bed3 = bedRepo.findNotOccupiedBeds3(requestDTO.getType());
         if (!bed3.isEmpty()){
             return bed3;
         }else if (!bed4.isEmpty()){
@@ -71,23 +71,22 @@ public class RequestImpl implements RequestService {
     }
 
     public List<Caregiver1> validateRequest1(RequestDTO requestDTO){
-        List<Caregiver1> caregiver1 = caregiver1Repo.findAvailability1(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage());
+        List<Caregiver1> caregiver1 = caregiver1Repo.findAvailability1(requestDTO.getGender());
 
         List<Caregiver1> caregiver2 = caregiver1Repo.findAvailability2(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
+        requestDTO.getAssStartDate());
 
         List<Caregiver1> caregiver3 = caregiver1Repo.findAvailability3(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
+        requestDTO.getAssStartDate(), requestDTO.getAssEndDate());
 
         List<Caregiver1> caregiver4 = caregiver1Repo.findAvailability4(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
+        requestDTO.getAssStartDate());
 
         List<Caregiver1> caregiver5 = caregiver1Repo.findAvailability5(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssStartDate());
+        requestDTO.getAssStartDate());
 
         List<Caregiver1> caregiver6 = caregiver1Repo.findAvailability6(requestDTO.getGender(), 
-        requestDTO.getUpperage(), requestDTO.getLowerage(), requestDTO.getAssEndDate());
+        requestDTO.getAssEndDate());
 
         if (!caregiver1.isEmpty()){
             return caregiver1;
@@ -227,7 +226,7 @@ public class RequestImpl implements RequestService {
         for (Tempreq tempreq : tempreqs){
             Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
             Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
-            ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid());
+            ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
             myObjectList.add(elderRequest);
         }
 

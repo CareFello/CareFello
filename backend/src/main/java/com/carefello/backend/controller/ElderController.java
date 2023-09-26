@@ -2,6 +2,11 @@ package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.ElderDTO;
 import com.carefello.backend.model.Elder;
+import com.carefello.backend.model.Elder1;
+import com.carefello.backend.model.Elderguar;
+import com.carefello.backend.payload.response.ElderInfo;
+import com.carefello.backend.payload.response.ElderRequest;
+import com.carefello.backend.repo.Elder1Repo;
 import com.carefello.backend.service.ElderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +23,8 @@ public class ElderController {
 
     @Autowired
     private ElderService elderService;
+    @Autowired
+    private Elder1Repo elder1Repo;
     @PostMapping("/addElder")
     public ResponseEntity<Elder> addElderToGuardian(
             @PathVariable int guardianId,
@@ -43,6 +50,32 @@ public class ElderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/{elderId}/updateImage")
+    public ResponseEntity<String> updateElderImage(
+            @PathVariable int elderId,
+            @RequestParam("imageFile") MultipartFile imageFile
+    ){
+        elderService.updateElderImage(elderId, imageFile);
+        return ResponseEntity.ok("ElderImage updated successfully with" + imageFile);
+    }
+
+    @GetMapping("/get/{id}")
+    public List<ElderInfo> func(@PathVariable int id){
+        List<ElderInfo> str = elderService.getElders(id);
+        return str;
+    }
+
+    @GetMapping("/get1/{name}")
+    public Elder1 func1(@PathVariable String name){
+        Elder1 str = elder1Repo.findByName1(name);
+        return str;
+    }
+
+
+
+   
+    
 
 
 }

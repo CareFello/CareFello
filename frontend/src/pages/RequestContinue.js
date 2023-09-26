@@ -2,6 +2,7 @@ import React from "react";
 import { ManagerMenuItem } from "../components/ManagerMenuItem";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -27,6 +28,8 @@ function RequestContinue() {
     bedOptions: ["Bed A", "Bed B"],
     caregiverOptions: ["Caregiver 1", "Caregiver 2"],
   };
+
+  const { elderid } = useParams();
 
   return (
     <div className="req-continue">

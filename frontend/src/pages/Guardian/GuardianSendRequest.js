@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import FormControl from '@mui/material/FormControl';
@@ -11,18 +11,21 @@ import TextField from '@mui/material/TextField';
 import '../../styles/Guardian/GuardianSendRequest.css';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-import Button from '@mui/material/Button';
-import axios from "axios";
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 const GuardianSendRequest = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
-  const [selectedMealItems, setSelectedMealItems] = useState([]);
+  const [selectedMealItems, setSelectedMealItems] = React.useState([]);
+
+  const idd = localStorage.getItem('myData');
+
+  //newly added
   const [name, setName] = useState('');
-  const [elderid, setElderid] = useState(1);
+  const [elderid, setElderid] = useState('');
   const [age, setAge] = useState('');
   const [elderGender, setElderGender] = useState('');
   const [assStartDate, setAssStartDate] = useState('');
@@ -33,6 +36,10 @@ const GuardianSendRequest = () => {
   const [ids, setIds] = useState('');
   const navigate = useNavigate();
   const [uniqueArray, setUniqueArray] = useState([]);
+  const [allergyMeal, setAllergyMeal] = useState('');
+  const [currentMedication, setCurrentMedication] = useState('');
+  const [people, setPeople] = useState([]);
+  const [elder, setElder] = useState([]);
 
   const handleMealItemToggle = (mealItem) => () => {
     const currentIndex = selectedMealItems.indexOf(mealItem);
@@ -47,19 +54,16 @@ const GuardianSendRequest = () => {
     setSelectedMealItems(newSelected);
   };
 
-  
-
   const isMealItemSelected = (mealItem) => selectedMealItems.indexOf(mealItem) !== -1;
 
-
   // Calculate the duration between two dates
-  function calculateDuration(enrollDate, endDate) {
-    if (!enrollDate || !endDate) {
+  function calculateDuration(assStartDate, assEndDate) {
+    if (!assStartDate || !assEndDate) {
       return '';
     }
 
-    const start = new Date(enrollDate);
-    const end = new Date(endDate);
+    const start = new Date(assStartDate);
+    const end = new Date(assEndDate);
 
     // Calculate the difference in milliseconds
     const durationMs = end - start;
@@ -69,6 +73,108 @@ const GuardianSendRequest = () => {
 
     return `${days} days`;
   }
+
+  async function check(event){
+    event.preventDefault();
+    console.log(selectedMealItems);
+  }
+
+
+  //newly added
+  async function Send(event) {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/api/beds/request", {
+        name: name,
+        age: age,
+        elderGender: elderGender,
+        gender: gender,
+        assStartDate: assStartDate,
+        assEndDate: assEndDate,
+        type: type,
+        assElderId: elderid,
+      });
+      console.log(response.data)
+  
+      if (response.data.length !== 0){
+        const bedIds = response.data.map((item) => item.bed_id);
+
+        const uniqueElements = [];
+    
+    bedIds.forEach((element) => {
+      if (!uniqueElements.includes(element)) {
+        uniqueElements.push(element);
+      }
+    });
+
+    setUniqueArray(uniqueElements);
+        
+
+        
+        axios.post(`http://localhost:8080/api/beds/request5/${uniqueArray}`,{
+          name: name,
+          age: age,
+          elderGender: elderGender,
+          gender: gender,
+          assStartDate: assStartDate,
+          assEndDate: assEndDate,
+          type: type,
+          assElderId: elderid,
+        }).then((res) => {
+          
+          if (res.data.str === "good"){
+            console.log(res.data.id);
+
+            axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems});
+
+            alert("Request successfully sent");
+            window.location.reload();
+          }else{
+            alert("No space");
+            
+          }
+          
+        
+        }).catch((error) => {
+          console.error(error); 
+        });
+        
+     
+       
+      
+      }else{
+        alert("No space");
+      }
+      
+
+    } catch (err) {
+      alert(err);
+    }
+
+  }
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/v1/guardian/{guardianId}/elders/get/${idd}`)
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+
+    axios.get(`http://localhost:8080/api/v1/guardian/{guardianId}/elders/get1/${name}`)
+      .then((response) => setElder(response.data))
+      .catch((error) => console.error(error));
+  }, [name]);
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+
+    axios.get(`http://localhost:8080/api/v1/guardian/{guardianId}/elders/get1/${name}`)
+      .then((response) => setElderid(response.data.elderid))
+      .catch((error) => console.error(error));
+  }, [name]);
 
 
   return (
@@ -89,205 +195,17 @@ const GuardianSendRequest = () => {
                 <Select
                   id="yourElder"
                   className='yourElder'
-                  value={formData.yourElder || ''}
-                  onChange={(e) => setFormData({ ...formData, yourElder: e.target.value })}
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
                 >
-                  <MenuItem value="Somasiri">Somasiri</MenuItem>
-                  <MenuItem value="Keerthi">Keerthi</MenuItem>
-                  <MenuItem value="Senarath">Senarath</MenuItem>
+                  {people.map((person) => (
+                    <MenuItem key={person.id} value={person.firstname}>{person.firstname}</MenuItem>
+                  ))}
+                  
+                  
                 </Select>
 
                 <div className="age-gender-container">
-
-
-  // async function Send(event){
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.post("http://localhost:8080/api/beds/request", {
-  //       name: name,
-  //       age: age,
-  //       elderGender: elderGender,
-  //       gender: gender,
-  //       assStartDate: assStartDate,
-  //       assEndDate: assEndDate,
-  //       type: type,
-  //       assElderId: elderid,
-  //     });
-  //     func1(response.data);
-
-  //   } catch (err) {
-  //     alert(err);
-  //   }
-  // }
-
-  // async function func1(myArray){
-  //   if (myArray.length !== 0){
-  //     const bedIds = myArray.map((item) => item.bed_id);
-  //     const uniqueElements = [];
-    
-  //     bedIds.forEach((element) => {
-  //     if (!uniqueElements.includes(element)) {
-  //       uniqueElements.push(element);
-  //     }
-  //     });
-
-  //     setUniqueArray(uniqueElements);
-  //     func2(uniqueArray);
-  //   }else{
-  //     alert("bad");
-  //   }
-  // }
-
-  // async function func2(myArray1){
-  //       myArray1.map(async (item) => {
-  //       try{
-  //         const response1 = await axios.post(`http://localhost:8080/api/beds/request5/${item}`,{
-  //           name: name,
-  //           age: age,
-  //           elderGender: elderGender,
-  //           gender: gender,
-  //           assStartDate: assStartDate,
-  //           assEndDate: assEndDate,
-  //           type: type,
-  //           assElderId: elderid,
-  //         });
-
-  //         if (response1.data.str === "bad"){
-            
-  //         }else{
-  //           setIds(response1.data.id)
-  //           setStr("good");
-  //         }
-
-  //       } catch(err){
-  //         alert(err);
-  //       }
-        
-  //     });
-      
-  // }
-
-  //   useEffect(() => {
-  //     // This code will run whenever the 'str' state variable changes
-      
-  //     if (str === 'good') {
-  //       console.log('good');
-  //       axios.post("http://localhost:8080/api/beds/request8",{id: ids, assElderId: elderid});
-  //       // setStr("bad");
-  //       alert("hello");
-  //     } 
-  //   }, [str]);
- 
-
-  
-
-// 19.09.2023
-
-//   async function Send(event) {
-//     event.preventDefault();
-//     try {
-//       const response = await axios.post("http://localhost:8080/api/beds/request", {
-//         name: name,
-//         age: age,
-//         elderGender: elderGender,
-//         gender: gender,
-//         assStartDate: assStartDate,
-//         assEndDate: assEndDate,
-//         type: type,
-//         assElderId: elderid,
-//       });
-//       console.log(response.data)
-  
-//       if (response.data.length !== 0){
-//         const bedIds = response.data.map((item) => item.bed_id);
-
-//         const uniqueElements = [];
-    
-//     bedIds.forEach((element) => {
-//       if (!uniqueElements.includes(element)) {
-//         uniqueElements.push(element);
-//       }
-//     });
-
-//     setUniqueArray(uniqueElements);
-        
-
-        
-//         axios.post(`http://localhost:8080/api/beds/request5/${uniqueArray}`,{
-//           name: name,
-//           age: age,
-//           elderGender: elderGender,
-//           gender: gender,
-//           assStartDate: assStartDate,
-//           assEndDate: assEndDate,
-//           type: type,
-//           assElderId: elderid,
-//         }).then((res) => {
-          
-//           if (res.data.str === "good"){
-//             console.log(res.data.id);
-
-//             axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid});
-
-//             alert("good");
-      
-//           }else{
-//             alert("bad");
-            
-//           }
-          
-        
-//         }).catch((error) => {
-//           console.error(error); 
-//         });
-        
-     
-       
-      
-//       }else{
-//         alert("bad");
-//       }
-      
-
-//     } catch (err) {
-//       alert(err);
-//     }
-
-//   }
-
-  
-
-  
-  
-
-
-//   return (
-//     <div>
-//       <form>
-//       <div style={{ display: 'flex' }}>
-//         <Header />
-//         <Sidebar menuItems={GuardianMenuItem} />
-//         <div style={{marginTop: '100px'}}>
-//         <h5>Send Request for Accommodation</h5>
-//             <CardContent style={{ width: '100%', margin: '0 auto', marginTop: '100px', marginBottom: '20px' }}>
-//               <div className='cardContent'>
-//                 <div className='field' style={{gap: '20px'}}>
-//                   <div className='subfield'>
-//                     <label htmlFor="yourElder">Your Elder's Name</label>
-//                     <Select
-//                       id="yourElder"
-//                       style={inputStyle}
-//                       value={name}
-//                       onChange={(event) => {
-//                       setName(event.target.value);
-//                       }}
-//                     >
-//                       <MenuItem value="Somasiri">Somasiri</MenuItem>
-//                       <MenuItem value="Keerthi">Keerthi</MenuItem>
-//                       <MenuItem value="Senarath">Senarath</MenuItem>
-//                     </Select>
-//                   </div>
-// >>>>>>> main
 
                   <div>
                     <label htmlFor="elderAge" className="elder-age-label">
@@ -296,13 +214,12 @@ const GuardianSendRequest = () => {
                     <input
                       type="number"
                       id="elderAge"
-
                       className="elderAge"
-                      value={formData.elderAge || ''}
-                      onChange={(e) => {
-                        const inputAge = parseInt(e.target.value, 10);
+                      value={elder.age}
+                      onChange={(event) => {
+                        const inputAge = parseInt(event.target.value, 10);
                         if (!isNaN(inputAge) && inputAge >= 0) {
-                          setFormData({ ...formData, elderAge: inputAge });
+                          setAge(inputAge);
                         }
                       }}
                     />
@@ -312,74 +229,15 @@ const GuardianSendRequest = () => {
                     <label htmlFor="elderGender" className="elder-gender-label">
                       Gender
                     </label>
-                    <Select
+                    <input
+                      type='text'
                       id="elderGender"
                       className="elderGender"
-                      value={formData.elderGender || ''}
-                      onChange={(e) => setFormData({ ...formData, elderGender: e.target.value })}
-                    >
-                      <MenuItem value="male">Male</MenuItem>
-                      <MenuItem value="female">Female</MenuItem>
-                    </Select>
+                      value={elder.gender}
+                      onChange={(event) => setElderGender(event.target.value)}
+                    
+                    />
                   </div>
-
-
-
-                </div>
-
-                <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="enrollDate">Enroll Date</label>
-                  <input
-                    type="date"
-                    id="enrollDate"
-                    placeholder="Enroll Date"
-                    style={smallInputStyle}
-                    value={assStartDate}
-                      onChange={(event) => {
-                      setAssStartDate(event.target.value);
-                      }}/>
-                </div>
-                <div className='subfield'>
-                  <label htmlFor="endDate">Check-Out Date</label>
-                  <input
-                    type="date"
-                    id="endDate"
-                    placeholder="End Date"
-                    style={smallInputStyle}
-                    value={assEndDate}
-                      onChange={(event) => {
-                      setAssEndDate(event.target.value);
-                      }}
-                  />
-                </div>
-
-                <div className='subfield'>
-                  <label htmlFor="duration">Duration</label>
-                  <input
-                    type="text"
-                    id="duration"
-                    style={inputStyle}
-                    value={formData.duration || ''}
-                    onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                  />
-                </div>
-                </div>
-                <div className='field'>
-                <div className='subfield'>
-                  <label htmlFor="roomPackage">Select a Room Package for Your Elder</label>
-                  <Select
-                    id="roomPackage"
-                    style={inputStyle}
-                    value={type}
-                      onChange={(event) => {
-                      setType(event.target.value);
-                    }}
-                  >
-                    <MenuItem value="basic">Basic</MenuItem>
-                    <MenuItem value="classic">Classic</MenuItem>
-                    <MenuItem value="luxury">Luxury</MenuItem>
-                  </Select>
 
                 </div>
 
@@ -395,8 +253,8 @@ const GuardianSendRequest = () => {
                       id="enrollDate"
                       className="enrollDate"
                       placeholder="Enroll Date"
-                      value={formData.enrollDate || ''}
-                      onChange={(e) => setFormData({ ...formData, enrollDate: e.target.value })}
+                      value={assStartDate}
+                      onChange={(event) => setAssStartDate(event.target.value)}
                     />
                   </div>
 
@@ -409,8 +267,8 @@ const GuardianSendRequest = () => {
                       id="endDate"
                       className="endDate"
                       placeholder="End Date"
-                      value={formData.endDate || ''}
-                      onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+                      value={assEndDate}
+                      onChange={(event) => setAssEndDate(event.target.value)}
                     />
                   </div>
                   
@@ -422,7 +280,7 @@ const GuardianSendRequest = () => {
                       type="text"
                       id="duration"
                       className="duration"
-                      value={calculateDuration(formData.enrollDate, formData.endDate)}
+                      value={calculateDuration(assStartDate, assEndDate)}
                       readOnly
                     />
                   </div>
@@ -433,12 +291,12 @@ const GuardianSendRequest = () => {
                 <Select
                   id="roomPackage"
                   className="roomPackage"
-                  value={formData.roomPackage || ''}
-                  onChange={(e) => setFormData({ ...formData, roomPackage: e.target.value })}
+                  value={type}
+                  onChange={(event) => setType(event.target.value)}
                 >
-                  <MenuItem value="Basic">Basic</MenuItem>
-                  <MenuItem value="Classic">Classic</MenuItem>
-                  <MenuItem value="Luxery">Luxery</MenuItem>
+                  <MenuItem value="basic">Basic</MenuItem>
+                  <MenuItem value="classic">Classic</MenuItem>
+                  <MenuItem value="luxury">Luxury</MenuItem>
                 </Select>
 
                 {/* Meal Plan and Allergy Items */}
@@ -454,9 +312,9 @@ const GuardianSendRequest = () => {
                       value={formData.mealPlan || ''}
                       onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
                     >
-                      <MenuItem value="Basic">Meal plan 01</MenuItem>
-                      <MenuItem value="Classic">Meal plan 02</MenuItem>
-                      <MenuItem value="Luxery">Meal plan 03</MenuItem>
+                      <MenuItem value="basic">Meal plan 01</MenuItem>
+                      <MenuItem value="classic">Meal plan 02</MenuItem>
+                      <MenuItem value="luxury">Meal plan 03</MenuItem>
                     </Select>
                   </div>
 
@@ -503,25 +361,24 @@ const GuardianSendRequest = () => {
                   
                 </div>
 
-
                 <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>
                 <input
                   type="text"
                   id="otherMealItems"
                   className="otherMealItems"
-                  value={formData.otherMealItems || ''}
-                  onChange={(e) => setFormData({ ...formData, otherMealItems: e.target.value })}
+                  value={allergyMeal}
+                  onChange={(event) => setAllergyMeal(event.target.value)}
                 />
 
                 <label htmlFor="Caregivergender">Select Caregiver's Type</label>
                 <Select
                   id="Caregivergender"
                   className="Caregivergender"
-                  value={formData.gender || ''}
-                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                  value={gender}
+                  onChange={(event) => setGender(event.target.value)}
                 >
-                  <MenuItem value="female">Female</MenuItem>
-                  <MenuItem value="male">Male</MenuItem>
+                  <MenuItem value="F">Female</MenuItem>
+                  <MenuItem value="M">Male</MenuItem>
                 </Select>
 
                 <label htmlFor="medicationDetails">Current Medication Details of your elder</label>
@@ -530,11 +387,11 @@ const GuardianSendRequest = () => {
                   className="medicationDetails"
                   rows="4"
 
-                  value={formData.medicationDetails || ''}
-                  onChange={(e) => setFormData({ ...formData, medicationDetails: e.target.value })}
+                  value={currentMedication}
+                  onChange={(event) => setCurrentMedication(event.target.value)}
                 />
 
-                <Button className="send-btn" variant="contained">Send</Button>
+                <Button className="send-btn" variant="contained" onClick={Send}>Send</Button>
 
               </div>
             </div>
@@ -544,7 +401,6 @@ const GuardianSendRequest = () => {
 
 
       </div>
-      </form>
     </div>
   );
 };
