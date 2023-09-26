@@ -1,258 +1,294 @@
-import { useState } from 'react'
-import Navbar from '../components/Navbar'
-import "../styles/Registration.css"
-import { Checkbox } from '@mui/material'
-import TextField from '@mui/material/TextField'
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button from '@mui/material/Button';
-import Reg from "../assets/reg.png"
-import axios from 'axios'
+import React, { useState } from 'react';
+import img from '../assets/reg_img.jpg';
+import '../index.css';
+import { Button} from 'flowbite-react';
 
+function RegistrationForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isValidNic, setIsValidNic] = useState(true);
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [nic, setNic] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [homeAddress, setHomeAddress] = useState('');
+  const [profession, setProfession] = useState('');
+  const [officeAddress, setOfficeAddress] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-function Registration() {
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [nic, setNic] = useState("");
-    const [cont, setCont] = useState("");
-    const [profession, setPro] = useState("");
-    const [haddress, setHaddress] = useState("");
-    const [waddress, setWaddress] = useState("");
-    const [isValid, setIsValid] = useState(true);
-    const [isValidnic, setIsValidnic] = useState(true);
+  const handleNicValidation = (event) => {
+    const inputNic = event.target.value;
+    // Example NIC validation: It should be 9 characters.
+    setIsValidNic(inputNic.length === 9);
+  };
 
-    async function save(event) {
-        event.preventDefault();
-        try {
-            await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
-                email: email,
-                password: password,
-                nic: nic,
-                fname: fname,
-                lname: lname,
-                cont: cont,
-                profession: profession,
-                haddress: haddress,
-                waddress: waddress,
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Add your form submission logic here
+  };
 
-            });
-            alert("Guardian registration Successfull");
-            window.location.reload();
-
-        } catch (err) {
-            alert(err);
-        }
-    }
-
-    return (
-        <div>
-            <Navbar />
-            <br></br>
-            <div className='reg-container'>
-
-
-                <div className='reg-image'>
-                    <img src={Reg} />
+  return (
+    <div className='main-content bg-#F9FFFE'>
+        <div className='flex flex-col  items-center mt-10 '>
+        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="p-6 space-y-4 md:space-y-0 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign Up
+            </h1><div className='content flex flex-row'>
+            {/* <img class=" mr-2 flex items-center" src={img} alt="reg"></img> */}
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            
+              <div className="name mb-2">
+                <div className="fname">
+                  <div className="mb-1 block">
+                    <label
+                      htmlFor="first-name"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      First Name
+                    </label>
+                  </div>
+                  <input
+                    required
+                    value={firstName}
+                    id="first-name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    onChange={(event) => setFirstName(event.target.value)}
+                  />
                 </div>
-                <div className='reg-form'>
-                    <form action="#" className="">
-                        <h2 className='Topic'>Sign Up</h2>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Fisrt name"
-                            sx={{ m: 1, width: '25ch' }}
 
-                            value={fname}
-                            onChange={(event) => {
-                                setFname(event.target.value);
-                            }}
-                        />
+                <div className="lname ml-4">
+                  <div className="mb-1 block">
+                    <label
+                      htmlFor="last-name"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Last Name
+                    </label>
+                  </div>
+                  <input
+                    required
+                    value={lastName}
+                    id="last-name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    onChange={(event) => setLastName(event.target.value)}
+                  />
+                </div>
+              </div>
 
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  name="email"
+                  id="email"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="name@company.com"
+                  required=""
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </div>
 
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Last name"
-                            sx={{ m: 1, width: '25ch' }}
+              <div className="lname mb-2">
+                <div className="mb-1 block">
+                  <label
+                    htmlFor="nic"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    NIC
+                  </label>
+                </div>
+                <input
+                  required
+                  value={nic}
+                  id="nic"
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 ${isValidNic ? 'dark:placeholder-gray-400' : 'dark:placeholder-red-400'} dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                  type="text"
+                  onChange={(event) => {
+                    setNic(event.target.value);
+                    handleNicValidation(event);
+                  }}
+                />
+              </div>
 
-                            value={lname}
-                            onChange={(event) => {
-                                setLname(event.target.value);
-                            }} />
+              <div className="lname mb-2">
+                <div className="mb-1 block">
+                  <label
+                    htmlFor="mobile-number"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Mobile Number
+                  </label>
+                </div>
+                <input
+                  required
+                  value={mobileNumber}
+                  id="mobile-number"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  type="text"
+                  onChange={(event) => setMobileNumber(event.target.value)}
+                />
+              </div>
 
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Email"
-                            sx={{ m: 1, width: '52ch' }}
-
-                            value={email}
-                            onChange={(event) => {
-                                setEmail(event.target.value);
-                                const inputEmail = event.target.value;
-
-                                // Regular expression for email validation
-                                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
-
-                                // Check if the email matches the pattern
-                                setIsValid(emailPattern.test(inputEmail));
-                            }}
-
-                            style={{ borderColor: isValid ? 'green' : 'red' }} />
-
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-
-                            label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                            sx={{ m: 1, width: '25ch' }}
-
-                            value={nic}
-                            onChange={(event) => {
-                                setNic(event.target.value);
-                                const inputnic = event.target.value;
-                                const nicPattern = /^\d{12}$/;
-                                setIsValidnic(nicPattern.test(inputnic));
-                            }}
-                            style={{ borderColor: isValid ? 'green' : 'red' }} />
-
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Mobile No"
-                            sx={{ m: 1, width: '25ch' }}
-
-                            value={cont}
-                            onChange={(event) => {
-                                setCont(event.target.value);
-                            }} />
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Home Address"
-                            sx={{ m: 1, width: '52ch' }}
-
-                            value={haddress}
-                            onChange={(event) => {
-                                setHaddress(event.target.value);
-                            }} />
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Proffession"
-                            sx={{ m: 1, width: '52ch' }}
-
-
-                            value={profession}
-                            onChange={(event) => {
-                                setPro(event.target.value);
-                            }} />
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Working Place Address"
-                            sx={{ m: 1, width: '52ch' }}
+              <div className="waddress mb-2">
+                <div className="mb-1 block">
+                  <label
+                    htmlFor="home-address"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Home Address
+                  </label>
+                </div>
+                <input
+                  required
+                  value={homeAddress}
+                  id="home-address"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  type="text"
+                  onChange={(event) => setHomeAddress(event.target.value)}
+                />
+              </div>
 
 
-                            value={waddress}
-                            onChange={(event) => {
-                                setWaddress(event.target.value);
-                            }} />
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
+              <div className="lname mb-2">
+                <div className="mb-1 block">
+                  <label
+                    htmlFor="profession"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Profession
+                  </label>
+                </div>
+                <input
+                  required
+                  value={profession}
+                  id="profession"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  type="text"
+                  onChange={(event) => setProfession(event.target.value)}
+                />
+              </div>
+
+              <div className="waddress mb-2">
+                <div className="mb-1 block">
+                  <label
+                    htmlFor="office-address"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Office Address
+                  </label>
+                </div>
+                <input
+                  required
+                  value={officeAddress}
+                  id="office-address"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  type="text"
+                  onChange={(event) => setOfficeAddress(event.target.value)}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Password
+                </label>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  id="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="confirm-password"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Confirm password
+                </label>
+                <input
+                  type="password"
+                  name="confirm-password"
+                  id="confirm-password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <input
+                    id="terms"
+                    aria-describedby="terms"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 mt-4 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    required=""
+                />
+                <label
+                    htmlFor="terms"
+                    className="ml-2 font-light text-sm text-gray-500 dark:text-gray-300"
+                >
+                    I accept the{' '}
+                    <a
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    href="#"
+                    >
+                    Terms and Conditions
+                    </a>
+                </label>
+                </div>
 
 
-                            /></FormControl>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Confirm Password"
-                                value={password}
-                                onChange={(event) => {
-                                    setPassword(event.target.value);
-                                }}
+              <Button
+                type="submit"
+                className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
+              >
+                Sign Up
+              </Button>
 
-
-                            /></FormControl>
-
-
-
-                        <Button onClick={save} variant="contained" sx={{
-                            m: 1, width: '40ch', height: '50px', backgroundColor: ' #05445E', marginTop: '20px',
-                            '&:hover': {
-                                backgroundColor: '#189AB4', // Change this color to your desired hover color
-                            },
-                        }}>
-
-                            Register
-                        </Button>
-                    </form>
-
-                </div >
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-            </div >
-        </div >
-    )
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Already have an account?{' '}
+                <a
+                  href="#"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Login here
+                </a>
+              </p>
+            </form>
+            </div>
+            
+         </div>
+        </div>
+       </div>
+       </div>
+  );
 }
 
-export default Registration
+export default RegistrationForm;
