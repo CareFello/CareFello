@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
@@ -107,7 +108,7 @@ public class RequestImpl implements RequestService {
         }else if (!caregiver6.isEmpty()){
             return caregiver6;  
         }else{
-            return null;
+            return Collections.emptyList();
         }      
     }
 
@@ -189,9 +190,11 @@ public class RequestImpl implements RequestService {
         
     }
 
-    public String validateRequest3(int id, RequestDTO requestDTO){
+    public BedResponse validateRequest3(int[] ids, RequestDTO requestDTO){
+
+        for (int id : ids){
         List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(id);
-        String result = "good";
+        BedResponse result = new BedResponse(id, "good");
         for (Caregiver1 caregiver : caregivers){
             
             int free = caregiver.getFree();
@@ -218,13 +221,18 @@ public class RequestImpl implements RequestService {
             }else if (free == 1){
                 
             }else{
-                result = "bad";
+                result = new BedResponse(0, "bad");
             }
             
         }
-        return result;
+        if (result.str == "good"){
+            return result;
+        }
         
     }
+    BedResponse result1 = new BedResponse(0, "bad");
+    return result1;
+}
 
     public List<ElderRequest> func1(){
         List<Tempreq> tempreqs = tempreqRepo.findAll();
@@ -244,8 +252,31 @@ public class RequestImpl implements RequestService {
         Elderguar elderguar = elderguarRepo.findByElderid(id);
         Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
         Tempreq tempreq = tempreqRepo.getTempreq(id);
-        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), 10, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id());
+        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), 10, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId());
         return elderResponse1;
+    }
+
+
+    public String assignElder1(RequestDTO requestDTO){
+
+        List<Bed> bed = bedRepo.findAllBeds(requestDTO.getBed_id());
+
+        int free = bed.get(0).getFree();
+        int assigned = bed.get(0).getAssigned();
+        int occupied = bed.get(0).getOccupied();
+        Date occuStartDateBed = bed.get(0).getOccuStartDate();
+        Date occuEndDateBed = bed.get(0).getOccuEndDate();
+        int occuElderId = bed.get(0).getOccuElderId();
+        Bed bed1 = new Bed(requestDTO.getBed_id(),
+        free, assigned,
+        occupied,requestDTO.getAssStartDate(),
+        requestDTO.getAssEndDate(), occuStartDateBed,
+        occuEndDateBed,occuElderId,
+        requestDTO.getAssElderId(),requestDTO.getType(),
+        requestDTO.getCaregiverId() );
+
+        bedRepo.save(bed1);
+        return "Elder successfully added";
     }
     
 }

@@ -16,7 +16,8 @@ public interface RequestService {
     String assignElder(RequestDTO requestDTO);
     String assignCaregiver(RequestDTO requestDTO);
     BedResponse validateRequest2(int[] id, RequestDTO requestDTO);
-    String validateRequest3(int id, RequestDTO requestDTO);
+    BedResponse validateRequest3(int[] id, RequestDTO requestDTO);
     List<ElderRequest> func1();
     BedResponse1 func2(int id);
+    String assignElder1(RequestDTO requestDTO);
 }
