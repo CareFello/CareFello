@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -31,8 +32,10 @@ function RequestContinue() {
   };
 
   const { elderid } = useParams();
-
+  const [uniqueArray, setUniqueArray] = useState([]);
   const [people, setPeople] = useState([]);
+  const [idds, setIdds] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Make the GET request using Axios to fetch data from the backend
@@ -41,6 +44,91 @@ function RequestContinue() {
       .catch((error) => console.error(error));
       console.log(people)
   }, []);
+
+
+  const check = async (assStartDate, assEndDate, caregiverGender) =>  {
+    
+    try {
+      const response = await axios.post("http://localhost:8080/api/beds/request1", {
+        assStartDate: assStartDate,
+        assEndDate: assEndDate,
+        gender: caregiverGender,
+      });
+      console.log(response.data)
+  
+      if (response.data.length !== 0){
+        const bedIds = response.data.map((item) => item.user_id);
+
+        const uniqueElements = [];
+    
+    bedIds.forEach((element) => {
+      if (!uniqueElements.includes(element)) {
+        uniqueElements.push(element);
+      }
+    });
+
+    setUniqueArray(uniqueElements);
+    console.log(uniqueArray);
+        
+
+        
+        axios.post(`http://localhost:8080/api/beds/request6/${uniqueArray}`,{
+          assStartDate: assStartDate,
+          assEndDate: assEndDate,
+          gender: caregiverGender,
+          
+        }).then((res) => {
+          
+          if (res.data.str === "good"){
+            setIdds(res.data.id);
+            alert("good");
+            
+          }else{
+            alert("bad");
+            
+          }
+          
+        
+        }).catch((error) => {
+          console.error(error); 
+        });
+        
+     
+       
+      
+      }else{
+        alert("bad");
+      }
+      
+
+    } catch (err) {
+      alert(err);
+    }
+    
+  }
+
+  const accept = async (assStartDate, assEndDate, idds, elderid, bed_id, type) => {
+
+    console.log(elderid);
+    try {
+      await axios.post(`http://localhost:8080/api/beds/request11`,{
+        assStartDate: assStartDate,
+        assEndDate: assEndDate,
+        assElderId: elderid,
+        caregiverId: idds,
+        bed_id: bed_id,
+        type: type,
+      })
+      .then((response) => alert(response.data))
+      .catch((error) => console.error(error));
+      axios.delete(`http://localhost:8080/api/beds/delete/${people.id}`);
+      navigate('/GuardianRequest');
+      
+    } catch (error) {
+      console.error('Error deleting helllo:', error);
+    }
+    
+};
 
   return (
     <div className="req-continue">
@@ -102,16 +190,19 @@ function RequestContinue() {
             <FormControl>
               <InputLabel>Caregiver</InputLabel>
               <Select>
-                {dummyData.caregiverOptions.map((caregiver, index) => (
-                  <MenuItem key={index} value={caregiver}>
-                    {caregiver}
+                
+                  <MenuItem value={idds}>
+                    {idds}
                   </MenuItem>
-                ))}
+            
               </Select>
             </FormControl>
           </div>
           <div className="action-buttons">
-            <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={() => check(people.assStartDate, people.assEndDate, people.caregiverGender)}>
+              Check for Caregiver
+            </Button>
+            <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}>
               Accept
             </Button>
             <Button variant="contained" color="secondary">

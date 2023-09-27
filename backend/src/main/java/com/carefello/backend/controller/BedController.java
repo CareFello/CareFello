@@ -90,8 +90,8 @@ public class BedController{
     }
 
     @PostMapping("/request6/{id}")
-    public String findCaregivers(@PathVariable int id, @RequestBody RequestDTO requestDTO){
-        String str = requestService.validateRequest3(id, requestDTO);
+    public BedResponse findCaregivers(@PathVariable int[] id, @RequestBody RequestDTO requestDTO){
+        BedResponse str = requestService.validateRequest3(id, requestDTO);
         return str;
     }
 
@@ -119,4 +119,9 @@ public class BedController{
         return requestService.func2(id);
     }
 
+    @PostMapping("/request11")
+    public String findreq(@RequestBody RequestDTO requestDTO){
+        String str = requestService.assignElder1(requestDTO);
+        return str;
+    }
 }

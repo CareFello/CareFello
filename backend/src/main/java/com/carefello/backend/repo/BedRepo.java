@@ -5,6 +5,7 @@ import com.carefello.backend.model.Bed;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -35,6 +36,9 @@ public interface BedRepo extends JpaRepository<Bed,Integer>{
 
     @Query("select b from Bed b where b.bed_id = :bed_id")
     List<Bed> findAllBeds(@Param("bed_id") int bed_id);
+
+    // @Query("select b from Bed b where b.bed_id = :bed_id")
+    // Bed findBed(@Param("bed_id") int bed_id);
 
     // @Query("SELECT b\n" + //
     //         "FROM Bed b\n" + //
