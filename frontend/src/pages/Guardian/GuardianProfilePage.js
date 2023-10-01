@@ -4,7 +4,8 @@ import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
 import { GuardianMenuItem } from "../../components/GuardianMenuItem";
 import "../../styles/Guardian/GuardianProfilePage.css";
-import img_1 from "../../assets/guardian/guardian.jpg";
+import img_user from "../../assets/guardian/guardian.jpg";
+import img_camera from "../../assets/guardian/cam1.svg";
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -23,13 +24,19 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { grey, red } from "@mui/material/colors";
 import axios from "axios";
 // import { NextLinkComposed } from '../../src/Link';
 
 const GuardianProfilePage = () => {
   const StyledBadge = styled(Badge)(({ theme }) => ({}));
+  const SmallAvatar = styled(Avatar)(({ theme }) => ({
+    width: 20,
+    height: 20,
+    border: `2px solid ${theme.palette.background.paper}`,
+    
+  }));
   const Grid = styled(MuiGrid)(({ theme }) => ({
     width: "100%",
     ...theme.typography.body2,
@@ -93,11 +100,11 @@ const GuardianProfilePage = () => {
             bgcolor: "#fff",
             display: "flex",
             // flexDirection: "row",
-          //  justifyContent: "center",
-            border:1
+            //  justifyContent: "center",
+            border: 1,
           }}
         >
-          <Grid xs={3} sx={{ p: 3,}}>
+          <Grid xs={3} sx={{ p: 3 }}>
             {/* this make avatar and others to list down alignment */}
             <Grid
               container
@@ -125,13 +132,42 @@ const GuardianProfilePage = () => {
                 justify-content="center"
               >
                 <div
-                  style={{
-                    // display: "flex",
-                    // flexDirection: "row",
-                    // justifyContent: "center",
-                  }}
+                  style={
+                    {
+                      // display: "flex",
+                      // flexDirection: "row",
+                      // justifyContent: "center",
+                    }
+                  }
                 >
-                  <StyledBadge>
+                  <Badge
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    badgeContent={
+                      <SmallAvatar
+                        alt="edit icon"
+                        src={img_camera}
+                        sx={{
+                          width: 40,
+                          height:40,
+                        }}
+                        
+                      />
+                    }
+                  >
+                   <Avatar
+                      alt="user-image"
+                      height="240"
+                      src={img_user}
+                      sx={{
+                        width: 150,
+                        height: 150,
+                      }}
+                     
+                    />
+                  </Badge>
+
+                  {/* <StyledBadge>
                     <Avatar
                       alt="user-image"
                       height="240"
@@ -140,18 +176,20 @@ const GuardianProfilePage = () => {
                         width: 150,
                         height: 150,
                       }}
+                     
                     />
-                  </StyledBadge>
+                    <ModeEditIcon/>
+                  </StyledBadge> */}
                 </div>
               </Grid>
               {/* <Grid container>
                 <Grid item xs={12} sx={{ my: 4 }}></Grid>
               </Grid> */}
-              <Grid xs={7} sx={{mt:4}}>
+              <Grid xs={7} sx={{ mt: 4 }}>
                 <Stack display="flex" flexDirection={"row"}>
                   <Box
                     sx={{
-                      "& .MuiTextField-root": { m: 1, width: "50ch"},
+                      "& .MuiTextField-root": { m: 1, width: "50ch" },
                       m: 1,
                     }}
                   >
@@ -249,10 +287,9 @@ const GuardianProfilePage = () => {
                         },
                       }}
                     >
-                      <Typography sx={{alignContent:'center'}}>
-                      Save
+                      <Typography sx={{ alignContent: "center" }}>
+                        Save
                       </Typography>
-                      
                     </Button>
                   </Box>
                 </Stack>
