@@ -197,7 +197,7 @@ function Login() {
         <Model isOpen={firstModalIsOpen}
           onRequestClose={closeFirstModal} style={{
             content: { width: "400px", marginLeft: "30%", marginTop: "40px", height: "280px" }
-          }}>
+          }}>  
           <div className='forget_pw'>
             <form action="#" className="">
               <h2 className='Topic'>Password Reset</h2>
