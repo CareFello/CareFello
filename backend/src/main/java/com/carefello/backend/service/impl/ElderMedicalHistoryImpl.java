@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ElderMedicalHistoryImpl implements ElderMedicalHistoryService {
 
@@ -32,5 +34,13 @@ public class ElderMedicalHistoryImpl implements ElderMedicalHistoryService {
         elderRepo.save(elder);
 
         return elderMedicalHistory;
+    }
+
+    @Override
+    public List<ElderMedicalHistory> getAllMedicalHistoriesByElderId(int elderId){
+        Elder elder = elderRepo.findById(elderId)
+                .orElseThrow(()->new EntityNotFoundException("ElderNot Found"));
+
+        return  elder.getElderMedicalHistories();
     }
 }
