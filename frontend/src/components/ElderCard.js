@@ -19,10 +19,40 @@ function ElderCard({ guardianId }) {
       });
   }, [guardianId]);
 
+  // Function to generate placeholder cards with the "Space for Loved Once" text
+  const generatePlaceholderCards = () => {
+    const placeholders = [];
+    for (let i = 0; i < 4; i++) {
+      placeholders.push(
+        <Grid item key={`placeholder-${i}`} xs={12} sm={6} md={3} lg={3}>
+          <Card
+            style={{
+              maxWidth: 165,
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <CardMedia
+              component="img"
+              height="100"
+              alt="Space for Your Loved Once"
+              src={pro}
+            />
+            <CardContent style={{ flex: 1 }}>
+              <Typography variant="h6">Space for Your Loved Once</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      );
+    }
+    return placeholders;
+  };
+
   return (
     <div>
       <Grid container spacing={2}>
-        {elderList.map((elder) => (
+        {elderList.map((elder, index) => (
           <Grid item key={elder.id} xs={12} sm={6} md={3} lg={3}>
             <NavLink to={`/elder/${elder.id}?guardianId=${guardianId}`} style={{ textDecoration: 'none' }}>
               <Card
@@ -37,24 +67,21 @@ function ElderCard({ guardianId }) {
                   component="img"
                   height="100"
                   alt={elder.name}
-                  // Use the image data directly from the elder object if it's not null, otherwise use the pro image
                   src={elder.image ? `data:image/jpeg;base64,${elder.image}` : pro}
                   onError={(e) => {
-                    // If there's an error loading the image, use a default image (pro image)
                     e.target.src = pro;
                   }}
                 />
-
                 <CardContent style={{ flex: 1 }}>
                   <Typography variant="h6">{elder.name}</Typography>
                   <Typography variant="body2">{elder.relationship}</Typography>
-                  {/* You may want to remove this line as it displays the image data */}
-                  {/* <Typography variant="body2">{elder.image}</Typography> */}
                 </CardContent>
               </Card>
             </NavLink>
           </Grid>
         ))}
+        {/* Generate placeholder cards for the remaining empty slots */}
+        {elderList.length < 4 && generatePlaceholderCards().slice(0, 4 - elderList.length)}
       </Grid>
     </div>
   );
