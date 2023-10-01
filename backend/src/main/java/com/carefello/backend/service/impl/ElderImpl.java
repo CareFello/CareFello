@@ -116,6 +116,14 @@ public class ElderImpl implements ElderService {
         elderDTO.setRelationship(elder.getRelationship());
         elderDTO.setGender(elder.getGender());
 
+        if (elder.getImage() != null) {
+            byte[] decompressedImage = ImageUtil.decompressImage(elder.getImage());
+            elderDTO.setImage(decompressedImage);
+        } else {
+            // Set the image field to null in ElderDTO if no image exists
+            elderDTO.setImage(null);
+        }
+
         return elderDTO;
     }
 

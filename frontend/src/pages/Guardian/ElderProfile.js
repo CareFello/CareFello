@@ -1,89 +1,195 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-import { Box, Container, TextField, Button, Typography, Avatar } from '@mui/material';
+import {
+  Box,
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Avatar,
+  Grid,
+  Card,
+  Stack,
+  CardContent,
+  CardMedia,
+
+} from '@mui/material';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
-import elder from "../../assets/guardian/elder1.jpeg";
+import pro from '../../assets/avatar.png';
 import '../../styles/Guardian/ElderProfile.css';
-
+import { TextInput, Label, FileInput } from "flowbite-react"
+import { useLocation, useParams } from 'react-router-dom';
+import axios from 'axios';
 function ElderProfile() {
-  const [emergencyContacts, setEmergencyContacts] = useState([
-    { id: 1, name: 'John Doe', relation: 'Son', contactNo: '0712343242' },
-    { id: 2, name: 'Jane Smith', relation: 'Daughter', contactNo: '0717631824' },
-  ]);
 
-  const [profilePicture, setProfilePicture] = useState(elder);
-  const [elderName, setElderName] = useState('Steve Doe');
+  const { elderId } = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const guardianId = queryParams.get('guardianId');
 
-  const [medicalDetails, setMedicalDetails] = useState({
-    medications: 'Medication A, Medication B',
-    allergies: 'Pollen, Nuts',
-    medicalHistory: 'Hypertension',
-    doctors: 'Dr. Smith, Dr. Johnson',
-  });
+  const [elder, setElder] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [message, setMessage] = useState('');
 
-  const [personalDetails, setPersonalDetails] = useState({
-    name: 'Elder Name',
-    NIC: '123456789',
-    dob: '01/01/1950',
-    age: '73',
-    guardianName: 'Guardian Name',
-  });
+  useEffect(() => {
+    // Fetch elder data by elderId and guardianId
+    axios
+      .get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}`)
+      .then((response) => {
+        setElder(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching elder data:', error);
+      });
+  }, [elderId, guardianId]);
+
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectedImage) {
+      setMessage('Please select an image file.');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append('imageFile', selectedImage);
+
+      const response = await axios.put(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/updateImage`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        setMessage('Elder image updated successfully.');
+        window.location.reload();
+      } else {
+        setMessage('Error occurred while updating elder image.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMessage('An error occurred while updating the image.');
+    }
+  };
+
+  if (!elder) {
+    return <div>Loading...</div>; // You can display a loading indicator
+  }
 
   return (
-    <div className="elder-profile-container">
+    <div >
       <Header />
       <Box height={80} />
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: 'flex' }}>
         <Sidebar menuItems={GuardianMenuItem} />
-        <Container>
-          <Typography className='page-topic' variant='h5'>Elder's Profile</Typography>
-          <div className="profile-section">
+        <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
+          <Container>
+            <Card>
+              <CardContent>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={4} lg={3}>
+                    <Box sx={{ position: 'relative' }}>
+                      <Avatar
+                        alt="Elder's Photo"
+                        src={elder.image ? `data:image/jpeg;base64,${elder.image}` : pro}
+                        sx={{ width: 120, height: 120, alignSelf: 'center', marginLeft: 7 }}
+                      />
+                      <div className="mb-2 block">
 
-            {/* Emergency Contact Details */}
-            <div className="profile-subsection">
-              <Typography variant="h6">Emergency Contact Details</Typography>
-              {emergencyContacts.map(contact => (
-                <div className="contact-item" key={contact.id}>
-                  <TextField label="Name" defaultValue={contact.name} />
-                  <TextField label="Relation" defaultValue={contact.relation} />
-                  <TextField label="Contact No" defaultValue={contact.contactNo} />
-                  <Button variant="contained" color="primary">Update</Button>
-                </div>
-              ))}
-            </div>
+                      </div>
+                      <input type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
+                      <br />
+                      <br />
+                      <Button onClick={handleSubmit} variant="contained" color="primary">
+                        Upload Image
+                      </Button>
+                      <div>{message}</div>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={8} lg={9}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={4} className='text-left'>
+                        <Label
+                          htmlFor="small"
+                          value="Full Name"
+                        />
+                        <TextInput
+                          disabled
+                          fullWidth
+                          placeholder={elder.name}
 
-            {/* Elder's Profile */}
-            <div className="profile-subsection">
-              <Avatar src={profilePicture} alt="Elder's Profile Picture" className="profile-picture" />
-              <TextField label="Name" value={elderName} onChange={e => setElderName(e.target.value)} />
-              <Button variant="contained" color="primary">Update</Button>
-            </div>
-          </div>
+                        // Add value and onChange props for the name field
+                        />
+                      </Grid>
+                      <Grid item xs={4} className='text-left'>
+                        <Label
+                          htmlFor="small"
+                          value="Gender"
+                        />
+                        <TextInput
+                          disabled
+                          fullWidth
+                          label="NIC"
+                          variant="outlined"
+                          placeholder={elder.gender}
+                        // Add value and onChange props for the NIC field
+                        />
+                      </Grid>
+                      <Grid item xs={4} className='text-left'>
+                        <Label
+                          htmlFor="small"
+                          value="Date of Birth"
+                        />
+                        <TextInput
+                          disabled
+                          fullWidth
+                          label="Birthday"
+                          variant="outlined"
+                          placeholder={elder.dob}
+                        // Add value and onChange props for the birthday field
+                        />
 
-          <div className="profile-section">
-            {/* Medical Details */}
-            <div className="profile-subsection">
-              <Typography variant="h6">Medical Details</Typography>
-              <TextField label="Current Medications" defaultValue={medicalDetails.medications} />
-              <TextField label="Allergies" defaultValue={medicalDetails.allergies} />
-              <TextField label="Medical History" defaultValue={medicalDetails.medicalHistory} />
-              <TextField label="Doctors" defaultValue={medicalDetails.doctors} />
-              <Button variant="contained" color="primary">Update</Button>
-            </div>
+                      </Grid>
+                      <Grid item xs={6} className='text-left'>
+                        <Label
+                          htmlFor="small"
+                          value="National Identity Card No"
+                        />
+                        <TextInput
+                          disabled
+                          fullWidth
+                          placeholder={elder.nic}
 
-            {/* Personal Details */}
-            <div className="profile-subsection">
-              <Typography variant="h6">Personal Details</Typography>
-              <TextField label="Name" value={personalDetails.name} onChange={e => setPersonalDetails({ ...personalDetails, name: e.target.value })} />
-              <TextField label="NIC No" value={personalDetails.NIC} onChange={e => setPersonalDetails({ ...personalDetails, NIC: e.target.value })} />
-              <TextField label="Date of Birth" value={personalDetails.dob} onChange={e => setPersonalDetails({ ...personalDetails, dob: e.target.value })} />
-              <TextField label="Age" value={personalDetails.age} onChange={e => setPersonalDetails({ ...personalDetails, age: e.target.value })} />
-              <TextField label="Guardian's Name" value={personalDetails.guardianName} onChange={e => setPersonalDetails({ ...personalDetails, guardianName: e.target.value })} />
-              <Button variant="contained" color="primary">Update</Button>
-            </div>
-          </div>
-        </Container>
+                        // Add value and onChange props for the name field
+                        />
+                      </Grid>
+                      <Grid item xs={6} className='text-left'>
+                        <Label
+                          htmlFor="small"
+                          value="Relationship to Guardian"
+                        />
+                        <TextInput
+                          disabled
+                          fullWidth
+                          label="Relationship to Guardian"
+                          variant="outlined"
+                          placeholder={elder.relationship}
+                        // Add value and onChange props for the NIC field
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Container>
+        </Box>
       </Box>
     </div>
   );
