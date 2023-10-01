@@ -4,21 +4,16 @@ import Header from '../components/Header'
 import { Box } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -74,215 +69,63 @@ function AddCaregiver() {
     }
 
     return (
-        <div>
-            <form>
-                <Header />
-                <Box height={120} />
-                <Box sx={{ display: 'flex' }}>
-                    <Sidebar menuItems={ManagerMenuItem} />
-                    <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-                        <Grid container spacing={0} >
-                            <Grid item xs={12}>
-                                <Stack spacing={9} direction={'row'}>
-                                    <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 100 + "%" }}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                            <CardContent sx={{ flex: '1 0 auto' }}>
-                                                <Typography component="div" variant="h4">
-                                                    Registration of Caregivers
-                                                </Typography>
-                                                <br />
-                                                <div>
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="First name"
-                                                        sx={{ m: 1, width: '30ch' }}
-
-                                                        value={name1}
-                                                        onChange={(event) => {
-                                                            setName1(event.target.value);
-                                                        }}
-
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Last name"
-                                                        sx={{ m: 1, width: '30ch' }}
-
-                                                        value={name2}
-                                                        onChange={(event) => {
-                                                            setName2(event.target.value);
-                                                        }}
-
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-multiline-flexible"
-                                                        label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                                                        sx={{ m: 1, width: '30ch' }}
-
-                                                        value={nic}
-                                                        onChange={(event) => {
-                                                            setNic(event.target.value);
-                                                            const inputnic = event.target.value;
-                                                            const nicPattern = /^\d{12}$/;
-                                                            setIsValidnic(nicPattern.test(inputnic));
-                                                        }}
-                                                        style={{ borderColor: isValid ? 'green' : 'red' }}
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Birthday"
-                                                        sx={{ m: 1, width: '30ch' }}
-                                                        type='date'
-                                                        InputProps={{
-
-                                                            style: { color: 'black' }, // Adjust the color as needed
-                                                        }}
-                                                        value={dob}
-                                                        onChange={(event) => {
-                                                            setDob(event.target.value);
-                                                        }}
-                                                    />
-
-                                                    <TextField
-                                                        required
-                                                        id="outlined-multiline-flexible"
-                                                        label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
-                                                        sx={{ m: 1, width: '62ch' }}
-
-                                                        value={email}
-                                                        onChange={(event) => {
-                                                            setEmail(event.target.value);
-                                                            const inputEmail = event.target.value;
-
-                                                            // Regular expression for email validation
-                                                            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
-
-                                                            // Check if the email matches the pattern
-                                                            setIsValid(emailPattern.test(inputEmail));
-                                                        }}
-
-                                                        style={{ borderColor: isValid ? 'green' : 'red' }}
-                                                    />
-
-                                                    <FormControl sx={{ m: 1, width: '30ch' }}>
-                                                        <InputLabel id="demo-simple-select-helper-label"
-                                                        >Gender</InputLabel>
-                                                        <Select
-                                                            labelId="demo-simple-select-helper-label"
-                                                            id="demo-simple-select-helper"
-                                                            value={gender}
-                                                            onChange={(event) => {
-                                                                setGender(event.target.value);
-                                                            }}
-
-                                                        >
-                                                            <MenuItem value={'M'}>Male</MenuItem>
-                                                            <MenuItem value={'F'}>Female</MenuItem>
-                                                        </Select>
-
-                                                    </FormControl>
-
-                                                    <TextField
-                                                        id="outlined-multiline-flexible"
-                                                        label="Contact no"
-                                                        multiline
-                                                        maxRows={4}
-                                                        sx={{ m: 1, width: '30ch' }}
-
-                                                        value={cont}
-                                                        onChange={(event) => {
-                                                            setCont(event.target.value);
-                                                        }}
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Address"
-                                                        sx={{ m: 1, width: '62ch' }}
-
-                                                        value={address}
-                                                        onChange={(event) => {
-                                                            setAddress(event.target.value);
-                                                        }}
-
-                                                    />
-
-                                                    <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-password"
-                                                        >Password</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-password"
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            endAdornment={
-                                                                <InputAdornment position="end">
-                                                                    <IconButton
-                                                                        aria-label="toggle password visibility"
-                                                                        onClick={handleClickShowPassword}
-                                                                        onMouseDown={handleMouseDownPassword}
-                                                                        edge="end"
-                                                                    >
-                                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                                    </IconButton>
-                                                                </InputAdornment>
-                                                            }
-                                                            label="Password"
-                                                            value={password}
-                                                            onChange={(event) => {
-                                                                setPassword(event.target.value);
-                                                            }}
-
-                                                        />
-                                                    </FormControl>
-                                                    <FormControl sx={{ m: 1, width: '30ch' }} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-password">Re- Enter Password</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-password"
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            endAdornment={
-                                                                <InputAdornment position="end">
-                                                                    <IconButton
-                                                                        aria-label="toggle password visibility"
-                                                                        onClick={handleClickShowPassword}
-                                                                        onMouseDown={handleMouseDownPassword}
-                                                                        edge="end"
-                                                                    >
-                                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                                    </IconButton>
-                                                                </InputAdornment>
-                                                            }
-                                                            label="Password"
-
-                                                        />
-                                                    </FormControl>
-                                                    <br />
-                                                    <Button variant="contained" sx={{ m: 1, width: '30ch' }} onClick={save}>
-                                                        Register
-                                                    </Button>
-
-                                                </div>
-                                            </CardContent>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                                            </Box>
-                                        </Box>
-                                        <CardMedia
-                                            component="img"
-                                            sx={{ width: 50 + "%" }}
-                                            image={img}
-                                            alt="Live from space album cover"
-                                        />
-                                    </Card>
-                                </Stack>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-            </form>
+        <div className='main-part '>
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0" style={{ marginTop: '200px' }}>
+          <div class="p-6 space-y-4 mt-40 md:space-y-6 sm:p-8">
+          <div class="text-xl text-black-800 md:text-2xl dark:text-white">
+              Register New Caregiver
+          </div>
+              <form class="space-y-4 md:space-y-6" action="#">
+              <div class="flex space-x-4">
+        <div class="w-1/2">
+            <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+            <input type="text" name="first-name" id="first-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="First Name" required="" />
         </div>
+        <div class="w-1/2">
+            <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+            <input type="text" name="last-name" id="last-name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Last Name" required="" />
+        </div>
+    </div>
+                  <div>
+                      <label for="birthdate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birth Date</label>
+                      <input type="date" name="birthdate" id="birthdate" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""></input>
+                  </div>
+                  <div class="flex space-x-4">
+        <div class="w-1/2">
+            <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+            <select name="gender" id="gender" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 h dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div class="w-1/2">
+            <label for="contact-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+            <input type="tel" name="contact-number" id="contact-number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contact Number" required="" />
+        </div>
+    </div>
+                  <div>
+                      <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                      <textarea name="address" id="address" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address" required=""></textarea>
+                  </div>
+                  <div class="flex items-start">
+                      <div class="flex items-center h-5">
+                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 mt-17 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                      </div>
+                      <div class="ml-3 text-sm">
+                        <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                      </div>
+                  </div>
+                  <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Already have an account? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
+                  </p>
+              </form>
+          </div>
+      </div>
+  </div>
+
+
+     
     )
 }
 
