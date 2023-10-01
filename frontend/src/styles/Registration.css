@@ -3,7 +3,6 @@
     width: 70%;
     min-height: 500px;
     box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
-    border: 5px solid white;
     box-shadow: 20;
     border-radius: 50px;
     margin-left: 15%;
@@ -20,11 +19,32 @@
 
 .reg-form {
     flex: 60%;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
 .Topic {
     margin-bottom: 10px;
     color: #05445E;
 }
+
+.registration-page {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* Add any other background styles you need */
+  }
+  
+  .transparent-background-form {
+    background-color: rgba(255, 255, 255, 0.7); /* Adjust the alpha value (0.7) for transparency */
+    padding: 20px; /* Add padding for better visibility */
+    border-radius: 10px; /* Add some border-radius for styling */
+    
+  }
+
+
+  .transparent-background-form textarea {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5) for field transparency */
+    border: none; /* Remove borders if needed */
+  }
+  
+  /* Add any other styling rules you want for the registration form */
+  
