@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("api/v1/guardian/{guardianId}/elders/{elderId}")
@@ -22,5 +24,11 @@ public class ElderMedicalHistoryController {
 
         ElderMedicalHistory elderMedicalHistory = elderMedicalHistoryService.addHistory(elderId, elderMedicalHistoryDTO);
         return new ResponseEntity<>(elderMedicalHistory , HttpStatus.CREATED);
+    }
+
+    @GetMapping("/viewHistory")
+    public ResponseEntity<List<ElderMedicalHistory>> getAllMedicalHistory(@PathVariable int elderId){
+        List<ElderMedicalHistory> medicalHistories = elderMedicalHistoryService.getAllMedicalHistoriesByElderId(elderId);
+        return new ResponseEntity<>(medicalHistories, HttpStatus.OK);
     }
 }
