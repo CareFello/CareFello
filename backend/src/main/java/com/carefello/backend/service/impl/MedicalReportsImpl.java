@@ -1,6 +1,7 @@
 package com.carefello.backend.service.impl;
 
 
+import com.carefello.backend.DTO.MedicalReportsDTO;
 import com.carefello.backend.Util.ImageUtil;
 import com.carefello.backend.model.ElderMedicalHistory;
 import com.carefello.backend.model.MedicalReports;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,5 +52,29 @@ public class MedicalReportsImpl implements MedicalReportsService {
                 throw new IllegalArgumentException("PDF File IS REQUIRED");
             }
         }
+    }
+
+    @Override
+    public List<MedicalReportsDTO> getAllReportsForDisease(int diseaseId) {
+        // Retrieve all medical reports for the specified disease ID
+        List<MedicalReports> reports = medicalReportsRepo.findByElderMedicalHistory_Id(diseaseId);
+
+        // Convert MedicalReports entities to DTOs
+        List<MedicalReportsDTO> reportDTOs = new ArrayList<>();
+        for (MedicalReports report : reports) {
+            MedicalReportsDTO reportDTO = new MedicalReportsDTO();
+            reportDTO.setId(report.getId());
+            reportDTO.setName(report.getName());
+            reportDTO.setType(report.getType());
+            // You can choose to return compressed or uncompressed PDF data here
+            // reportDTO.setPdf(report.getPdfData());
+            reportDTOs.add(reportDTO);
+        }
+
+        return reportDTOs;
+    }
+
+    public MedicalReports getReportsById(int reportId){
+        return medicalReportsRepo.findById(reportId).orElse(null);
     }
 }
