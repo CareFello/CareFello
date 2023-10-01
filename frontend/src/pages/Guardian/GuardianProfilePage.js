@@ -1,26 +1,31 @@
 import React, { useState } from "react";
+
 import Sidebar from "../../components/Sidebar";
 import Header from "../../components/Header";
+import { GuardianMenuItem } from "../../components/GuardianMenuItem";
+import "../../styles/Guardian/GuardianProfilePage.css";
+import img_1 from "../../assets/guardian/guardian.jpg";
+
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { Theme } from "@mui/material";
+import { createTheme } from "@mui/material";
+import Container from "@mui/material";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import MuiGrid from "@mui/material/Grid";
 import { Typography, autocompleteClasses } from "@mui/material";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
-
 import Divider, { dividerClasses } from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import MuiGrid from "@mui/material/Grid";
-
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-
 import IconButton from "@mui/material/IconButton";
-import img_1 from "../../assets/guardian/guardian.jpg";
-import { GuardianMenuItem } from "../../components/GuardianMenuItem";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import "../../styles/Guardian/GuardianProfilePage.css";
 import { grey, red } from "@mui/material/colors";
+import axios from "axios";
 // import { NextLinkComposed } from '../../src/Link';
 
 const GuardianProfilePage = () => {
@@ -33,7 +38,8 @@ const GuardianProfilePage = () => {
     },
   }));
   const [personalDetails, setPersonalDetails] = useState({
-    fullName: "Priyanthi De Silva",
+    firstName: "Priyanthi",
+    lastName: "De Silva",
     email: "pereraDehiwala@gmail.com",
     nic: "2000120304",
     mobile: "0773485994",
@@ -42,6 +48,31 @@ const GuardianProfilePage = () => {
     profession: "Software Engineer",
     lovedOnes: "K.Sampath Perera, Nimali Perera",
   });
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [password, setPassword] = useState("");
+  const [cont, setCont] = useState("");
+  const [profession, setPro] = useState("");
+  const [haddress, setHaddress] = useState("");
+  const [waddress, setWaddress] = useState("");
+  async function save(event) {
+    event.preventDefault();
+    try {
+      await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
+        fname: fname,
+        lname: lname,
+        cont: cont,
+        profession: profession,
+        haddress: haddress,
+        waddress: waddress,
+        password: password,
+      });
+      alert("Your Profile Updated is Successful");
+      window.location.reload();
+    } catch (err) {
+      alert(err);
+    }
+  }
 
   return (
     <div className="guardian-profile-page">
@@ -50,255 +81,186 @@ const GuardianProfilePage = () => {
 
       <Box
         sx={{
-          // display: "flex",
           mx: 45, //margin left and right
-          my: 5, //margin top and bottom
-          p: 3,
         }}
       >
         <Sidebar menuItems={GuardianMenuItem} />
         <Grid
           container
           sx={{
-            border: 1,
-            width: 900,
-            height: "85vh",
-            borderColor: "grey.300",
-            boxShadow: 0,
+            // width: 900,
+            // height: "100vh",
             bgcolor: "#fff",
-            borderRadius: 3,
-            p: 2,
+            display: "flex",
+            // flexDirection: "row",
+          //  justifyContent: "center",
+            border:1
           }}
         >
-          {/* <Grid xs={6}>
-            <Typography
-              variant="h5"
-              color="#05445E"
-              sx={{ mx: 30, textAlign: "left" }}
+          <Grid xs={3} sx={{ p: 3,}}>
+            {/* this make avatar and others to list down alignment */}
+            <Grid
+              container
+              sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              Profile
-            </Typography>
-          </Grid> */}
-
-          <Typography variant="h5" color="#05445E" sx={{ textAlign: "left" }}>
-            Profile
-          </Typography>
-
-          <Grid xs={3} sx={{ p: 3 }}>
-            <Grid display={"flex"} flexDirection={"column"}>
+              <Typography
+                variant="h5"
+                color="#05445E"
+                sx={{ textAlign: "left" }}
+              >
+                Profile
+              </Typography>
               <Grid
                 xs={3}
                 spacing={24}
-                // display="flex"
+                sx={{ mt: 4 }}
+                display="flex"
                 // align-items="center"
-                // justify-content="center"
+                justify-content="center"
               >
-                <StyledBadge>
-                  <Avatar
-                    alt="user-image"
-                    height="240"
-                    src={img_1}
-                    sx={{
-                      width: 150,
-                      height: 150,
-                      // display: "flex",
-                      // alignItems: "center",
-                      // justifyContent: "center",
-                    }}
-                  />
-                </StyledBadge>
+                <div
+                  style={{
+                    // display: "flex",
+                    // flexDirection: "row",
+                    // justifyContent: "center",
+                  }}
+                >
+                  <StyledBadge>
+                    <Avatar
+                      alt="user-image"
+                      height="240"
+                      src={img_1}
+                      sx={{
+                        width: 150,
+                        height: 150,
+                      }}
+                    />
+                  </StyledBadge>
+                </div>
               </Grid>
-              <Grid container>
-                <Grid item xs={12} sx={{ my: 4 }}>
-                  <Typography color="#0544E" sx={{ mx: 2 }}>
-                    {personalDetails.fullName}
-                  </Typography>
-                </Grid>
-              </Grid>
-              {/* <Grid xs={12} sx={{ border: 2, m: 2 }}>
-                <Typography color="#0544E" sx={{ mx: 2 }}>
-                  {personalDetails.fullName}
-                </Typography>
+              {/* <Grid container>
+                <Grid item xs={12} sx={{ my: 4 }}></Grid>
               </Grid> */}
+              <Grid xs={7} sx={{mt:4}}>
+                <Stack display="flex" flexDirection={"row"}>
+                  <Box
+                    sx={{
+                      "& .MuiTextField-root": { m: 1, width: "50ch"},
+                      m: 1,
+                    }}
+                  >
+                    <div>
+                      <Box
+                        sx={{
+                          "& .MuiTextField-root": { width: "24ch" },
+                        }}
+                      >
+                        <TextField
+                          label="First Name"
+                          id="outlined-size-small"
+                          defaultValue={personalDetails.firstName}
+                          size="small"
+                          sx={{ outline: "none" }}
+                        />
+                        <TextField
+                          autoFocus
+                          label="Last Name"
+                          id="outlined-size-small"
+                          defaultValue={personalDetails.lastName}
+                          size="small"
+                          sx={{ outline: "none" }}
+                        />
+                      </Box>
+                      <TextField
+                        disabled
+                        label="Email"
+                        id="outlined-size-small"
+                        defaultValue={personalDetails.email}
+                        size="small"
+                      />
+                      <Box
+                        sx={{
+                          // "& .MuiTextField-root": { width: "24ch" },
+                          width: "24ch",
+                        }}
+                      >
+                        <TextField
+                          disabled
+                          label="NIC"
+                          id="outlined-size-small"
+                          defaultValue={personalDetails.nic}
+                          size="small"
+                        />
+                        <TextField
+                          label="Mobile Number"
+                          id="outlined-size-small"
+                          defaultValue={personalDetails.mobile}
+                          size="small"
+                        />
+                      </Box>
+
+                      <TextField
+                        label="Home Address"
+                        id="outlined-size-small"
+                        defaultValue={personalDetails.homeAddress}
+                        size="small"
+                      />
+                      <TextField
+                        label="Profession"
+                        id="outlined-size-small"
+                        defaultValue={personalDetails.profession}
+                        size="small"
+                      />
+
+                      <TextField
+                        label="Working Place Address"
+                        id="outlined-size-small"
+                        defaultValue={personalDetails.workingPlaceAddress}
+                        size="small"
+                      />
+                      <TextField
+                        disabled
+                        label="Your Loved Ones"
+                        id="outlined-size-small"
+                        defaultValue={personalDetails.lovedOnes}
+                        size="small"
+                        sx={{ pb: 2 }}
+                      />
+                    </div>
+                    <Button
+                      onClick={save}
+                      variant="contained"
+                      sx={{
+                        m: 1,
+                        width: "10ch",
+                        height: "50px",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        backgroundColor: " #05445E",
+                        marginTop: "20px",
+                        "&:hover": {
+                          backgroundColor: "#189AB4", // Change this color to your desired hover color
+                        },
+                      }}
+                    >
+                      <Typography sx={{alignContent:'center'}}>
+                      Save
+                      </Typography>
+                      
+                    </Button>
+                  </Box>
+                </Stack>
+              </Grid>
             </Grid>
           </Grid>
-          <Divider orientation="vertical" flexItem sx={{ m: 2 }} />
-          <Grid xs={7}>
-            <Stack display="flex" flexDirection={"row"}>
-              <Box
-                sx={{
-                  "& .MuiTextField-root": { m: 1, width: "50ch" },
-                  m: 1,
-                }}
-                autoComplete="off"
-              >
-                <div>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "left",
-                    }}
-                  >
-                    {/* <Typography>Full Name:</Typography>
-                    <Typography>{personalDetails.fullName}</Typography> */}
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
-                      p: 2,
-                    }}
-                  >
-                    <Button
-                      variant="outlined"
-                      size="medium"
-                      // component={NextLinkComposed}
-                      // to={{
-                      //   pathname: "/EditGuardianProfile",
-                      //   query: { name: "test" },
-                      // }}
-                    >
-                      Edit Profile
-                    </Button>
-                    {/* <Typography>Full Name:</Typography>
-                    <Typography>{personalDetails.fullName}</Typography> */}
-                  </Box>
-
-                  <TextField
-                    disabled
-                    label="Full Name"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.fullName}
-                    size="small"
-                    variant="standard"
-                  />
-                  <TextField
-                    disabled
-                    label="Email"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.email}
-                    size="small"
-                    variant="standard"
-                  />
-                  <Box
-                    sx={{
-                      "& .MuiTextField-root": { width: "24ch" },
-                    }}
-                  >
-                    <TextField
-                      disabled
-                      label="NIC"
-                      id="standard-size-small"
-                      defaultValue={personalDetails.nic}
-                      size="small"
-                      variant="standard"
-                    />
-                    <TextField
-                      disabled
-                      label="Mobile Number"
-                      id="standard-size-small"
-                      defaultValue={personalDetails.mobile}
-                      size="small"
-                      variant="standard"
-                    />
-                  </Box>
-
-                  <TextField
-                    disabled
-                    label="Home Address"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.homeAddress}
-                    size="small"
-                    variant="standard"
-                  />
-                  <TextField
-                    disabled
-                    label="Profession"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.profession}
-                    size="small"
-                    variant="standard"
-                  />
-                  <TextField
-                    disabled
-                    label="Working Place Address"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.workingPlaceAddress}
-                    size="small"
-                    variant="standard"
-                    sx={{ pb: 2 }}
-                  />
-                  <TextField
-                    disabled
-                    label="Your Loved Ones"
-                    id="standard-size-small"
-                    defaultValue={personalDetails.lovedOnes}
-                    size="small"
-                    variant="standard"
-                    sx={{ pb: 2 }}
-                  />
-                  {/* <TextField
-                    disabled
-                    label="Working Place Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.workingPlaceAddresse}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Email"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.email}
-                    size="small"
-                  />
-                  <Box
-                    sx={{
-                      "& .MuiTextField-root": { width: "24ch" },
-                    }}
-                  >
-                    <TextField
-                      disabled
-                      label="NIC"
-                      id="outlined-size-small"
-                      defaultValue={personalDetails.nic}
-                      size="small"
-                    />
-                    <TextField
-                      disabled
-                      label="Mobile Number"
-                      id="outlined-size-small"
-                      defaultValue={personalDetails.mobile}
-                      size="small"
-                    />
-                  </Box>
-                  <TextField
-                    disabled
-                    label="Home Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.homeAddress}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Profession"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.profession}
-                    size="small"
-                  />
-                  <TextField
-                    disabled
-                    label="Working Place Address"
-                    id="outlined-size-small"
-                    defaultValue={personalDetails.workingPlaceAddress}
-                    size="small"
-                  /> */}
-                </div>
-              </Box>
-            </Stack>
-          </Grid>
         </Grid>
+        {/* <Divider orientation="vertical" flexItem sx={{ m: 2 }} /> */}
       </Box>
     </div>
   );

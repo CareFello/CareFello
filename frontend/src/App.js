@@ -52,7 +52,7 @@ import Caregiverprofile from "./pages/caregiverprofile";
 import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
-import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
+//import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
