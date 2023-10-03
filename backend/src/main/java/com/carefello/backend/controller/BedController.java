@@ -20,6 +20,7 @@ import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
+import com.carefello.backend.payload.response.BedResponse2;
 import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.repo.BedRepo;
 import com.carefello.backend.repo.TempreqRepo;
@@ -123,5 +124,21 @@ public class BedController{
     public String findreq(@RequestBody RequestDTO requestDTO){
         String str = requestService.assignElder1(requestDTO);
         return str;
+    }
+
+    @PostMapping("/request12")
+    public String findreq1(@RequestBody RequestDTO requestDTO){
+        String str = requestService.Tempreqcheck(requestDTO);
+        return str;
+    }
+
+    // @GetMapping("/request13")
+    // public int[] findOccuBeds(){
+    //     return bedRepo.getDistinctBed();
+    // }
+
+    @GetMapping("/request13")
+    public List<BedResponse2> findOccuBeds(){
+        return requestService.getOccu();
     }
 }

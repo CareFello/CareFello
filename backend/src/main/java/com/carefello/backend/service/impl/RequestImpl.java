@@ -22,6 +22,7 @@ import com.carefello.backend.model.Guardian;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
+import com.carefello.backend.payload.response.BedResponse2;
 import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.service.RequestService;
 import com.carefello.backend.repo.BedRepo;
@@ -277,6 +278,30 @@ public class RequestImpl implements RequestService {
 
         bedRepo.save(bed1);
         return "Elder successfully added";
+    }
+
+    public String Tempreqcheck(RequestDTO requestDTO){
+        Tempreq tempreq = tempreqRepo.getTempreq1(requestDTO.getAssStartDate());
+        Tempreq tempreq2 = tempreqRepo.getTempreq2(requestDTO.getAssEndDate());
+        if (tempreq != null){
+            return "good";
+        }else if (tempreq2 != null){
+            return "good";
+        }else{
+            return "bad";
+        }
+    }
+
+    public List<BedResponse2> getOccu(){
+        List<BedResponse2> myObjectList = new ArrayList<>();
+        int[] bedIds = bedRepo.getDistinctBed();
+        for (int bedId : bedIds){
+            List<Bed> bed = bedRepo.findAllBeds(bedId);
+            Elder1 elder1 = elder1Repo.findByElderid(bed.get(0).getOccuElderId());
+            BedResponse2 bedResponse2 = new BedResponse2(elder1.getFirstname(), bed.get(0).getOccuStartDate(), bedId, bed.get(0).getOccuEndDate(), bed.get(0).getOccuElderId());
+            myObjectList.add(bedResponse2);
+        }
+        return myObjectList;
     }
     
 }

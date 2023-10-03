@@ -7,6 +7,7 @@ import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
+import com.carefello.backend.payload.response.BedResponse2;
 import com.carefello.backend.payload.response.ElderRequest;
 
 public interface RequestService {
@@ -20,4 +21,6 @@ public interface RequestService {
     List<ElderRequest> func1();
     BedResponse1 func2(int id);
     String assignElder1(RequestDTO requestDTO);
+    String Tempreqcheck(RequestDTO requestDTO);
+    List<BedResponse2> getOccu();
 }
