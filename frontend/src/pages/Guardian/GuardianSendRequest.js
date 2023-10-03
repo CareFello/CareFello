@@ -123,12 +123,18 @@ const GuardianSendRequest = () => {
         }).then((res) => {
           
           if (res.data.str === "good"){
-            console.log(res.data.id);
-
-            axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems, type: type});
-
-            alert("Request successfully sent");
-            window.location.reload();
+            axios.post("http://localhost:8080/api/beds/request12",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
+            .then((res) => {
+              if (res.data == "good"){
+                console.log(res.data.id);
+                axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems, type: type});
+                alert("Request successfully sent");
+                window.location.reload();
+              }else{
+                alert("No space");
+              }
+            })
+            
           }else{
             alert("No space");
             
