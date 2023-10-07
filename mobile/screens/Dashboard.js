@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    borderTopLeftRadius: 50, // Add rounded corners to the upper two corners
+    borderTopRightRadius: 50, // Add rounded corners to the upper two corners
   },
   content: {
     flex: 1,
