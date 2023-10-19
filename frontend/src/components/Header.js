@@ -18,6 +18,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAppStore } from '../appStore';
 import Logo from '../assets/logo.png';
 import "../styles/Header.css"
+import { useNavigate } from 'react-router-dom';
 
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
@@ -75,6 +76,7 @@ export default function Header() {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const updateOpen = useAppStore((state) => state.updateOpen);
     const dOpen = useAppStore((state) => state.dopen);
+    const navigate = useNavigate();
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -88,8 +90,8 @@ export default function Header() {
     };
 
     const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
+        localStorage.removeItem('myData');
+        navigate('/');
     };
 
     const handleMobileMenuOpen = (event) => {
@@ -113,7 +115,7 @@ export default function Header() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem >Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
         </Menu>
     );

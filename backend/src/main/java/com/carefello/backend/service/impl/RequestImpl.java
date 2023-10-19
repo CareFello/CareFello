@@ -280,15 +280,18 @@ public class RequestImpl implements RequestService {
         return "Elder successfully added";
     }
 
-    public String Tempreqcheck(RequestDTO requestDTO){
+    public BedResponse Tempreqcheck(RequestDTO requestDTO){
         Tempreq tempreq = tempreqRepo.getTempreq1(requestDTO.getAssStartDate());
         Tempreq tempreq2 = tempreqRepo.getTempreq2(requestDTO.getAssEndDate());
         if (tempreq != null){
-            return "good";
+            BedResponse response = new BedResponse(requestDTO.getId(), "good");
+            return response;
         }else if (tempreq2 != null){
-            return "good";
+            BedResponse response = new BedResponse(requestDTO.getId(), "good");
+            return response;
         }else{
-            return "bad";
+            BedResponse response = new BedResponse(0, "bad");
+            return response;
         }
     }
 

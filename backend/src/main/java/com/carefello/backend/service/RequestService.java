@@ -21,6 +21,6 @@ public interface RequestService {
     List<ElderRequest> func1();
     BedResponse1 func2(int id);
     String assignElder1(RequestDTO requestDTO);
-    String Tempreqcheck(RequestDTO requestDTO);
+    BedResponse Tempreqcheck(RequestDTO requestDTO);
     List<BedResponse2> getOccu();
 }

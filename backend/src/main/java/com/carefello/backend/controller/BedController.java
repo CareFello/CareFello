@@ -127,8 +127,8 @@ public class BedController{
     }
 
     @PostMapping("/request12")
-    public String findreq1(@RequestBody RequestDTO requestDTO){
-        String str = requestService.Tempreqcheck(requestDTO);
+    public BedResponse findreq1(@RequestBody RequestDTO requestDTO){
+        BedResponse str = requestService.Tempreqcheck(requestDTO);
         return str;
     }
 
