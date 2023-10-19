@@ -73,11 +73,11 @@ public class BedController{
         return str;
     }
 
-    @PostMapping("/request7")
-    public String assignCaregiver1(@RequestBody RequestDTO requestDTO){
-        String str = requestService.assignCaregiver(requestDTO);
-        return str;
-    }
+    // @PostMapping("/request7")
+    // public String assignCaregiver1(@RequestBody RequestDTO requestDTO){
+    //     String str = requestService.assignCaregiver(requestDTO);
+    //     return str;
+    // }
 
     @GetMapping("/request4/{id}")
     public List<Bed> findBeds(@PathVariable int id){
