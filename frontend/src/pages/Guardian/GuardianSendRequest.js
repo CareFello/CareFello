@@ -22,6 +22,7 @@ const GuardianSendRequest = () => {
   const [selectedMealItems, setSelectedMealItems] = React.useState([]);
 
   const idd = localStorage.getItem('myData');
+  console.log(idd);
 
   //newly added
   const [name, setName] = useState('');
@@ -123,10 +124,11 @@ const GuardianSendRequest = () => {
         }).then((res) => {
           
           if (res.data.str === "good"){
+            
             axios.post("http://localhost:8080/api/beds/request12",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
             .then((res) => {
-              if (res.data == "good"){
-                console.log(res.data.id);
+              if (res.data.str == "good"){
+                
                 axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems, type: type});
                 alert("Request successfully sent");
                 window.location.reload();
