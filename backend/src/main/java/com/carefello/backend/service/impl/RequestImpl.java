@@ -34,6 +34,8 @@ import com.carefello.backend.repo.TempreqRepo;
 
 
 
+
+
 @Service
 
 public class RequestImpl implements RequestService {
@@ -127,18 +129,18 @@ public class RequestImpl implements RequestService {
         return requestDTO.getType();
     }
 
-    public String assignCaregiver(RequestDTO requestDTO){
+    // public String assignCaregiver(RequestDTO requestDTO){
 
-        Caregiver1 caregiver1 = new Caregiver1(requestDTO.getGender(),
-        requestDTO.getFree(), requestDTO.getAge(),
-        requestDTO.getAssigned(),requestDTO.getOccupied(),
-        requestDTO.getOccuStartDate(),requestDTO.getOccuEndDate(),
-        requestDTO.getAssStartDate(),requestDTO.getAssEndDate()
-         );
+    //     Caregiver1 caregiver1 = new Caregiver1(requestDTO.getGender(),
+    //     requestDTO.getFree(), requestDTO.getAge(),
+    //     requestDTO.getAssigned(),requestDTO.getOccupied(),
+    //     requestDTO.getOccuStartDate(),requestDTO.getOccuEndDate(),
+    //     requestDTO.getAssStartDate(),requestDTO.getAssEndDate()
+    //      );
 
-        caregiver1Repo.save(caregiver1);
-        return requestDTO.getType();
-    }
+    //     caregiver1Repo.save(caregiver1);
+    //     return requestDTO.getType();
+    // }
 
     public BedResponse validateRequest2(int[] ids, RequestDTO requestDTO){
 
@@ -253,6 +255,9 @@ public class RequestImpl implements RequestService {
         Elderguar elderguar = elderguarRepo.findByElderid(id);
         Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
         Tempreq tempreq = tempreqRepo.getTempreq(id);
+
+        
+
         BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), 10, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId());
         return elderResponse1;
     }
@@ -261,6 +266,7 @@ public class RequestImpl implements RequestService {
     public String assignElder1(RequestDTO requestDTO){
 
         List<Bed> bed = bedRepo.findAllBeds(requestDTO.getBed_id());
+        List<Caregiver1> caregiver = caregiver1Repo.findAllCaregivers(requestDTO.getCaregiverId());
 
         int free = bed.get(0).getFree();
         int assigned = bed.get(0).getAssigned();
@@ -268,6 +274,16 @@ public class RequestImpl implements RequestService {
         Date occuStartDateBed = bed.get(0).getOccuStartDate();
         Date occuEndDateBed = bed.get(0).getOccuEndDate();
         int occuElderId = bed.get(0).getOccuElderId();
+
+        int freecare = caregiver.get(0).getFree();
+        int assignedcare = caregiver.get(0).getAssigned();
+        int occupiedcare = caregiver.get(0).getOccupied();
+        Date occuStartDateBedcare = caregiver.get(0).getOccuStartDate();
+        Date occuEndDateBedcare = caregiver.get(0).getOccuEndDate();
+        char gender = caregiver.get(0).getGender();
+        int age = caregiver.get(0).getAge();
+        
+
         Bed bed1 = new Bed(requestDTO.getBed_id(),
         free, assigned,
         occupied,requestDTO.getAssStartDate(),
@@ -277,6 +293,10 @@ public class RequestImpl implements RequestService {
         requestDTO.getCaregiverId() );
 
         bedRepo.save(bed1);
+
+        Caregiver1 caregiver1 = new Caregiver1(gender, freecare, age, assignedcare, occupiedcare, occuStartDateBedcare, occuEndDateBedcare, requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getCaregiverId());
+        caregiver1Repo.save(caregiver1);
+
         return "Elder successfully added";
     }
 
