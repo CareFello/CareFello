@@ -41,6 +41,11 @@ public interface Caregiver1Repo extends JpaRepository<Caregiver1,Integer>{
     @Query("select c from Caregiver1 c where c.user_id = :user_id")
     List<Caregiver1> findAllCaregivers(@Param("user_id") int user_id);
 
+    @Query("select c from Caregiver1 c where c.user_id = :user_id and c.assStartDate = :assStartDate")
+    Caregiver1 findAllCaregivers1(@Param("user_id") int user_id, @Param("assStartDate") Date assStartDate);
+
+    
+
     // @Query("SELECT c FROM Caregiver1 c WHERE c.gender = :gender")
     // Caregiver1 findGenderMatch(@Param("gender") char gender);
 

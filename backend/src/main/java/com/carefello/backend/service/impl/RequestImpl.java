@@ -116,19 +116,19 @@ public class RequestImpl implements RequestService {
         }      
     }
 
-    public String assignElder(RequestDTO requestDTO){
+    // public String assignElder(RequestDTO requestDTO){
 
-        Bed bed = new Bed(requestDTO.getBed_id(),
-        requestDTO.getFree(), requestDTO.getAssigned(),
-        requestDTO.getOccupied(),requestDTO.getAssStartDate(),
-        requestDTO.getAssEndDate(),requestDTO.getOccuStartDate(),
-        requestDTO.getOccuEndDate(),requestDTO.getOccuElderId(),
-        requestDTO.getAssElderId(),requestDTO.getType(),
-        requestDTO.getCaregiverId() );
+    //     Bed bed = new Bed(requestDTO.getBed_id(),
+    //     requestDTO.getFree(), requestDTO.getAssigned(),
+    //     requestDTO.getOccupied(),requestDTO.getAssStartDate(),
+    //     requestDTO.getAssEndDate(),requestDTO.getOccuStartDate(),
+    //     requestDTO.getOccuEndDate(),requestDTO.getOccuElderId(),
+    //     requestDTO.getAssElderId(),requestDTO.getType(),
+    //     requestDTO.getCaregiverId() );
 
-        bedRepo.save(bed);
-        return requestDTO.getType();
-    }
+    //     bedRepo.save(bed);
+    //     return requestDTO.getType();
+    // }
 
     // public String assignCaregiver(RequestDTO requestDTO){
 
@@ -275,6 +275,7 @@ public class RequestImpl implements RequestService {
         Date occuStartDateBed = bed.get(0).getOccuStartDate();
         Date occuEndDateBed = bed.get(0).getOccuEndDate();
         int occuElderId = bed.get(0).getOccuElderId();
+        int caregiveridoccu = bed.get(0).getCaregiveridoccu();
 
         int freecare = caregiver.get(0).getFree();
         int assignedcare = caregiver.get(0).getAssigned();
@@ -291,7 +292,7 @@ public class RequestImpl implements RequestService {
         requestDTO.getAssEndDate(), occuStartDateBed,
         occuEndDateBed,occuElderId,
         requestDTO.getAssElderId(),requestDTO.getType(),
-        requestDTO.getCaregiverId() );
+        requestDTO.getCaregiverId(),caregiveridoccu);
 
         bedRepo.save(bed1);
 
@@ -334,13 +335,26 @@ public class RequestImpl implements RequestService {
         Date date1 = beds.get(0).getAssStartDate();
         Date date2 = beds.get(0).getAssEndDate();
         int idd = beds.get(0).getId();
+        int caregiveridoccu = beds.get(0).getCaregiverId();
         
         for (Bed bed : beds){
             bed.setOccuStartDate(date1);
             bed.setOccuEndDate(date2);
+            bed.setCaregiveridoccu(caregiveridoccu);
             bed = bedRepo.save(bed);
         }
         bedRepo.deleteById(idd);
+
+        Caregiver1 caregiver1 = caregiver1Repo.findAllCaregivers1(caregiveridoccu, date1);
+        int iddd = caregiver1.getId();
+        List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(caregiveridoccu);
+
+        for (Caregiver1 caregiver : caregivers){
+            caregiver.setOccuStartDate(date1);
+            caregiver.setOccuEndDate(date2);
+            caregiver = caregiver1Repo.save(caregiver);
+        }
+        caregiver1Repo.deleteById(iddd);
 
         return "hi";
     }
