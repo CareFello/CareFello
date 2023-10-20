@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.carefello.backend.DTO.RequestDTO;
@@ -140,5 +141,10 @@ public class BedController{
     @GetMapping("/request13")
     public List<BedResponse2> findOccuBeds(){
         return requestService.getOccu();
+    }
+
+    @PutMapping("/request14/{id}")
+    public String findOccuBed(@PathVariable int id){
+        return requestService.func5(id);
     }
 }
