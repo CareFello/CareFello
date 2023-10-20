@@ -37,6 +37,9 @@ public interface BedRepo extends JpaRepository<Bed,Integer>{
     @Query("select b from Bed b where b.bed_id = :bed_id")
     List<Bed> findAllBeds(@Param("bed_id") int bed_id);
 
+    @Query("select b from Bed b where b.bed_id = :bed_id order by b.assStartDate asc")
+    List<Bed> findAllBedsasc(@Param("bed_id") int bed_id);
+
     @Query("SELECT DISTINCT b.bed_id FROM Bed b")
     int[] getDistinctBed();
 

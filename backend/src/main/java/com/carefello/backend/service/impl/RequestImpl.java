@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -325,6 +326,23 @@ public class RequestImpl implements RequestService {
             myObjectList.add(bedResponse2);
         }
         return myObjectList;
+    }
+
+    public String func5(int id){
+
+        List<Bed> beds = bedRepo.findAllBedsasc(id);
+        Date date1 = beds.get(0).getAssStartDate();
+        Date date2 = beds.get(0).getAssEndDate();
+        int idd = beds.get(0).getId();
+        
+        for (Bed bed : beds){
+            bed.setOccuStartDate(date1);
+            bed.setOccuEndDate(date2);
+            bed = bedRepo.save(bed);
+        }
+        bedRepo.deleteById(idd);
+
+        return "hi";
     }
     
 }

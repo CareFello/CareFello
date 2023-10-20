@@ -7,6 +7,7 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+import Sel1 from "./pages/Select1";
 
 import Email from "./pages/Email";
 
@@ -87,7 +88,7 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/email" element={<Email />} />
-
+          
 
           <Route path="/image" element={<Image />} />
           <Route path="/image1" element={<Image1 />} />
@@ -102,6 +103,7 @@ function App() {
 
 
           <Route path="/sel" element={<Sel />} />
+          <Route path="/sel1" element={<Sel1 />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/ViewGuardianProfile" element={<ViewGuardianProfile />} />
