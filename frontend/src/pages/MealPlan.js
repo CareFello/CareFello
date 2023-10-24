@@ -6,27 +6,14 @@ import { Box } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal'
-import TextField from '@mui/material/TextField'
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import meal1 from "../assets/meal1.jpg"
+
+import { IoCloseSharp } from 'react-icons/io5';
+import { TextInput, Label, FileInput, Checkbox, Textarea } from "flowbite-react"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import MealPlanCard from '../components/MealPlanCard';
 
@@ -133,26 +120,38 @@ export default function MealPlan() {
                                     width: '100%',
                                 }}
                             >
+                                <IconButton
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 0,
+                                        zIndex: 1, // Ensure the close button appears above the content
+                                    }}
+                                    onClick={handleModalClose}
+                                >
+                                    <IoCloseSharp /> {/* Replace with your close icon component */}
+                                </IconButton>
                                 <Typography variant="h6">Add New Meal Plan</Typography>
                                 <form onSubmit={handleSubmit}>
-                                    <TextField
-                                        label="Meal Plan Name"
+                                    <TextInput
+
                                         fullWidth
                                         required
                                         style={{ marginTop: "5px" }}
                                         // Add state and onChange handler for input values
-
+                                        placeholder='Meal Plan Name'
                                         value={name}
                                         onChange={(event) => {
                                             setName(event.target.value);
                                         }}
                                     />
                                     <br />
-                                    <TextField
-                                        label="Description"
+                                    <Textarea
+
                                         multiline
                                         rows={3}
                                         fullWidth
+                                        placeholder="Description"
                                         required
                                         style={{ marginTop: "5px" }}
                                         // Add state and onChange handler for input values
@@ -163,11 +162,12 @@ export default function MealPlan() {
                                         }}
                                     />
                                     <br />
-                                    <TextField
-                                        label="Price"
+                                    <TextInput
+
                                         type="number"
                                         fullWidth
                                         required
+                                        placeholder='Price'
                                         style={{ marginTop: "5px" }}
                                         // Add state and onChange handler for input values
                                         value={price}
@@ -178,6 +178,7 @@ export default function MealPlan() {
                                     <br />
                                     <input
                                         type="file"
+                                        required
                                         accept="image/*"
                                         onChange={(e) => setImage(e.target.files[0])}
                                     />

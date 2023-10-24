@@ -12,10 +12,10 @@ public class MealPlan {
     private String name;
     private String description;
     private double price;
-
-    @Lob
-    @Column(name = "image", length = Integer.MAX_VALUE)
     private byte[] image;
+
+    @Transient
+    private byte[] decompressedImage;
 
     public MealPlan() {
 
@@ -59,6 +59,14 @@ public class MealPlan {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public byte[] getDecompressedImage() {
+        return decompressedImage;
+    }
+
+    public void setDecompressedImage(byte[] decompressedImage) {
+        this.decompressedImage = decompressedImage;
     }
 
     public MealPlan(int id, String name, String description, double price, byte[] image) {

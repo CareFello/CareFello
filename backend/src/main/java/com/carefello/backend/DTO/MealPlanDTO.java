@@ -43,7 +43,8 @@ public class MealPlanDTO {
         return image;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+
+    public void setImage(byte[] decompressedImage) {
+        this.image = decompressedImage;
     }
 }
