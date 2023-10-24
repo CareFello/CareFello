@@ -5,7 +5,7 @@ import {
   Box,
   Container,
   TextField,
-  Button,
+
   Typography,
   Avatar,
   Grid,
@@ -13,14 +13,16 @@ import {
   Stack,
   CardContent,
   CardMedia,
-
+  IconButton, Modal
 } from '@mui/material';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import pro from '../../assets/avatar.png';
 import '../../styles/Guardian/ElderProfile.css';
-import { TextInput, Label, FileInput } from "flowbite-react"
+import { Button, TextInput, Label, FileInput, Checkbox, Textarea } from "flowbite-react"
 import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { BiAddToQueue, BiCloset } from 'react-icons/bi';
+import { IoCloseSharp } from 'react-icons/io5'
 function ElderProfile() {
 
   const { elderId } = useParams();
@@ -31,6 +33,7 @@ function ElderProfile() {
   const [elder, setElder] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [message, setMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Fetch elder data by elderId and guardianId
@@ -78,6 +81,39 @@ function ElderProfile() {
     }
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const [disease, setDisease] = useState("");
+  const [description, setDescription] = useState("");
+
+  async function save(event) {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/addHistory`, {
+        disease: disease,
+        description: description
+      });
+
+      console.log(response);
+      if (response.status == 200) {
+        alert("Elder added successfully");
+        window.location.reload();
+      } else {
+        console.error('Error:', response);
+        alert('Error adding elder: ' + response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error adding elder: ' + error.message);
+    }
+  }
+
   if (!elder) {
     return <div>Loading...</div>; // You can display a loading indicator
   }
@@ -106,13 +142,13 @@ function ElderProfile() {
                       <input type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
                       <br />
                       <br />
-                      <Button onClick={handleSubmit} variant="contained" color="primary">
+                      <Button onClick={handleSubmit} variant="contained" style={{ border: "blue" }}>
                         Upload Image
                       </Button>
                       <div>{message}</div>
                     </Box>
                   </Grid>
-                  <Grid item xs={12} md={8} lg={9}>
+                  <Grid item xs={6} md={8} lg={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={4} className='text-left'>
                         <Label
@@ -188,9 +224,96 @@ function ElderProfile() {
                 </Grid>
               </CardContent>
             </Card>
+            <Box height={40} />
+            <Grid container spacing={2}>
+              <Grid item xs={6} md={12} lg={6}>
+                <Card>
+                  <CardContent>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography variant='h6' >Medical History & Reports </Typography>
+                      <Button variant="contained" onClick={handleOpenModal} sx={{
+
+                        top: '20px', // Adjust the margin top as needed
+                        left: '50px',
+                        zIndex: 1, // Ensure the button appears above other content
+                      }}>
+                        Add Medical History
+                      </Button>
+                      <Modal open={isModalOpen} onClose={handleCloseModal}>
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            p: 4,
+                            maxWidth: 400,
+                            width: '100%',
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              position: 'absolute',
+                              top: 0,
+                              right: 0,
+                              zIndex: 1, // Ensure the close button appears above the content
+                            }}
+                            onClick={handleCloseModal}
+                          >
+                            <IoCloseSharp /> {/* Replace with your close icon component */}
+                          </IconButton>
+                          <Typography variant="h6">Add Medical History</Typography>
+                          <form >
+                            <TextInput
+                              id="name"
+                              sizing="md"
+                              type="text"
+                              className='mb-2'
+                              placeholder='Disease / Surgery '
+                              value={disease}
+                              onChange={(event) => {
+                                setDisease(event.target.value);
+                              }}
+
+                            />
+                            <Textarea
+                              id="name"
+                              sizing="md"
+                              type="text"
+                              className='mb-2'
+                              placeholder='Enter Description '
+                              value={description}
+                              onChange={(event) => {
+                                setDescription(event.target.value);
+                              }}
+
+                            />
+
+
+                            <Button type="submit" variant="contained" sx={{ mt: 2 }} onClick={save} >
+                              Add Meal Plan
+                            </Button>
+                          </form>
+                        </Box>
+                      </Modal>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={12} lg={6}>
+                <Card>
+                  <CardContent>
+
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
           </Container>
         </Box>
       </Box>
+
     </div>
   );
 }
