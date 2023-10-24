@@ -22,10 +22,11 @@ public class MealPlanController {
     @PostMapping("/addMealPlan")
     public ResponseEntity<String> addMealPlan(
             @ModelAttribute MealPlanDTO mealPlanDTO,
-            @RequestParam("imageFile")MultipartFile imageFile){
-        mealPlanService.addMealPlan(mealPlanDTO,imageFile);
-        return ResponseEntity.ok("Meal Plan added succesfully");
+            @RequestParam("imageFile") MultipartFile imageFile) {
+        mealPlanService.addMealPlan(mealPlanDTO, imageFile);
+        return ResponseEntity.ok("Meal Plan added successfully");
     }
+
 
     @GetMapping("viewMealPlan")
     public ResponseEntity<List<MealPlanDTO>> getAllMealPlans(){

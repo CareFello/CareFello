@@ -12,6 +12,10 @@ public class Meal {
     private String itemName;
     private String nutritions;
 
+    private byte[] image;
+    @Transient
+    private byte[] decompressedImage;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "meal_plan_id")
     private MealPlan mealPlan;
@@ -57,6 +61,22 @@ public class Meal {
 
     public void setMealPlan(MealPlan mealPlan) {
         this.mealPlan = mealPlan;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getDecompressedImage() {
+        return decompressedImage;
+    }
+
+    public void setDecompressedImage(byte[] decompressedImage) {
+        this.decompressedImage = decompressedImage;
     }
 
     public Meal(int id, String type, String itemName, String nutritions, MealPlan mealPlan) {

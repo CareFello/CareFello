@@ -24,7 +24,7 @@ const MealPlanCard = () => {
                     <CardMedia
                         component="img"
                         height="140"
-                        image={mealPlan.imageData ? `data:image/jpeg;base64,${mealPlan.imageData}` : meal}// Use the image data from your API
+                        image={mealPlan.image ? `data:image/jpeg;base64,${mealPlan.image}` : meal} // Use the image data from your API
                         alt="Meal Plan Image"
                     />
                     <CardContent>
