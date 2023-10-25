@@ -3,6 +3,8 @@ package com.carefello.backend.service.impl;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -257,10 +259,38 @@ public class RequestImpl implements RequestService {
         Elderguar elderguar = elderguarRepo.findByElderid(id);
         Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
         Tempreq tempreq = tempreqRepo.getTempreq(id);
+        long price = 0;
+        LocalDate localDate1 = tempreq.getAssStartDate().toLocalDate();
+        LocalDate localDate2 = tempreq.getAssEndDate().toLocalDate();
+        long days = ChronoUnit.DAYS.between(localDate1, localDate2);
 
-        
+        if ("basic".equals(tempreq.getType())){
+            if (days <= 7){
+                price = days*2000;
+            }else if (days > 7 && days <= 30){
+                price = days*1500;
+            }else{
+                price = days*1000;
+            }
+        }else if("classic".equals(tempreq.getType())){
+            if (days <= 7){
+                price = days*2500;
+            }else if (days > 7 && days <= 30){
+                price = days*2000;
+            }else{
+                price = days*1500;
+            }
+        }else{
+            if (days <= 7){
+                price = days*3000;
+            }else if (days > 7 && days <= 30){
+                price = days*2500;
+            }else{
+                price = days*2000;
+            }
+        }
 
-        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), 10, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId());
+        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), price);
         return elderResponse1;
     }
 
@@ -552,16 +582,34 @@ public class RequestImpl implements RequestService {
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
-            }else if (caregivers.size() == 1){
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 0){
                 Date date1 = bedss.get(0).getAssStartDate();
                 Date date2 = bedss.get(0).getAssEndDate();
 
                 caregivers.get(0).setOccuStartDate(date1);
                 caregivers.get(0).setOccuEndDate(date2);
                 caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 1) {
+
+                Date date1 = bedss.get(0).getAssStartDate();
+                Date date2 = bedss.get(0).getAssEndDate();
+
+                caregivers.get(0).setOccuStartDate(date1);
+                caregivers.get(0).setOccuEndDate(date2);
+                caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
+                caregiver1Repo.save(caregivers.get(0));
+
+                return "hi";
+
             }else{
                 int caregiveridoccu = bedss.get(0).getCaregiverId();
                 Date date1 = bedss.get(0).getAssStartDate();
@@ -586,21 +634,24 @@ public class RequestImpl implements RequestService {
             Date date1 = bedss.get(0).getAssStartDate();
             Date date2 = bedss.get(0).getAssEndDate();
             int caregiveridoccu = bedss.get(0).getCaregiverId();
+            int occuelderid = bedss.get(0).getAssElderId();
 
             bedss.get(0).setOccuStartDate(date1);
             bedss.get(0).setOccuEndDate(date2);
             bedss.get(0).setCaregiveridoccu(caregiveridoccu);
+            bedss.get(0).setOccupied(1);
             bedss.get(0).setAssigned(0);
+            bedss.get(0).setCaregiverId(0);
+            bedss.get(0).setAssElderId(0);
+            bedss.get(0).setAssStartDate(sqlDate);
+            bedss.get(0).setAssEndDate(sqlDate);
+            bedss.get(0).setOccuElderId(occuelderid);
+
             bedRepo.save(bedss.get(0));
             
             List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
             
             if (caregivers.get(0).getAssigned() == 0){
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    // Parse the date string and convert it to java.sql.Date
-                    // java.util.Date utilDate = dateFormat.parse("2000-01-01");
-                    // java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 caregivers.get(0).setAssStartDate(sqlDate);
                 caregivers.get(0).setAssEndDate(sqlDate);
                 caregivers.get(0).setFree(1);
@@ -608,20 +659,38 @@ public class RequestImpl implements RequestService {
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
-                } catch (Exception e) {
-                return "error";
-            }
-            }else if (caregivers.size() == 1){
-                
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 0){
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
 
                 caregivers.get(0).setOccuStartDate(date1);
                 caregivers.get(0).setOccuEndDate(date2);
                 caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 1) {
+
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
+
+                caregivers.get(0).setOccuStartDate(date1);
+                caregivers.get(0).setOccuEndDate(date2);
+                caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
+                caregiver1Repo.save(caregivers.get(0));
+
+                return "hi";
+
             }else{
-                
+                // int caregiveridoccu = bedss.get(0).getCaregiverId();
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
                 Caregiver1 caregiver1 = caregiver1Repo.findAllCaregivers1(caregiveridoccu, date1);
                 int iddd = caregiver1.getId();
                 List<Caregiver1> caregiverss = caregiver1Repo.findAllCaregivers(caregiveridoccu);
@@ -657,11 +726,6 @@ public class RequestImpl implements RequestService {
             List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
             
             if (caregivers.get(0).getAssigned() == 0){
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    // Parse the date string and convert it to java.sql.Date
-                    // java.util.Date utilDate = dateFormat.parse("2000-01-01");
-                    // java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 caregivers.get(0).setAssStartDate(sqlDate);
                 caregivers.get(0).setAssEndDate(sqlDate);
                 caregivers.get(0).setFree(1);
@@ -669,15 +733,9 @@ public class RequestImpl implements RequestService {
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
-                } catch (Exception e) {
-                return "error";
-            }
             }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 0){
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    // Parse the date string and convert it to java.sql.Date
-                    // java.util.Date utilDate = dateFormat.parse("2000-01-01");
-                    // java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
 
                 caregivers.get(0).setOccuStartDate(date1);
                 caregivers.get(0).setOccuEndDate(date2);
@@ -688,11 +746,25 @@ public class RequestImpl implements RequestService {
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
-                } catch (Exception e) {
-                return "error";
-            }
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 1) {
+
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
+
+                caregivers.get(0).setOccuStartDate(date1);
+                caregivers.get(0).setOccuEndDate(date2);
+                caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
+                caregiver1Repo.save(caregivers.get(0));
+
+                return "hi";
+
             }else{
-                
+                // int caregiveridoccu = bedss.get(0).getCaregiverId();
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
                 Caregiver1 caregiver1 = caregiver1Repo.findAllCaregivers1(caregiveridoccu, date1);
                 int iddd = caregiver1.getId();
                 List<Caregiver1> caregiverss = caregiver1Repo.findAllCaregivers(caregiveridoccu);
@@ -725,11 +797,6 @@ public class RequestImpl implements RequestService {
         List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
             
             if (caregivers.get(0).getAssigned() == 0){
-                // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    // Parse the date string and convert it to java.sql.Date
-                    // java.util.Date utilDate = dateFormat.parse("2000-01-01");
-                    // java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                 caregivers.get(0).setAssStartDate(sqlDate);
                 caregivers.get(0).setAssEndDate(sqlDate);
                 caregivers.get(0).setFree(1);
@@ -737,20 +804,38 @@ public class RequestImpl implements RequestService {
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
-                } catch (Exception e) {
-                return "error";
-            }
-            }else if (caregivers.size() == 1){
-                
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 0){
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
 
                 caregivers.get(0).setOccuStartDate(date1);
                 caregivers.get(0).setOccuEndDate(date2);
                 caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
                 caregiver1Repo.save(caregivers.get(0));
 
                 return "hi";
+            }else if (caregivers.size() == 1 && caregivers.get(0).getAssigned() == 1 && caregivers.get(0).getOccupied() == 1) {
+
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
+
+                caregivers.get(0).setOccuStartDate(date1);
+                caregivers.get(0).setOccuEndDate(date2);
+                caregivers.get(0).setAssigned(0);
+                caregivers.get(0).setOccupied(1);
+                caregivers.get(0).setAssStartDate(sqlDate);
+                caregivers.get(0).setAssEndDate(sqlDate);
+                caregiver1Repo.save(caregivers.get(0));
+
+                return "hi";
+
             }else{
-                
+                // int caregiveridoccu = bedss.get(0).getCaregiverId();
+                // Date date1 = bedss.get(0).getAssStartDate();
+                // Date date2 = bedss.get(0).getAssEndDate();
                 Caregiver1 caregiver1 = caregiver1Repo.findAllCaregivers1(caregiveridoccu, date1);
                 int iddd = caregiver1.getId();
                 List<Caregiver1> caregiverss = caregiver1Repo.findAllCaregivers(caregiveridoccu);

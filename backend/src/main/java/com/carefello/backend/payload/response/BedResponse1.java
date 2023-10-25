@@ -8,7 +8,7 @@ public class BedResponse1 {
 
     public String guradianName; 
     public String elderName;
-    public int duration;
+    public long duration;
     public String type;
     public char caregiverGender;
     public Date assStartDate;
@@ -16,8 +16,9 @@ public class BedResponse1 {
     public int bed_id;
     public Date assEndDate;
     public int id;
+    public long price;
     
-    public BedResponse1(String guradianName, String elderName, int duration, String type, char caregiverGender, Date assStartDate, String specRe, int bed_id, Date assEnDate, int id){
+    public BedResponse1(String guradianName, String elderName, long duration, String type, char caregiverGender, Date assStartDate, String specRe, int bed_id, Date assEnDate, int id, long price){
         this.guradianName = guradianName;
         this.elderName = elderName;
         this.duration = duration;
@@ -28,6 +29,7 @@ public class BedResponse1 {
         this.bed_id = bed_id;
         this.assEndDate = assEnDate;
         this.id = id;
+        this.price = price;
     }
 
     public BedResponse1(){
