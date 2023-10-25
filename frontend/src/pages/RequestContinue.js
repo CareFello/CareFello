@@ -35,6 +35,8 @@ function RequestContinue() {
   const [uniqueArray, setUniqueArray] = useState([]);
   const [people, setPeople] = useState([]);
   const [idds, setIdds] = useState('');
+  const [day, setDay] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +46,24 @@ function RequestContinue() {
       .catch((error) => console.error(error));
       console.log(people)
   }, []);
+
+  function calculateDuration(assStartDate, assEndDate) {
+    if (!assStartDate || !assEndDate) {
+      return '';
+    }
+
+    const start = new Date(assStartDate);
+    const end = new Date(assEndDate);
+
+    // Calculate the difference in milliseconds
+    const durationMs = end - start;
+
+    // Calculate the number of days
+    const days = Math.floor(durationMs / (1000 * 60 * 60 * 24));
+
+    return days;
+  }
+
 
 
   const check = async (assStartDate, assEndDate, caregiverGender) =>  {
@@ -147,7 +167,7 @@ function RequestContinue() {
               <p className="topic-content">{people.elderName}</p>
 
               <p className="label-topic">Duration:</p>
-              <p className="topic-content">{people.duration}</p>
+              <p className="topic-content">{people.duration} days</p>
 
               <p className="label-topic">Requested Room Type:</p>
               <p className="topic-content">{people.type}</p>
@@ -163,6 +183,9 @@ function RequestContinue() {
 
               <p className="label-topic">Special Requirements:</p>
               <p className="topic-content">{people.specRe}</p>
+
+              <p className="label-topic">Price:</p>
+              <p className="topic-content">Rs. {people.price}</p>
 
             </div>
           </div>
