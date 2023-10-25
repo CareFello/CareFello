@@ -83,6 +83,7 @@ const GuardianSendRequest = () => {
 
   //newly added
   async function Send(event) {
+    
     event.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/api/beds/request", {
