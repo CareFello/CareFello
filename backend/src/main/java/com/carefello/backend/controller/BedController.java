@@ -68,11 +68,11 @@ public class BedController{
         return bedRepo.findById(id);
     }
 
-    @PostMapping("/request3")
-    public String assignElder1(@RequestBody RequestDTO requestDTO){
-        String str = requestService.assignElder(requestDTO);
-        return str;
-    }
+    // @PostMapping("/request3")
+    // public String assignElder1(@RequestBody RequestDTO requestDTO){
+    //     String str = requestService.assignElder(requestDTO);
+    //     return str;
+    // }
 
     // @PostMapping("/request7")
     // public String assignCaregiver1(@RequestBody RequestDTO requestDTO){

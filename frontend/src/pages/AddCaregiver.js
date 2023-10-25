@@ -65,6 +65,7 @@ function AddCaregiver() {
                 name2: name2,
                 cont: cont
             });
+            
             alert("caregiver registration Successfull");
             window.location.reload();
 
