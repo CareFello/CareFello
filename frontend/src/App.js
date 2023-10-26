@@ -38,7 +38,6 @@ import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
-import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 import ViewEldersList from "./pages/ViewEldersList";
@@ -46,12 +45,6 @@ import ViewEldersList from "./pages/ViewEldersList";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
-
-
-
-
-
-import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
 
 import GuardianDetailsPage from "./components/GuardianDetailPage";
@@ -63,7 +56,10 @@ import ViewComplaints from "./pages/ViewComplaints";
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
+import DoctorDashboard from "./pages/DoctorDashboard";
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
+import DoctorUpdateAvailablity from "./pages/DoctorUpdateAvailablity";
+
 
 // import Caregiverprofile from './pages/caregiverprofile';
 
@@ -137,10 +133,6 @@ function App() {
 
 
 
-          <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
-
-
-
           <Route
             path="/GuardianSendRequest/:guardianId"
             element={<GuardianSendRequest />}
@@ -162,13 +154,16 @@ function App() {
 
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
           <Route path="/Caregiverlist" element={<Caregiverlist />} />
-          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
 
 
           <Route path="/ViewComplaints" element={<ViewComplaints />} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
+
+          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
+          <Route path="/DoctorUpdateAvailablity" element={<DoctorUpdateAvailablity />} />
+          
 
 
 
