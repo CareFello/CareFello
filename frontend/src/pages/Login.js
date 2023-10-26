@@ -165,10 +165,11 @@ function Login() {
       {/* </a> */}
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              
+              <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign In
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                       <input type="email" name="email" id="email"  value={email} onChange={(event) => {
@@ -202,7 +203,7 @@ function Login() {
                   </p>
               </form>
           </div>
-      </div>
+      
   </div>
 
         
@@ -317,7 +318,7 @@ function Login() {
             </form>
           </div>
         </Model>
-
+</div>
       </div>
     
   );
