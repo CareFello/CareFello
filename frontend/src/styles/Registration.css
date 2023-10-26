@@ -1,12 +1,17 @@
 .reg-container {
     display: flex;
-    width: 70%;
+    width: 100%;
     min-height: 500px;
     box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
     border: 5px solid white;
     box-shadow: 20;
     border-radius: 50px;
     margin-left: 15%;
+    background-color: linear-gradient(to right, #3498db, #ffffff);
+}
+
+.main_2{
+    
 }
 
 .reg-image {
@@ -28,3 +33,29 @@
     margin-bottom: 10px;
     color: #05445E;
 }
+
+.nic_mobile{
+    display: flex;
+    flex-direction: column;
+}
+
+.password{
+    display: flex;
+    flex-direction: column;
+}
+
+.fname{
+    margin-left: 100px;
+}
+.Home_ad{
+    margin-left: 0px;
+}
+
+.Office_ad{
+    margin-right: 100px;
+}
+
+.pw_2{
+    margin-left: 100px;
+}
+    

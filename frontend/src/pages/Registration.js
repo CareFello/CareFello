@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import img from '../assets/reg_img.jpg';
+import img from '../assets/reg.png';
 import '../index.css';
 import { Button} from 'flowbite-react';
+import '../styles/Registration.css';
 
 function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isValidNic, setIsValidNic] = useState(true);
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [nic, setNic] = useState('');
@@ -38,56 +38,55 @@ function RegistrationForm() {
   };
 
   return (
-    <div className='main-content bg-#F9FFFE'>
-        <div className='flex flex-col  items-center mt-10 '>
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-0 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Sign Up
-            </h1><div className='content flex flex-row'>
-            {/* <img class=" mr-2 flex items-center" src={img} alt="reg"></img> */}
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-            
-              <div className="name mb-2">
-                <div className="fname">
-                  <div className="mb-1 block">
-                    <label
-                      htmlFor="first-name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      First Name
-                    </label>
-                  </div>
-                  <input
-                    required
-                    value={firstName}
-                    id="first-name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="text"
-                    onChange={(event) => setFirstName(event.target.value)}
-                  />
-                </div>
-
-                <div className="lname ml-4">
-                  <div className="mb-1 block">
-                    <label
-                      htmlFor="last-name"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Last Name
-                    </label>
-                  </div>
-                  <input
-                    required
-                    value={lastName}
-                    id="last-name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="text"
-                    onChange={(event) => setLastName(event.target.value)}
-                  />
-                </div>
+    <div className='main-content' >
+    <div className='flex flex-col items-center'>
+      <div className="p-10 space-y-2 md:space-y-0 sm:p-8 " >
+        
+        <div className='content flex flex-row' sx={{boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+        
+          <form className="md:space-y-0 max-w-3xl w-full" onSubmit={handleSubmit}  style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          Sign Up
+        </h1>
+            <div className="name flex space-x-4">
+              <div className="fname">
+                <label
+                  htmlFor="first-name"
+                  className="block mb-2 text-sm font-small text-gray-900 dark:text-white "
+                >
+                  First Name
+                </label>
+                <input
+                  required
+                  style={{ fontSize: '12px' }}
+                  value={firstName}
+                  id="first-name"
+                  className="input-field"
+                  type="text"
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
               </div>
 
+              <div className="lname ml-4">
+                <label
+                  htmlFor="last-name"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Last Name
+                </label>
+                <input
+                  required
+                  value={lastName}
+                  style={{ fontSize: '12px' }}
+                  id="last-name"
+                  className="input-field"
+                  type="text"
+                  onChange={(event) => setLastName(event.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="flex space-x-4">
               <div>
                 <label
                   htmlFor="email"
@@ -96,31 +95,31 @@ function RegistrationForm() {
                   Email
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   name="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  style={{ fontSize: '12px' }}
+                  className="input-field"
                   placeholder="name@company.com"
                   required=""
                   onChange={(event) => setEmail(event.target.value)}
                 />
               </div>
 
-              <div className="lname mb-2">
-                <div className="mb-1 block">
-                  <label
-                    htmlFor="nic"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    NIC
-                  </label>
-                </div>
+              <div>
+                <label
+                  htmlFor="nic"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  NIC
+                </label>
                 <input
                   required
                   value={nic}
                   id="nic"
-                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 ${isValidNic ? 'dark:placeholder-gray-400' : 'dark:placeholder-red-400'} dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                  style={{ fontSize: '12px' }}
+                  className={`input-field ${isValidNic ? 'dark:placeholder-gray-400' : 'dark:placeholder-red-400'}`}
                   type="text"
                   onChange={(event) => {
                     setNic(event.target.value);
@@ -129,84 +128,82 @@ function RegistrationForm() {
                 />
               </div>
 
-              <div className="lname mb-2">
-                <div className="mb-1 block">
-                  <label
-                    htmlFor="mobile-number"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Mobile Number
-                  </label>
-                </div>
+              <div>
+                <label
+                  htmlFor="mobile-number"
+                  className="block mb-2 text-gray-900 sm:text-sm "
+                >
+                  Mobile Number
+                </label>
                 <input
                   required
+                  style={{ fontSize: '12px' }}
                   value={mobileNumber}
                   id="mobile-number"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="input-field"
                   type="text"
                   onChange={(event) => setMobileNumber(event.target.value)}
                 />
               </div>
+            </div>
 
-              <div className="waddress mb-2">
-                <div className="mb-1 block">
-                  <label
-                    htmlFor="home-address"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Home Address
-                  </label>
-                </div>
-                <input
+            <div className="textarea-row flex space-x-4">
+              <div class="Home_ad">
+                <label
+                  htmlFor="home-address"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Home Address
+                </label>
+                <textarea
                   required
+                  style={{ fontSize: '12px' }}
                   value={homeAddress}
                   id="home-address"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  type="text"
+                  className="input-field"
+                  style ={{ fontSize: '12px', width: '170px' }}
                   onChange={(event) => setHomeAddress(event.target.value)}
                 />
               </div>
 
-
-              <div className="lname mb-2">
-                <div className="mb-1 block">
-                  <label
-                    htmlFor="profession"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Profession
-                  </label>
-                </div>
+              <div>
+                <label
+                  htmlFor="profession"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Profession
+                </label>
                 <input
                   required
                   value={profession}
+                  style={{ fontSize: '12px' }}
                   id="profession"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="input-field"
                   type="text"
                   onChange={(event) => setProfession(event.target.value)}
                 />
               </div>
 
-              <div className="waddress mb-2">
-                <div className="mb-1 block">
-                  <label
-                    htmlFor="office-address"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Office Address
-                  </label>
-                </div>
-                <input
+              <div className='Office_ad'>
+                <label
+                  htmlFor="office-address"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Work-place Address
+                </label>
+                <textarea
+                style={{ fontSize: '12px' , width: '170px'}}
                   required
                   value={officeAddress}
                   id="office-address"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  type="text"
+                  className="input-field"
                   onChange={(event) => setOfficeAddress(event.target.value)}
                 />
               </div>
+            </div>
 
-              <div>
+            <div className="password-confirm-row flex space-x-4 mb-5">
+              <div className='pw_2'>
                 <label
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -217,8 +214,8 @@ function RegistrationForm() {
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  style={{ fontSize: '12px' }}
+                  className="input-field"
                   required=""
                   onChange={(event) => setPassword(event.target.value)}
                 />
@@ -233,61 +230,50 @@ function RegistrationForm() {
                 </label>
                 <input
                   type="password"
+                  style={{ fontSize: '12px' }}
                   name="confirm-password"
                   id="confirm-password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="input-field"
                   required=""
                   onChange={(event) => setConfirmPassword(event.target.value)}
                 />
               </div>
+            </div>
 
-              <div className="flex items-center">
-                <input
-                    id="terms"
-                    aria-describedby="terms"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 mt-4 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    required=""
-                />
-                <label
-                    htmlFor="terms"
-                    className="ml-2 font-light text-sm text-gray-500 dark:text-gray-300"
-                >
-                    I accept the{' '}
-                    <a
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    href="#"
-                    >
-                    Terms and Conditions
-                    </a>
-                </label>
-                </div>
-
-
-              <Button
-                type="submit"
-                className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-              >
-                Sign Up
-              </Button>
-
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{' '}
-                <a
-                  href="#"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Login here
-                </a>
-              </p>
-            </form>
+            <div className="flex items-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                     <div class="flex mt-3 items-center h-5">
+                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
+                      </div>
+                      <div class="ml-3 mb-2 text-sm">
+                        <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                      </div>
             </div>
             
-         </div>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Button
+              type="submit"
+              className="text-xl font-bold leading-tight  tracking-tight text-gray-900 md:text-2xl dark:text-white"
+              style={{ width: '150px' }}
+            >
+              Sign Up
+            </Button>
+            </div>
+
+            <p className="text-sm font-light text-gray-500 mt-2 dark:text-gray-400">
+              Already have an account?{' '}
+              <a
+                href="#"
+                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+              >
+                Login here
+              </a>
+            </p>
+          </form>
+          </div>
         </div>
-       </div>
-       </div>
+      </div>
+    
+  </div>
   );
 }
 
