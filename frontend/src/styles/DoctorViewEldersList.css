@@ -1,0 +1,47 @@
+/* DoctorViewEldersList.css */
+body{
+  background-color: #F9FFFE;
+}
+
+/* Style the elders-list-content */
+.elders-list-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the search bar */
+.search-bar {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+}
+
+/* Style the elder card */
+.elder-card {
+  margin: 20px;
+  background-color: #F9FFFE;
+}
+
+
+img{
+  width: 80px;
+  height: 90px;
+  /* margin-bottom: 2rem !important; */
+}
+
+/* Style the elder name */
+.elder-name {
+  color: #062c54f4;
+  text-decoration: none;
+  margin-left:0;
+}
+
+/* Style the guardian name link */
+.guardianName-link {
+  color: #062c54f4;
+  text-decoration: none;
+}
