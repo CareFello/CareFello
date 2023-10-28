@@ -59,6 +59,7 @@ import ViewDonationRequests from "./pages/ViewDonationRequests";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 import DoctorUpdateAvailablity from "./pages/DoctorUpdateAvailablity";
+import DoctorProfile from "./pages/DoctorProfile";
 
 
 // import Caregiverprofile from './pages/caregiverprofile';
@@ -163,6 +164,7 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
           <Route path="/DoctorUpdateAvailablity" element={<DoctorUpdateAvailablity />} />
+          <Route path="/DoctorProfile" element={<DoctorProfile />} />
           
 
 

@@ -1,0 +1,35 @@
+/* DoctorProfile.css */
+.doc-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #profile-pic {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .personal-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .upcoming-appointments {
+    margin-top: 20px;
+  }
+  
+  .highlighted-date {
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
