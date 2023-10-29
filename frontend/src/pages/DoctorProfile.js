@@ -8,43 +8,37 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Calendar from 'react-calendar';  // You might need to install this package
-
-import '../styles/DoctorProfile.css';
-
-// import 'react-calendar/dist/npCalendar.css'; // Import calendar styles
+import Calendar from "react-calendar";
+import "../styles/DoctorProfile.css";
+import img_1 from "../assets/E1.jpg";
 
 export default function DoctorProfile() {
   const [doctorData, setDoctorData] = useState({
-    profilePic: "", // You can set the default profile pic here
-    nic: "",
-    registrationNumber: "",
-    address: "",
-    email: "",
-    mobileNumber: "",
+    profilePic: img_1,
+    nic: "676770010V",
+    registrationNumber: "CF453",
+    address: "No 12, Flower Road, Nugegoda",
+    email: "doctor01@gmail.com",
+    mobileNumber: "0701234567",
   });
 
   const [calendarDate, setCalendarDate] = useState(new Date());
-  const [appointments, setAppointments] = useState([]); // Replace with your dummy data
+  const [appointments, setAppointments] = useState([]);
 
-  // Handle profile pic upload
   const handleProfilePicUpload = (e) => {
     // Handle profile pic upload logic here
   };
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setDoctorData({ ...doctorData, [name]: value });
   };
 
-  // Handle form submission
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Handle form submission and data saving logic here
   };
 
-  // Handle calendar date change
   const handleCalendarChange = (date) => {
     setCalendarDate(date);
     // Fetch and update appointments for the selected date from your database
@@ -59,28 +53,29 @@ export default function DoctorProfile() {
     <div className="doc-profile">
       <Header />
       <Box height={60} />
-      <Box>
+      <Box className="profile-content">
         <Sidebar menuItems={DoctorMenuItem} />
         <main>
           <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Paper elevation={3} style={{ padding: "16px" }}>
-                <div>
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper elevation={3} className="personal-details">
+                <div className="pic">
                   <img
-                    src={doctorData.profilePic || "default-profile-pic.jpg"}
+                    src={doctorData.profilePic}
                     alt="Doctor Profile"
-                    width="100%"
+                    className="profile-pic"
                   />
                   <input type="file" onChange={handleProfilePicUpload} />
                 </div>
                 <Typography variant="h5">Personal Details</Typography>
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleFormSubmit} className="personal-details-form">
                   <TextField
                     name="nic"
                     label="NIC Number"
                     value={doctorData.nic}
                     onChange={handleInputChange}
                     fullWidth
+                    variant="outlined"
                   />
                   <TextField
                     name="registrationNumber"
@@ -88,6 +83,7 @@ export default function DoctorProfile() {
                     value={doctorData.registrationNumber}
                     onChange={handleInputChange}
                     fullWidth
+                    variant="outlined"
                   />
                   <TextField
                     name="address"
@@ -95,6 +91,7 @@ export default function DoctorProfile() {
                     value={doctorData.address}
                     onChange={handleInputChange}
                     fullWidth
+                    variant="outlined"
                   />
                   <TextField
                     name="email"
@@ -102,6 +99,7 @@ export default function DoctorProfile() {
                     value={doctorData.email}
                     onChange={handleInputChange}
                     fullWidth
+                    variant="outlined"
                   />
                   <TextField
                     name="mobileNumber"
@@ -109,6 +107,7 @@ export default function DoctorProfile() {
                     value={doctorData.mobileNumber}
                     onChange={handleInputChange}
                     fullWidth
+                    variant="outlined"
                   />
                   <Button type="submit" variant="contained" color="primary">
                     Save
@@ -116,25 +115,37 @@ export default function DoctorProfile() {
                 </form>
               </Paper>
             </Grid>
-            <Grid item xs={8}>
-              <Paper elevation={3} style={{ padding: "16px" }}>
-                <Typography variant="h5">Upcoming Appointments</Typography>
+
+            <Grid item xs={12} sm={6} md={8}>
+              <Paper elevation={3} className="right">
+                <Typography variant="h5" style={{ paddingBottom: "16px" }}>
+                  Upcoming Appointments
+                </Typography>
+
                 <Calendar
                   value={calendarDate}
                   onChange={handleCalendarChange}
                   tileContent={({ date, view }) => {
-                    if (view === 'month' && appointments.some(appointment => appointment.date === date.getDate())) {
-                      return <div className="highlighted-date">{date.getDate()}</div>;
+                    if (
+                      view === "month" &&
+                      appointments.some(
+                        (appointment) => appointment.date === date.getDate()
+                      )
+                    ) {
+                      return (
+                        <div className="highlighted-date">{date.getDate()}</div>
+                      );
                     }
                   }}
                 />
+
                 {appointments.length > 0 && (
-                  <div>
+                  <div className="popup">
                     <Typography variant="h6">
                       Appointments on {calendarDate.toLocaleDateString()}
                     </Typography>
                     <ul>
-                      {appointments.map(appointment => (
+                      {appointments.map((appointment) => (
                         <li key={appointment.id}>
                           {`Appointment ID: ${appointment.id}, Patient Name: ${appointment.patientName}, Age: ${appointment.age}`}
                         </li>

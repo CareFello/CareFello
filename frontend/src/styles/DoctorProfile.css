@@ -1,35 +1,148 @@
 /* DoctorProfile.css */
 .doc-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #profile-pic {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .personal-details-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .upcoming-appointments {
-    margin-top: 20px;
-  }
-  
-  .highlighted-date {
-    background-color: #3498db;
-    color: #fff;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  margin: 2rem;
+}
+
+.personal-details{
+  padding: 10px;
+  /* justify-content: center;
+  align-items: center; */
+}
+.profile-pic {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20%; /* Make the profile picture circular */
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);  */
+}
+
+.personal-details-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* margin-top: 0px; */
+}
+
+/* Style text fields and buttons */
+.personal-details-form .MuiFormControl-root {
+  background-color: #f7f7f7;
+}
+
+.personal-details-form .MuiTextField-root {
+  border-radius: 4px;
+}
+
+.personal-details-form .MuiInputLabel-root {
+  color: #333;
+}
+
+.personal-details-form .MuiOutlinedInput-root {
+  background-color: #fff;
+}
+
+.personal-details-form .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: #ddd;
+}
+
+.personal-details-form .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.personal-details-form .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #3498db;
+}
+
+.personal-details-form .MuiButton-root {
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.personal-details-form .MuiButton-root:hover {
+  background-color: #2072a6;
+}
+
+/* Add styles for the calendar */
+.react-calendar {
+  /* font-family: Arial, sans-serif; */
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 80%;
+  margin: 1rem;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1a4e70;
+  color: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.react-calendar__viewContainer {
+  background-color: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.react-calendar__viewContainer .react-calendar__tile {
+  width: 100%;
+  padding: 8px;
+  text-align: center;
+}
+
+.react-calendar__viewContainer .react-calendar__tile:disabled {
+  background-color: transparent;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.highlighted-date {
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Adjust the calendar's font size */
+.react-calendar__tile {
+  font-size: 14px;
+}
+
+/* Modify the appearance of the selected date */
+.react-calendar__tile--active {
+  background-color: #3498db;
+  color: #fff;
+}
+
+/* Style the calendar button */
+.react-calendar__tile--now {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+/* Add transitions to improve hover effects */
+.react-calendar__tile:hover {
+  background-color: #ddd;
+  transition: background-color 0.3s;
+}
