@@ -28,7 +28,7 @@ function GuardianAddElder() {
     event.preventDefault();
     try {
       const url = "http://localhost:8080/api/v1/guardian/" + guardianId + "/elders/addElder";
-      const response = await axios.post(url, {
+      await axios.post(url, {
         name: name,
         nic: nic,
         gender: gender,
@@ -36,16 +36,19 @@ function GuardianAddElder() {
         relationship: relationship,
       });
 
-      if (response.status === 200) {
-        alert("Elder added successfully");
-        window.location.reload();
-      } else {
-        console.error('Error:', response);
-        alert('Error adding elder: ' + response.statusText);
-      }
+      alert("Elder registration Successfull");
+            window.location.reload();
+
+      // if (response.status === 200) {
+      //   alert("Elder added successfully");
+      //   window.location.reload();
+      // } else {
+      //   console.error('Error:', response);
+      //   alert('Error adding elder: ' + response.statusText);
+      // }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error adding elder: ' + error.message);
+      alert("Maximum elder count reached");
     }
   }
 
@@ -136,10 +139,10 @@ function GuardianAddElder() {
                     <option value="" disabled hidden>
                       Choose gender
                     </option>
-                    <option value={'male'}>
+                    <option value={'Male'}>
                       Male
                     </option>
-                    <option value={'female'}>
+                    <option value={'Female'}>
                       Female
                     </option>
 

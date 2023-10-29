@@ -1,12 +1,13 @@
 package com.carefello.backend.model;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
-@Table(name = "guardian2")
+@Table(name = "guardian")
 
 public class Guardian {
 
