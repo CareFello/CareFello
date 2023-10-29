@@ -16,18 +16,25 @@ import dayjs from 'dayjs';
 import { DoctorMenuItem } from '../components/DoctorMenuItem'
 
 function DoctorViewHistory() {
-    const [expanded, setExpanded] = useState(Array(2).fill(false)); // Array of booleans for each card
+    const [expandedOnHover, setExpandedOnHover] = useState(Array(2).fill(false));
+    const [expandedOnClick, setExpandedOnClick] = useState(Array(2).fill(false));
 
-    const handleExpand = (index) => {
-        const updatedExpanded = [...expanded];
+    const handleExpandOnHover = (index) => {
+        const updatedExpanded = [...expandedOnHover];
         updatedExpanded[index] = true;
-        setExpanded(updatedExpanded);
+        setExpandedOnHover(updatedExpanded);
     };
 
-    const handleCollapse = (index) => {
-        const updatedExpanded = [...expanded];
+    const handleCollapseOnHover = (index) => {
+        const updatedExpanded = [...expandedOnHover];
         updatedExpanded[index] = false;
-        setExpanded(updatedExpanded);
+        setExpandedOnHover(updatedExpanded);
+    };
+
+    const handleToggleOnClick = (index) => {
+        const updatedExpanded = [...expandedOnClick];
+        updatedExpanded[index] = !expandedOnClick[index];
+        setExpandedOnClick(updatedExpanded);
     };
 
     const cards = [
@@ -44,11 +51,6 @@ function DoctorViewHistory() {
                     name: 'Sulochana Aloka',
                     nic: '754122235V',
                     details: 'Selexit 100mg Antibiotic for 3 times per day',
-                },
-                {
-                    name: 'Periyasamy Sivakumar',
-                    nic: '775822698V',
-                    details: 'Vitamin C for 2 times per day',
                 },
             ],
         },
@@ -95,8 +97,9 @@ function DoctorViewHistory() {
                             }}
                         >
                             <CardActionArea
-                                onMouseEnter={() => handleExpand(index)}
-                                onMouseLeave={() => handleCollapse(index)}
+                                onMouseEnter={() => handleExpandOnHover(index)}
+                                onMouseLeave={() => handleCollapseOnHover(index)}
+                                onClick={() => handleToggleOnClick(index)}
                             >
                                 <CardContent>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -112,7 +115,7 @@ function DoctorViewHistory() {
                                     </Box>
                                 </CardContent>
                             </CardActionArea>
-                            {expanded[index] && (
+                            {(expandedOnHover[index] || expandedOnClick[index]) && (
                                 <TableContainer>
                                     <Table>
                                         <TableHead>
