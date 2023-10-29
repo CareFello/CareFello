@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "guardian2")
+@Table(name = "guardian")
 
 public class Guardian {
 
