@@ -54,6 +54,7 @@ function DoctorViewHistory() {
                 },
             ],
         },
+        
         {
             title: 'Yesterday',
             date: dayjs().subtract(1, 'day').format('DD/MM/YYYY'),
