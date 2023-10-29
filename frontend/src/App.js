@@ -42,7 +42,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 import ViewEldersList from "./pages/ViewEldersList";
-
+import Test1 from "./pages/Test1";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
@@ -88,13 +88,13 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/email" element={<Email />} />
-          
+
 
           <Route path="/image" element={<Image />} />
           <Route path="/image1" element={<Image1 />} />
           <Route path="/image2" element={<Image2 />} />
 
-
+          <Route path="/Test1" element={<Test1 />} />
 
 
 
