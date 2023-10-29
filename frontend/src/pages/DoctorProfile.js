@@ -65,8 +65,11 @@ export default function DoctorProfile() {
                     alt="Doctor Profile"
                     className="profile-pic"
                   />
-                  <input type="file" onChange={handleProfilePicUpload} />
                 </div>
+                <div className="upload">
+                  <input className="upload-file" type="file" onChange={handleProfilePicUpload} />
+                </div>
+                
                 <Typography variant="h5">Personal Details</Typography>
                 <form onSubmit={handleFormSubmit} className="personal-details-form">
                   <TextField
@@ -76,6 +79,7 @@ export default function DoctorProfile() {
                     onChange={handleInputChange}
                     fullWidth
                     variant="outlined"
+                    // InputLabelProps={{ position: 'top' }}
                   />
                   <TextField
                     name="registrationNumber"
@@ -118,7 +122,7 @@ export default function DoctorProfile() {
 
             <Grid item xs={12} sm={6} md={8}>
               <Paper elevation={3} className="right">
-                <Typography variant="h5" style={{ paddingBottom: "16px" }}>
+                <Typography variant="h5" style={{ paddingBottom: "5px" }}>
                   Upcoming Appointments
                 </Typography>
 

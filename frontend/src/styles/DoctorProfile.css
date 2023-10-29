@@ -12,6 +12,11 @@
   margin: 2rem;
 }
 
+.pic{
+  display: flex;
+  justify-content: center;
+}
+
 .personal-details{
   padding: 10px;
   /* justify-content: center;
@@ -24,10 +29,22 @@
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);  */
 }
 
+.upload{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-file{
+  display: flex;
+  justify-content: center;
+  padding-left: 6rem;
+}
 .personal-details-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   /* margin-top: 0px; */
 }
 
@@ -58,7 +75,7 @@
 }
 
 .personal-details-form .MuiButton-root {
-  background-color: #3498db;
+  background-color: #1a4e70;
   color: #fff;
   border-radius: 4px;
   transition: background-color 0.3s;
@@ -66,6 +83,15 @@
 
 .personal-details-form .MuiButton-root:hover {
   background-color: #2072a6;
+}
+
+/* Add custom CSS to center the content in the right paper */
+.right {
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  padding: 1rem;
 }
 
 /* Add styles for the calendar */
@@ -146,3 +172,5 @@
   background-color: #ddd;
   transition: background-color 0.3s;
 }
+
+
