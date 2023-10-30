@@ -67,9 +67,9 @@ import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
 // import Caregiverprofile from './pages/caregiverprofile';
 
-import CheckupEldersList from "./pages/CheckupEldersList";
+// import CheckupEldersList from "./pages/CheckupEldersList";
 
-import CaregiverDashboard from "./pages/CaregiverDashboard";
+// import CaregiverDashboard from "./pages/CaregiverDashboard";
 
 import ViewAssignedRooms from "./pages/ViewAssignedElders";
 
@@ -173,8 +173,8 @@ function App() {
           <Route path="/ViewComplaints" element={<ViewComplaints />} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
-          <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
-          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} />
+          {/* <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
+          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} /> */}
           <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
 
 
