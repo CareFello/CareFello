@@ -70,6 +70,7 @@ import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 import CheckupEldersList from "./pages/CheckupEldersList";
 
 import CaregiverDashboard from "./pages/CaregiverDashboard";
+import CaregiverViewHealthTips from "./pages/Caregiver/CaregiverViewHealthTips";
 
 import ViewAssignedRooms from "./pages/ViewAssignedElders";
 
@@ -177,6 +178,7 @@ function App() {
           <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} />
           <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
 
+          <Route path="/CaregiverViewHealthTips" element={<CaregiverViewHealthTips/>} />
 
           </Routes>
       </Router>
