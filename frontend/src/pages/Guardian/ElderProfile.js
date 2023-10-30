@@ -55,7 +55,7 @@ function ElderProfile() {
     // Fetch elder data by elderId and guardianId
     axios
       .get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/viewHistory`)
-      .then((response) => 
+      .then((response) =>
         setHistory(response.data)
       )
       .catch((error) => {
@@ -130,9 +130,14 @@ function ElderProfile() {
     }
   }
 
-  if (!elder) {
-    return <div>Loading...</div>; // You can display a loading indicator
-  }
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const handleOpenModal1 = () => {
+    setIsModalOpen1(true);
+  };
+
+  const handleCloseModal1 = () => {
+    setIsModalOpen1(false);
+  };
 
   const check = async (id) => {
 
@@ -142,11 +147,19 @@ function ElderProfile() {
     //   axios.get('http://localhost:8080/api/persons/get')
     //   .then((response) => setPeople(response.data))
     //   .catch((error) => console.error(error));
-      
+
     // } catch (error) {
     //   console.error('Error deleting employee:', error);
     // }
   };
+
+  if (!elder) {
+    return <div>Loading...</div>; // You can display a loading indicator
+  }
+
+
+
+
 
   return (
     <div >
@@ -256,7 +269,7 @@ function ElderProfile() {
             </Card>
             <Box height={40} />
             <Grid container spacing={2}>
-              <Grid item xs={6} md={12} lg={6}>
+              <Grid item xs={8} md={12} lg={8}>
                 <Card>
                   <CardContent>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -328,31 +341,70 @@ function ElderProfile() {
                           </form>
                         </Box>
                       </Modal>
-                      
+
                     </div>
                     <TableContainer>
-                        <Table>
-                          <TableHead>
-                            <TableCell>Disease</TableCell>
-                            <TableCell>Descriptions</TableCell>
-                            <TableCell>Actions</TableCell>
-                          </TableHead>
-                          {history.map((hist) => (
-                            <TableBody key={hist.id}>
+                      <Table>
+                        <TableHead>
+                          <TableCell>Disease</TableCell>
+                          <TableCell>Descriptions</TableCell>
+                          <TableCell>Files</TableCell>
+                          <TableCell>Actions</TableCell>
+                        </TableHead>
+                        {history.map((hist) => (
+                          <TableBody key={hist.id}>
                             <TableCell>{hist.disease}</TableCell>
                             <TableCell>{hist.description}</TableCell>
-                            <TableCell><button onClick={() => check(hist.id)}>Check</button></TableCell>
+                            <TableCell>report.pdf</TableCell>
+                            <TableCell><Button pill onClick={handleOpenModal1}>Files</Button></TableCell>
                           </TableBody>
-                          ))}
-                          
-                          
-                          
-                        </Table>
-                      </TableContainer>
+                        ))}
+
+                        <Modal open={isModalOpen1} onClose={handleCloseModal1}>
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              bgcolor: 'background.paper',
+                              boxShadow: 24,
+                              p: 4,
+                              maxWidth: 400,
+                              width: '100%',
+                            }}
+                          >
+                            <IconButton
+                              sx={{
+                                position: 'absolute',
+                                top: 0,
+                                right: 0,
+                                zIndex: 1, // Ensure the close button appears above the content
+                              }}
+                              onClick={handleCloseModal1}
+                            >
+                              <IoCloseSharp /> {/* Replace with your close icon component */}
+                            </IconButton>
+                            <Typography variant="h6">Add history reports</Typography>
+                            <form >
+
+                              <input type="file" accept=".pdf" />
+                              <p>only pdf files are acceptable</p>
+
+
+                              <Button type="submit" variant="contained" sx={{ mt: 2 }}  >
+                                Upload
+                              </Button>
+                            </form>
+                          </Box>
+                        </Modal>
+
+                      </Table>
+                    </TableContainer>
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={6} md={12} lg={6}>
+              <Grid item xs={4} md={12} lg={4}>
                 <Card>
                   <CardContent>
 

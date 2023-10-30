@@ -69,9 +69,9 @@ import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
 
-import CheckupEldersList from "./pages/CheckupEldersList";
+// import CheckupEldersList from "./pages/CheckupEldersList";
 
-import CaregiverDashboard from "./pages/CaregiverDashboard";
+// import CaregiverDashboard from "./pages/CaregiverDashboard";
 
 import ViewAssignedRooms from "./pages/ViewAssignedElders";
 
@@ -176,15 +176,13 @@ function App() {
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
 
-          <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
+          <Route path="/DoctorViewHistory" element={<DoctorViewHistory />} />
 
-          <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
-          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} />
-          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
+          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms />} />
 
 
 
-          </Routes>
+        </Routes>
       </Router>
     </div>
   );
