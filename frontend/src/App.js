@@ -176,19 +176,15 @@ function App() {
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
 
-          
+          <Route path="/DoctorViewHistory" element={<DoctorViewHistory />} />
 
-
-          <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
-
-          {/* <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
-          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} /> */}
-
-          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
+          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms />} />
 
 
 
-          </Routes>
+
+
+        </Routes>
       </Router>
     </div>
   );
