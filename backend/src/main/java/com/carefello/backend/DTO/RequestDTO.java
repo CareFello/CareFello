@@ -33,4 +33,6 @@ public class RequestDTO {
     private String allergyMeal;
     private String currentMedication;
     private List<String> foodNot;
+    private long price;
+    private double mealprice;
 }

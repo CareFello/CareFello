@@ -99,7 +99,7 @@ public class BedController{
 
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice());
         tempreqRepo.save(tempreq);
         return "hi";
     }
