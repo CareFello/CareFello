@@ -37,6 +37,7 @@ import GuardianCaregiverRating from "./pages/Guardian/GuardianCaregiverRating";
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+import GuardianViewHealthTips from "./pages/Guardian/GuardianViewHealthTips";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
@@ -65,6 +66,7 @@ import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
+import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
 
 // import CheckupEldersList from "./pages/CheckupEldersList";
@@ -138,7 +140,7 @@ function App() {
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-
+          <Route path="/GuardianViewHealthTips" element={<GuardianViewHealthTips />} />
 
 
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
@@ -173,9 +175,17 @@ function App() {
           <Route path="/ViewComplaints" element={<ViewComplaints />} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
-          {/* <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
-          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} /> */}
+
+          
+
+
+          <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
+
+          <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
+          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} />
+
           <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
+
 
 
           </Routes>
