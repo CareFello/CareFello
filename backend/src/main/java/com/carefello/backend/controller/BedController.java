@@ -18,12 +18,18 @@ import com.carefello.backend.DTO.RequestDTO;
 import org.springframework.web.bind.annotation.RestController;
 import com.carefello.backend.model.Bed;
 import com.carefello.backend.model.Caregiver1;
+import com.carefello.backend.model.Elder1;
+import com.carefello.backend.model.Elderguar;
+import com.carefello.backend.model.Price;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
 import com.carefello.backend.payload.response.BedResponse2;
 import com.carefello.backend.payload.response.ElderRequest;
 import com.carefello.backend.repo.BedRepo;
+import com.carefello.backend.repo.Elder1Repo;
+import com.carefello.backend.repo.ElderguarRepo;
+import com.carefello.backend.repo.PriceRepo;
 import com.carefello.backend.repo.TempreqRepo;
 import com.carefello.backend.service.RequestService;
 
@@ -39,6 +45,15 @@ public class BedController{
 
     @Autowired
     private TempreqRepo tempreqRepo;
+
+    @Autowired
+    private PriceRepo priceRepo;
+
+    @Autowired
+    private Elder1Repo elder1Repo;
+
+    @Autowired
+    private ElderguarRepo elderguarRepo;
 
     public BedController(BedRepo bedRepo){
         this.bedRepo = bedRepo;
@@ -99,7 +114,7 @@ public class BedController{
 
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice(),0);
         tempreqRepo.save(tempreq);
         return "hi";
     }
@@ -146,5 +161,23 @@ public class BedController{
     @PutMapping("/request14/{id}")
     public String findOccuBed(@PathVariable int id){
         return requestService.func5(id);
+    }
+
+    @PostMapping("/request20")
+    public String getPrice(@RequestBody RequestDTO requestDTO){
+
+        Elder1 elder1 = elder1Repo.findByElderid(requestDTO.getId());
+        Elderguar elderguar = elderguarRepo.findByElderid(requestDTO.getId());
+        Price price = new Price(requestDTO.getId(), requestDTO.getPrice(), elderguar.getGuardianid(), elder1.getFirstname());
+        priceRepo.save(price);
+        Tempreq tempreq = tempreqRepo.findById(requestDTO.getLowerage());
+        tempreq.setPending(1);
+        tempreqRepo.save(tempreq);
+        return "hi";
+    }
+
+    @GetMapping("/request21/{id}")
+    public List<Price> getPrice11(@PathVariable int id){
+        return priceRepo.findPrices(id);
     }
 }

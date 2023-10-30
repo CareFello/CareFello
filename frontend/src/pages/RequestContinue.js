@@ -150,6 +150,23 @@ function RequestContinue() {
     
 };
 
+const acceptt = async (elderid, price, id) => {
+
+  console.log(elderid);
+  try {
+    await axios.post(`http://localhost:8080/api/beds/request20`,{
+      id: elderid,
+      price: price,
+      lowerage: id,
+    })
+    navigate('/GuardianRequest');
+    
+  } catch (error) {
+    console.error('Error deleting helllo:', error);
+  }
+  
+};
+
   return (
     <div className="req-continue">
       <Header />
@@ -226,7 +243,7 @@ function RequestContinue() {
               Check for Caregiver
             </Button>
             {/* <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}> */}
-            <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}>
+            <Button variant="contained" color="primary" onClick={() => acceptt(elderid, people.price, people.id)}>
               Accept
             </Button>
             <Button variant="contained" color="secondary">
