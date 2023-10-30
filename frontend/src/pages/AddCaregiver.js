@@ -54,7 +54,7 @@ function AddCaregiver() {
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8085/api/v1/caregiver/save", {
+            await axios.post("http://localhost:8080/api/v1/caregiver/save", {
                 email: email,
                 password: password,
                 nic: nic,
@@ -65,6 +65,7 @@ function AddCaregiver() {
                 name2: name2,
                 cont: cont
             });
+            
             alert("caregiver registration Successfull");
             window.location.reload();
 

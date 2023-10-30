@@ -3,6 +3,8 @@ package com.carefello.backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -18,10 +20,19 @@ public class Elder {
     private String relationship;
     private String gender;
 
+    private byte[] image;
+
+    @Transient
+    private byte[] decompressedImage;
+
+
 
     @ManyToOne
     @JoinColumn(name = "guardian_id")
     private Guardian guardian;
+
+    @OneToMany(mappedBy = "elder")
+    private List<DailyTask> dailyTasks;
 
     public int getId() {
         return id;
@@ -79,6 +90,22 @@ public class Elder {
         this.relationship = relationship;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getDecompressedImage() {
+        return decompressedImage;
+    }
+
+    public void setDecompressedImage(byte[] decompressedImage) {
+        this.decompressedImage = decompressedImage;
+    }
+
     public Elder() {
     }
 
@@ -90,5 +117,24 @@ public class Elder {
         this.relationship = relationship;
         this.gender = gender;
         this.guardian = guardian;
+    }
+
+    @OneToMany(mappedBy = "elder",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ElderMedicalHistory> elderMedicalHistories = new ArrayList<>();
+
+    public List<DailyTask> getDailyTasks() {
+        return dailyTasks;
+    }
+
+    public void setDailyTasks(List<DailyTask> dailyTasks) {
+        this.dailyTasks = dailyTasks;
+    }
+
+    public List<ElderMedicalHistory> getElderMedicalHistories() {
+        return elderMedicalHistories;
+    }
+
+    public void setElderMedicalHistories(List<ElderMedicalHistory> elderMedicalHistories) {
+        this.elderMedicalHistories = elderMedicalHistories;
     }
 }

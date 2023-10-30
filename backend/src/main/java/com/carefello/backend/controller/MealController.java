@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,15 +18,15 @@ import java.util.List;
 public class MealController {
     @Autowired
     private MealService mealService;
-
     @PostMapping("/addMealItem")
-    public ResponseEntity<Meal> addMealItem(
-            @PathVariable int mealPlanId,
-            @RequestBody MealDTO mealDTO
-            ){
-        Meal addMealItem = mealService.addMealItem(mealPlanId, mealDTO);
-        return new ResponseEntity<>(addMealItem, HttpStatus.CREATED);
+    public ResponseEntity<String> addMealItem(
+            @PathVariable("mealPlanId") int mealPlanId,
+            @ModelAttribute MealDTO mealDTO,
+            @RequestParam("imageFile") MultipartFile imageFile) {
+        mealService.addMealItem(mealPlanId, mealDTO, imageFile);
+        return ResponseEntity.ok("Meal Item added successfully");
     }
+
 
     @GetMapping("/viewMealItem")
     public ResponseEntity<List<MealDTO>> getAllMealItems(@PathVariable int mealPlanId){

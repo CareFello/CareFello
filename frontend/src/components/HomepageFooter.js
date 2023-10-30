@@ -1,53 +1,112 @@
-import React from 'react'
-import '../styles/Footer.css';
-import playstoreLogo from '../assets/playstoreLogo.png';
-import AppstoreLogo from '../assets/AppstoreLogo.png';
-import address from '../assets/location.png';
-import phone from '../assets/phone.png';
-import mail from '../assets/mail.png';
-import fb from '../assets/fbLogo.png';
-import insta from '../assets/insterLogo.png';
-import twitter from '../assets/twitterLogo.png';
-import utube from '../assets/youtubeLogo.png';
 
+import { Footer } from 'flowbite-react';
+import { BsFacebook, BsGithub, BsInstagram, BsTwitter, BsGooglePlay } from 'react-icons/bs';
 
-function HomepageFooter() {
-
+export default function FooterSitemapLinks() {
     return (
-        <div className='footer'>
-            <div className='left'>
-                <div className='footer01'><img src={playstoreLogo} alt='logo' /></div>
-                <div className='footer02'><img src={AppstoreLogo} alt='logo2' /></div>
-            </div>
-            <div className='middle'>
-                <div className='address'>
-                    <img src={address} alt='location' />
-                    <p>No.23 , Garden Rd, Dehiwala</p>
-                </div>
-                <div className='address'>
-                    <img src={phone} alt='location' />
-                    <p>+ 94 117901360 / +94 773100912</p>
-                </div>
-                <div className='address'>
-                    <img src={mail} alt='location' />
-                    <p>info@Carefello.com</p>
-                </div>
-            </div>
-            <div className='Right'>
-                <div>
-                    <p>Follow Us :</p>
-                    <div className='social'>
-                        <img src={fb} />
-                        <img src={insta} />
-                        <img src={utube} />
-                        <img src={twitter} />
+        <Footer bgDark>
+            <div className="w-full">
+                {/* <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4">
+                    <div>
+                        <Footer.Title title="Company" />
+                        <Footer.LinkGroup col>
+                            <Footer.Link href="#">
+                                About
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Careers
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Brand Center
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Blog
+                            </Footer.Link>
+                        </Footer.LinkGroup>
                     </div>
-                    <div className='tagline'>CareFello © 2023. All rights reserved</div>
+                    <div>
+                        <Footer.Title title="help center" />
+                        <Footer.LinkGroup col>
+                            <Footer.Link href="#">
+                                Discord Server
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Twitter
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Facebook
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Contact Us
+                            </Footer.Link>
+                        </Footer.LinkGroup>
+                    </div>
+                    <div>
+                        <Footer.Title title="legal" />
+                        <Footer.LinkGroup col>
+                            <Footer.Link href="#">
+                                Privacy Policy
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Licensing
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Terms & Conditions
+                            </Footer.Link>
+                        </Footer.LinkGroup>
+                    </div>
+                    <div>
+                        <Footer.Title title="download" />
+                        <Footer.LinkGroup col>
+                            <Footer.Link href="#">
+                                iOS
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Android
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                Windows
+                            </Footer.Link>
+                            <Footer.Link href="#">
+                                MacOS
+                            </Footer.Link>
+                        </Footer.LinkGroup>
+                    </div>
+                </div> */}
+                <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between">
+                    <Footer.Copyright
+                        by="CareFello™"
+                        href="#"
+                        year={2023}
+                    />
+                    <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+                        <Footer.Icon
+                            href="#"
+                            icon={BsGooglePlay}
+                        />
+                        <Footer.Icon
+                            href="#"
+                            icon={BsFacebook}
+                        />
+                        <Footer.Icon
+                            href="#"
+                            icon={BsInstagram}
+                        />
+                        <Footer.Icon
+                            href="#"
+                            icon={BsTwitter}
+                        />
+                        <Footer.Icon
+                            href="#"
+                            icon={BsGithub}
+                        />
+
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </Footer>
     )
-
 }
 
-export default HomepageFooter
+
