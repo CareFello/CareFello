@@ -86,7 +86,7 @@ function ViewAssignedRooms() {
               {groupedElders.map((row, rowIndex) => (
                 <div className="row" key={rowIndex} style={{ textAlign: "center" }}>
                   {row.map((elder, index) => (
-                    <Card key={index} sx={{ display: 'flex', minWidth: "300px",  height: 140 , marginLeft: "120px", marginTop: "100px"}}>
+                    <Card key={index} sx={{ display: 'flex', minWidth: "300px",  height: 140 , marginTop: "100px"}}>
                       <CardMedia
                         component="img"
                         sx={{ width: "130px"}}
