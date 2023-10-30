@@ -37,6 +37,7 @@ import GuardianCaregiverRating from "./pages/Guardian/GuardianCaregiverRating";
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+import GuardianViewHealthTips from "./pages/Guardian/GuardianViewHealthTips";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
@@ -138,7 +139,7 @@ function App() {
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-
+          <Route path="/GuardianViewHealthTips" element={<GuardianViewHealthTips />} />
 
 
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
