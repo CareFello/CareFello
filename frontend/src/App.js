@@ -37,11 +37,12 @@ import GuardianCaregiverRating from "./pages/Guardian/GuardianCaregiverRating";
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+import GuardianViewHealthTips from "./pages/Guardian/GuardianViewHealthTips";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
 import ViewEldersList from "./pages/ViewEldersList";
-
+import Test1 from "./pages/Test1";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
@@ -62,9 +63,14 @@ import DoctorUpdateAvailablity from "./pages/DoctorUpdateAvailablity";
 import DoctorProfile from "./pages/DoctorProfile";
 
 
+import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
 
+// import CheckupEldersList from "./pages/CheckupEldersList";
 
+// import CaregiverDashboard from "./pages/CaregiverDashboard";
+
+import ViewAssignedRooms from "./pages/ViewAssignedElders";
 
 
 function App() {
@@ -85,13 +91,13 @@ function App() {
           <Route path="/log" element={<Login />} />
           <Route path="/reg" element={<Reg />} />
           <Route path="/email" element={<Email />} />
-          
+
 
           <Route path="/image" element={<Image />} />
           <Route path="/image1" element={<Image1 />} />
           <Route path="/image2" element={<Image2 />} />
 
-
+          <Route path="/Test1" element={<Test1 />} />
 
 
 
@@ -131,7 +137,7 @@ function App() {
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-
+          <Route path="/GuardianViewHealthTips" element={<GuardianViewHealthTips />} />
 
 
           <Route
@@ -166,6 +172,12 @@ function App() {
           <Route path="/DoctorUpdateAvailablity" element={<DoctorUpdateAvailablity />} />
           <Route path="/DoctorProfile" element={<DoctorProfile />} />
           
+
+          <Route path="/DoctorViewHistory" element={<DoctorViewHistory />} />
+
+          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms />} />
+
+
 
 
 

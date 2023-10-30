@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import line from '../assets/Line.png';
-import photo from '../assets/photo.png';
+import logo from '../assets/logo.png';
 import Navbar from '../components/Navbar';
+import reg from "./Registration";
 import '../styles/LoginPage.css';
 import Model from 'react-modal';
 import Visibility from '@mui/icons-material/Visibility';
@@ -11,11 +12,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { Button } from '@mui/material';
+import { HiKey, HiMail } from 'react-icons/hi';
+// import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import login_img from '../assets/login_img.png';
+
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 
 Model.setAppElement("#root");
 
@@ -157,16 +161,69 @@ function Login() {
   }
 
   return (
-    <div> 
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
-          {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
-            
-      {/* </a> */}
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              
-              <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
+    <div>
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
+        {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
+
+        {/* </a> */}
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
+            <div className="flex justify-center items-center">
+              <img className="w-16 h-16" src={logo} alt="logo" />
+            </div>
+
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign In
+            </h1>
+            <form className="flex max-w-md flex-col gap-4">
+              <div>
+
+                <TextInput
+                  icon={HiMail}
+                  id="email4"
+                  placeholder="Email Address"
+                  required
+                  type="email"
+                  value={email} onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+
+                />
+              </div>
+              <div>
+
+                <TextInput
+                  icon={HiKey}
+                  id="password2"
+                  placeholder='Password'
+                  required
+                  shadow
+                  type="password"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              </div>
+              <div class="flex items-center h-5 mb-2">
+                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                <div class="ml-3 text-sm">
+                  <label for="remember" className="text-gray-500  dark:text-gray-300">Remember me</label>
+                  <label for="remember" className="text-blue-500  dark:text-blue-300 ml-14 cursor-pointer" onClick={openFirstModal}>Forgot Password?</label>
+                </div>
+              </div>
+              <Button type="submit" onClick={login}>
+                Sign In
+              </Button>
+              <div class="flex items-center h-5 mb-2">
+                <div class="ml-3 text-sm">
+                  <label for="remember" className="text-gray-500  dark:text-gray-300">Don't have an account ? </label>
+                  <NavLink to='/Registration' for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Register now</NavLink>
+                </div>
+              </div>
+            </form>
+            {/* <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign In
               </h1>
@@ -201,12 +258,12 @@ function Login() {
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <a href='http://localhost:3000/Registration' class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                   </p>
-              </form>
+              </form> */}
           </div>
-      
-  </div>
 
-        
+        </div>
+
+
 
         <Model isOpen={firstModalIsOpen}
           onRequestClose={closeFirstModal} style={{
@@ -318,9 +375,9 @@ function Login() {
             </form>
           </div>
         </Model>
-</div>
       </div>
-    
+    </div>
+
   );
 };
 

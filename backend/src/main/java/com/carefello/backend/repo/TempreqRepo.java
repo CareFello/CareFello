@@ -25,5 +25,7 @@ public interface TempreqRepo extends JpaRepository<Tempreq, Integer> {
     @Query("select t from Tempreq t where t.assStartDate > :assEndDate")
     Tempreq getTempreq2(@Param("assEndDate") Date assEndDate);
 
+    Tempreq findById(int id);
+
 }
 
