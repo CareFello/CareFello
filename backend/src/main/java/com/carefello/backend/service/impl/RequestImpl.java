@@ -23,6 +23,7 @@ import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Elder1;
 import com.carefello.backend.model.Elderguar;
 import com.carefello.backend.model.Guardian;
+import com.carefello.backend.model.Price;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
@@ -34,6 +35,7 @@ import com.carefello.backend.repo.Caregiver1Repo;
 import com.carefello.backend.repo.Elder1Repo;
 import com.carefello.backend.repo.ElderguarRepo;
 import com.carefello.backend.repo.GuardianRepo;
+import com.carefello.backend.repo.PriceRepo;
 import com.carefello.backend.repo.TempreqRepo;
 
 
@@ -50,6 +52,8 @@ public class RequestImpl implements RequestService {
     private Caregiver1Repo caregiver1Repo;
     @Autowired
     private TempreqRepo tempreqRepo;
+    @Autowired
+    private PriceRepo priceRepo;
     @Autowired
     private Elder1Repo elder1Repo;
     @Autowired
@@ -245,10 +249,13 @@ public class RequestImpl implements RequestService {
         List<Tempreq> tempreqs = tempreqRepo.findAll();
         List<ElderRequest> myObjectList = new ArrayList<>();
         for (Tempreq tempreq : tempreqs){
-            Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
-            Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
-            ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
-            myObjectList.add(elderRequest);
+            if (tempreq.getPending() == 0){
+                Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
+                Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
+                ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
+                myObjectList.add(elderRequest);
+            }
+            
         }
 
         return myObjectList;
@@ -264,35 +271,11 @@ public class RequestImpl implements RequestService {
         LocalDate localDate2 = tempreq.getAssEndDate().toLocalDate();
         long days = ChronoUnit.DAYS.between(localDate1, localDate2);
 
-        // if ("basic".equals(tempreq.getType())){
-        //     if (days <= 7){
-        //         price = days*2000;
-        //     }else if (days > 7 && days <= 30){
-        //         price = days*1500;
-        //     }else{
-        //         price = days*1000;
-        //     }
-        // }else if("classic".equals(tempreq.getType())){
-        //     if (days <= 7){
-        //         price = days*2500;
-        //     }else if (days > 7 && days <= 30){
-        //         price = days*2000;
-        //     }else{
-        //         price = days*1500;
-        //     }
-        // }else{
-        //     if (days <= 7){
-        //         price = days*3000;
-        //     }else if (days > 7 && days <= 30){
-        //         price = days*2500;
-        //     }else{
-        //         price = days*2000;
-        //     }
-        // }
 
         BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), tempreq.getPrice());
         return elderResponse1;
     }
+
 
 
     public String assignElder1(RequestDTO requestDTO){

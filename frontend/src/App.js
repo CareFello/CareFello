@@ -181,8 +181,8 @@ function App() {
 
           <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
 
-          <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
-          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} />
+          {/* <Route path="/CheckupEldersList" element={<CheckupEldersList/>} />
+          <Route path="/CaregiverDashboard" element={<CaregiverDashboard/>} /> */}
 
           <Route path="/ViewAssignedElders" element={<ViewAssignedRooms/>} />
 
