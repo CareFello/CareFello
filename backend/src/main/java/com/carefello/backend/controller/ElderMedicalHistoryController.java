@@ -2,6 +2,8 @@ package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.ElderMedicalHistoryDTO;
 import com.carefello.backend.model.ElderMedicalHistory;
+import com.carefello.backend.model.Emh;
+import com.carefello.backend.repo.EmhRepo;
 import com.carefello.backend.service.ElderMedicalHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,18 +19,23 @@ public class ElderMedicalHistoryController {
 
     @Autowired
     private ElderMedicalHistoryService elderMedicalHistoryService;
+
+    @Autowired
+    private EmhRepo emhRepo;
+
     @PostMapping("/addHistory")
-    public ResponseEntity<ElderMedicalHistory> addHistory(
+    public String addHistory(
             @PathVariable int elderId ,
             @RequestBody ElderMedicalHistoryDTO elderMedicalHistoryDTO){
 
-        ElderMedicalHistory elderMedicalHistory = elderMedicalHistoryService.addHistory(elderId, elderMedicalHistoryDTO);
-        return new ResponseEntity<>(elderMedicalHistory , HttpStatus.CREATED);
+        Emh emh = new Emh(elderMedicalHistoryDTO.getDisease(), elderMedicalHistoryDTO.getDescription(), elderId);
+        emhRepo.save(emh);
+        return "hi";
     }
 
     @GetMapping("/viewHistory")
-    public ResponseEntity<List<ElderMedicalHistory>> getAllMedicalHistory(@PathVariable int elderId){
-        List<ElderMedicalHistory> medicalHistories = elderMedicalHistoryService.getAllMedicalHistoriesByElderId(elderId);
-        return new ResponseEntity<>(medicalHistories, HttpStatus.OK);
+    public List<Emh> getAllMedicalHistory(@PathVariable int elderId){
+        List<Emh> emhs = emhRepo.findAllitems(elderId);
+        return emhs;
     }
 }

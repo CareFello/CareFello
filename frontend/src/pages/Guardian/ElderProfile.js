@@ -13,7 +13,7 @@ import {
   Stack,
   CardContent,
   CardMedia,
-  IconButton, Modal
+  IconButton, Modal, TableContainer, TableCell, Table, TableBody
 } from '@mui/material';
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import pro from '../../assets/avatar.png';
@@ -23,6 +23,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BiAddToQueue, BiCloset } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5'
+import { TableHead } from 'flowbite-react/lib/esm/components/Table/TableHead';
+
 function ElderProfile() {
 
   const { elderId } = useParams();
@@ -34,6 +36,7 @@ function ElderProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [message, setMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     // Fetch elder data by elderId and guardianId
@@ -46,6 +49,19 @@ function ElderProfile() {
         console.error('Error fetching elder data:', error);
       });
   }, [elderId, guardianId]);
+
+
+  useEffect(() => {
+    // Fetch elder data by elderId and guardianId
+    axios
+      .get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/viewHistory`)
+      .then((response) => 
+        setHistory(response.data)
+      )
+      .catch((error) => {
+        console.error('Error fetching elder data:', error);
+      });
+  }, []);
 
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
@@ -102,7 +118,7 @@ function ElderProfile() {
 
       console.log(response);
       if (response.status == 200) {
-        alert("Elder added successfully");
+        alert("Medical History added");
         window.location.reload();
       } else {
         console.error('Error:', response);
@@ -117,6 +133,20 @@ function ElderProfile() {
   if (!elder) {
     return <div>Loading...</div>; // You can display a loading indicator
   }
+
+  const check = async (id) => {
+
+    console.log(id);
+    // try {
+    //   await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
+    //   axios.get('http://localhost:8080/api/persons/get')
+    //   .then((response) => setPeople(response.data))
+    //   .catch((error) => console.error(error));
+      
+    // } catch (error) {
+    //   console.error('Error deleting employee:', error);
+    // }
+  };
 
   return (
     <div >
@@ -293,12 +323,32 @@ function ElderProfile() {
 
 
                             <Button type="submit" variant="contained" sx={{ mt: 2 }} onClick={save} >
-                              Add Meal Plan
+                              Submit
                             </Button>
                           </form>
                         </Box>
                       </Modal>
+                      
                     </div>
+                    <TableContainer>
+                        <Table>
+                          <TableHead>
+                            <TableCell>Disease</TableCell>
+                            <TableCell>Descriptions</TableCell>
+                            <TableCell>Actions</TableCell>
+                          </TableHead>
+                          {history.map((hist) => (
+                            <TableBody key={hist.id}>
+                            <TableCell>{hist.disease}</TableCell>
+                            <TableCell>{hist.description}</TableCell>
+                            <TableCell><button onClick={() => check(hist.id)}>Check</button></TableCell>
+                          </TableBody>
+                          ))}
+                          
+                          
+                          
+                        </Table>
+                      </TableContainer>
                   </CardContent>
                 </Card>
               </Grid>
