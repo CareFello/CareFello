@@ -64,6 +64,7 @@ import ViewComplaints from "./pages/ViewComplaints";
 import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
+import DoctorViewHealthTips from "./pages/Doctor/DoctorViewHealthTips";
 
 // import Caregiverprofile from './pages/caregiverprofile';
 
@@ -169,6 +170,8 @@ function App() {
           <Route path="/ViewComplaints" element={<ViewComplaints />} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
+
+          <Route path="/DoctorViewHealthTips" element={<DoctorViewHealthTips />} />
 
 
 
