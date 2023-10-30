@@ -19,6 +19,7 @@ import TableBody from "@mui/material/TableBody";
 
 import { TextInput, Label, FileInput, Checkbox, Textarea } from "flowbite-react"
 
+import { Link } from 'react-router-dom';
 
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -365,6 +366,7 @@ function DoctorDashboard() {
                               <TableCell align="center">Date</TableCell>
                               <TableCell align="center">Time</TableCell>
                               <TableCell align="center">Maximum Elders</TableCell>
+                              <TableCell align="center"></TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody sx={{}}>
@@ -373,10 +375,22 @@ function DoctorDashboard() {
                                 key={row.name}
                                 style={{ borderBottom: "0.5px solid #ccc" }}
                               >
-                                <TableCell align="center">{row.date}</TableCell>
+                                <TableCell align="center" sx={{marginLeft: "10px"}}>{row.date}</TableCell>
                                 <TableCell align="center">{row.time}</TableCell>
                                 <TableCell align="center">
                                   {row.max_elders}
+                                </TableCell>
+                                <TableCell align="center">
+                                <Link to="/checkupEldersList">
+                                  <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    sx={{ mt: 4, fontSize: "9px", whiteSpace: 'nowrap' }}
+                                  >
+                                    View Elders
+                                  </Button>
+                                </Link>
                                 </TableCell>
                               </TableRow>
                             ))}
