@@ -5,11 +5,11 @@ import lombok.Data;
 public class ElderInfo {
     public int age;
     public String firstname; 
-    public char gender;
+    public String gender;
     public String lastname;
     public int id;
     
-    public ElderInfo(int age, String firstname, char gender, String lastname, int id){
+    public ElderInfo(int age, String firstname, String gender, String lastname, int id){
         this.age = age;
         this.firstname = firstname;
         this.gender = gender;

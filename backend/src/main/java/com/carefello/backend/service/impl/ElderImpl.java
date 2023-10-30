@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +41,7 @@ public class ElderImpl implements ElderService {
     private ElderRepo elderRepo;
 
     @Override
-    public Elder addElderToGuardian(int guardianId, ElderDTO elderDTO) {
+    public String addElderToGuardian(int guardianId, ElderDTO elderDTO) {
         // Retrieve the guardian
         Guardian guardian = guardianRepo.findById(guardianId)
                 .orElseThrow(() -> new EntityNotFoundException("Guardian not found"));
@@ -59,11 +61,23 @@ public class ElderImpl implements ElderService {
         elder.setGender(elderDTO.getGender());
 
 
+
         // Save the elder and update the guardian's elders list
         guardian.getElders().add(elder);
         guardianRepo.save(guardian);
 
-        return elder;
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(elderDTO.getDob(), currentDate);
+
+        Elder nic = elderRepo.findByNic(elderDTO.getNic());
+
+        Elder1 elder1 = new Elder1(elderDTO.getName(), elderDTO.getName(), period.getYears(), elderDTO.getGender(), nic.getId());
+        elder1Repo.save(elder1);
+
+        Elderguar elderguar = new Elderguar(guardianId, nic.getId());
+        elderguarRepo.save(elderguar);
+
+        return "hi";
     }
 
     public class MaxEldersReachedException extends RuntimeException {
@@ -153,6 +167,15 @@ public class ElderImpl implements ElderService {
         }
         return myObjectList;
     }
+
+    // @Override
+    // public List<Elder1> getElder2(int guardianId){
+    //     List<Elder1> myObjectList = new ArrayList<>();
+    //     List<Elderguar> elderguars = elderguarRepo.findByguardianid(guardianId);
+    //     for (Elderguar elderguar : elderguars){
+    //         Eldet
+    //     }
+    // }
 
 
 }

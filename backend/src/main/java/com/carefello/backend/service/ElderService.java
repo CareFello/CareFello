@@ -11,9 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ElderService {
-    Elder addElderToGuardian(int guardianId, ElderDTO elderDTO);
+    String addElderToGuardian(int guardianId, ElderDTO elderDTO);
     List<ElderDTO> getEldersByGuardianId(int guardianId);
     ElderDTO getElderById(int guardianId, int elderId);
     void updateElderImage(int elderId , MultipartFile imageFile);
     List<ElderInfo> getElders(int id);
+    // List<Elder1> getElder2(int guardianId);
 }

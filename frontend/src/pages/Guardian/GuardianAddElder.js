@@ -32,6 +32,7 @@ function GuardianAddElder() {
   const handleSubmit = async (event) => {
     // Validation logic
     event.preventDefault();
+
     let isValid = true;
 
     if (!name) {
@@ -116,8 +117,9 @@ function GuardianAddElder() {
         // }
       } catch (error) {
         console.error('Error:', error);
-        alert("Maximum elder count reached");
+        alert("Maximum elder count reached or network error happen");
       }
+
     }
   }
 
