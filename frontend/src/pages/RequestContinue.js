@@ -225,6 +225,7 @@ function RequestContinue() {
           <Button variant="contained" color="primary" onClick={() => check(people.assStartDate, people.assEndDate, people.caregiverGender)}>
               Check for Caregiver
             </Button>
+            {/* <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}> */}
             <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}>
               Accept
             </Button>

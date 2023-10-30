@@ -259,38 +259,38 @@ public class RequestImpl implements RequestService {
         Elderguar elderguar = elderguarRepo.findByElderid(id);
         Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
         Tempreq tempreq = tempreqRepo.getTempreq(id);
-        long price = 0;
+        
         LocalDate localDate1 = tempreq.getAssStartDate().toLocalDate();
         LocalDate localDate2 = tempreq.getAssEndDate().toLocalDate();
         long days = ChronoUnit.DAYS.between(localDate1, localDate2);
 
-        if ("basic".equals(tempreq.getType())){
-            if (days <= 7){
-                price = days*2000;
-            }else if (days > 7 && days <= 30){
-                price = days*1500;
-            }else{
-                price = days*1000;
-            }
-        }else if("classic".equals(tempreq.getType())){
-            if (days <= 7){
-                price = days*2500;
-            }else if (days > 7 && days <= 30){
-                price = days*2000;
-            }else{
-                price = days*1500;
-            }
-        }else{
-            if (days <= 7){
-                price = days*3000;
-            }else if (days > 7 && days <= 30){
-                price = days*2500;
-            }else{
-                price = days*2000;
-            }
-        }
+        // if ("basic".equals(tempreq.getType())){
+        //     if (days <= 7){
+        //         price = days*2000;
+        //     }else if (days > 7 && days <= 30){
+        //         price = days*1500;
+        //     }else{
+        //         price = days*1000;
+        //     }
+        // }else if("classic".equals(tempreq.getType())){
+        //     if (days <= 7){
+        //         price = days*2500;
+        //     }else if (days > 7 && days <= 30){
+        //         price = days*2000;
+        //     }else{
+        //         price = days*1500;
+        //     }
+        // }else{
+        //     if (days <= 7){
+        //         price = days*3000;
+        //     }else if (days > 7 && days <= 30){
+        //         price = days*2500;
+        //     }else{
+        //         price = days*2000;
+        //     }
+        // }
 
-        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), price);
+        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), tempreq.getPrice());
         return elderResponse1;
     }
 
