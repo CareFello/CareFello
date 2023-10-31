@@ -62,6 +62,7 @@ import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
 import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
+import CaregiverViewReport from "./pages/CaregiverViewReport";
 
 
 function App() {
@@ -165,7 +166,7 @@ function App() {
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
           <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
-
+          <Route path="/CaregiverViewReport" element={<CaregiverViewReport />} />
         </Routes>
       </Router>
     </div>
