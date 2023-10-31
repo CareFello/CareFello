@@ -114,7 +114,8 @@ public class BedController{
 
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice(),0);
+        Elderguar elderguar = elderguarRepo.findByElderid(requestDTO.getAssElderId());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice(),0,0,elderguar.getGuardianid());
         tempreqRepo.save(tempreq);
         return "hi";
     }
@@ -148,6 +149,12 @@ public class BedController{
         return str;
     }
 
+    @PostMapping("/request23")
+    public BedResponse findreq2(@RequestBody RequestDTO requestDTO){
+        BedResponse str = requestService.TempreqcheckCaregiver(requestDTO);
+        return str;
+    }
+
     // @GetMapping("/request13")
     // public int[] findOccuBeds(){
     //     return bedRepo.getDistinctBed();
@@ -156,6 +163,11 @@ public class BedController{
     @GetMapping("/request13")
     public List<BedResponse2> findOccuBeds(){
         return requestService.getOccu();
+    }
+
+    @GetMapping("/request22")
+    public List<BedResponse2> findOccuBeds1(){
+        return requestService.getOccu1();
     }
 
     @PutMapping("/request14/{id}")
@@ -172,6 +184,7 @@ public class BedController{
         priceRepo.save(price);
         Tempreq tempreq = tempreqRepo.findById(requestDTO.getLowerage());
         tempreq.setPending(1);
+        tempreq.setCaregiverid(requestDTO.getUpperage());
         tempreqRepo.save(tempreq);
         return "hi";
     }

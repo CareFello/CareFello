@@ -23,7 +23,9 @@ public interface RequestService {
     BedResponse1 func2(int id);
     String assignElder1(RequestDTO requestDTO);
     BedResponse Tempreqcheck(RequestDTO requestDTO);
+    BedResponse TempreqcheckCaregiver(RequestDTO requestDTO);
     List<BedResponse2> getOccu();
+    List<BedResponse2> getOccu1();
     String func5(int id);
 
 }
