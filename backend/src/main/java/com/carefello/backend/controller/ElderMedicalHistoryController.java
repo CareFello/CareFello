@@ -28,10 +28,12 @@ public class ElderMedicalHistoryController {
             @PathVariable int elderId ,
             @RequestBody ElderMedicalHistoryDTO elderMedicalHistoryDTO){
 
-        Emh emh = new Emh(elderMedicalHistoryDTO.getDisease(), elderMedicalHistoryDTO.getDescription(), elderId);
+        Emh emh = new Emh(elderMedicalHistoryDTO.getDisease(), elderMedicalHistoryDTO.getDescription(), elderId, null, null, null);
         emhRepo.save(emh);
         return "hi";
     }
+
+    
 
     @GetMapping("/viewHistory")
     public List<Emh> getAllMedicalHistory(@PathVariable int elderId){
