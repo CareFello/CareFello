@@ -185,7 +185,7 @@ function RegistrationForm() {
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       sizing="md"
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                     />
                     <div className="error-message" style={{ color: 'red' }}>{firstNameError}</div>
 
@@ -197,7 +197,7 @@ function RegistrationForm() {
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       sizing="md"
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                     />
                     <div className="error-message" style={{ color: 'red' }}>{lastNameError}</div>
 
@@ -228,7 +228,7 @@ function RegistrationForm() {
                   <div className="input-container mr-4">
                     <TextInput
                       placeholder="Mobile No"
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                       sizing="md"
                       value={mobileNo}
                       onChange={(e) => setMobileNo(e.target.value)}
@@ -238,7 +238,7 @@ function RegistrationForm() {
                   <div className="input-container">
                     <TextInput
                       placeholder="Profession"
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                       sizing="md"
                       value={profession}
                       onChange={(e) => setProfession(e.target.value)}
@@ -267,7 +267,7 @@ function RegistrationForm() {
                     <TextInput
                       placeholder="Password"
                       type='password'
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                       sizing="md"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -278,7 +278,7 @@ function RegistrationForm() {
                     <TextInput
                       placeholder="Confirm Password"
                       type='password'
-                      className='w-full mr-4'
+                      className='w-full mr-12'
                       sizing="md"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
