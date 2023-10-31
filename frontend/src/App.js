@@ -7,6 +7,8 @@ import Home1 from "./components/Test";
 import Login from "./components/Login";
 import Reg from "./components/Register";
 import Sel from "./pages/Select";
+import Sel1 from "./pages/Select1";
+
 import Email from "./pages/Email";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -35,11 +37,13 @@ import GuardianCaregiverRating from "./pages/Guardian/GuardianCaregiverRating";
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+import GuardianViewHealthTips from "./pages/Guardian/GuardianViewHealthTips";
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
-
+import ViewEldersList from "./pages/ViewEldersList";
+import Test1 from "./pages/Test1";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
@@ -47,23 +51,33 @@ import Image2 from "./pages/Image2";
 
 
 
+
+import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
+
+
 import GuardianDetailsPage from "./components/GuardianDetailPage";
 import Caregiverprofile from "./pages/caregiverprofile";
 import Elderslist from "./pages/Elderslist";
 import ViewGuardianProfile from "./pages/ViewGuardianProfile";
 import ViewComplaints from "./pages/ViewComplaints";
-// import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
+
 
 import ViewDonationRequests from "./pages/ViewDonationRequests";
-
-import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 
 import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
+
 import CaregiverViewReport from "./pages/CaregiverViewReport";
 import CaregiverCalender from "./pages/CaregiverCalender";
+
+// import CheckupEldersList from "./pages/CheckupEldersList";
+
+// import CaregiverDashboard from "./pages/CaregiverDashboard";
+import ViewAssignedRooms from "./pages/ViewAssignedElders";
+
+
 
 function App() {
   return (
@@ -89,16 +103,16 @@ function App() {
           <Route path="/image1" element={<Image1 />} />
           <Route path="/image2" element={<Image2 />} />
 
+          <Route path="/Test1" element={<Test1 />} />
 
 
-         
-          <Route path="/Caregiverprofile" element={<Caregiverprofile/>}/>
 
 
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
 
 
           <Route path="/sel" element={<Sel />} />
+          <Route path="/sel1" element={<Sel1 />} />
           <Route path="/Registration" element={<Registration />} />
           <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
           <Route path="/ViewGuardianProfile" element={<ViewGuardianProfile />} />
@@ -117,20 +131,23 @@ function App() {
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
 
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
-
-          <Route path="/RequestContinue" element={<RequestContinue />} />
+          <Route path="/ViewEldersList" element={<ViewEldersList />} />
+          <Route path="/RequestContinue/:elderid" element={<RequestContinue />} />
 
 
           <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />
-          <Route path="/GuardianProfilePage" element={<GuardianProfilePage />} />
+          <Route path="/GuardianProfilePage/:guardianId" element={<GuardianProfilePage />} />
           <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
 
-          <Route path="/ElderProfile" element={<ElderProfile />} />
+          <Route path="//elder/:elderId" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
 
           <Route path="/GuardianRoomPackages" element={<GuardianRoomPackages />} />
-         
+          <Route path="/GuardianViewHealthTips" element={<GuardianViewHealthTips />} />
+
+
           <Route path="/DoctorUpdateAvailability" element={<DoctorUpdateAvailability />} />
+
 
 
           <Route
@@ -140,21 +157,16 @@ function App() {
           <Route path="/GuardianAddElder/:guardianId" element={<GuardianAddElder />} />
 
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
-          
+
+
 
 
           <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
-          
 
           <Route path="/GuardianPayments/:guardianId" element={<GuardianPayments />} />
-          
 
 
-          <Route path="/GuardianComplain/:guardianId" element={<GuardianComplain />} />
-          
-          <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
-          <Route path="/Caregiverlist" element={<Caregiverlist />} />
-          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
+
 
 
           <Route path="/GuardianCaregiverRating" element={<GuardianCaregiverRating />} />
@@ -162,12 +174,23 @@ function App() {
           <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
           <Route path="/Elderslist" element={<Elderslist />} />
 
-          <Route path="/ViewComplaints" element={<ViewComplaints/>} />
-          <Route path="/ViewDonationRequests" element={<ViewDonationRequests/>} />
+
+          <Route path="/ViewComplaints" element={<ViewComplaints />} />
+          <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
+
           <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
           <Route path="/CaregiverViewReport" element={<CaregiverViewReport />} />
           <Route path="/CaregiverCalender" element={<CaregiverCalender />} />
+
+          <Route path="/DoctorViewHistory" element={<DoctorViewHistory />} />
+          <Route path="/ViewAssignedElders" element={<ViewAssignedRooms />} />
+
+
+
+
+
+
         </Routes>
       </Router>
     </div>

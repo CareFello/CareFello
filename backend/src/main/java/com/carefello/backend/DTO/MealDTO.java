@@ -6,6 +6,7 @@ public class MealDTO {
     private String type;
     private String itemName;
     private String nutritions;
+    private byte[] image;
 
     public int getId() {
         return id;
@@ -37,5 +38,14 @@ public class MealDTO {
 
     public void setNutritions(String nutritions) {
         this.nutritions = nutritions;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+
+    public void setImage(byte[] decompressedImage) {
+        this.image = decompressedImage;
     }
 }

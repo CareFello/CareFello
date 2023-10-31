@@ -38,6 +38,8 @@ public class Bed {
     private int caregiverId;
     @Column(name="type", length = 255)
     private String type;
+    @Column(name="caregiveridoccu", length = 45)
+    private int caregiveridoccu;
 
     
 
@@ -47,7 +49,7 @@ public class Bed {
 
     public Bed(int bed_id, int free, int assigned, int occupied, Date assStarDate,
     Date assEndDate, Date occuStarDate, Date occuEnDate, int occuElderId,
-    int assElderId, String type, int caregiverId){
+    int assElderId, String type, int caregiverId, int caregiveridoccu){
 
         this.bed_id = bed_id;
         this.free = free;
@@ -61,6 +63,7 @@ public class Bed {
         this.assElderId = assElderId;
         this.type = type;
         this.caregiverId = caregiverId;
+        this.caregiveridoccu = caregiveridoccu;
     }
     
 }

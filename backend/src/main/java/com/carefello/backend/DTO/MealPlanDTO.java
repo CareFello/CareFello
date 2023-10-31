@@ -5,6 +5,7 @@ public class MealPlanDTO {
     private String name;
     private String description;
     private double price;
+    private byte[] image;
 
     public int getId() {
         return id;
@@ -36,5 +37,14 @@ public class MealPlanDTO {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+
+    public void setImage(byte[] decompressedImage) {
+        this.image = decompressedImage;
     }
 }

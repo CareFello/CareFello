@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, CardMedia } from '@mui/material';
 import '../styles/MealItemCard.css'; // Import your CSS file for styling
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import axios from 'axios'
+import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
+import meal from "../assets/meal1.jpg";
 
 const MealItemCard = () => {
     const [mealItems, setMealItems] = useState([]);
     const params = useParams();
 
-    const url = "http://localhost:8080/api/v1/MealPlan/" + params.id + "/meal/viewMealItem";
+    const url = `http://localhost:8080/api/v1/MealPlan/${params.id}/meal/viewMealItem`;
 
     useEffect(() => {
         axios.get(url)
@@ -37,28 +36,31 @@ const MealItemCard = () => {
             });
     };
 
-
-
     return (
         <div className="meal-item-container">
-            <h2>Meal Plan Details</h2>
-
             <div className="meal-cards">
                 {mealItems.map(mealItem => (
                     <Card key={mealItem.id} className="meal-card">
+                        <CardMedia
+                            component="img"
+                            height="140"
+                            image={mealItem.image ? `data:image/jpeg;base64,${mealItem.image}` : meal} // Use the image data from your API
+                            alt="Meal Item Image"
+                        />
                         <CardContent>
                             <Typography variant="h6">{mealItem.itemName}</Typography>
                             <Typography variant="body1">Type: {mealItem.type}</Typography>
                             <Typography variant="body2">Nutritions: {mealItem.nutritions}</Typography>
-                            {/* Other details */}
-                            <DeleteIcon onClick={() => handleDelete(mealItem.id)} // Call a delete function on click
-                                style={{ cursor: 'pointer' }} />
+                            <DeleteIcon
+                                onClick={() => handleDelete(mealItem.id)} // Call a delete function on click
+                                style={{ cursor: 'pointer' }}
+                            />
                         </CardContent>
                     </Card>
                 ))}
             </div>
         </div>
     );
-}
+};
 
 export default MealItemCard;

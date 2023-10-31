@@ -27,8 +27,6 @@ public class Caregiver {
     private double rating;
     @Column(name="gender", length = 255)
     private char gender;
-    @Column(name="free", length = 45)
-    private int free;
     @Column(name="name1", length = 255)
     private String name1;
     @Column(name="name2", length = 255)
@@ -37,18 +35,7 @@ public class Caregiver {
     private String cont;
     @Column(name="age", length = 45)
     private int age;
-    @Column(name="assigned", length = 45)
-    private int assigned;
-    @Column(name="occupied", length = 45)
-    private int occupied;
-    @Column(name="occuStartDate", length = 255)
-    private Date occuStartDate;
-    @Column(name="occuEndDate", length = 255)
-    private Date occuEndDate;
-    @Column(name="assStartDate", length = 255)
-    private Date assStartDate;
-    @Column(name="assEndDate", length = 255)
-    private Date assEndDate;
+    
     
 
     public Caregiver() {
@@ -56,7 +43,7 @@ public class Caregiver {
     }
 
     public Caregiver(String email, String password, Date dob, String address, String nic,
-    char gender, int free, String name1, String name2, String cont, int age) {
+    char gender, String name1, String name2, String cont, int age) {
         
         this.email = email;
         this.password = password;
@@ -64,7 +51,6 @@ public class Caregiver {
         this.address = address;
         this.nic = nic;
         this.gender = gender;
-        this.free = free;
         this.name1 = name1;
         this.name2 = name2;
         this.cont = cont;

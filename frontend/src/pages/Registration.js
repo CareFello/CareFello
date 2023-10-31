@@ -1,258 +1,308 @@
-import { useState } from 'react'
-import Navbar from '../components/Navbar'
-import "../styles/Registration.css"
-import { Checkbox } from '@mui/material'
-import TextField from '@mui/material/TextField'
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Button from '@mui/material/Button';
-import Reg from "../assets/reg.png"
-import axios from 'axios'
+import React, { useState } from 'react'
+import Sidebar from '../components/Sidebar'
+import '../index.css';
+import Header from '../components/Header'
+import { Box } from '@mui/material'
+import { Button, Card, Checkbox, Datepicker, Label, TextInput, Select, Textarea } from 'flowbite-react';
+import "../styles/form.css"
+import { ManagerMenuItem } from '../components/ManagerMenuItem'
+import { Grid } from '@mui/material';
+import slide1 from '../assets/log_2.jpg'
+import axios from 'axios';
 
+function RegistrationForm() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [nicNo, setNicNo] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [profession, setProfession] = useState('');
+  const [homeAddress, setHomeAddress] = useState('');
+  const [workAddress, setWorkAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [firstNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [nicNoError, setNicNoError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [mobileNoError, setMobileNoError] = useState('');
+  const [professionError, setProfessionError] = useState('');
+  const [homeAddressError, setHomeAddressError] = useState('');
+  const [workAddressError, setWorkAddressError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
-function Registration() {
+  const handleSubmit = async (event) => {
+    // Validation logic
+    event.preventDefault();
+    let isValid = true;
 
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [nic, setNic] = useState("");
-    const [cont, setCont] = useState("");
-    const [profession, setPro] = useState("");
-    const [haddress, setHaddress] = useState("");
-    const [waddress, setWaddress] = useState("");
-    const [isValid, setIsValid] = useState(true);
-    const [isValidnic, setIsValidnic] = useState(true);
-
-    async function save(event) {
-        event.preventDefault();
-        try {
-            await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
-                email: email,
-                password: password,
-                nic: nic,
-                fname: fname,
-                lname: lname,
-                cont: cont,
-                profession: profession,
-                haddress: haddress,
-                waddress: waddress,
-
-            });
-            alert("Guardian registration Successfull");
-            window.location.reload();
-
-        } catch (err) {
-            alert(err);
-        }
+    if (!firstName) {
+      setFirstNameError('First Name is required');
+      isValid = false;
+    } else {
+      setFirstNameError('');
     }
 
-    return (
-        <div>
-            <Navbar />
-            <br></br>
-            <div className='reg-container'>
+    if (!lastName) {
+      setLastNameError('Last Name is required');
+      isValid = false;
+    } else {
+      setLastNameError('');
+    }
+
+    if (!nicNo) {
+      setNicNoError('NIC No is required');
+      isValid = false;
+    } else if (/^(19|20)\d{10}$/.test(nicNo) || /^9\d{8}V$/.test(nicNo)) {
+      setNicNoError('');
+    } else {
+      setNicNoError('NIC No is invalid');
+      isValid = false;
+    }
+
+    if (!email) {
+      setEmailError('Email is required');
+      isValid = false;
+    } else if (/^\S+@gmail\.com$/.test(email)) {
+      setEmailError('');
+    } else {
+      setEmailError('Email is invalid.');
+      isValid = false;
+    }
 
 
-                <div className='reg-image'>
-                    <img src={Reg} />
+    if (!mobileNo) {
+      setMobileNoError('Mobile number is required');
+      isValid = false;
+    } else if (/^\d{10,15}$/.test(mobileNo)) {
+      setMobileNoError('');
+    } else {
+      setMobileNoError('Mobile number is invalid.');
+      isValid = false;
+    }
+
+
+    if (!profession) {
+      setProfessionError('Profession is required');
+      isValid = false;
+    } else {
+      setProfessionError('');
+    }
+
+    if (!homeAddress) {
+      setHomeAddressError('Home Address is required');
+      isValid = false;
+    } else {
+      setHomeAddressError('');
+    }
+
+    if (!workAddress) {
+      setWorkAddressError('Working Place Address is required');
+      isValid = false;
+    } else {
+      setWorkAddressError('');
+    }
+
+    if (!password) {
+      setPasswordError('Password is required');
+      isValid = false;
+    } else if (password.length >= 8) {
+      setPasswordError('');
+    } else {
+      setPasswordError('Password should contain at least 8 characters');
+      isValid = false;
+    }
+
+    if (!confirmPassword) {
+      setConfirmPasswordError('Password confirmation is required');
+      isValid = false;
+    } else if (password === confirmPassword) {
+      setConfirmPasswordError('');
+    } else {
+      setConfirmPasswordError('Passwords do not match');
+      isValid = false;
+    }
+
+    // Add similar validation logic for other fields...
+
+    if (isValid) {
+      // Form submission logic here
+
+      try {
+        await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
+          fname: firstName,
+          lname: lastName,
+          nic: nicNo,
+          email: email,
+          cont: mobileNo,
+          profession: profession,
+          hAddress: homeAddress,
+          wAddress: workAddress,
+          password: password,
+        });
+
+        alert("You have register successfully");
+        window.location.reload();
+
+      } catch (err) {
+        // Handle any errors, such as network errors or server-side validation errors
+        alert(err);
+      }
+    }
+  }
+
+
+
+
+  return (
+    <div>
+
+      <Box height={10} />
+      <Box sx={{ display: 'flex' }}>
+
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
+          <br />
+          <Grid container spacing={1}>
+            <Grid item xs={7}>
+              <div className="flex justify-center items-center">
+                <img className="w-200 h-320" src={slide1} alt="logo" />
+              </div>
+
+            </Grid>
+            <Grid item xs={4}>
+
+              <h1 className="mb-4">
+                Guardian Registration
+              </h1>
+              <div className='ml-7'>
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+
+                    <TextInput
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      sizing="md"
+                      className='w-full mr-12'
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{firstNameError}</div>
+
+                  </div>
+                  <div className="input-container ">
+
+                    <TextInput
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      sizing="md"
+                      className='w-full mr-12'
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{lastNameError}</div>
+
+                  </div>
                 </div>
-                <div className='reg-form'>
-                    <form action="#" className="">
-                        <h2 className='Topic'>Sign Up</h2>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Fisrt name"
-                            sx={{ m: 1, width: '25ch' }}
 
-                            value={fname}
-                            onChange={(event) => {
-                                setFname(event.target.value);
-                            }}
-                        />
+                <div className="mb-4">
+                  <TextInput
+                    placeholder="NIC No" type='text' sizing="md" className='w-68'
+                    value={nicNo}
+                    onChange={(e) => setNicNo(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: 'red' }}>{nicNoError}</div>
+                </div>
 
 
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Last name"
-                            sx={{ m: 1, width: '25ch' }}
-
-                            value={lname}
-                            onChange={(event) => {
-                                setLname(event.target.value);
-                            }} />
+                <div className="mb-4">
+                  <TextInput
+                    placeholder="Email" className='w-68' type='email' sizing="md"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: 'red' }}>{emailError}</div>
+                </div>
 
 
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Email"
-                            sx={{ m: 1, width: '52ch' }}
-
-                            value={email}
-                            onChange={(event) => {
-                                setEmail(event.target.value);
-                                const inputEmail = event.target.value;
-
-                                // Regular expression for email validation
-                                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
-
-                                // Check if the email matches the pattern
-                                setIsValid(emailPattern.test(inputEmail));
-                            }}
-
-                            style={{ borderColor: isValid ? 'green' : 'red' }} />
-
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-
-                            label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                            sx={{ m: 1, width: '25ch' }}
-
-                            value={nic}
-                            onChange={(event) => {
-                                setNic(event.target.value);
-                                const inputnic = event.target.value;
-                                const nicPattern = /^\d{12}$/;
-                                setIsValidnic(nicPattern.test(inputnic));
-                            }}
-                            style={{ borderColor: isValid ? 'green' : 'red' }} />
-
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Mobile No"
-                            sx={{ m: 1, width: '25ch' }}
-
-                            value={cont}
-                            onChange={(event) => {
-                                setCont(event.target.value);
-                            }} />
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Home Address"
-                            sx={{ m: 1, width: '52ch' }}
-
-                            value={haddress}
-                            onChange={(event) => {
-                                setHaddress(event.target.value);
-                            }} />
-
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Proffession"
-                            sx={{ m: 1, width: '52ch' }}
-
-
-                            value={profession}
-                            onChange={(event) => {
-                                setPro(event.target.value);
-                            }} />
-
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Working Place Address"
-                            sx={{ m: 1, width: '52ch' }}
-
-
-                            value={waddress}
-                            onChange={(event) => {
-                                setWaddress(event.target.value);
-                            }} />
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-
-
-                            /></FormControl>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Confirm Password"
-                                value={password}
-                                onChange={(event) => {
-                                    setPassword(event.target.value);
-                                }}
-
-
-                            /></FormControl>
-
-
-
-                        <Button onClick={save} variant="contained" sx={{
-                            m: 1, width: '40ch', height: '50px', backgroundColor: ' #05445E', marginTop: '20px',
-                            '&:hover': {
-                                backgroundColor: '#189AB4', // Change this color to your desired hover color
-                            },
-                        }}>
-
-                            Register
-                        </Button>
-                    </form>
-
-                </div >
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-            </div >
-        </div >
-    )
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+                    <TextInput
+                      placeholder="Mobile No"
+                      className='w-full mr-12'
+                      sizing="md"
+                      value={mobileNo}
+                      onChange={(e) => setMobileNo(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{mobileNoError}</div>
+                  </div>
+                  <div className="input-container">
+                    <TextInput
+                      placeholder="Profession"
+                      className='w-full mr-12'
+                      sizing="md"
+                      value={profession}
+                      onChange={(e) => setProfession(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{professionError}</div>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <Textarea
+                    placeholder="Home Address" className='w-full' sizing="sm"
+                    value={homeAddress}
+                    onChange={(e) => setHomeAddress(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: 'red' }}>{homeAddressError}</div>
+                </div>
+                <div className="mb-4">
+                  <Textarea
+                    placeholder="Working Place Address" className='w-68' sizing="sm"
+                    value={workAddress}
+                    onChange={(e) => setWorkAddress(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: 'red' }}>{workAddressError}</div>
+                </div>
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+                    <TextInput
+                      placeholder="Password"
+                      type='password'
+                      className='w-full mr-12'
+                      sizing="md"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{passwordError}</div>
+                  </div>
+                  <div className="input-container">
+                    <TextInput
+                      placeholder="Confirm Password"
+                      type='password'
+                      className='w-full mr-12'
+                      sizing="md"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: 'red' }}>{confirmPasswordError}</div>
+                  </div>
+                </div>
+                <div class="flex items-center h-5 mb-4">
+                  <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                  <div class="ml-3 text-sm">
+                    <label for="remember" className="text-gray-500  dark:text-gray-300">I agree to</label>
+                    <label for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Terms & Conditions</label>
+                  </div>
+                </div>
+                <Button className='w-68' onClick={handleSubmit}>
+                  Sign In
+                </Button>
+              </div>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </div>
+  )
 }
 
-export default Registration
+export default RegistrationForm;

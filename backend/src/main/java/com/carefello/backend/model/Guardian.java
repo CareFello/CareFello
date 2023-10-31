@@ -1,17 +1,19 @@
 package com.carefello.backend.model;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
+@Table(name = "guardian")
 
 public class Guardian {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int user_id;
     private String email;
     private String fname;
     private String lname;
@@ -25,8 +27,8 @@ public class Guardian {
     public Guardian() {
     }
 
-    public Guardian(int id, String email, String fname, String lname, String nic, String cont, String hAddress, String wAddress, String profession, String password) {
-        this.id = id;
+    public Guardian(int user_id, String email, String fname, String lname, String nic, String cont, String hAddress, String wAddress, String profession, String password) {
+        this.user_id = user_id;
         this.email = email;
         this.fname = fname;
         this.lname = lname;
@@ -39,11 +41,11 @@ public class Guardian {
     }
 
     public int getId() {
-        return id;
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getEmail() {

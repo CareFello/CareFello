@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import line from '../assets/Line.png';
-import photo from '../assets/photo.png';
+import logo from '../assets/logo.png';
 import Navbar from '../components/Navbar';
+import reg from "./Registration";
 import '../styles/LoginPage.css';
 import Model from 'react-modal';
 import Visibility from '@mui/icons-material/Visibility';
@@ -11,11 +12,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { Button } from '@mui/material';
+import { HiKey, HiMail } from 'react-icons/hi';
+// import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import login_img from '../assets/login_img.png';
+
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 
 Model.setAppElement("#root");
 
@@ -35,7 +39,7 @@ function Login() {
 
   const openSecondModal = async () => {
     try {
-      await axios.post("http://localhost:8085/api/resetemail", {
+      await axios.post("http://localhost:8080/api/resetemail", {
         recipient: resetemail,
 
       }).then((res) => {
@@ -60,7 +64,7 @@ function Login() {
 
   const openThirdModal = async () => {
     try {
-      await axios.post("http://localhost:8085/api/checkcode", {
+      await axios.post("http://localhost:8080/api/checkcode", {
         code: code,
 
       }).then((res) => {
@@ -81,7 +85,7 @@ function Login() {
 
   const reset = async () => {
     try {
-      await axios.put(`http://localhost:8085/api/v1/employee/updatepass/${resetemail}`, {
+      await axios.put(`http://localhost:8080/api/v1/employee/updatepass/${resetemail}`, {
         password: newpassword,
       });
       window.location.reload();
@@ -129,13 +133,13 @@ function Login() {
         }
         else if (res.data.message == "Email not exits") {
 
-          axios.post("http://localhost:8085/api/v1/employee/login", {
+          axios.post("http://localhost:8080/api/v1/employee/login", {
             email: email,
             password: password,
           }).then((res) => {
 
             if (res.data.message == "Login Success") {
-              localStorage.setItem('myData', email);
+              // localStorage.setItem('myData', email);
               navigate('/ManagerDashboard');
             } else {
               alert("Incorrect Email or Password")
@@ -158,41 +162,108 @@ function Login() {
 
   return (
     <div>
-      <Navbar />
-      <div className='photo'><img src={photo} alt='photo' /></div>
-      <div className='logbox'>
-        <div className='line1'><img src={line} alt='line' /></div>
-        <div className='line2'><img src={line} alt='line' /></div>
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
+        {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
 
-        <form>
-          <div>
-            <input className='input1'
-              type="email"
-              id="email"
-              placeholder='Email'
-              value={email}
-              onChange={(event) => {
+        {/* </a> */}
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
+            <div className="flex justify-center items-center">
+              <img className="w-16 h-16" src={logo} alt="logo" />
+            </div>
+
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign In
+            </h1>
+            <form className="flex max-w-md flex-col gap-4">
+              <div>
+
+                <TextInput
+                  icon={HiMail}
+                  id="email4"
+                  placeholder="Email Address"
+                  required
+                  type="email"
+                  value={email} onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+
+                />
+              </div>
+              <div>
+
+                <TextInput
+                  icon={HiKey}
+                  id="password2"
+                  placeholder='Password'
+                  required
+                  shadow
+                  type="password"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              </div>
+              <div class="flex items-center h-5 mb-2">
+                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                <div class="ml-3 text-sm">
+                  <label for="remember" className="text-gray-500  dark:text-gray-300">Remember me</label>
+                  <label for="remember" className="text-blue-500  dark:text-blue-300 ml-14 cursor-pointer" onClick={openFirstModal}>Forgot Password?</label>
+                </div>
+              </div>
+              <Button type="submit" onClick={login}>
+                Sign In
+              </Button>
+              <div class="flex items-center h-5 mb-2">
+                <div class="ml-3 text-sm">
+                  <label for="remember" className="text-gray-500  dark:text-gray-300">Don't have an account ? </label>
+                  <NavLink to='/Registration' for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Register now</NavLink>
+                </div>
+              </div>
+            </form>
+            {/* <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Sign In
+              </h1>
+                  <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                      <input type="email" name="email" id="email"  value={email} onChange={(event) => {
                 setEmail(event.target.value);
               }}
-              required
-            />
-          </div>
-          <div>
-            <input className='input2'
-              type="password"
-              id="password"
-              placeholder='Password'
-              value={password}
-              onChange={(event) => {
+              required class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required=""></input>
+                  </div>
+                  <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <input type="password" name="password" id="password" value={password} placeholder="••••••••" onChange={(event) => {
                 setPassword(event.target.value);
               }}
               required
-            />
+             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""></input>
+                  </div>
+                  <div class="flex items-center justify-between">
+                      <div class="flex items-start">
+                          <div class="flex items-center h-5">
+                            <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                            <div class="ml-3 text-sm">
+                            <label for="remember" class="text-gray-500  dark:text-gray-300">Remember me</label>
+                          </div>
+                          </div>
+                          
+                      </div>
+                      <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500"><Button onClick={openFirstModal}>Forgot password?</Button></a>
+                  </div>
+                  <button type="submit" onClick={login} class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign in</button>
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Don’t have an account yet? <a href='http://localhost:3000/Registration' class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                  </p>
+              </form> */}
           </div>
-          <button className='logbtn' type="submit" onClick={login}>LOGIN</button>
-        </form>
-        <div className='signup'>Dosen't have an an account yet?</div><div className='signup1'><a href='http://localhost:3000/Registration'>Sign Up</a></div>
-        <div className='forgot'>Forgot Password?</div><div className='forgot1'><Button onClick={openFirstModal}>Click Here</Button></div>
+
+        </div>
+
+
 
         <Model isOpen={firstModalIsOpen}
           onRequestClose={closeFirstModal} style={{
@@ -304,9 +375,9 @@ function Login() {
             </form>
           </div>
         </Model>
-
       </div>
-    </div >
+    </div>
+
   );
 };
 

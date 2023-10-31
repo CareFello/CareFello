@@ -2,33 +2,17 @@ import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Box } from '@mui/material'
-import Grid from '@mui/material/Grid'
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
-
-import img_4 from '../assets/doctor.jpg';
+import doctor from '../assets/doctor.png';
 import '../styles/AddDoctor.css';
 import { useState } from "react";
 import axios from "axios";
-
+import { Button, Card, Checkbox, Label, TextInput } from 'flowbite-react';
+import '../index.css';
+import InputAdornment from '@mui/material/InputAdornment';
+import { IconButton } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function AddDoctor() {
 
@@ -51,7 +35,7 @@ function AddDoctor() {
     async function save(event) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8085/api/v1/doctor/save", {
+            await axios.post("http://localhost:8080/api/v1/doctor/save", {
                 email: email,
                 password: password,
                 nic: nic,
@@ -61,16 +45,16 @@ function AddDoctor() {
                 reg: reg,
             });
             try {
-                const response = await axios.post('http://localhost:8085/api/email', {
-                  recipient: email,
-                  subject: 'Carefello doctor registration',
-                  content: 'You have been successfully registered as a doctor',
+                const response = await axios.post('http://localhost:8080/api/email', {
+                    recipient: email,
+                    subject: 'Carefello doctor registration',
+                    content: 'You have been successfully registered as a doctor',
                 });
-                
+
                 console.log(response.data); // Handle success message
-              } catch (error) {
+            } catch (error) {
                 console.error('Error sending email:', error);
-              }
+            }
             alert("Doctor registration Successfull");
             window.location.reload();
 
@@ -82,81 +66,150 @@ function AddDoctor() {
 
     return (
         <div className='addDoctor'>
-            <form>
-                <Header />
-                <Box height={120} />
-                <Box sx={{ display: 'flex' }}>
-                    <Sidebar menuItems={ManagerMenuItem} />
-                    <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
-                        <Grid container spacing={0} >
-                            <Grid item xs={12}>
-                                <Stack spacing={9} direction={'row'}>
-                                    <Card sx={{ display: 'flex', minWidth: 100 + "%", height: 100 + "%" }}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                                            <CardContent sx={{ flex: '1 0 auto' }}>
-                                                <Typography component="div" variant="h4">
-                                                    Registration of Doctors
-                                                </Typography>
-                                                <br />
-                                                <div>
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Fisrt name"
-                                                        sx={{ m: 1, width: '25ch' }}
+            <Header />
+            <Box height={80} />
+            <Box sx={{ display: 'flex' }}>
+                <Sidebar menuItems={ManagerMenuItem} />
+                <div className='app'>
+                    <div className='main-container'>
+                        <div className='top-part'>
+                            <div className='topic_reg'>Add New Doctor</div>
+                        </div>
+                        <div className="bottom-part">
+                            <div className="vertical-part_1" style={{ width: '400px' }}>
 
-                                                        value={name1}
-                                                        onChange={(event) => {
-                                                            setName1(event.target.value);
-                                                        }}
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Last name"
-                                                        sx={{ m: 1, width: '25ch' }}
+                                <img src={doctor} alt="doctor" />
+                            </div>
+                            <div className="vertical-part_2" style={{ width: '600px' }}>
+                                <form className="flex max-w-xl flex-col gap-4">
+                                    <div className='name mb-2'>
+                                        <div className='fname'>
+                                            <div className="mb-1 block text-left">
+                                                <Label
+                                                    className="form-label"
+                                                    htmlFor="base"
+                                                    value="First Name"
+                                                />
+                                            </div>
+                                            <TextInput
+                                                required
+                                                value={name1}
+                                                id="base"
+                                                sizing="md"
+                                                type="text"
+                                                onChange={(event) => {
+                                                    setName1(event.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='lname ml-4'>
+                                            <div className="mb-1 block text-left">
+                                                <Label
+                                                    htmlFor="base"
+                                                    value="Last Name"
+                                                    className="form-label"
+                                                />
+                                            </div>
+                                            <TextInput
+                                                required
+                                                id="base"
+                                                label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
+                                                value={nic}
+                                                onChange={(event) => {
+                                                    setNic(event.target.value);
+                                                }}
+                                                sizing="md"
+                                                type="text"
+                                            />
+                                        </div>
+                                    </div>
 
-                                                        value={name2}
-                                                        onChange={(event) => {
-                                                            setname2(event.target.value);
-                                                        }}
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label="Register Number"
-                                                        sx={{ m: 1, width: '25ch' }}
+                                    <div className='reg mb-2'>
+                                        <div className="mb-1 block text-left">
+                                            <Label
+                                                className="form-label"
+                                                htmlFor="base"
+                                                value="Registeration Number"
+                                            />
+                                        </div>
+                                        <TextInput
+                                            onChange={(event) => {
+                                                setReg(event.target.value);
+                                            }}
+                                            id="base"
+                                            sizing="md"
+                                            type="text"
+                                        />
 
-                                                        value={reg}
-                                                        onChange={(event) => {
-                                                            setReg(event.target.value);
-                                                        }}
+                                    </div>
 
-                                                    />
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                                                        sx={{ m: 1, width: '25ch' }}
+                                    <div className='nic mb-2'>
+                                        <div className="mb-1 block text-left">
+                                            <Label
+                                                className="form-label"
+                                                htmlFor="base"
+                                                value="NIC"
+                                            />
+                                        </div>
+                                        <TextInput
+                                            id="base"
+                                            sizing="md"
+                                            type="text"
+                                            label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
+                                            onChange={(event) => {
+                                                setNic(event.target.value);
+                                                const inputnic = event.target.value;
+                                                const nicPattern = /^\d{12}$/;
+                                                setIsValidnic(nicPattern.test(inputnic));
+                                            }}
+                                        />
+                                    </div>
+                                    <div className='email mb-2'>
+                                        <div className="mb-1 block text-left">
+                                            <Label
+                                                htmlFor="email2"
+                                                className="form-label"
+                                                value="Email"
+                                            />
+                                        </div>
+                                        <TextInput
+                                            label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
+                                            value={email}
+                                            id="email2"
+                                            onChange={(event) => {
+                                                setEmail(event.target.value);
+                                                const inputEmail = event.target.value;
 
-                                                        value={nic}
-                                                        onChange={(event) => {
-                                                            setNic(event.target.value);
-                                                            const inputnic = event.target.value;
-                                                            const nicPattern = /^\d{12}$/;
-                                                            setIsValidnic(nicPattern.test(inputnic));
-                                                        }}
-                                                        style={{ borderColor: isValid ? 'green' : 'red' }}
-                                                    />
+                                                // Regular expression for email validation
+                                                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3}$/;
 
-                                                    <TextField
-                                                        required
-                                                        id="outlined-required"
-                                                        label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
-                                                        sx={{ m: 1, width: '25ch' }}
+                                                // Check if the email matches the pattern
+                                                setIsValid(emailPattern.test(inputEmail));
+                                            }}
+                                            placeholder=""
+                                            required
+                                            shadow
+                                            type="email"
+                                        />
+                                    </div>
 
-                                                        value={email}
-                                                        onChange={(event) => {
+
+                                    {/* <div className='email mb-2'>
+                                <div className="mb-1 block text-left">
+                                <Label
+                                className="form-label"
+                                    htmlFor="email2"
+                                    id="mobileNumber"
+                                    name="mobileNumber"
+                                    value={mobileNumber}
+                                    onChange={(e) => setMobileNumber(e.target.value)}
+                                />
+                                </div>
+                                <TextInput
+                                label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
+                                value={email}
+                                id="email2"
+                                onChange={(event) => {
                                                             setEmail(event.target.value);
                                                             const inputEmail = event.target.value;
 
@@ -166,91 +219,86 @@ function AddDoctor() {
                                                             // Check if the email matches the pattern
                                                             setIsValid(emailPattern.test(inputEmail));
                                                         }}
+                                placeholder="name@flowbite.com"
+                                required
+                                shadow
+                                type="email"
+                                />
+                            </div> */}
 
-                                                        style={{ borderColor: isValid ? 'green' : 'red' }}
-                                                    />
-                                                    <TextField
-                                                        id="outlined-multiline-flexible"
-                                                        label="Mobile No"
-                                                        multiline
-                                                        maxRows={4}
-                                                        sx={{ m: 1, width: '25ch' }}
 
-                                                        value={cont}
-                                                        onChange={(event) => {
-                                                            setCont(event.target.value);
-                                                        }}
-                                                    />
+                                    <div className='pw'>
+                                        <div>
+                                            <div className="mb-1 block text-left">
+                                                <Label
+                                                    className="form-label"
+                                                    htmlFor="password2"
+                                                    value="Enter a Password"
+                                                />
+                                            </div>
+                                            <TextInput
+                                                id="password2"
+                                                required
+                                                shadow
+                                                type={showPassword ? 'text' : 'password'}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                                label="Password"
+                                                value={password}
+                                                onChange={(event) => {
+                                                    setPassword(event.target.value);
+                                                }}
+                                            />
+                                        </div>
+                                        <div className='re_enter ml-4 mb-4'>
+                                            <div className="mb-1 block text-left">
+                                                <Label
+                                                    className="form-label"
+                                                    htmlFor="repeat-password"
+                                                    value="Re-Enter password"
+                                                />
+                                            </div>
+                                            <TextInput
+                                                id="repeat-password"
+                                                required
+                                                shadow
+                                                type={showPassword ? 'text' : 'password'}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                                label="Password"
+                                            />
+                                        </div>
+                                    </div>
 
-                                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-password"
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            endAdornment={
-                                                                <InputAdornment position="end">
-                                                                    <IconButton
-                                                                        aria-label="toggle password visibility"
-                                                                        onClick={handleClickShowPassword}
-                                                                        onMouseDown={handleMouseDownPassword}
-                                                                        edge="end"
-                                                                    >
-                                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                                    </IconButton>
-                                                                </InputAdornment>
-                                                            }
-                                                            label="Password"
-                                                            value={password}
-                                                            onChange={(event) => {
-                                                                setPassword(event.target.value);
-                                                            }}
-                                                        />
-                                                    </FormControl>
-                                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                                        <InputLabel htmlFor="outlined-adornment-password">Re- Enter Password</InputLabel>
-                                                        <OutlinedInput
-                                                            id="outlined-adornment-password"
-                                                            type={showPassword ? 'text' : 'password'}
-                                                            endAdornment={
-                                                                <InputAdornment position="end">
-                                                                    <IconButton
-                                                                        aria-label="toggle password visibility"
-                                                                        onClick={handleClickShowPassword}
-                                                                        onMouseDown={handleMouseDownPassword}
-                                                                        edge="end"
-                                                                    >
-                                                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                                    </IconButton>
-                                                                </InputAdornment>
-                                                            }
-                                                            label="Password"
-
-                                                        />
-                                                    </FormControl>
-                                                    <br />
-                                                    <Button variant="contained" sx={{ m: 1, width: '30ch' }} onClick={save}>
-                                                        Register
-                                                    </Button>
-
-                                                </div>
-                                            </CardContent>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-
-                                            </Box>
-                                        </Box>
-                                        <CardMedia
-                                            component="img"
-                                            sx={{ width: 50 + "%" }}
-                                            image={img_4}
-                                            alt="Live from space album cover"
-                                        />
-                                    </Card>
-                                </Stack>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-            </form>
+                                    <Button type="submit" onClick={save}>
+                                        Register Account
+                                    </Button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Box>
         </div>
     )
 }
