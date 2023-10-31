@@ -488,10 +488,11 @@ public class RequestImpl implements RequestService {
     }
 
     public BedResponse Tempreqcheck(RequestDTO requestDTO){
+        List<Tempreq> tr = tempreqRepo.findAll();
         Tempreq tempreq = tempreqRepo.getTempreq1(requestDTO.getAssStartDate(), requestDTO.getId());
         Tempreq tempreq2 = tempreqRepo.getTempreq2(requestDTO.getAssEndDate(), requestDTO.getId());
 
-        if (tempreq == null && tempreq2 == null){
+        if (tr.size() == 0){
             BedResponse response = new BedResponse(requestDTO.getId(), "good");
             return response;
         }else{
@@ -510,10 +511,11 @@ public class RequestImpl implements RequestService {
     }
 
     public BedResponse TempreqcheckCaregiver(RequestDTO requestDTO){
+        List<Tempreq> tr = tempreqRepo.findAll();
         Tempreq tempreq = tempreqRepo.getTempreq3(requestDTO.getAssStartDate(), requestDTO.getId());
         Tempreq tempreq2 = tempreqRepo.getTempreq4(requestDTO.getAssEndDate(), requestDTO.getId());
 
-        if (tempreq == null && tempreq2 == null){
+        if (tr.size() == 0){
             BedResponse response = new BedResponse(requestDTO.getId(), "good");
             return response;
         }else{

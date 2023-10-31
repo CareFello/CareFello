@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
+import PdfViewer from '../../components/PdfViewer';
 import {
   Box,
   Container,
@@ -25,6 +26,7 @@ import { BiAddToQueue, BiCloset } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5'
 import { TableHead } from 'flowbite-react/lib/esm/components/Table/TableHead';
 
+
 function ElderProfile() {
 
   const { elderId } = useParams();
@@ -37,6 +39,10 @@ function ElderProfile() {
   const [message, setMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [history, setHistory] = useState([]);
+  const [idi, setIdi] = useState('');
+  const [filee, setFilee] = useState(null);
+  const [pdfFiles, setPdfFiles] = useState([]);
+  const [pdfBlobUrl, setPdfBlobUrl] = useState('');
 
   useEffect(() => {
     // Fetch elder data by elderId and guardianId
@@ -55,13 +61,56 @@ function ElderProfile() {
     // Fetch elder data by elderId and guardianId
     axios
       .get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/viewHistory`)
-      .then((response) =>
-        setHistory(response.data)
-      )
+      .then((response) =>{
+        setHistory(response.data);
+        
+        
+        
+        })
       .catch((error) => {
         console.error('Error fetching elder data:', error);
       });
   }, []);
+
+  // const getPdfUrl = async (id) => {
+
+  //   try {
+  //     axios
+  //     .get(`http://localhost:8080/api/v1/elderMedical/${id}/medicalReports/downloadReport/${id}`)
+  //     .then((response) =>{
+  //       return response.data;
+        
+        
+        
+  //       })
+  //   } catch (error) {
+  //     console.error('Error creating PDF URL:', error);
+  //     return null;
+  //   }
+  // };
+
+  const openPdfInNewTab = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/elderMedical/${id}/medicalReports/downloadReport/${id}`, {
+        responseType: 'arraybuffer', // Specify responseType as 'arraybuffer' to handle binary data
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const blobUrl = URL.createObjectURL(blob);
+  
+      // Open the PDF in a new tab
+      const newWindow = window.open(blobUrl, '_blank');
+      if (newWindow) {
+        newWindow.focus();
+      } else {
+        console.error('A popup blocker may be preventing the new tab from opening.');
+      }
+    } catch (error) {
+      console.error('Error opening PDF:', error);
+    }
+  };
+
+
 
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
@@ -107,6 +156,7 @@ function ElderProfile() {
 
   const [disease, setDisease] = useState("");
   const [description, setDescription] = useState("");
+  
 
   async function save(event) {
     event.preventDefault();
@@ -142,6 +192,10 @@ function ElderProfile() {
   const check = async (id) => {
 
     console.log(id);
+
+    setIdi(id);
+    handleOpenModal1();
+    
     // try {
     //   await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
     //   axios.get('http://localhost:8080/api/persons/get')
@@ -153,9 +207,53 @@ function ElderProfile() {
     // }
   };
 
+  const addPdf = async (e) => {
+    e.preventDefault();
+    console.log(idi);
+  
+    if (!filee) {
+      setMessage('Please select a Pdf file.');
+      return;
+    }
+  
+    try {
+      const formData1 = new FormData();
+      formData1.append('pdfFile', filee); // Assuming "pdfFile" is the field name on the server
+  
+      await axios.post(`http://localhost:8080/api/v1/elderMedical/${idi}/medicalReports/addReports`, formData1, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      // Consider using React state and not a full page reload
+      alert("Successfully uploaded PDF");
+      window.location.reload();
+  
+      // You can handle the success state here instead of a full page reload
+      // Set a success state or update the UI accordingly
+    } catch (error) {
+      console.error('Error adding Pdf:', error);
+      alert("Error adding Pdf");
+    }
+  };
+  
+
   if (!elder) {
     return <div>Loading...</div>; // You can display a loading indicator
   }
+
+
+  // useEffect(() => {
+  //   // Fetch the list of PDF files using Axios.
+  //   axios.get(`http://localhost:8080/api/v1/elderMedical/${idi}/medicalReports/getAllReports`)
+  //     .then((response) => {
+  //       setPdfFiles(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching PDF list:', error);
+  //     });
+  // }, []);
 
 
 
@@ -355,8 +453,8 @@ function ElderProfile() {
                           <TableBody key={hist.id}>
                             <TableCell>{hist.disease}</TableCell>
                             <TableCell>{hist.description}</TableCell>
-                            <TableCell>report.pdf</TableCell>
-                            <TableCell><Button pill onClick={handleOpenModal1}>Files</Button></TableCell>
+                            <TableCell><Button onClick={() => openPdfInNewTab(hist.id)}>{hist.name}</Button></TableCell>
+                            <TableCell><Button pill onClick={() => check(hist.id)}>Files</Button></TableCell>
                           </TableBody>
                         ))}
 
@@ -388,11 +486,13 @@ function ElderProfile() {
                             <Typography variant="h6">Add history reports</Typography>
                             <form >
 
-                              <input type="file" accept=".pdf" />
+                              <input type="file" accept=".pdf" onChange={(event) => {
+                              setFilee(event.target.files[0]);
+                                }}/>
                               <p>only pdf files are acceptable</p>
 
 
-                              <Button type="submit" variant="contained" sx={{ mt: 2 }}  >
+                              <Button type="submit" variant="contained" sx={{ mt: 2 }} onClick={addPdf} >
                                 Upload
                               </Button>
                             </form>

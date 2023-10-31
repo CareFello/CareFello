@@ -51,13 +51,13 @@ public class MedicalReportsImpl implements MedicalReportsService {
                 byte[] pdfData = pdfFile.getBytes();
                 byte[] compressedPdfData = ImageUtil.compressImage(pdfData);
 
-                Mr mr = new Mr();
-                mr.setName(originalFilename);
-                mr.setType(fileType);
-                mr.setPdfData(compressedPdfData);
-                mr.setRecordid(diseaseId);
+                
+                emh.setName(originalFilename);
+                emh.setType(fileType);
+                emh.setPdfData(compressedPdfData);
+                
 
-                mrRepo.save(mr);
+                emhRepo.save(emh);
             }else{
                 throw new IllegalArgumentException("PDF File IS REQUIRED");
             }
