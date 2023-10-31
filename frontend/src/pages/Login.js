@@ -145,6 +145,32 @@ function Login() {
               alert("Incorrect Email or Password")
             }
           })
+        }else if (res.data.message == "Email not exits"){
+          axios.post("http://localhost:8080/api/v1/caregiver/login", {
+            email: email,
+            password: password,
+          }).then((res) => {
+
+            if (res.data.message == "Login Success") {
+              // localStorage.setItem('myData', email);
+              navigate('/ManagerDashboard');
+            } else {
+              alert("Incorrect Email or Password")
+            }
+          })
+        }else if (res.data.message == "Email not exits"){
+          axios.post("http://localhost:8080/api/v1/doctor/login", {
+            email: email,
+            password: password,
+          }).then((res) => {
+
+            if (res.data.message == "Login Success") {
+              // localStorage.setItem('myData', email);
+              navigate('/ManagerDashboard');
+            } else {
+              alert("Incorrect Email or Password")
+            }
+          })
         }
         else {
           alert("Incorrect Email or Password");

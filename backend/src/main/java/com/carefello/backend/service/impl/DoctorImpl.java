@@ -2,7 +2,10 @@ package com.carefello.backend.service.impl;
 
 import com.carefello.backend.DTO.DoctorDTO;
 import com.carefello.backend.DTO.DoctortimeDTO;
+import com.carefello.backend.DTO.LoginDTO;
 import com.carefello.backend.model.Doctor;
+import com.carefello.backend.model.Guardian;
+import com.carefello.backend.payload.response.LoginMesage;
 import com.carefello.backend.repo.DoctorRepo;
 import com.carefello.backend.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,30 @@ public class DoctorImpl implements DoctorService {
         );
         DoctorRepo.save(Doctor);
         return Doctor.getDoctorEmail();
+    }
+
+    @Override
+    public LoginMesage loginDoctor(LoginDTO loginDTO) {
+        String msg = "";
+        Doctor guardian1 = DoctorRepo.findByEmail(loginDTO.getEmail());
+        if (guardian1 != null) {
+            String password = loginDTO.getPassword();
+            String encodedPassword = guardian1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            if (isPwdRight) {
+                Optional<Doctor> guardian = DoctorRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
+                if (guardian.isPresent()) {
+                    return new LoginMesage("Login Success", true,guardian.get().getUser_id());
+                } else {
+                    return new LoginMesage("Login Failed", false,0);
+                }
+            } else {
+                return new LoginMesage(encodedPassword, false,0);
+
+            }
+        }else {
+            return new LoginMesage("Email not exits", false,0);
+        }
     }
     
 }
