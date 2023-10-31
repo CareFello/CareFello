@@ -100,9 +100,18 @@ function RequestContinue() {
         }).then((res) => {
           
           if (res.data.str === "good"){
-            setIdds(res.data.id);
-            alert("good");
-            
+            // setIdds(res.data.id);
+            // alert("good");
+
+            axios.post("http://localhost:8080/api/beds/request23",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
+            .then((res) => {
+              if (res.data.str == "good"){
+                setIdds(res.data.id);
+                alert("good");
+              }else{
+                alert("bad");
+              }
+            })
           }else{
             alert("bad");
             
@@ -150,7 +159,7 @@ function RequestContinue() {
     
 };
 
-const acceptt = async (elderid, price, id) => {
+const acceptt = async (elderid, price, id, idds) => {
 
   console.log(elderid);
   try {
@@ -158,6 +167,7 @@ const acceptt = async (elderid, price, id) => {
       id: elderid,
       price: price,
       lowerage: id,
+      upperage: idds,
     })
     navigate('/GuardianRequest');
     
@@ -243,7 +253,7 @@ const acceptt = async (elderid, price, id) => {
               Check for Caregiver
             </Button>
             {/* <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}> */}
-            <Button variant="contained" color="primary" onClick={() => acceptt(elderid, people.price, people.id)}>
+            <Button variant="contained" color="primary" onClick={() => acceptt(elderid, people.price, people.id, idds)}>
               Accept
             </Button>
             <Button variant="contained" color="secondary">

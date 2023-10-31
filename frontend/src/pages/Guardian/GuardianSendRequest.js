@@ -184,7 +184,7 @@ const GuardianSendRequest = () => {
     axios.post(`http://localhost:8080/api/package/cal`,{assStartDate: assStartDate, assEndDate: assEndDate, type: type, mealprice: mealprice})
       .then((response) => setPrice(response.data))
       .catch((error) => console.error(error));
-  }, [mealprice]);
+  }, [mealprice, type, assStartDate, assEndDate]);
 
   useEffect(() => {
     // Make the GET request using Axios to fetch data from the backend
