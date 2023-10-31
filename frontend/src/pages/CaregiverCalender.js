@@ -61,3 +61,7 @@ const CaregiverCalender = () => {
 };
 
 export default CaregiverCalender;
+
+//code for install fullcalendar
+// npm install --save @fullcalendar/react @fullcalendar/daygrid @fullcalendar/interaction
+
