@@ -2,6 +2,8 @@ package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.DoctorDTO;
 import com.carefello.backend.DTO.DoctortimeDTO;
+import com.carefello.backend.DTO.LoginDTO;
+import com.carefello.backend.payload.response.LoginMesage;
 import com.carefello.backend.service.DoctorService;
 import com.carefello.backend.service.EmailService;
 
@@ -35,6 +37,13 @@ public class DoctorController {
         }*/
 
         return id;
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> loginEmployee(@RequestBody LoginDTO loginDTO)
+    {
+        LoginMesage loginResponse = doctorService.loginDoctor(loginDTO);
+        return ResponseEntity.ok(loginResponse);
     }
 
     // @PutMapping("/updat/{id}")
