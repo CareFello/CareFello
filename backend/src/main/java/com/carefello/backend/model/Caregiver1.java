@@ -41,7 +41,7 @@ public class Caregiver1 {
     }
 
     public Caregiver1(char gender, int free, int age, int assigned, int occupied,
-    Date occuStarDate, Date occuEnDate, Date assStarDate, Date assEndDate) {
+    Date occuStarDate, Date occuEnDate, Date assStarDate, Date assEndDate, int user_id) {
         
         this.gender = gender;
         this.free = free;
@@ -52,6 +52,7 @@ public class Caregiver1 {
         this.occuEndDate = occuEnDate;
         this.assStartDate = assStarDate;
         this.assEndDate = assEndDate;
+        this.user_id = user_id;
 
        
     }

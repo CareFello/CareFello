@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import java.sql.Date;
+import java.util.List;
 
 
 @Data
@@ -28,4 +29,10 @@ public class RequestDTO {
     private String name;
     private String mealType;  
     private char eldergender; 
+    private int id;
+    private String allergyMeal;
+    private String currentMedication;
+    private List<String> foodNot;
+    private long price;
+    private double mealprice;
 }

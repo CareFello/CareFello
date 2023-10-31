@@ -1,143 +1,303 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import '../index.css';
 import Header from '../components/Header'
 import { Box } from '@mui/material'
-import { Button, Card, Checkbox, Datepicker, Label, TextInput, Select } from 'flowbite-react';
+import { Button, Card, Checkbox, Datepicker, Label, TextInput, Select, Textarea } from 'flowbite-react';
 import "../styles/form.css"
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import { Grid } from '@mui/material';
+import slide1 from '../assets/log_2.jpg'
+import axios from 'axios';
 
 
 function SendRequest() {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [nicNo, setNicNo] = useState('');
+    const [email, setEmail] = useState('');
+    const [mobileNo, setMobileNo] = useState('');
+    const [profession, setProfession] = useState('');
+    const [homeAddress, setHomeAddress] = useState('');
+    const [workAddress, setWorkAddress] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [firstNameError, setFirstNameError] = useState('');
+    const [lastNameError, setLastNameError] = useState('');
+    const [nicNoError, setNicNoError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [mobileNoError, setMobileNoError] = useState('');
+    const [professionError, setProfessionError] = useState('');
+    const [homeAddressError, setHomeAddressError] = useState('');
+    const [workAddressError, setWorkAddressError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+    const handleSubmit = async (event) => {
+        // Validation logic
+        event.preventDefault();
+        let isValid = true;
+
+        if (!firstName) {
+            setFirstNameError('First Name is required');
+            isValid = false;
+        } else {
+            setFirstNameError('');
+        }
+
+        if (!lastName) {
+            setLastNameError('Last Name is required');
+            isValid = false;
+        } else {
+            setLastNameError('');
+        }
+
+        if (!nicNo) {
+            setNicNoError('NIC No is required');
+            isValid = false;
+        } else if (/^(19|20)\d{10}$/.test(nicNo) || /^9\d{8}V$/.test(nicNo)) {
+            setNicNoError('');
+        } else {
+            setNicNoError('NIC No is invalid');
+            isValid = false;
+        }
+
+        if (!email) {
+            setEmailError('Email is required');
+            isValid = false;
+        } else if (/^\S+@gmail\.com$/.test(email)) {
+            setEmailError('');
+        } else {
+            setEmailError('Email is invalid.');
+            isValid = false;
+        }
+
+
+        if (!mobileNo) {
+            setMobileNoError('Mobile number is required');
+            isValid = false;
+        } else if (/^\d{10,15}$/.test(mobileNo)) {
+            setMobileNoError('');
+        } else {
+            setMobileNoError('Mobile number is invalid.');
+            isValid = false;
+        }
+
+
+        if (!profession) {
+            setProfessionError('Profession is required');
+            isValid = false;
+        } else {
+            setProfessionError('');
+        }
+
+        if (!homeAddress) {
+            setHomeAddressError('Home Address is required');
+            isValid = false;
+        } else {
+            setHomeAddressError('');
+        }
+
+        if (!workAddress) {
+            setWorkAddressError('Working Place Address is required');
+            isValid = false;
+        } else {
+            setWorkAddressError('');
+        }
+
+        if (!password) {
+            setPasswordError('Password is required');
+            isValid = false;
+        } else if (password.length >= 8) {
+            setPasswordError('');
+        } else {
+            setPasswordError('Password should contain at least 8 characters');
+            isValid = false;
+        }
+
+        if (!confirmPassword) {
+            setConfirmPasswordError('Password confirmation is required');
+            isValid = false;
+        } else if (password === confirmPassword) {
+            setConfirmPasswordError('');
+        } else {
+            setConfirmPasswordError('Passwords do not match');
+            isValid = false;
+        }
+
+        // Add similar validation logic for other fields...
+
+        if (isValid) {
+            // Form submission logic here
+
+            try {
+                await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
+                    fname: firstName,
+                    lname: lastName,
+                    nic: nicNo,
+                    email: email,
+                    cont: mobileNo,
+                    profession: profession,
+                    hAddress: homeAddress,
+                    wAddress: workAddress,
+                    password: password,
+                });
+
+                alert("You have register successfully");
+                window.location.reload();
+
+            } catch (err) {
+                // Handle any errors, such as network errors or server-side validation errors
+                alert(err);
+            }
+        }
+    }
+
+
+
+
     return (
         <div>
-            <Header />
-            <Box height={80} />
+
+            <Box height={10} />
             <Box sx={{ display: 'flex' }}>
-                <Sidebar menuItems={ManagerMenuItem} />
+
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }} >
                     <br />
                     <Grid container spacing={1}>
-                        <Grid item xs={6}>
-                            <Grid item xs={9} spacing={1}>
-                                <h3 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-left">
-                                    Noteworthy technology acquisitions 2021
-                                </h3>
-                                <p className="font-normal text-gray-700 dark:text-gray-400 text-left">
-                                    Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                                </p>
-                            </Grid>
-                            <Box height={80} />
-                            <Grid item xs={9} spacing={1}>
-                                <Card className="max-w-sm">
+                        <Grid item xs={7}>
+                            <div className="flex justify-center items-center">
+                                <img className="w-200 h-320" src={slide1} alt="logo" />
+                            </div>
 
-                                    <p className="font-normal text-gray-700 dark:text-gray-400">
-                                        <p>
-                                            Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                                        </p>
-                                    </p>
-                                    <Button>
-                                        Read more
-                                    </Button>
-                                </Card>
-                            </Grid>
                         </Grid>
-                        <Grid item xs={6}>
-                            <div>
-                                <div className="mb-2 block text-left">
-                                    <Label
-                                        htmlFor="small"
-                                        value="Elder Name"
-                                    />
-                                </div>
-                                <TextInput
-                                    id="name"
-                                    sizing="md"
-                                    type="text"
-                                    className='mb-2'
-                                    placeholder='Enter Full Name'
-                                />
-                                <div className="mb-2 block text-left">
-                                    <Label
-                                        htmlFor="small"
-                                        value="NIC No"
-                                    />
-                                </div>
-                                <TextInput
-                                    id="nic"
-                                    sizing="md"
-                                    type="text"
-                                    className='mb-2'
-                                    placeholder='Enter NIC No'
-                                />
-                                <div className="mb-2 block text-left">
-                                    <Label
-                                        htmlFor="small"
-                                        value="Gender"
-                                    />
-                                    <Select
-                                        id="gender"
-                                        required
-                                        defaultValue=""
-                                        className='mb-2'
-                                    >
-                                        <option value="" disabled hidden>
-                                            Choose gender
-                                        </option>
-                                        <option>
-                                            Male
-                                        </option>
-                                        <option>
-                                            Female
-                                        </option>
+                        <Grid item xs={4}>
 
-                                    </Select>
+                            <h1 className="mb-4">
+                                Guardian Registration
+                            </h1>
+                            <div className='ml-7'>
+                                <div className="flex mb-3">
+                                    <div className="input-container mr-4">
+
+                                        <TextInput
+                                            placeholder="First Name"
+                                            value={firstName}
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            sizing="md"
+                                            className='w-full mr-4'
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{firstNameError}</div>
+
+                                    </div>
+                                    <div className="input-container ">
+
+                                        <TextInput
+                                            placeholder="Last Name"
+                                            value={lastName}
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            sizing="md"
+                                            className='w-full mr-4'
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{lastNameError}</div>
+
+                                    </div>
                                 </div>
 
-                                <div className="mb-2 block text-left">
-                                    <Label
-                                        htmlFor="small"
-                                        value="Birthday"
+                                <div className="mb-4">
+                                    <TextInput
+                                        placeholder="NIC No" type='text' sizing="md" className='w-68'
+                                        value={nicNo}
+                                        onChange={(e) => setNicNo(e.target.value)}
                                     />
-                                    <Datepicker
-                                        className='mb-2'
-                                        value='dob' />
+                                    <div className="error-message" style={{ color: 'red' }}>{nicNoError}</div>
                                 </div>
-                                <div className="mb-2 block text-left">
-                                    <Label
-                                        htmlFor="small"
-                                        value="Relationship to Elder"
+
+
+                                <div className="mb-4">
+                                    <TextInput
+                                        placeholder="Email" className='w-68' type='email' sizing="md"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
-                                    <Select
-                                        id="relationship"
-                                        required
-                                        defaultValue=""
-                                        className='mb-4'
-                                    >
-                                        <option value="" disabled hidden>
-                                            Choose a relationship
-                                        </option>
-                                        <option>
-                                            Father
-                                        </option>
-                                        <option>
-                                            Mother
-                                        </option>
-                                        <option>
-                                            Father-in-law
-                                        </option>
-                                        <option>
-                                            Mother-in-law
-                                        </option>
-                                        <option>
-                                            Other
-                                        </option>
-                                    </Select>
+                                    <div className="error-message" style={{ color: 'red' }}>{emailError}</div>
                                 </div>
-                                <div>
-                                    <Button as="span" className="cursor-pointer">Span Button</Button>
+
+
+                                <div className="flex mb-3">
+                                    <div className="input-container mr-4">
+                                        <TextInput
+                                            placeholder="Mobile No"
+                                            className='w-full mr-4'
+                                            sizing="md"
+                                            value={mobileNo}
+                                            onChange={(e) => setMobileNo(e.target.value)}
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{mobileNoError}</div>
+                                    </div>
+                                    <div className="input-container">
+                                        <TextInput
+                                            placeholder="Profession"
+                                            className='w-full mr-4'
+                                            sizing="md"
+                                            value={profession}
+                                            onChange={(e) => setProfession(e.target.value)}
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{professionError}</div>
+                                    </div>
                                 </div>
+                                <div className="mb-4">
+                                    <Textarea
+                                        placeholder="Home Address" className='w-full' sizing="sm"
+                                        value={homeAddress}
+                                        onChange={(e) => setHomeAddress(e.target.value)}
+                                    />
+                                    <div className="error-message" style={{ color: 'red' }}>{homeAddressError}</div>
+                                </div>
+                                <div className="mb-4">
+                                    <Textarea
+                                        placeholder="Working Place Address" className='w-68' sizing="sm"
+                                        value={workAddress}
+                                        onChange={(e) => setWorkAddress(e.target.value)}
+                                    />
+                                    <div className="error-message" style={{ color: 'red' }}>{workAddressError}</div>
+                                </div>
+                                <div className="flex mb-3">
+                                    <div className="input-container mr-4">
+                                        <TextInput
+                                            placeholder="Password"
+                                            type='password'
+                                            className='w-full mr-4'
+                                            sizing="md"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{passwordError}</div>
+                                    </div>
+                                    <div className="input-container">
+                                        <TextInput
+                                            placeholder="Confirm Password"
+                                            type='password'
+                                            className='w-full mr-4'
+                                            sizing="md"
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                        />
+                                        <div className="error-message" style={{ color: 'red' }}>{confirmPasswordError}</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center h-5 mb-4">
+                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                                    <div class="ml-3 text-sm">
+                                        <label for="remember" className="text-gray-500  dark:text-gray-300">I agree to</label>
+                                        <label for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Terms & Conditions</label>
+                                    </div>
+                                </div>
+                                <Button className='w-68' onClick={handleSubmit}>
+                                    Sign In
+                                </Button>
                             </div>
                         </Grid>
                     </Grid>

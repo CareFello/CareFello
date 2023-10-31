@@ -1,9 +1,6 @@
 package com.carefello.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -15,6 +12,10 @@ public class MealPlan {
     private String name;
     private String description;
     private double price;
+    private byte[] image;
+
+    @Transient
+    private byte[] decompressedImage;
 
     public MealPlan() {
 
@@ -52,10 +53,27 @@ public class MealPlan {
         this.price = price;
     }
 
-    public MealPlan(int id, String name, String description, double price) {
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getDecompressedImage() {
+        return decompressedImage;
+    }
+
+    public void setDecompressedImage(byte[] decompressedImage) {
+        this.decompressedImage = decompressedImage;
+    }
+
+    public MealPlan(int id, String name, String description, double price, byte[] image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.image = image;
     }
 }

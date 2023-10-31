@@ -3,9 +3,9 @@ import axios from 'axios';
 
 function ImageDisplay() {
   const [imageData, setImageData] = useState(null);
-    const imageId = 2;
+  const imageId = 3;
   useEffect(() => {
-    axios.get(`http://localhost:8085/api/persons/${imageId}`, { responseType: 'arraybuffer' })
+    axios.get(`http://localhost:8080/api/persons/${imageId}`, { responseType: 'arraybuffer' })
       .then((response) => {
         console.log(response)
         const base64 = btoa(
