@@ -28,6 +28,7 @@ import img from '../assets/caregiver.png'
 import { useState } from "react";
 import axios from "axios";
 import { ManagerMenuItem } from '../components/ManagerMenuItem'
+import { TextInput } from "flowbite-react";
 
 
 
@@ -65,7 +66,7 @@ function AddCaregiver() {
                 name2: name2,
                 cont: cont
             });
-            
+
             alert("caregiver registration Successfull");
             window.location.reload();
 
@@ -93,7 +94,7 @@ function AddCaregiver() {
                                                 </Typography>
                                                 <br />
                                                 <div>
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-required"
                                                         label="First name"
@@ -105,7 +106,7 @@ function AddCaregiver() {
                                                         }}
 
                                                     />
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-required"
                                                         label="Last name"
@@ -117,7 +118,7 @@ function AddCaregiver() {
                                                         }}
 
                                                     />
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-multiline-flexible"
                                                         label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
@@ -132,7 +133,7 @@ function AddCaregiver() {
                                                         }}
                                                         style={{ borderColor: isValid ? 'green' : 'red' }}
                                                     />
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-required"
                                                         label="Birthday"
@@ -148,7 +149,7 @@ function AddCaregiver() {
                                                         }}
                                                     />
 
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-multiline-flexible"
                                                         label={isValid ? "Email" : <p style={{ color: 'red' }}>Invalid email address</p>}
@@ -187,19 +188,18 @@ function AddCaregiver() {
 
                                                     </FormControl>
 
-                                                    <TextField
+                                                    <TextInput
                                                         id="outlined-multiline-flexible"
                                                         label="Contact no"
                                                         multiline
                                                         maxRows={4}
                                                         sx={{ m: 1, width: '30ch' }}
-
                                                         value={cont}
                                                         onChange={(event) => {
                                                             setCont(event.target.value);
                                                         }}
                                                     />
-                                                    <TextField
+                                                    <TextInput
                                                         required
                                                         id="outlined-required"
                                                         label="Address"

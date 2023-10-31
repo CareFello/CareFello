@@ -1,6 +1,7 @@
 package com.carefello.backend.service.impl;
 
 import com.carefello.backend.DTO.ElderDTO;
+import com.carefello.backend.DTO.ElderWithGuardianDTO;
 import com.carefello.backend.Util.ImageUtil;
 import com.carefello.backend.model.Elder;
 import com.carefello.backend.model.Elder1;
@@ -140,6 +141,48 @@ public class ElderImpl implements ElderService {
 
         return elderDTO;
     }
+
+    @Override
+    public List<ElderWithGuardianDTO> getAllElders() {
+        List<ElderWithGuardianDTO> result = new ArrayList<>();
+        List<Elder> elders = elderRepo.findAll(); // Fetch all elders without specifying a guardian
+
+        for (Elder elder : elders) {
+            ElderWithGuardianDTO elderWithGuardianDTO = new ElderWithGuardianDTO();
+            elderWithGuardianDTO.setName(elder.getName());
+            elderWithGuardianDTO.setNic(elder.getNic());
+            elderWithGuardianDTO.setAge(calculateAge(elder.getDob()));
+
+            // Assuming you have a 'getGuardian' method in your Elder entity
+            if (elder.getGuardian() != null) {
+                elderWithGuardianDTO.setGuardianName(elder.getGuardian().getFname());
+                elderWithGuardianDTO.setGuardianId(elder.getGuardian().getId());
+            } else {
+                // Handle the case where the elder has no guardian
+                elderWithGuardianDTO.setGuardianName("No Guardian");
+                elderWithGuardianDTO.setGuardianId(-1); // You can use a suitable value for no guardian
+            }
+
+            if (elder.getImage() != null) {
+                byte[] decompressedImage = ImageUtil.decompressImage(elder.getImage());
+                elderWithGuardianDTO.setImage(decompressedImage);
+            } else {
+                elderWithGuardianDTO.setImage(null);
+            }
+
+            result.add(elderWithGuardianDTO);
+        }
+
+        return result;
+    }
+
+
+    private int calculateAge(LocalDate dob) {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(dob, currentDate);
+        return period.getYears();
+    }
+
 
     @Override
     public void updateElderImage(int elderId, MultipartFile imageFile){
