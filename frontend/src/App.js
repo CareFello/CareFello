@@ -63,7 +63,7 @@ import DoctorViewEldersList from "./pages/DoctorViewEldersList";
 import DoctorViewHistory from "./pages/DoctorViewHistory";
 // import Caregiverprofile from './pages/caregiverprofile';
 import CaregiverViewReport from "./pages/CaregiverViewReport";
-
+import CaregiverCalender from "./pages/CaregiverCalender";
 
 function App() {
   return (
@@ -167,6 +167,7 @@ function App() {
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
           <Route path="/DoctorViewHistory" element={<DoctorViewHistory/>} />
           <Route path="/CaregiverViewReport" element={<CaregiverViewReport />} />
+          <Route path="/CaregiverCalender" element={<CaregiverCalender />} />
         </Routes>
       </Router>
     </div>
