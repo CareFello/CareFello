@@ -50,7 +50,7 @@ import Image2 from "./pages/Image2";
 
 
 
-
+import DonationRequest from "./pages/DonationRequest";
 
 import DoctorUpdateAvailability from "./pages/DoctorUpdateAvailablity";
 
@@ -106,7 +106,7 @@ function App() {
 
 
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
-
+          <Route path="/DonationRequest" element={<DonationRequest/>} />
 
           <Route path="/sel" element={<Sel />} />
           <Route path="/sel1" element={<Sel1 />} />
