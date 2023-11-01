@@ -218,7 +218,7 @@ export default function Header() {
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={4} color="error">
+                                <Badge color="error">
                                     <MailIcon />
                                 </Badge>
                             </IconButton>
@@ -227,7 +227,7 @@ export default function Header() {
                                 aria-label="show 17 new notifications"
                                 color="inherit"
                             >
-                                <Badge badgeContent={17} color="error">
+                                <Badge color="error">
                                     <NotificationsIcon />
                                 </Badge>
                             </IconButton>
