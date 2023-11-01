@@ -46,6 +46,8 @@ import Test1 from "./pages/Test1";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
+import ViewMealPlan from "./pages/viewMealPlan";
+import ViewMeal from "./pages/viewMeal";
 
 
 import GuardianDetailsPage from "./components/GuardianDetailPage";
@@ -104,8 +106,8 @@ function App() {
           <Route path="/Test1" element={<Test1 />} />
 
 
-
-
+          <Route path="/ViewMealPlan" element={<ViewMealPlan />} />
+          <Route path="/ViewMeal/:id" element={<ViewMeal />} />
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
           <Route path="/sel" element={<Sel />} />
           <Route path="/sel1" element={<Sel1 />} />
@@ -173,7 +175,7 @@ function App() {
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
           <Route path="/DoctorUpdateAvailablity" element={<DoctorUpdateAvailablity />} />
           <Route path="/DoctorProfile" element={<DoctorProfile />} />
-          
+
 
           <Route path="/DoctorViewHistory" element={<DoctorViewHistory />} />
 
@@ -181,7 +183,7 @@ function App() {
 
           <Route path="/ElderDetails" element={<ElderDetails />} />
 
-          
+
           <Route path="/ElderprofileCaregiverView" element={<ElderProfileCaregiverView />} />
 
 
