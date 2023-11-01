@@ -16,6 +16,8 @@ import img_2 from "../assets/pendingcheckups.jpg";
 import img_3 from "../assets/Checkuprequest.jpg";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 import { TextInput, Label, FileInput, Checkbox, Textarea } from "flowbite-react"
 
@@ -83,6 +85,10 @@ const dataset = [
 const valueFormatter = (value) => `${value}`;
 
 function DoctorDashboard() {
+
+  const { doctorId } = useParams();
+  console.log(doctorId)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleExpandClick1 = () => {
@@ -97,10 +103,23 @@ function DoctorDashboard() {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    // You can use the form data to create a new meal plan
+  async function handleSubmit(event){
+    event.preventDefault(); 
+        try {
+            await axios.post(`http://localhost:8080/api/v1/doctor/${doctorId}/timeSlot/addTimeSlot`, {
+                startTime: time1,
+                finishTime: time2,
+                date: date_available,
+                maxElders: max,
+                
+            });
+
+            alert("Time Slot Updated");
+            window.location.reload();
+
+        } catch (err) {
+            alert(err);
+        }
     handleModalClose();
   };
 
@@ -291,6 +310,7 @@ function DoctorDashboard() {
 
                             placeholder="Date"
                             fullWidth
+                            type="date"
                             required
                             style={{ marginTop: "5px", fontSize: "13px", }}
                             value={date_available}
@@ -303,6 +323,7 @@ function DoctorDashboard() {
                             <TextInput
                               placeholder="From Time A"
                               multiline
+                              type="time"
                               rows={3}
                               fullWidth
                               required
@@ -315,6 +336,7 @@ function DoctorDashboard() {
 
                               placeholder="To Time B"
                               multiline
+                              type="time"
                               rows={1}
                               fullWidth
                               required

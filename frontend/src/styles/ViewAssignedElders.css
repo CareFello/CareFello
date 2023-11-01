@@ -1,13 +1,29 @@
-.main-part{
+/* Default styles for larger screens */
+.main-part {
     display: flex;
     flex-direction: row;
-    
-}
-
-.part-1.part-2{
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .row {
     display: flex;
-    flex-direction: column;
-    
-}
-
-
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px; /* Add some margin between rows */
+  }
+  
+  /* Mobile-responsive styles */
+  @media (max-width: 600px) {
+    .main-part {
+      flex-direction: column; /* Stack rows vertically on small screens */
+    }
+  
+    .row {
+      flex-direction: column; /* Stack cards vertically on small screens */
+      text-align: center;
+      margin: 0px; /* Reduce the margin for smaller screens */
+    }
+  }
+  

@@ -41,6 +41,9 @@ const GuardianSendRequest = () => {
   const [currentMedication, setCurrentMedication] = useState('');
   const [people, setPeople] = useState([]);
   const [elder, setElder] = useState([]);
+  const [price, setPrice] = useState('');
+  const [meal, setMeal] = useState([]);
+  const [mealprice, setMealprice] = useState('');
 
   const handleMealItemToggle = (mealItem) => () => {
     const currentIndex = selectedMealItems.indexOf(mealItem);
@@ -130,7 +133,7 @@ const GuardianSendRequest = () => {
             .then((res) => {
               if (res.data.str == "good"){
                 
-                axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems, type: type});
+                axios.post("http://localhost:8080/api/beds/request8",{id: res.data.id, assElderId: elderid, assStartDate: assStartDate, assEndDate: assEndDate, gender: gender, allergyMeal: allergyMeal, currentMedication: currentMedication, foodNot: selectedMealItems, type: type, price: price});
                 alert("Request successfully sent");
                 window.location.reload();
               }else{
@@ -171,6 +174,20 @@ const GuardianSendRequest = () => {
 
   useEffect(() => {
     // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/v1/MealPlan/viewMealPlan`)
+      .then((response) => setMeal(response.data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.post(`http://localhost:8080/api/package/cal`,{assStartDate: assStartDate, assEndDate: assEndDate, type: type, mealprice: mealprice})
+      .then((response) => setPrice(response.data))
+      .catch((error) => console.error(error));
+  }, [mealprice, type, assStartDate, assEndDate]);
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
 
     axios.get(`http://localhost:8080/api/v1/guardian/{guardianId}/elders/get1/${name}`)
       .then((response) => setElder(response.data))
@@ -184,6 +201,8 @@ const GuardianSendRequest = () => {
       .then((response) => setElderid(response.data.elderid))
       .catch((error) => console.error(error));
   }, [name]);
+
+  
 
 
   return (
@@ -244,6 +263,20 @@ const GuardianSendRequest = () => {
                       className="elderGender"
                       value={elder.gender}
                       onChange={(event) => setElderGender(event.target.value)}
+                    
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="elderGender" className="elder-gender-label">
+                      Price
+                    </label>
+                    <input
+                      type='text'
+                      id="elderGender"
+                      className="elderGender"
+                      value={price}
+                      // onChange={(event) => setElderGender(event.target.value)}
                     
                     />
                   </div>
@@ -318,12 +351,12 @@ const GuardianSendRequest = () => {
                     <Select
                       id="mealPlan"
                       className="mealPlan"
-                      value={formData.mealPlan || ''}
-                      onChange={(e) => setFormData({ ...formData, mealPlan: e.target.value })}
+                      value={mealprice}
+                      onChange={(e) => setMealprice(e.target.value)}
                     >
-                      <MenuItem value="basic">Meal plan 01</MenuItem>
-                      <MenuItem value="classic">Meal plan 02</MenuItem>
-                      <MenuItem value="luxury">Meal plan 03</MenuItem>
+                      {meal.map((mea) => (
+                    <MenuItem key={mea.id} value={mea.price}>{mea.name}</MenuItem>
+                  ))}
                     </Select>
                   </div>
 

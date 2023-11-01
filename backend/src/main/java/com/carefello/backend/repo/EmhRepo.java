@@ -12,4 +12,7 @@ public interface EmhRepo extends JpaRepository<Emh , Integer> {
     @Query("select e from Emh e where e.elderid = :elderid")
     List<Emh> findAllitems(@Param("elderid") int elderid);
 
+    @Query("select e from Emh e where e.id = :id")
+    Emh findReport(@Param("id") int id);
+
 }
