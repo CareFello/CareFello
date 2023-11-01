@@ -91,7 +91,7 @@ export default function ManagerRoomDetailsView() {
 
     setRooms(dummyRooms);
   }, []);
-
+//images
   return (
     <div className="room-details">
       <Header />
