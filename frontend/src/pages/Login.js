@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import line from '../assets/Line.png';
-import logo from '../assets/logo.png';
-import Navbar from '../components/Navbar';
+import React, { useState } from "react";
+import line from "../assets/Line.png";
+import logo from "../assets/logo.png";
+import Navbar from "../components/Navbar";
 import reg from "./Registration";
-import '../styles/LoginPage.css';
-import Model from 'react-modal';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import { NavLink, useNavigate } from 'react-router-dom';
+import "../styles/LoginPage.css";
+import Model from "react-modal";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { HiKey, HiMail } from 'react-icons/hi';
+import { HiKey, HiMail } from "react-icons/hi";
 // import { Button } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import login_img from '../assets/login_img.png';
+import TextField from "@mui/material/TextField";
+import login_img from "../assets/login_img.png";
+import { AiOutlineHome } from "react-icons/ai";
+import { Box, Stack} from '@mui/material'
 
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 
 Model.setAppElement("#root");
 
 function Login() {
-
   const [firstModalIsOpen, setFirstModalIsOpen] = useState(false);
   const [secondModalIsOpen, setSecondModalIsOpen] = useState(false);
   const [thirdModalIsOpen, setThirdModalIsOpen] = useState(false);
@@ -39,23 +40,23 @@ function Login() {
 
   const openSecondModal = async () => {
     try {
-      await axios.post("http://localhost:8080/api/resetemail", {
-        recipient: resetemail,
+      await axios
+        .post("http://localhost:8080/api/resetemail", {
+          recipient: resetemail,
+        })
+        .then((res) => {
+          console.log(res.data.message);
 
-      }).then((res) => {
-        console.log(res.data.message);
-
-        if (res.data.message == "true") {
-          setSecondModalIsOpen(true);
-          closeFirstModal();
-        } else {
-          alert("Invalid email");
-        }
-      });
+          if (res.data.message == "true") {
+            setSecondModalIsOpen(true);
+            closeFirstModal();
+          } else {
+            alert("Invalid email");
+          }
+        });
     } catch (err) {
       alert(err);
     }
-
   };
 
   const closeSecondModal = () => {
@@ -64,30 +65,33 @@ function Login() {
 
   const openThirdModal = async () => {
     try {
-      await axios.post("http://localhost:8080/api/checkcode", {
-        code: code,
+      await axios
+        .post("http://localhost:8080/api/checkcode", {
+          code: code,
+        })
+        .then((res) => {
+          console.log(res.data.message);
 
-      }).then((res) => {
-        console.log(res.data.message);
-
-        if (res.data.message == "true") {
-          setThirdModalIsOpen(true);
-          closeSecondModal();
-        } else {
-          alert("Invalid code");
-        }
-      });
+          if (res.data.message == "true") {
+            setThirdModalIsOpen(true);
+            closeSecondModal();
+          } else {
+            alert("Invalid code");
+          }
+        });
     } catch (err) {
       alert(err);
     }
-
   };
 
   const reset = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/v1/employee/updatepass/${resetemail}`, {
-        password: newpassword,
-      });
+      await axios.put(
+        `http://localhost:8080/api/v1/employee/updatepass/${resetemail}`,
+        {
+          password: newpassword,
+        }
+      );
       window.location.reload();
     } catch (err) {
       alert(err);
@@ -113,7 +117,6 @@ function Login() {
   const [code, setCode] = useState("");
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
-
 
   // async function login(event) {
   //   event.preventDefault();
@@ -168,8 +171,7 @@ function Login() {
   //         })
   //           }
   //         })
-          
-          
+
   //         }else if (res.data.message == "Email not exits"){
   //           axios.post("http://localhost:8080/api/v1/doctor/login", {
   //             email: email,
@@ -200,64 +202,84 @@ function Login() {
 
   async function login(event) {
     event.preventDefault();
-  
+
     try {
-      const guardianResponse = await axios.post("http://localhost:8080/api/v1/guardian/login", {
-        email: email,
-        password: password,
-      });
-  
+      const guardianResponse = await axios.post(
+        "http://localhost:8080/api/v1/guardian/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
       if (guardianResponse.data.message === "Login Success") {
         const guardianId = guardianResponse.data.id;
-        localStorage.setItem('myData', guardianId);
+        localStorage.setItem("myData", guardianId);
         navigate(`/GuardianDashboard/${guardianId}`);
         return;
       }
-  
-      const employeeResponse = await axios.post("http://localhost:8080/api/v1/employee/login", {
-        email: email,
-        password: password,
-      });
-  
+
+      const employeeResponse = await axios.post(
+        "http://localhost:8080/api/v1/employee/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
       if (employeeResponse.data.message === "Login Success") {
         // localStorage.setItem('myData', email);
-        navigate('/ManagerDashboard');
+        navigate("/ManagerDashboard");
         return;
       }
-  
-      const caregiverResponse = await axios.post("http://localhost:8080/api/v1/caregiver/login", {
-        email: email,
-        password: password,
-      });
-  
+
+      const caregiverResponse = await axios.post(
+        "http://localhost:8080/api/v1/caregiver/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
       if (caregiverResponse.data.message === "Login Success") {
         // localStorage.setItem('myData', email);
-        navigate('/ManagerDashboard');
+        navigate("/ManagerDashboard");
         return;
       }
-  
-      const doctorResponse = await axios.post("http://localhost:8080/api/v1/doctor/login", {
-        email: email,
-        password: password,
-      });
-  
+
+      const doctorResponse = await axios.post(
+        "http://localhost:8080/api/v1/doctor/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
       if (doctorResponse.data.message === "Login Success") {
         const doctorId = doctorResponse.data.id;
-        localStorage.setItem('myData', doctorId);
+        localStorage.setItem("myData", doctorId);
         navigate(`/DoctorDashboard/${doctorId}`);
         return;
       }
-  
+
       alert("Incorrect Email or Password");
     } catch (error) {
       console.error(error);
       alert("Incorrect Email or Password");
     }
   }
-  
 
   return (
     <div>
+      <Stack direction="row">
+        <Box>
+          <NavLink to="/">
+            <AiOutlineHome
+              style={{ fontSize: "2rem", color: "#189AB4", marginLeft:"30px",marginTop:"30px" }}
+            />
+          </NavLink>
+        </Box>
+      </Stack>
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
         {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
@@ -274,25 +296,23 @@ function Login() {
             </h1>
             <form className="flex max-w-md flex-col gap-4">
               <div>
-
                 <TextInput
                   icon={HiMail}
                   id="email4"
                   placeholder="Email Address"
                   required
                   type="email"
-                  value={email} onChange={(event) => {
+                  value={email}
+                  onChange={(event) => {
                     setEmail(event.target.value);
                   }}
-
                 />
               </div>
               <div>
-
                 <TextInput
                   icon={HiKey}
                   id="password2"
-                  placeholder='Password'
+                  placeholder="Password"
                   required
                   shadow
                   type="password"
@@ -303,10 +323,27 @@ function Login() {
                 />
               </div>
               <div class="flex items-center h-5 mb-2">
-                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
+                <input
+                  id="remember"
+                  aria-describedby="remember"
+                  type="checkbox"
+                  className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  required=""
+                ></input>
                 <div class="ml-3 text-sm">
-                  <label for="remember" className="text-gray-500  dark:text-gray-300">Remember me</label>
-                  <label for="remember" className="text-blue-500  dark:text-blue-300 ml-14 cursor-pointer" onClick={openFirstModal}>Forgot Password?</label>
+                  <label
+                    for="remember"
+                    className="text-gray-500  dark:text-gray-300"
+                  >
+                    Remember me
+                  </label>
+                  <label
+                    for="remember"
+                    className="text-blue-500  dark:text-blue-300 ml-14 cursor-pointer"
+                    onClick={openFirstModal}
+                  >
+                    Forgot Password?
+                  </label>
                 </div>
               </div>
               <Button type="submit" onClick={login}>
@@ -314,8 +351,19 @@ function Login() {
               </Button>
               <div class="flex items-center h-5 mb-2">
                 <div class="ml-3 text-sm">
-                  <label for="remember" className="text-gray-500  dark:text-gray-300">Don't have an account ? </label>
-                  <NavLink to='/Registration' for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Register now</NavLink>
+                  <label
+                    for="remember"
+                    className="text-gray-500  dark:text-gray-300"
+                  >
+                    Don't have an account ?{" "}
+                  </label>
+                  <NavLink
+                    to="/Registration"
+                    for="remember"
+                    className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer"
+                  >
+                    Register now
+                  </NavLink>
                 </div>
               </div>
             </form>
@@ -356,19 +404,27 @@ function Login() {
                   </p>
               </form> */}
           </div>
-
         </div>
 
-
-
-        <Model isOpen={firstModalIsOpen}
-          onRequestClose={closeFirstModal} style={{
-            content: { width: "400px", marginLeft: "30%", marginTop: "40px", height: "280px" }
-          }}>
-          <div className='forget_pw'>
+        <Model
+          isOpen={firstModalIsOpen}
+          onRequestClose={closeFirstModal}
+          style={{
+            content: {
+              width: "400px",
+              marginLeft: "30%",
+              marginTop: "40px",
+              height: "280px",
+            },
+          }}
+        >
+          <div className="forget_pw">
             <form action="#" className="">
-              <h2 className='Topic'>Password Reset</h2>
-              <h6>To reset your password, enter the email address you use to sign in to form</h6>
+              <h2 className="Topic">Password Reset</h2>
+              <h6>
+                To reset your password, enter the email address you use to sign
+                in to form
+              </h6>
               <TextField
                 required
                 id="outlined-required"
@@ -377,22 +433,32 @@ function Login() {
                 onChange={(event) => {
                   setResetemail(event.target.value);
                 }}
-                sx={{ m: 1, width: '38ch' }} />
-              <Button onClick={openSecondModal}>
-                Send
-              </Button>
+                sx={{ m: 1, width: "38ch" }}
+              />
+              <Button onClick={openSecondModal}>Send</Button>
             </form>
           </div>
         </Model>
 
-        <Model isOpen={secondModalIsOpen}
-          onRequestClose={closeSecondModal} style={{
-            content: { width: "400px", marginLeft: "30%", marginTop: "40px", height: "280px" }
-          }}>
-          <div className='forget_pw'>
+        <Model
+          isOpen={secondModalIsOpen}
+          onRequestClose={closeSecondModal}
+          style={{
+            content: {
+              width: "400px",
+              marginLeft: "30%",
+              marginTop: "40px",
+              height: "280px",
+            },
+          }}
+        >
+          <div className="forget_pw">
             <form action="#" className="">
-              <h2 className='Topic'>Password Reset</h2>
-              <h6>To reset your password, enter the verification code that send to your email</h6>
+              <h2 className="Topic">Password Reset</h2>
+              <h6>
+                To reset your password, enter the verification code that send to
+                your email
+              </h6>
               <TextField
                 required
                 id="outlined-required"
@@ -401,27 +467,36 @@ function Login() {
                 onChange={(event) => {
                   setCode(event.target.value);
                 }}
-                sx={{ m: 1, width: '38ch' }} />
-              <Button onClick={openThirdModal}>
-                Verify
-              </Button>
+                sx={{ m: 1, width: "38ch" }}
+              />
+              <Button onClick={openThirdModal}>Verify</Button>
             </form>
           </div>
         </Model>
 
-        <Model isOpen={thirdModalIsOpen}
-          onRequestClose={closeThirdModal} style={{
-            content: { width: "400px", marginLeft: "30%", marginTop: "40px", height: "280px" }
-          }}>
-          <div className='forget_pw'>
+        <Model
+          isOpen={thirdModalIsOpen}
+          onRequestClose={closeThirdModal}
+          style={{
+            content: {
+              width: "400px",
+              marginLeft: "30%",
+              marginTop: "40px",
+              height: "280px",
+            },
+          }}
+        >
+          <div className="forget_pw">
             <form action="#" className="">
-              <h2 className='Topic'>Password Reset</h2>
+              <h2 className="Topic">Password Reset</h2>
               <h6>To reset your password, enter new password and confirm it</h6>
-              <FormControl sx={{ m: 1, width: '38ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <FormControl sx={{ m: 1, width: "38ch" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -439,13 +514,15 @@ function Login() {
                   onChange={(event) => {
                     setNewpassword(event.target.value);
                   }}
-
-                /></FormControl>
-              <FormControl sx={{ m: 1, width: '38ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
+                />
+              </FormControl>
+              <FormControl sx={{ m: 1, width: "38ch" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Confirm Password
+                </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -463,19 +540,15 @@ function Login() {
                   onChange={(event) => {
                     setNewpassword1(event.target.value);
                   }}
-
-                /></FormControl>
-              <Button onClick={reset}>
-                Reset
-              </Button>
+                />
+              </FormControl>
+              <Button onClick={reset}>Reset</Button>
             </form>
           </div>
         </Model>
       </div>
     </div>
-
   );
-};
+}
 
 export default Login;
-
