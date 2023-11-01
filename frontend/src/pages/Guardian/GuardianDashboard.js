@@ -47,11 +47,50 @@ const caregiverProfiles = [
 ];
 
 
+
+
 const GuardianDashboard = () => {
 
   // Inside your component function
   const { guardianId } = useParams();
   console.log(guardianId)
+
+  const [people, setPeople] = useState([]);
+  const [people1, setPeople1] = useState([]);
+  const [people2, setPeople2] = useState([]);
+
+  const handlePayment = async (id) => {
+
+    console.log(id);
+    // try {
+    //   await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
+    //   axios.get('http://localhost:8080/api/persons/get')
+    //   .then((response) => setPeople(response.data))
+    //   .catch((error) => console.error(error));
+      
+    // } catch (error) {
+    //   console.error('Error deleting employee:', error);
+    // }
+  };
+
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/beds/request21/${guardianId}`)
+      .then((response) => setPeople(response.data))
+      .catch((error) => console.error(error));
+      console.log(people)
+  }, []);
+
+
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/beds/request30/${guardianId}`)
+      .then((response) => setPeople1(response.data))
+      .catch((error) => console.error(error));
+      console.log(people1)
+  }, []);
 
   return (
     <div className='dashboard'>
@@ -77,7 +116,7 @@ const GuardianDashboard = () => {
 
                 </Stack>
               </Grid>
-              <Grid item xs={10} spacing={1}>
+              {/* <Grid item xs={10} spacing={1}>
                 <Stack display="flex" flexDirection={'row'}>
                   <Typography component="div" variant="h6" className='topic'>
                     Assigned Caregivers
@@ -109,7 +148,7 @@ const GuardianDashboard = () => {
                     </Card>
                   ))}
                 </Stack>
-              </Grid>
+              </Grid> */}
               {/* Other grid items */}
             </Grid>
             <Grid item xs={2} sx={{ marginLeft: "10px" }}>
@@ -120,18 +159,25 @@ const GuardianDashboard = () => {
                       <Typography variant="h6" className='h6'>Pending Payments</Typography>
                       {/* <Typography variant="body1">You have pending payments for the following services at ElderCare Home:</Typography> */}
                       <List>
-                        <ListItem>
-                          <ListItemText primary="Monthly Residence Fee" secondary="$500" />
+                        {people.map((person) => (
+                          <ListItem key={person.id}>
+                          <ListItemText primary={person.name} secondary={person.price} />
+                          <button onClick={() => handlePayment(person.id)}>Pay</button>
                         </ListItem>
-                        <ListItem>
-                          <ListItemText primary="Medication Management" secondary="$50" />
+                        ))}
+                        
+                        
+                      </List>
+                      <Typography variant="h6" className='h6'>Pending Requests</Typography>
+                      <List>
+                        {people1.map((person1) => (
+                          <ListItem key={person1.id}>
+                          <ListItemText primary="Saman Perera" secondary={person1.assStartDate}/>
+                          
                         </ListItem>
-                        <ListItem>
-                          <ListItemText primary="Physical Therapy Sessions" secondary="$100" />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemText primary="Transportation Services" secondary="$25" />
-                        </ListItem>
+                        ))}
+                        
+                        
                       </List>
                       {/* <Typography variant="body2">Please make the necessary payments to ensure continued care and support for your loved ones.</Typography> */}
                     </CardContent>

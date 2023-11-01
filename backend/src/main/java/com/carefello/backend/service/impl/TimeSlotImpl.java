@@ -21,18 +21,13 @@ public class TimeSlotImpl implements TimeSlotService {
 
     @Override
     public TimeSlot addTimeSlot(int doctorId, TimeSlotDTO timeSlotDTO) {
-        Doctor doctor = doctorRepo.findById(doctorId)
-                .orElseThrow(()-> new EntityNotFoundException("Doctor not found"));
+        
 
-        TimeSlot timeSlot = new TimeSlot();
-        timeSlot.setId(timeSlotDTO.getId());
-        timeSlot.setStartTime(timeSlotDTO.getStartTime());
-        timeSlot.setFinishTime(timeSlotDTO.getFinishTime());
-        timeSlot.setMaxElders(timeSlotDTO.getMaxElders());
-        timeSlot.setDoctor(doctor);
+        TimeSlot timeSlot = new TimeSlot(timeSlotDTO.getStartTime(), timeSlotDTO.getFinishTime(), timeSlotDTO.getMaxElders(), timeSlotDTO.getDate(), doctorId);
+        
 
-        doctor.getTimeSlots().add(timeSlot);
-        doctorRepo.save(doctor);
+        timeSlotRepo.save(timeSlot);
+        
 
         return timeSlot;
     }

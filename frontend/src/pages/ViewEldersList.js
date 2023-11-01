@@ -1,11 +1,11 @@
 // ViewEldersList.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import Box from "@mui/material/Box";
 import { ManagerMenuItem } from "../components/ManagerMenuItem";
 import "../styles/ViewEldersList.css";
-
+import axios from "axios";
 import img_1 from "../assets/E1.jpg";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -13,29 +13,25 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { Avatar } from "flowbite-react";
+import pro from '../assets/avatar.png';
 
 export default function ViewEldersList() {
     // Sample data for elders (replace this with your actual data)
-    const eldersData = [
-        {
-            id: 1,
-            name: "Elder 1",
-            image: img_1,
-            guardianName: "Guardian 1",
-            age: 75,
-            nicNo: "12345-67890",
-        },
+    const [elders, setElders] = useState([]);
 
-        {
-            id: 2,
-            name: "Elder 2",
-            image: img_1,
-            guardianName: "Guardian 2",
-            age: 75,
-            nicNo: "12345-67890",
-        },
-        // Add more elders as needed
-    ];
+    useEffect(() => {
+        // Make an API request to fetch elder data
+        axios.get("http://localhost:8080/api/v1/elders/getAllElders") // Use your actual API URL
+            .then((response) => {
+                // Update the state with the fetched data
+                setElders(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching elder data:", error);
+            });
+    }, []);
+    // Add more elders as needed
 
     return (
         <div className="elders-list">
@@ -60,18 +56,18 @@ export default function ViewEldersList() {
                                 ),
                             }}
                             className="search-input"
-                            // value={searchQuery}
-                            // onChange={handleSearchChange}
+                        // value={searchQuery}
+                        // onChange={handleSearchChange}
                         />
                     </div>
                     <div className="elders-cards">
-                        {eldersData.map((elder) => (
+                        {elders.map((elder) => (
                             <div className="elder-card" key={elder.id}>
                                 <div className="elder-card-upper">
-                                    <img
-                                        src={elder.image}
-                                        alt={elder.name}
-                                        className="elder-image"
+                                    <Avatar
+                                        alt="elder.name"
+                                        src={elder.image ? `data:image/jpeg;base64,${elder.image}` : pro}
+                                        sx={{ width: 120, height: 120, alignSelf: 'center', marginLeft: 7 }}
                                     />
                                     <a href={`/elder-profile/${elder.id}`} className="elder-name">
                                         {elder.name}
@@ -93,7 +89,7 @@ export default function ViewEldersList() {
                                     <div className="icon-label">
                                         <span className="material-icons"><CreditCardIcon /></span>
                                         <span className="label">NIC No : </span>
-                                        {elder.nicNo}
+                                        {elder.nic}
                                     </div>
                                 </div>
                             </div>

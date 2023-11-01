@@ -2,9 +2,14 @@ package com.carefello.backend.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import lombok.Data;
 
+@Data
 @Entity
 
 public class TimeSlot {
@@ -12,62 +17,62 @@ public class TimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime startTime;
-    private LocalDateTime finishTime;
+    private Date date;
+    private LocalTime startTime;
+    private LocalTime finishTime;
     private int maxElders;
+    private int docid;
+    
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    // public int getId() {
+    //     return id;
+    // }
 
-    public int getId() {
-        return id;
-    }
+    // public void setId(int id) {
+    //     this.id = id;
+    // }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // public LocalTime getStartTime() {
+    //     return startTime;
+    // }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
+    // public void setStartTime {
+    //     this.startTime = startTime;
+    // }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
+    // public LocalTime getFinishTime() {
+    //     return finishTime;
+    // }
 
-    public LocalDateTime getFinishTime() {
-        return finishTime;
-    }
+    // public void setFinishTime(LocalTime finishTime) {
+    //     this.finishTime = finishTime;
+    // }
 
-    public void setFinishTime(LocalDateTime finishTime) {
-        this.finishTime = finishTime;
-    }
+    // public int getMaxElders() {
+    //     return maxElders;
+    // }
 
-    public int getMaxElders() {
-        return maxElders;
-    }
+    // public void setMaxElders(int maxElders) {
+    //     this.maxElders = maxElders;
+    // }
 
-    public void setMaxElders(int maxElders) {
-        this.maxElders = maxElders;
-    }
+    // public Doctor getDoctor() {
+    //     return doctor;
+    // }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
+    // public void setDoctor(Doctor doctor) {
+    //     this.doctor = doctor;
+    // }
 
     public TimeSlot() {
     }
 
-    public TimeSlot(int id, LocalDateTime startTime, LocalDateTime finishTime, int maxElders, Doctor doctor) {
-        this.id = id;
+    public TimeSlot(LocalTime startTime, LocalTime finishTime, int maxElders, Date date, int docid) {
+        
         this.startTime = startTime;
         this.finishTime = finishTime;
         this.maxElders = maxElders;
-        this.doctor = doctor;
+        this.date = date;
+        this.docid = docid;
     }
 }

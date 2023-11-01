@@ -74,7 +74,7 @@ function RequestContinue() {
         assEndDate: assEndDate,
         gender: caregiverGender,
       });
-      console.log(response.data)
+      
   
       if (response.data.length !== 0){
         const bedIds = response.data.map((item) => item.user_id);
@@ -102,7 +102,16 @@ function RequestContinue() {
           if (res.data.str === "good"){
             setIdds(res.data.id);
             alert("good");
-            
+
+            // axios.post("http://localhost:8080/api/beds/request23",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
+            // .then((res) => {
+            //   if (res.data.str == "good"){
+            //     setIdds(res.data.id);
+            //     alert("good");
+            //   }else{
+            //     alert("bad");
+            //   }
+            // })
           }else{
             alert("bad");
             
@@ -148,6 +157,24 @@ function RequestContinue() {
       console.error('Error deleting helllo:', error);
     }
     
+};
+
+const acceptt = async (elderid, price, id, idds) => {
+
+  console.log(elderid);
+  try {
+    await axios.post(`http://localhost:8080/api/beds/request20`,{
+      id: elderid,
+      price: price,
+      lowerage: id,
+      upperage: idds,
+    })
+    navigate('/GuardianRequest');
+    
+  } catch (error) {
+    console.error('Error deleting helllo:', error);
+  }
+  
 };
 
   return (
@@ -225,7 +252,8 @@ function RequestContinue() {
           <Button variant="contained" color="primary" onClick={() => check(people.assStartDate, people.assEndDate, people.caregiverGender)}>
               Check for Caregiver
             </Button>
-            <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}>
+            {/* <Button variant="contained" color="primary" onClick={() => accept(people.assStartDate, people.assEndDate, idds, elderid, people.bed_id, people.type)}> */}
+            <Button variant="contained" color="primary" onClick={() => acceptt(elderid, people.price, people.id, idds)}>
               Accept
             </Button>
             <Button variant="contained" color="secondary">

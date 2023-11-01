@@ -23,6 +23,7 @@ import com.carefello.backend.model.Caregiver1;
 import com.carefello.backend.model.Elder1;
 import com.carefello.backend.model.Elderguar;
 import com.carefello.backend.model.Guardian;
+import com.carefello.backend.model.Price;
 import com.carefello.backend.model.Tempreq;
 import com.carefello.backend.payload.response.BedResponse;
 import com.carefello.backend.payload.response.BedResponse1;
@@ -34,6 +35,7 @@ import com.carefello.backend.repo.Caregiver1Repo;
 import com.carefello.backend.repo.Elder1Repo;
 import com.carefello.backend.repo.ElderguarRepo;
 import com.carefello.backend.repo.GuardianRepo;
+import com.carefello.backend.repo.PriceRepo;
 import com.carefello.backend.repo.TempreqRepo;
 
 
@@ -50,6 +52,8 @@ public class RequestImpl implements RequestService {
     private Caregiver1Repo caregiver1Repo;
     @Autowired
     private TempreqRepo tempreqRepo;
+    @Autowired
+    private PriceRepo priceRepo;
     @Autowired
     private Elder1Repo elder1Repo;
     @Autowired
@@ -245,10 +249,13 @@ public class RequestImpl implements RequestService {
         List<Tempreq> tempreqs = tempreqRepo.findAll();
         List<ElderRequest> myObjectList = new ArrayList<>();
         for (Tempreq tempreq : tempreqs){
-            Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
-            Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
-            ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
-            myObjectList.add(elderRequest);
+            if (tempreq.getPending() == 0){
+                Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
+                Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
+                ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
+                myObjectList.add(elderRequest);
+            }
+            
         }
 
         return myObjectList;
@@ -259,40 +266,16 @@ public class RequestImpl implements RequestService {
         Elderguar elderguar = elderguarRepo.findByElderid(id);
         Guardian guardian = guardianRepo.getGuardian(elderguar.getGuardianid());
         Tempreq tempreq = tempreqRepo.getTempreq(id);
-        long price = 0;
+        
         LocalDate localDate1 = tempreq.getAssStartDate().toLocalDate();
         LocalDate localDate2 = tempreq.getAssEndDate().toLocalDate();
         long days = ChronoUnit.DAYS.between(localDate1, localDate2);
 
-        if ("basic".equals(tempreq.getType())){
-            if (days <= 7){
-                price = days*2000;
-            }else if (days > 7 && days <= 30){
-                price = days*1500;
-            }else{
-                price = days*1000;
-            }
-        }else if("classic".equals(tempreq.getType())){
-            if (days <= 7){
-                price = days*2500;
-            }else if (days > 7 && days <= 30){
-                price = days*2000;
-            }else{
-                price = days*1500;
-            }
-        }else{
-            if (days <= 7){
-                price = days*3000;
-            }else if (days > 7 && days <= 30){
-                price = days*2500;
-            }else{
-                price = days*2000;
-            }
-        }
 
-        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), price);
+        BedResponse1 elderResponse1 = new BedResponse1(guardian.getFname(), elder1.getFirstname(), days, tempreq.getType(), tempreq.getGender(), tempreq.getAssStartDate(), tempreq.getCurrentMedication(), tempreq.getBed_id(), tempreq.getAssEndDate(), tempreq.getId(), tempreq.getPrice());
         return elderResponse1;
     }
+
 
 
     public String assignElder1(RequestDTO requestDTO){
@@ -505,10 +488,11 @@ public class RequestImpl implements RequestService {
     }
 
     public BedResponse Tempreqcheck(RequestDTO requestDTO){
-        Tempreq tempreq = tempreqRepo.getTempreq1(requestDTO.getAssStartDate());
-        Tempreq tempreq2 = tempreqRepo.getTempreq2(requestDTO.getAssEndDate());
+        List<Tempreq> tr = tempreqRepo.findAll();
+        Tempreq tempreq = tempreqRepo.getTempreq1(requestDTO.getAssStartDate(), requestDTO.getId());
+        Tempreq tempreq2 = tempreqRepo.getTempreq2(requestDTO.getAssEndDate(), requestDTO.getId());
 
-        if (tempreq == null && tempreq2 == null){
+        if (tr.size() == 0){
             BedResponse response = new BedResponse(requestDTO.getId(), "good");
             return response;
         }else{
@@ -526,6 +510,29 @@ public class RequestImpl implements RequestService {
     }
     }
 
+    // public BedResponse TempreqcheckCaregiver(RequestDTO requestDTO){
+    //     List<Tempreq> tr = tempreqRepo.findAll();
+    //     Tempreq tempreq = tempreqRepo.getTempreq3(requestDTO.getAssStartDate(), requestDTO.getId());
+    //     Tempreq tempreq2 = tempreqRepo.getTempreq4(requestDTO.getAssEndDate(), requestDTO.getId());
+
+    //     if (tr.size() == 0){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else{
+
+    //     if (tempreq != null){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else if (tempreq2 != null){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else{
+    //         BedResponse response = new BedResponse(0, "bad");
+    //         return response;
+    //     }
+    // }
+    // }
+
     public List<BedResponse2> getOccu(){
         List<BedResponse2> myObjectList = new ArrayList<>();
         int[] bedIds = bedRepo.getDistinctBed();
@@ -538,18 +545,32 @@ public class RequestImpl implements RequestService {
 
         for (int bedId : bedIds){
             List<Bed> bed = bedRepo.findAllBeds(bedId);
+            
+                Elder1 elder1 = elder1Repo.findByElderid(bed.get(0).getOccuElderId());
+                BedResponse2 bedResponse2 = new BedResponse2(elder1.getFirstname(), bed.get(0).getOccuStartDate(), bedId, bed.get(0).getOccuEndDate(), bed.get(0).getOccuElderId());
+                myObjectList.add(bedResponse2);
+            }
+        
+        return myObjectList;
+    }
+
+    public List<BedResponse2> getOccu1(){
+        List<BedResponse2> myObjectList = new ArrayList<>();
+        int[] bedIds = bedRepo.getDistinctBed();
+        
+
+        for (int bedId : bedIds){
+            List<Bed> bed = bedRepo.findAllBeds(bedId);
             if (bed.get(0).getAssigned() == 1 && bed.get(0).getOccupied() == 0){
                 Elder1 elder1 = elder1Repo.findByElderid(bed.get(0).getAssElderId());
                 BedResponse2 bedResponse2 = new BedResponse2(elder1.getFirstname(), bed.get(0).getAssStartDate(), bedId, bed.get(0).getAssEndDate(), bed.get(0).getAssElderId());
-                myObjectList.add(bedResponse2);
-            }else{
-                Elder1 elder1 = elder1Repo.findByElderid(bed.get(0).getOccuElderId());
-                BedResponse2 bedResponse2 = new BedResponse2(elder1.getFirstname(), bed.get(0).getOccuStartDate(), bedId, bed.get(0).getOccuEndDate(), bed.get(0).getOccuElderId());
                 myObjectList.add(bedResponse2);
             }
         }
         return myObjectList;
     }
+
+    
 
     public String func5(int id){
         
@@ -560,6 +581,7 @@ public class RequestImpl implements RequestService {
                     java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         List<Bed> bedss = bedRepo.findAllBeds(id);
         if (bedss.get(0).getAssigned() == 0){
+            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
             // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
                     // Parse the date string and convert it to java.sql.Date
@@ -570,9 +592,10 @@ public class RequestImpl implements RequestService {
             bedss.get(0).setCaregiveridoccu(0);
             bedss.get(0).setFree(1);
             bedss.get(0).setOccupied(0);
+            bedss.get(0).setOccuElderId(0);
             bedRepo.save(bedss.get(0));
 
-            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
+            
             
             if (caregivers.get(0).getAssigned() == 0){
                 caregivers.get(0).setAssStartDate(sqlDate);
@@ -635,6 +658,7 @@ public class RequestImpl implements RequestService {
             Date date2 = bedss.get(0).getAssEndDate();
             int caregiveridoccu = bedss.get(0).getCaregiverId();
             int occuelderid = bedss.get(0).getAssElderId();
+            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
 
             bedss.get(0).setOccuStartDate(date1);
             bedss.get(0).setOccuEndDate(date2);
@@ -649,7 +673,7 @@ public class RequestImpl implements RequestService {
 
             bedRepo.save(bedss.get(0));
             
-            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
+            
             
             if (caregivers.get(0).getAssigned() == 0){
                 caregivers.get(0).setAssStartDate(sqlDate);
@@ -709,6 +733,7 @@ public class RequestImpl implements RequestService {
             Date date2 = bedss.get(0).getAssEndDate();
             int caregiveridoccu = bedss.get(0).getCaregiverId();
             int occuelderid = bedss.get(0).getAssElderId();
+            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
 
             bedss.get(0).setOccuStartDate(date1);
             bedss.get(0).setOccuEndDate(date2);
@@ -723,7 +748,7 @@ public class RequestImpl implements RequestService {
 
             bedRepo.save(bedss.get(0));
 
-            List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
+            
             
             if (caregivers.get(0).getAssigned() == 0){
                 caregivers.get(0).setAssStartDate(sqlDate);
@@ -785,6 +810,7 @@ public class RequestImpl implements RequestService {
         Date date2 = beds.get(0).getAssEndDate();
         int idd = beds.get(0).getId();
         int caregiveridoccu = beds.get(0).getCaregiverId();
+        List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
         
         for (Bed bed : beds){
             bed.setOccuStartDate(date1);
@@ -794,7 +820,7 @@ public class RequestImpl implements RequestService {
         }
         bedRepo.deleteById(idd);
 
-        List<Caregiver1> caregivers = caregiver1Repo.findAllCaregivers(bedss.get(0).getCaregiveridoccu());
+        
             
             if (caregivers.get(0).getAssigned() == 0){
                 caregivers.get(0).setAssStartDate(sqlDate);
