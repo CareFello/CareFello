@@ -149,11 +149,11 @@ public class BedController{
         return str;
     }
 
-    @PostMapping("/request23")
-    public BedResponse findreq2(@RequestBody RequestDTO requestDTO){
-        BedResponse str = requestService.TempreqcheckCaregiver(requestDTO);
-        return str;
-    }
+    // @PostMapping("/request23")
+    // public BedResponse findreq2(@RequestBody RequestDTO requestDTO){
+    //     BedResponse str = requestService.TempreqcheckCaregiver(requestDTO);
+    //     return str;
+    // }
 
     // @GetMapping("/request13")
     // public int[] findOccuBeds(){
