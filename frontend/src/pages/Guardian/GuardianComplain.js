@@ -37,7 +37,14 @@ export default function GuardianComplain() {
   };
 
   return (
-    <div style={{justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor:"#F9FFFE" }}>
+    <div
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#F9FFFE",
+      }}
+    >
       <Header />
       <Box height={80} />
       <Box sx={{ display: "flex" }}>
@@ -45,9 +52,14 @@ export default function GuardianComplain() {
 
         <Container>
           <Grid container spacing={3}>
-
             <Grid item xs={12} md={6}>
-              <Typography variant="h6">Add Complaint</Typography>
+              {/* <Typography variant="h6" marginBottom="50px" color="#" >Add Complaint</Typography>
+               */}
+
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                Add Complaint
+              </h1>
+
               <Card>
                 <CardContent>
                   <Stack spacing={1}>
@@ -61,7 +73,7 @@ export default function GuardianComplain() {
                     />
                     <TextField
                       placeholder="Complaint Description"
-                      variant="filled"
+                      //variant="filled"
                       fullWidth
                       multiline
                       rows={4}
@@ -76,14 +88,16 @@ export default function GuardianComplain() {
                       Submit Complaint
                     </Button>
                   </Stack>
-
                 </CardContent>
               </Card>
             </Grid>
 
             <Grid item xs={12} md={6}>
               <div>
-                <Typography variant="h6">Previous Complaints</Typography>
+                {/* <Typography variant="h6">Previous Complaints</Typography> */}
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Previous Complaint
+                </h1>
                 {complaints.map((complaint) => (
                   <Card
                     key={complaint.id}
@@ -93,8 +107,10 @@ export default function GuardianComplain() {
                     <CardContent>
                       <Stack spacing={2}>
                         <Typography variant="subtitle2" align="center">
-                          <span className="label">Date & Time :</span> {new Date(complaint.id).toLocaleString()} <br />
-                          <span className="label">Topic :</span> {complaint.topic}
+                          <span className="label">Date & Time :</span>{" "}
+                          {new Date(complaint.id).toLocaleString()} <br />
+                          <span className="label">Topic :</span>{" "}
+                          {complaint.topic}
                         </Typography>
                         <Typography variant="subtitle2" align="left">
                           {" "}
@@ -109,7 +125,6 @@ export default function GuardianComplain() {
                           View Responses
                         </Button>
                       </Stack>
-
                     </CardContent>
                   </Card>
                 ))}
