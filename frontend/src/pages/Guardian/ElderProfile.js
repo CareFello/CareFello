@@ -44,6 +44,7 @@ function ElderProfile() {
   const [filee, setFilee] = useState(null);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
+  const [people2, setPeople2] = useState([]);
 
   useEffect(() => {
     // Fetch elder data by elderId and guardianId
@@ -157,6 +158,10 @@ function ElderProfile() {
 
   const [disease, setDisease] = useState("");
   const [description, setDescription] = useState("");
+  const [task, setTask] = useState(''); 
+  const [des, setDes] = useState(''); 
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
 
 
   async function save(event) {
@@ -238,6 +243,36 @@ function ElderProfile() {
       alert("Error adding Pdf");
     }
   };
+  
+  useEffect(() => {
+    // Fetch the list of PDF files using Axios.
+    axios.get(`http://localhost:8080/api/v1/dailyTask/viewTask/${elderId}`)
+      .then((response) => {
+        setPeople2(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching PDF list:', error);
+      });
+  }, []);
+
+  async function save1(event){
+    event.preventDefault();
+          try {
+              await axios.post(`http://localhost:8080/api/v1/dailyTask/addTask/${elderId}`, {
+                  taskName: task,
+                  description: des,
+                  time: time,
+                  date: date
+                  
+              });
+  
+              alert("Task added");
+              window.location.reload();
+  
+          } catch (err) {
+              alert(err);
+          }
+  }
 
 
   if (!elder) {
@@ -245,16 +280,7 @@ function ElderProfile() {
   }
 
 
-  // useEffect(() => {
-  //   // Fetch the list of PDF files using Axios.
-  //   axios.get(`http://localhost:8080/api/v1/elderMedical/${idi}/medicalReports/getAllReports`)
-  //     .then((response) => {
-  //       setPdfFiles(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching PDF list:', error);
-  //     });
-  // }, []);
+
 
 
 
@@ -514,29 +540,78 @@ function ElderProfile() {
                       placeholder='Task/Medication name'
                       type='text'
                       className='mb-2'
+
+                      value={task}
+                      onChange={(event) => {
+                      setTask(event.target.value);
+                      }}
                     />
                     <TextInput
                       placeholder='description'
                       type='text'
                       className='mb-2'
+
+                      value={des}
+                      onChange={(event) => {
+                      setDes(event.target.value);
+                      }}
                     />
                     <TextInput
                       placeholder='Date'
                       type='date'
                       className='mb-2'
+
+                      value={date}
+                      onChange={(event) => {
+                      setDate(event.target.value);
+                      }}
                     />
                     <TextInput
                       placeholder='description'
                       type='time'
                       className='mb-2'
+
+                      value={time}
+                      onChange={(event) => {
+                      setTime(event.target.value);
+                      }}
                     />
                     <div className="flex items-center space-x-2">
-                      <Button>Add</Button>
+                      <Button onClick={save1}>Add</Button>
                       <Button>
                         View All Task
                         <HiOutlineArrowRight className="ml-2 h-5 w-5" />
                       </Button>
                     </div>
+
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={7} md={12} lg={7}>
+                <Card>
+                  <CardContent>
+                    <Typography>Task List</Typography>
+                    <br />
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableCell>Task</TableCell>
+                          <TableCell>Description</TableCell>
+                          <TableCell>Date</TableCell>
+                          <TableCell>Time</TableCell>
+                        </TableHead>
+                        {people2.map((person2) => (
+                          <TableBody key={person2.date}>
+                            <TableCell>{person2.taskName}</TableCell>
+                            <TableCell>{person2.description}</TableCell>
+                            <TableCell>{person2.date}</TableCell>
+                            <TableCell>{person2.time}</TableCell>
+                          </TableBody>
+                          ))}
+                          </Table>
+                          </TableContainer>
+                        
+                    
 
                   </CardContent>
                 </Card>

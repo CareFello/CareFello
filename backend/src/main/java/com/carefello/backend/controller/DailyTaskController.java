@@ -25,7 +25,7 @@ public class DailyTaskController {
         this.dailyTaskService = dailyTaskService;
     }
 
-    @PostMapping("addTask/{elderId}")
+    @PostMapping("/addTask/{elderId}")
     public ResponseEntity<String> addDailyTask(@PathVariable int elderId, @RequestBody DailyTaskDTO dailyTaskDTO){
         DailyTask dailyTask = dailyTaskService.addDailyTask(elderId, dailyTaskDTO);
         return ResponseEntity.ok("Task added successfully with ID" + dailyTask.getId() );

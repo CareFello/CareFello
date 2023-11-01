@@ -193,4 +193,9 @@ public class BedController{
     public List<Price> getPrice11(@PathVariable int id){
         return priceRepo.findPrices(id);
     }
+
+    @GetMapping("/request30/{id}")
+    public List<Tempreq> getTemp(@PathVariable int id){
+        return tempreqRepo.getTemp(id);
+    }
 }
