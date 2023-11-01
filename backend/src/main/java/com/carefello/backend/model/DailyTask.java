@@ -14,9 +14,9 @@ public class DailyTask {
     private int id;
     private String taskName;
     private String description;
-    private LocalDate date;
+    private String date;
     private LocalTime time;
-    private boolean status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "elder_id")
@@ -46,11 +46,11 @@ public class DailyTask {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -70,18 +70,18 @@ public class DailyTask {
         this.time = time;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     public DailyTask() {
     }
 
-    public DailyTask(int id, String taskName, String description, LocalTime time, LocalDate date, boolean status, Elder elder) {
+    public DailyTask(int id, String taskName, String description, LocalTime time, String date, String status, Elder elder) {
         this.id = id;
         this.taskName = taskName;
         this.description = description;
