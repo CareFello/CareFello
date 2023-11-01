@@ -74,8 +74,12 @@ import ViewDonationRequests from "./pages/ViewDonationRequests";
 
 import DoctorDashboard from "./pages/DoctorDashboard";
 import DoctorViewEldersList from "./pages/DoctorViewEldersList";
+
+import DoctorViewHealthTips from "./pages/Doctor/DoctorViewHealthTips";
+
 import DoctorUpdateAvailablity from "./pages/DoctorUpdateAvailablity";
 import DoctorProfile from "./pages/DoctorProfile";
+
 
 
 import DoctorViewHistory from "./pages/DoctorViewHistory";
@@ -203,7 +207,12 @@ function App() {
           <Route path="/ElderDetails" element={<ElderDetails />} />
 
 
+
+          <Route path="/DoctorViewHealthTips" element={<DoctorViewHealthTips />} />
+
+
           <Route path="/ElderprofileCaregiverView" element={<ElderProfileCaregiverView />} />
+
 
 
         </Routes>
