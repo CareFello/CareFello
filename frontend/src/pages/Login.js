@@ -115,76 +115,145 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
+  // async function login(event) {
+  //   event.preventDefault();
+  //   try {
+
+  //     await axios.post("http://localhost:8080/api/v1/guardian/login", {
+
+  //       email: email,
+  //       password: password,
+  //     }).then((res) => {
+
+  //       if (res.data.message == "Login Success") {
+
+  //         const guardianId = res.data.id;
+  //         localStorage.setItem('myData', res.data.id);
+  //         navigate(`/GuardianDashboard/${guardianId}`);
+  //       }else if (res.data.message == "Email not exits") {
+
+  //         axios.post("http://localhost:8080/api/v1/employee/login", {
+  //           email: email,
+  //           password: password,
+  //         }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //           } else if (res.data.message == "Email not exits"){
+  //             axios.post("http://localhost:8080/api/v1/caregiver/login", {
+  //             email: email,
+  //             password: password,
+  //             }).then((res) => {
+
+  //             if (res.data.message == "Login Success") {
+  //               // localStorage.setItem('myData', email);
+  //               navigate('/ManagerDashboard');
+  //             } else if (res.data.message == "Email not exits"){
+  //               axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //               email: email,
+  //               password: password,
+  //               }).then((res) => {
+
+  //               if(res.data.message == "Login Success"){
+  //                 // localStorage.setItem('myData', email);
+  //                 navigate('/DoctorDashboard');
+  //               }else{
+  //                 alert("Incorrect Email or Password")
+  //               }
+  //               })
+  //             }else{
+  //               alert("Incorrect Email or Password")
+  //             }
+  //         })
+  //           }
+  //         })
+          
+          
+  //         }else if (res.data.message == "Email not exits"){
+  //           axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //             email: email,
+  //             password: password,
+  //           }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //         }else{
+  //             alert("Incorrect Email or Password")
+  //           }
+  //         })
+  //       }
+  //       else {
+  //         alert("Incorrect Email or Password");
+  //       }
+  //     }, fail => {
+  //       console.error(fail); // Error!
+  //     });
+  //   }
+
+  //   catch (err) {
+  //     alert(err);
+  //   }
+
+  // }
+
   async function login(event) {
     event.preventDefault();
+  
     try {
-
-      await axios.post("http://localhost:8080/api/v1/guardian/login", {
-
+      const guardianResponse = await axios.post("http://localhost:8080/api/v1/guardian/login", {
         email: email,
         password: password,
-      }).then((res) => {
-
-        if (res.data.message == "Login Success") {
-
-          const guardianId = res.data.id;
-          localStorage.setItem('myData', res.data.id);
-          navigate(`/GuardianDashboard/${guardianId}`);
-        }
-        else if (res.data.message == "Email not exits") {
-
-          axios.post("http://localhost:8080/api/v1/employee/login", {
-            email: email,
-            password: password,
-          }).then((res) => {
-
-            if (res.data.message == "Login Success") {
-              // localStorage.setItem('myData', email);
-              navigate('/ManagerDashboard');
-            } else {
-              alert("Incorrect Email or Password")
-            }
-          })
-        }else if (res.data.message == "Email not exits"){
-          axios.post("http://localhost:8080/api/v1/caregiver/login", {
-            email: email,
-            password: password,
-          }).then((res) => {
-
-            if (res.data.message == "Login Success") {
-              // localStorage.setItem('myData', email);
-              navigate('/ManagerDashboard');
-            } else {
-              alert("Incorrect Email or Password")
-            }
-          })
-        }else if (res.data.message == "Email not exits"){
-          axios.post("http://localhost:8080/api/v1/doctor/login", {
-            email: email,
-            password: password,
-          }).then((res) => {
-
-            if (res.data.message == "Login Success") {
-              // localStorage.setItem('myData', email);
-              navigate('/ManagerDashboard');
-            } else {
-              alert("Incorrect Email or Password")
-            }
-          })
-        }
-        else {
-          alert("Incorrect Email or Password");
-        }
-      }, fail => {
-        console.error(fail); // Error!
       });
+  
+      if (guardianResponse.data.message === "Login Success") {
+        const guardianId = guardianResponse.data.id;
+        localStorage.setItem('myData', guardianId);
+        navigate(`/GuardianDashboard/${guardianId}`);
+        return;
+      }
+  
+      const employeeResponse = await axios.post("http://localhost:8080/api/v1/employee/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (employeeResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const caregiverResponse = await axios.post("http://localhost:8080/api/v1/caregiver/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (caregiverResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const doctorResponse = await axios.post("http://localhost:8080/api/v1/doctor/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (doctorResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/DoctorDashboard');
+        return;
+      }
+  
+      alert("Incorrect Email or Password");
+    } catch (error) {
+      console.error(error);
+      alert("Incorrect Email or Password");
     }
-
-    catch (err) {
-      alert(err);
-    }
-
   }
+  
 
   return (
     <div>
