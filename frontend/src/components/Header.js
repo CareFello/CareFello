@@ -183,29 +183,37 @@ export default function Header() {
                             edge="start"
                             color='#05445E'
                             aria-label="open drawer"
-                            sx={{ mr: 2 }}
+                           
                             onClick={() => updateOpen(!dOpen)}
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography className='logo'
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                fontSize: '13px',
-                                color: '#05445E',
-                            }}
-                        >
-                            <div style={{ marginRight: '2px', marginTop: '4px' }}>
-                                <img src={Logo} alt='logo' height={45} width={45} />
-                            </div>
-                            <div style={{ marginTop: '2px', color: '#189AB4' }}>
-                                <i style={{ fontWeight: 'bold' }}>CareFello</i>
-                            </div>
-                        </Typography>
+
+
+                        {/* <div className='header-logo' style={{display:'flex', flexDirection:'column'}}> */}
+                        <Typography
+  variant="h6"
+  component="div"
+  sx={{
+    display: 'flex',
+    // marginLeft: '160px',
+    alignItems: 'center',
+    fontSize: '13px',
+    color: '#05445E',
+  }}
+>
+  
+  
+  <div style={{ marginRight: '8px' }}>
+    <img src={Logo} alt="logo" height={45} width={45} />
+  </div>
+  <div>
+    <div style={{ fontWeight: 'bold', fontSize: '12px' }}>CareFello</div>
+  </div>
+</Typography>
+                        {/* </div> */}
+
+
 
                         <Box sx={{ flexGrow: 1 }} />
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
