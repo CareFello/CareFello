@@ -51,8 +51,16 @@ import Test1 from "./pages/Test1";
 import Image from "./pages/Image";
 import Image1 from "./pages/Image1";
 import Image2 from "./pages/Image2";
+
+
+
+
+import DonationRequest from "./pages/DonationRequest";
+
+
 import ViewMealPlan from "./pages/viewMealPlan";
 import ViewMeal from "./pages/viewMeal";
+
 
 
 import GuardianDetailsPage from "./components/GuardianDetailPage";
@@ -114,6 +122,10 @@ function App() {
           <Route path="/ViewMealPlan" element={<ViewMealPlan />} />
           <Route path="/ViewMeal/:id" element={<ViewMeal />} />
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
+
+          <Route path="/DonationRequest" element={<DonationRequest/>} />
+
+
           <Route path="/sel" element={<Sel />} />
           <Route path="/sel1" element={<Sel1 />} />
           <Route path="/Registration" element={<Registration />} />
