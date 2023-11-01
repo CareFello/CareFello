@@ -37,7 +37,12 @@ import GuardianCaregiverRating from "./pages/Guardian/GuardianCaregiverRating";
 import GuardianPayments from "./pages/Guardian/GuardianPayments";
 import EditGuardianProfile from "./pages/Guardian/EditGuardianProfile";
 import GuardianProfilePage from "./pages/Guardian/GuardianProfilePage";
+
+import GuardianAddDailyTask from "./pages/Guardian/GuardianAddDailyTask";
+
+
 import GuardianViewHealthTips from "./pages/Guardian/GuardianViewHealthTips";
+
 import ManagerGuardianProfile from "./pages/ViewGuardianProfile";
 import GuardianList from "./pages/GuardianList";
 import ManagerRoomDetailsView from "./pages/ManagerRoomDetailsView";
@@ -136,6 +141,8 @@ function App() {
           <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />
           <Route path="/GuardianProfilePage/:guardianId" element={<GuardianProfilePage />} />
           <Route path="/EditGuardianProfile" element={<EditGuardianProfile />} />
+          <Route path="/GuardianAddDailyTask" element={<GuardianAddDailyTask />} />
+
 
           <Route path="//elder/:elderId" element={<ElderProfile />} />
           <Route path="/EditElderProfile" element={<EditElderProfile />} />
