@@ -47,7 +47,10 @@ export default function GuardianComplain() {
           <Grid container spacing={3}>
 
             <Grid item xs={12} md={6}>
-              <Typography variant="h6">Add Complaint</Typography>
+              {/* <Typography variant="h6">Add Complaint</Typography> */}
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Add Complaint
+                </h1>
               <Card>
                 <CardContent>
                   <Stack spacing={1}>
@@ -83,7 +86,10 @@ export default function GuardianComplain() {
 
             <Grid item xs={12} md={6}>
               <div>
-                <Typography variant="h6">Previous Complaints</Typography>
+                {/* <Typography variant="h6">Previous Complaints</Typography> */}
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Previous Complaint
+                </h1>
                 {complaints.map((complaint) => (
                   <Card
                     key={complaint.id}
