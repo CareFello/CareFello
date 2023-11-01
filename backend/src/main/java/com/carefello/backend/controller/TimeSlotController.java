@@ -19,9 +19,11 @@ public class TimeSlotController {
     private TimeSlotService timeSlotService;
 
     @PostMapping("/addTimeSlot")
-    public ResponseEntity<TimeSlot> addTimeSlot(@PathVariable int doctorId,@ModelAttribute TimeSlotDTO timeSlotDTO){
-        TimeSlot timeSlot = timeSlotService.addTimeSlot(doctorId, timeSlotDTO);
-        return ResponseEntity.created(URI.create("api/v1/guardian/" + doctorId + "/timeSlot/" + timeSlot.getId()))
-                .body(timeSlot);
+    public String addTimeSlot(@PathVariable int doctorId,@RequestBody TimeSlotDTO timeSlotDTO){
+        timeSlotService.addTimeSlot(doctorId, timeSlotDTO);
+        // return ResponseEntity.created(URI.create("api/v1/guardian/" + doctorId + "/timeSlot/" + timeSlot.getId()))
+        //         .body(timeSlot);
+
+        return "hi";
     }
 }
