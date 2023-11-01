@@ -5,6 +5,7 @@ import com.carefello.backend.DTO.DailyTaskDTO;
 import com.carefello.backend.model.DailyTask;
 import com.carefello.backend.service.DailyTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +38,13 @@ public class DailyTaskController {
 
     }
     @GetMapping("/viewTask/{elderId}")
-    public ResponseEntity<List<DailyTask>> getTasksByElderIdAndDate(@PathVariable int elderId){
+    public List<DailyTaskDTO> getTasksByElderIdAndDate(@PathVariable int elderId) {
         LocalDate currentDate = LocalDate.now();
-        List<DailyTask> dailyTasks = dailyTaskService.getTaskByElderIdAndDate(elderId , currentDate);
-        return ResponseEntity.ok(dailyTasks);
+        return dailyTaskService.getTaskByElderIdAndDate(elderId, currentDate);
     }
+    @GetMapping("/allTask/{elderId}")
+    public List<DailyTaskDTO> getTasksByElderId(@PathVariable int elderId) {
+        return dailyTaskService.getTaskByElderId(elderId);
+    }
+
 }

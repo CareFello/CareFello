@@ -10,5 +10,6 @@ import java.util.List;
 public interface DailyTaskService {
     DailyTask addDailyTask(int elderId, DailyTaskDTO dailyTaskDTO);
     DailyTask updateDailyTask(int taskId, DailyTaskDTO dailyTaskDTO);
-    List<DailyTask> getTaskByElderIdAndDate(int elderId, LocalDate date);
+    List<DailyTaskDTO> getTaskByElderIdAndDate(int elderId, LocalDate date);
+    List<DailyTaskDTO> getTaskByElderId(int elderId);
 }
