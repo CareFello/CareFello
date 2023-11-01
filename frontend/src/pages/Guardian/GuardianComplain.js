@@ -53,14 +53,14 @@ export default function GuardianComplain() {
                   <Stack spacing={1}>
                     <TextField
                       className="text"
-                      variant="filled"
-                      label="Complaint Topic"
+                      // variant="standard"
+                      placeholder="Complain Topic"
                       fullWidth
                       value={topic}
                       onChange={(e) => setTopic(e.target.value)}
                     />
                     <TextField
-                      label="Complaint Description"
+                      placeholder="Complaint Description"
                       variant="filled"
                       fullWidth
                       multiline
