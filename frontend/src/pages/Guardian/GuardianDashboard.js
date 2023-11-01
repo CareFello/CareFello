@@ -172,7 +172,7 @@ const GuardianDashboard = () => {
                       <List>
                         {people1.map((person1) => (
                           <ListItem key={person1.id}>
-                          <ListItemText primary="saman" secondary={person1.assStartDate}/>
+                          <ListItemText primary="Saman Perera" secondary={person1.assStartDate}/>
                           
                         </ListItem>
                         ))}

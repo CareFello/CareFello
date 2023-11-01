@@ -12,9 +12,9 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography';
-import Basic from '../../assets/Basic.jpg'
-import Classic from '../../assets/Classic.jpg'
-import Luxury from '../../assets/Luxury.jpg'
+import basic from '../../assets/Basic.jpg'
+import classic from '../../assets/Classic.jpg'
+import luxury from '../../assets/Luxury1.jpg'
 import Model from "react-modal"
 import "../../styles/form.css"
 import { GuardianMenuItem } from '../../components/GuardianMenuItem'
@@ -41,9 +41,9 @@ export default function RoomPackage() {
     };
 
     const packageImages = {
-        Basic: Basic,
-        Classic: Classic,
-        Luxury: Luxury,
+        basic: basic,
+        classic: classic,
+        luxury: luxury,
     };
 
     useEffect(() => {

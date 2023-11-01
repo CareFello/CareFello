@@ -246,7 +246,7 @@ function ElderProfile() {
   
   useEffect(() => {
     // Fetch the list of PDF files using Axios.
-    axios.get(`http://localhost:8080/api/v1/dailyTask/viewTask/${elderId}`)
+    axios.get(`http://localhost:8080/api/v1/dailyTask/allTask/${elderId}`)
       .then((response) => {
         setPeople2(response.data);
       })
@@ -578,10 +578,10 @@ function ElderProfile() {
                     />
                     <div className="flex items-center space-x-2">
                       <Button onClick={save1}>Add</Button>
-                      <Button>
+                      {/* <Button>
                         View All Task
                         <HiOutlineArrowRight className="ml-2 h-5 w-5" />
-                      </Button>
+                      </Button> */}
                     </div>
 
                   </CardContent>

@@ -24,11 +24,6 @@ export const GuardianMenuItem = [
         icon: <AiOutlineUserAdd />,
     },
     {
-        path: `/GuardianSendRequest/${data}`,
-        name: " Send Request",
-        icon: <FaUserNurse />
-    },
-    {
         path: `/GuardianRoomPackages`,
         name: "Packages",
         icon: <TbListDetails />
@@ -39,9 +34,9 @@ export const GuardianMenuItem = [
         icon: <TbAlertSquareRounded />
     },
     {
-        path: `/GuardianPayments/${data}`,
-        name: "Payments",
-        icon: <PaymentsIcon />
+        path: `/GuardianSendRequest/${data}`,
+        name: " Send Request",
+        icon: <FaUserNurse />
     },
     {
         path: `/GuardianComplain/${data}`,

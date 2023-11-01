@@ -204,7 +204,7 @@ function ManagerDashboard() {
 
               <Card sx={{ flex: 1 }}>
                 <CardContent>
-                  <h2>{storedData}</h2><br />
+                  <h2>Available Rooms</h2><br />
                   <PieChart
                     series={[
                       {

@@ -74,7 +74,7 @@ function RequestContinue() {
         assEndDate: assEndDate,
         gender: caregiverGender,
       });
-      console.log(response.data)
+      
   
       if (response.data.length !== 0){
         const bedIds = response.data.map((item) => item.user_id);
@@ -100,18 +100,18 @@ function RequestContinue() {
         }).then((res) => {
           
           if (res.data.str === "good"){
-            // setIdds(res.data.id);
-            // alert("good");
+            setIdds(res.data.id);
+            alert("good");
 
-            axios.post("http://localhost:8080/api/beds/request23",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
-            .then((res) => {
-              if (res.data.str == "good"){
-                setIdds(res.data.id);
-                alert("good");
-              }else{
-                alert("bad");
-              }
-            })
+            // axios.post("http://localhost:8080/api/beds/request23",{id: res.data.id, assStartDate: assStartDate, assEndDate: assEndDate})
+            // .then((res) => {
+            //   if (res.data.str == "good"){
+            //     setIdds(res.data.id);
+            //     alert("good");
+            //   }else{
+            //     alert("bad");
+            //   }
+            // })
           }else{
             alert("bad");
             
