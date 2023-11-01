@@ -510,28 +510,28 @@ public class RequestImpl implements RequestService {
     }
     }
 
-    public BedResponse TempreqcheckCaregiver(RequestDTO requestDTO){
-        List<Tempreq> tr = tempreqRepo.findAll();
-        Tempreq tempreq = tempreqRepo.getTempreq3(requestDTO.getAssStartDate(), requestDTO.getId());
-        Tempreq tempreq2 = tempreqRepo.getTempreq4(requestDTO.getAssEndDate(), requestDTO.getId());
+    // public BedResponse TempreqcheckCaregiver(RequestDTO requestDTO){
+    //     List<Tempreq> tr = tempreqRepo.findAll();
+    //     Tempreq tempreq = tempreqRepo.getTempreq3(requestDTO.getAssStartDate(), requestDTO.getId());
+    //     Tempreq tempreq2 = tempreqRepo.getTempreq4(requestDTO.getAssEndDate(), requestDTO.getId());
 
-        if (tr.size() == 0){
-            BedResponse response = new BedResponse(requestDTO.getId(), "good");
-            return response;
-        }else{
+    //     if (tr.size() == 0){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else{
 
-        if (tempreq != null){
-            BedResponse response = new BedResponse(requestDTO.getId(), "good");
-            return response;
-        }else if (tempreq2 != null){
-            BedResponse response = new BedResponse(requestDTO.getId(), "good");
-            return response;
-        }else{
-            BedResponse response = new BedResponse(0, "bad");
-            return response;
-        }
-    }
-    }
+    //     if (tempreq != null){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else if (tempreq2 != null){
+    //         BedResponse response = new BedResponse(requestDTO.getId(), "good");
+    //         return response;
+    //     }else{
+    //         BedResponse response = new BedResponse(0, "bad");
+    //         return response;
+    //     }
+    // }
+    // }
 
     public List<BedResponse2> getOccu(){
         List<BedResponse2> myObjectList = new ArrayList<>();

@@ -56,6 +56,8 @@ const GuardianDashboard = () => {
   console.log(guardianId)
 
   const [people, setPeople] = useState([]);
+  const [people1, setPeople1] = useState([]);
+  const [people2, setPeople2] = useState([]);
 
   const handlePayment = async (id) => {
 
@@ -78,6 +80,16 @@ const GuardianDashboard = () => {
       .then((response) => setPeople(response.data))
       .catch((error) => console.error(error));
       console.log(people)
+  }, []);
+
+
+
+  useEffect(() => {
+    // Make the GET request using Axios to fetch data from the backend
+    axios.get(`http://localhost:8080/api/beds/request30/${guardianId}`)
+      .then((response) => setPeople1(response.data))
+      .catch((error) => console.error(error));
+      console.log(people1)
   }, []);
 
   return (
@@ -104,7 +116,7 @@ const GuardianDashboard = () => {
 
                 </Stack>
               </Grid>
-              <Grid item xs={10} spacing={1}>
+              {/* <Grid item xs={10} spacing={1}>
                 <Stack display="flex" flexDirection={'row'}>
                   <Typography component="div" variant="h6" className='topic'>
                     Assigned Caregivers
@@ -136,7 +148,7 @@ const GuardianDashboard = () => {
                     </Card>
                   ))}
                 </Stack>
-              </Grid>
+              </Grid> */}
               {/* Other grid items */}
             </Grid>
             <Grid item xs={2} sx={{ marginLeft: "10px" }}>
@@ -151,6 +163,17 @@ const GuardianDashboard = () => {
                           <ListItem key={person.id}>
                           <ListItemText primary={person.name} secondary={person.price} />
                           <button onClick={() => handlePayment(person.id)}>Pay</button>
+                        </ListItem>
+                        ))}
+                        
+                        
+                      </List>
+                      <Typography variant="h6" className='h6'>Pending Requests</Typography>
+                      <List>
+                        {people1.map((person1) => (
+                          <ListItem key={person1.id}>
+                          <ListItemText primary="Saman Perera" secondary={person1.assStartDate}/>
+                          
                         </ListItem>
                         ))}
                         

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import line from '../assets/Line.png';
-import logo from '../assets/logo.png';
+import OLogo from '../assets/OLogo.png';
 import Navbar from '../components/Navbar';
 import reg from "./Registration";
 import '../styles/LoginPage.css';
@@ -115,50 +115,146 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
+  // async function login(event) {
+  //   event.preventDefault();
+  //   try {
+
+  //     await axios.post("http://localhost:8080/api/v1/guardian/login", {
+
+  //       email: email,
+  //       password: password,
+  //     }).then((res) => {
+
+  //       if (res.data.message == "Login Success") {
+
+  //         const guardianId = res.data.id;
+  //         localStorage.setItem('myData', res.data.id);
+  //         navigate(`/GuardianDashboard/${guardianId}`);
+  //       }else if (res.data.message == "Email not exits") {
+
+  //         axios.post("http://localhost:8080/api/v1/employee/login", {
+  //           email: email,
+  //           password: password,
+  //         }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //           } else if (res.data.message == "Email not exits"){
+  //             axios.post("http://localhost:8080/api/v1/caregiver/login", {
+  //             email: email,
+  //             password: password,
+  //             }).then((res) => {
+
+  //             if (res.data.message == "Login Success") {
+  //               // localStorage.setItem('myData', email);
+  //               navigate('/ManagerDashboard');
+  //             } else if (res.data.message == "Email not exits"){
+  //               axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //               email: email,
+  //               password: password,
+  //               }).then((res) => {
+
+  //               if(res.data.message == "Login Success"){
+  //                 // localStorage.setItem('myData', email);
+  //                 navigate('/DoctorDashboard');
+  //               }else{
+  //                 alert("Incorrect Email or Password")
+  //               }
+  //               })
+  //             }else{
+  //               alert("Incorrect Email or Password")
+  //             }
+  //         })
+  //           }
+  //         })
+          
+          
+  //         }else if (res.data.message == "Email not exits"){
+  //           axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //             email: email,
+  //             password: password,
+  //           }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //         }else{
+  //             alert("Incorrect Email or Password")
+  //           }
+  //         })
+  //       }
+  //       else {
+  //         alert("Incorrect Email or Password");
+  //       }
+  //     }, fail => {
+  //       console.error(fail); // Error!
+  //     });
+  //   }
+
+  //   catch (err) {
+  //     alert(err);
+  //   }
+
+  // }
+
   async function login(event) {
     event.preventDefault();
+  
     try {
-
-      await axios.post("http://localhost:8080/api/v1/guardian/login", {
-
+      const guardianResponse = await axios.post("http://localhost:8080/api/v1/guardian/login", {
         email: email,
         password: password,
-      }).then((res) => {
-
-        if (res.data.message == "Login Success") {
-
-          const guardianId = res.data.id;
-          localStorage.setItem('myData', res.data.id);
-          navigate(`/GuardianDashboard/${guardianId}`);
-        }
-        else if (res.data.message == "Email not exits") {
-
-          axios.post("http://localhost:8080/api/v1/employee/login", {
-            email: email,
-            password: password,
-          }).then((res) => {
-
-            if (res.data.message == "Login Success") {
-              // localStorage.setItem('myData', email);
-              navigate('/ManagerDashboard');
-            } else {
-              alert("Incorrect Email or Password")
-            }
-          })
-        }
-        else {
-          alert("Incorrect Email or Password");
-        }
-      }, fail => {
-        console.error(fail); // Error!
       });
+  
+      if (guardianResponse.data.message === "Login Success") {
+        const guardianId = guardianResponse.data.id;
+        localStorage.setItem('myData', guardianId);
+        navigate(`/GuardianDashboard/${guardianId}`);
+        return;
+      }
+  
+      const employeeResponse = await axios.post("http://localhost:8080/api/v1/employee/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (employeeResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const caregiverResponse = await axios.post("http://localhost:8080/api/v1/caregiver/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (caregiverResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const doctorResponse = await axios.post("http://localhost:8080/api/v1/doctor/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (doctorResponse.data.message === "Login Success") {
+        const doctorId = doctorResponse.data.id;
+        localStorage.setItem('myData', doctorId);
+        navigate(`/DoctorDashboard/${doctorId}`);
+        return;
+      }
+  
+      alert("Incorrect Email or Password");
+    } catch (error) {
+      console.error(error);
+      alert("Incorrect Email or Password");
     }
-
-    catch (err) {
-      alert(err);
-    }
-
   }
+  
 
   return (
     <div>
@@ -170,13 +266,13 @@ function Login() {
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
             <div className="flex justify-center items-center">
-              <img className="w-16 h-16" src={logo} alt="logo" />
+              <img className="w-40 h-40" src={OLogo} alt="logo" />
             </div>
 
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign In
             </h1>
-            <form className="flex max-w-md flex-col gap-4">
+            <form className=" s-form flex max-w-md flex-col gap-4">
               <div>
 
                 <TextInput
@@ -206,19 +302,27 @@ function Login() {
                   }}
                 />
               </div>
-              <div class="flex items-center h-5 mb-2">
-                <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""></input>
-                <div class="ml-3 text-sm">
-                  <label for="remember" className="text-gray-500  dark:text-gray-300">Remember me</label>
-                  <label for="remember" className="text-blue-500  dark:text-blue-300 ml-14 cursor-pointer" onClick={openFirstModal}>Forgot Password?</label>
-                </div>
+              <div class="checkbox-group">
+                <input
+                  id="remember"
+                  aria-describedby="remember"
+                  type="checkbox"
+                  className="c-style w-4 h-4 mr-2 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  required=""
+                ></input>
+                <label for="remember" className="l-log text-gray-500 dark:text-gray-300">Remember me</label>
+                <label for="remember" className=" l-log text-blue-500 dark:text-blue-300 ml-4 cursor-pointer" onClick={openFirstModal}>
+                  Forgot Password?
+                </label>
               </div>
+
+
               <Button type="submit" onClick={login}>
                 Sign In
               </Button>
               <div class="flex items-center h-5 mb-2">
-                <div class="ml-3 text-sm">
-                  <label for="remember" className="text-gray-500  dark:text-gray-300">Don't have an account ? </label>
+                <div class="ml-3 mb-4 text-sm">
+                  <label for="remember" className=" text-gray-500  dark:text-gray-300">Don't have an account ? </label>
                   <NavLink to='/Registration' for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Register now</NavLink>
                 </div>
               </div>

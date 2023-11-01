@@ -149,11 +149,11 @@ public class BedController{
         return str;
     }
 
-    @PostMapping("/request23")
-    public BedResponse findreq2(@RequestBody RequestDTO requestDTO){
-        BedResponse str = requestService.TempreqcheckCaregiver(requestDTO);
-        return str;
-    }
+    // @PostMapping("/request23")
+    // public BedResponse findreq2(@RequestBody RequestDTO requestDTO){
+    //     BedResponse str = requestService.TempreqcheckCaregiver(requestDTO);
+    //     return str;
+    // }
 
     // @GetMapping("/request13")
     // public int[] findOccuBeds(){
@@ -192,5 +192,10 @@ public class BedController{
     @GetMapping("/request21/{id}")
     public List<Price> getPrice11(@PathVariable int id){
         return priceRepo.findPrices(id);
+    }
+
+    @GetMapping("/request30/{id}")
+    public List<Tempreq> getTemp(@PathVariable int id){
+        return tempreqRepo.getTemp(id);
     }
 }

@@ -25,6 +25,7 @@ import axios from 'axios';
 import { BiAddToQueue, BiCloset } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5'
 import { TableHead } from 'flowbite-react/lib/esm/components/Table/TableHead';
+import { HiOutlineArrowRight, HiShoppingCart } from 'react-icons/hi';
 
 
 function ElderProfile() {
@@ -43,6 +44,7 @@ function ElderProfile() {
   const [filee, setFilee] = useState(null);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [pdfBlobUrl, setPdfBlobUrl] = useState('');
+  const [people2, setPeople2] = useState([]);
 
   useEffect(() => {
     // Fetch elder data by elderId and guardianId
@@ -61,12 +63,12 @@ function ElderProfile() {
     // Fetch elder data by elderId and guardianId
     axios
       .get(`http://localhost:8080/api/v1/guardian/${guardianId}/elders/${elderId}/viewHistory`)
-      .then((response) =>{
+      .then((response) => {
         setHistory(response.data);
-        
-        
-        
-        })
+
+
+
+      })
       .catch((error) => {
         console.error('Error fetching elder data:', error);
       });
@@ -79,9 +81,9 @@ function ElderProfile() {
   //     .get(`http://localhost:8080/api/v1/elderMedical/${id}/medicalReports/downloadReport/${id}`)
   //     .then((response) =>{
   //       return response.data;
-        
-        
-        
+
+
+
   //       })
   //   } catch (error) {
   //     console.error('Error creating PDF URL:', error);
@@ -94,10 +96,10 @@ function ElderProfile() {
       const response = await axios.get(`http://localhost:8080/api/v1/elderMedical/${id}/medicalReports/downloadReport/${id}`, {
         responseType: 'arraybuffer', // Specify responseType as 'arraybuffer' to handle binary data
       });
-  
+
       const blob = new Blob([response.data], { type: 'application/pdf' });
       const blobUrl = URL.createObjectURL(blob);
-  
+
       // Open the PDF in a new tab
       const newWindow = window.open(blobUrl, '_blank');
       if (newWindow) {
@@ -156,7 +158,11 @@ function ElderProfile() {
 
   const [disease, setDisease] = useState("");
   const [description, setDescription] = useState("");
-  
+  const [task, setTask] = useState(''); 
+  const [des, setDes] = useState(''); 
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+
 
   async function save(event) {
     event.preventDefault();
@@ -195,7 +201,7 @@ function ElderProfile() {
 
     setIdi(id);
     handleOpenModal1();
-    
+
     // try {
     //   await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
     //   axios.get('http://localhost:8080/api/persons/get')
@@ -210,26 +216,26 @@ function ElderProfile() {
   const addPdf = async (e) => {
     e.preventDefault();
     console.log(idi);
-  
+
     if (!filee) {
       setMessage('Please select a Pdf file.');
       return;
     }
-  
+
     try {
       const formData1 = new FormData();
       formData1.append('pdfFile', filee); // Assuming "pdfFile" is the field name on the server
-  
+
       await axios.post(`http://localhost:8080/api/v1/elderMedical/${idi}/medicalReports/addReports`, formData1, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       // Consider using React state and not a full page reload
       alert("Successfully uploaded PDF");
       window.location.reload();
-  
+
       // You can handle the success state here instead of a full page reload
       // Set a success state or update the UI accordingly
     } catch (error) {
@@ -238,22 +244,43 @@ function ElderProfile() {
     }
   };
   
+  useEffect(() => {
+    // Fetch the list of PDF files using Axios.
+    axios.get(`http://localhost:8080/api/v1/dailyTask/allTask/${elderId}`)
+      .then((response) => {
+        setPeople2(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching PDF list:', error);
+      });
+  }, []);
+
+  async function save1(event){
+    event.preventDefault();
+          try {
+              await axios.post(`http://localhost:8080/api/v1/dailyTask/addTask/${elderId}`, {
+                  taskName: task,
+                  description: des,
+                  time: time,
+                  date: date
+                  
+              });
+  
+              alert("Task added");
+              window.location.reload();
+  
+          } catch (err) {
+              alert(err);
+          }
+  }
+
 
   if (!elder) {
     return <div>Loading...</div>; // You can display a loading indicator
   }
 
 
-  // useEffect(() => {
-  //   // Fetch the list of PDF files using Axios.
-  //   axios.get(`http://localhost:8080/api/v1/elderMedical/${idi}/medicalReports/getAllReports`)
-  //     .then((response) => {
-  //       setPdfFiles(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching PDF list:', error);
-  //     });
-  // }, []);
+
 
 
 
@@ -453,7 +480,7 @@ function ElderProfile() {
                           <TableBody key={hist.id}>
                             <TableCell>{hist.disease}</TableCell>
                             <TableCell>{hist.description}</TableCell>
-                            <TableCell><Button onClick={() => openPdfInNewTab(hist.id)}>{hist.name}</Button></TableCell>
+                            <TableCell><Button outline onClick={() => openPdfInNewTab(hist.id)}>{hist.name}</Button></TableCell>
                             <TableCell><Button pill onClick={() => check(hist.id)}>Files</Button></TableCell>
                           </TableBody>
                         ))}
@@ -487,8 +514,8 @@ function ElderProfile() {
                             <form >
 
                               <input type="file" accept=".pdf" onChange={(event) => {
-                              setFilee(event.target.files[0]);
-                                }}/>
+                                setFilee(event.target.files[0]);
+                              }} />
                               <p>only pdf files are acceptable</p>
 
 
@@ -507,6 +534,84 @@ function ElderProfile() {
               <Grid item xs={4} md={12} lg={4}>
                 <Card>
                   <CardContent>
+                    <Typography>Add Task and medication</Typography>
+                    <br />
+                    <TextInput
+                      placeholder='Task/Medication name'
+                      type='text'
+                      className='mb-2'
+
+                      value={task}
+                      onChange={(event) => {
+                      setTask(event.target.value);
+                      }}
+                    />
+                    <TextInput
+                      placeholder='description'
+                      type='text'
+                      className='mb-2'
+
+                      value={des}
+                      onChange={(event) => {
+                      setDes(event.target.value);
+                      }}
+                    />
+                    <TextInput
+                      placeholder='Date'
+                      type='date'
+                      className='mb-2'
+
+                      value={date}
+                      onChange={(event) => {
+                      setDate(event.target.value);
+                      }}
+                    />
+                    <TextInput
+                      placeholder='description'
+                      type='time'
+                      className='mb-2'
+
+                      value={time}
+                      onChange={(event) => {
+                      setTime(event.target.value);
+                      }}
+                    />
+                    <div className="flex items-center space-x-2">
+                      <Button onClick={save1}>Add</Button>
+                      {/* <Button>
+                        View All Task
+                        <HiOutlineArrowRight className="ml-2 h-5 w-5" />
+                      </Button> */}
+                    </div>
+
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={7} md={12} lg={7}>
+                <Card>
+                  <CardContent>
+                    <Typography>Task List</Typography>
+                    <br />
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableCell>Task</TableCell>
+                          <TableCell>Description</TableCell>
+                          <TableCell>Date</TableCell>
+                          <TableCell>Time</TableCell>
+                        </TableHead>
+                        {people2.map((person2) => (
+                          <TableBody key={person2.date}>
+                            <TableCell>{person2.taskName}</TableCell>
+                            <TableCell>{person2.description}</TableCell>
+                            <TableCell>{person2.date}</TableCell>
+                            <TableCell>{person2.time}</TableCell>
+                          </TableBody>
+                          ))}
+                          </Table>
+                          </TableContainer>
+                        
+                    
 
                   </CardContent>
                 </Card>
