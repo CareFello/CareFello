@@ -184,6 +184,8 @@ export default function RoomPackage() {
                                             component="img"
                                             alt={pack1.name}
                                             height="300"
+                                            // width="300"
+                                            // style={{objectFit:"cover"}}
                                             src={packageImages[pack1.name]}
                                         />
                                         <CardContent>

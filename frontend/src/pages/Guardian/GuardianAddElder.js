@@ -148,7 +148,7 @@ function GuardianAddElder() {
 
                   <p className="font-normal text-gray-700 dark:text-gray-400">
                     <p>
-                    Welcome to the Elder Care Management System. We understand the importance of your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect your data when you use our services. By using the System, you consent to the practices described in this policy.
+                    Welcome to CareFello. We understand the importance of your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect your data when you use our services. By using the System, you consent to the practices described in this policy.
                     </p>
                   </p>
                   <Button>

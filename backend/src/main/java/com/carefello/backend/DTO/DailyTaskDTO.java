@@ -9,9 +9,9 @@ public class DailyTaskDTO {
     private int id;
     private String taskName;
     private String description;
-    private boolean status;
+    private String status;
     private LocalTime time;
-    private LocalDate date;
+    private String date;
 
     public int getId() {
         return id;
@@ -37,11 +37,11 @@ public class DailyTaskDTO {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -53,11 +53,11 @@ public class DailyTaskDTO {
         this.time = time;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

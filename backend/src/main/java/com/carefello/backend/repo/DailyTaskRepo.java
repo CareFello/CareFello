@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface DailyTaskRepo extends JpaRepository<DailyTask , Integer> {
-    List<DailyTask> findByElderIdAndDate(int elderId, LocalDate date);
+    // List<DailyTask> findByElderIdAndDate(int elderId, LocalDate date);
     List<DailyTask> findByElderId(int elderId);
 
 }
