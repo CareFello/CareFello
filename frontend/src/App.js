@@ -72,6 +72,10 @@ import DoctorViewHistory from "./pages/DoctorViewHistory";
 
 import ViewAssignedRooms from "./pages/ViewAssignedElders";
 
+import ElderDetails from "./pages/ElderDetails";
+
+import ElderProfileCaregiverView from "./pages/ElderProfileCaregiverView";
+
 
 function App() {
   return (
@@ -103,8 +107,6 @@ function App() {
 
 
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
-
-
           <Route path="/sel" element={<Sel />} />
           <Route path="/sel1" element={<Sel1 />} />
           <Route path="/Registration" element={<Registration />} />
@@ -177,8 +179,10 @@ function App() {
 
           <Route path="/ViewAssignedElders" element={<ViewAssignedRooms />} />
 
+          <Route path="/ElderDetails" element={<ElderDetails />} />
 
-
+          
+          <Route path="/ElderprofileCaregiverView" element={<ElderProfileCaregiverView />} />
 
 
         </Routes>
