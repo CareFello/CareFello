@@ -242,8 +242,9 @@ function Login() {
       });
   
       if (doctorResponse.data.message === "Login Success") {
-        // localStorage.setItem('myData', email);
-        navigate('/DoctorDashboard');
+        const doctorId = doctorResponse.data.id;
+        localStorage.setItem('myData', doctorId);
+        navigate(`/DoctorDashboard/${doctorId}`);
         return;
       }
   

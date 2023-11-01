@@ -169,7 +169,7 @@ function App() {
           <Route path="/ViewComplaints" element={<ViewComplaints />} />
           <Route path="/ViewDonationRequests" element={<ViewDonationRequests />} />
 
-          <Route path="/DoctorDashboard" element={<DoctorDashboard />} />
+          <Route path="/DoctorDashboard/:doctorId" element={<DoctorDashboard />} />
           <Route path="/DoctorViewEldersList" element={<DoctorViewEldersList />} />
           <Route path="/DoctorUpdateAvailablity" element={<DoctorUpdateAvailablity />} />
           <Route path="/DoctorProfile" element={<DoctorProfile />} />
