@@ -56,9 +56,9 @@ export default function GuardianComplain() {
               <Typography variant="h6" marginBottom="50px" color="#" >Add Complaint</Typography>
               
 
-              {/* <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add Complaint
-              </h1> */}
+              </h1>
 
               <Card>
                 <CardContent>
