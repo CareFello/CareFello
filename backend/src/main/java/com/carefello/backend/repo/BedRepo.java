@@ -34,6 +34,8 @@ public interface BedRepo extends JpaRepository<Bed,Integer>{
 
     Bed findByAssElderId(int assElderId);
 
+    Bed findByCaregiveridoccu(int caregiveridoccu);
+
     @Query("select b from Bed b where b.bed_id = :bed_id")
     List<Bed> findAllBeds(@Param("bed_id") int bed_id);
 
