@@ -88,7 +88,7 @@ function Home() {
           <div className="quote-box">
             <div className="quote">
               <div className="main-topic">CareFello</div>
-              <div className="sub-topic">Live Life Beyond the Age</div>
+              <div className="sub-topic home-sub-topic">Live Life Beyond the Age</div>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ function Home() {
         <div className="grid-box">
           <div className="s_box">
             <img src={healthcare} alt="healthcare" />
-            <div className="topic">
+            <div className="topic h-topic">
               <b>Health Care</b>
             </div>
             <p>
@@ -111,7 +111,7 @@ function Home() {
           </div>
           <div className="s_box">
             <img src={Food} alt="food" />
-            <div className="topic">
+            <div className="topic h-topic">
               <b>Food</b>
             </div>
             <p>
@@ -122,7 +122,7 @@ function Home() {
           </div>
           <div className="s_box">
             <img src={accomadation} alt="accomadation" />
-            <div className="topic">
+            <div className="topic h-topic">
               <b>Accomodation</b>
             </div>
             <p>
@@ -135,7 +135,7 @@ function Home() {
           </div>
           <div className="s_box">
             <img src={Relax} alt="relax" />
-            <div className="topic">
+            <div className="topic h-topic">
               <b>Relax Environment</b>
             </div>
             <p>
@@ -202,9 +202,9 @@ function Home() {
           </div>
         </div>
         <div className="contactus" id="contact">
-          <section class=" dark:bg-#05445E-900">
-            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-              <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-#05445E dark:text-#05445E">Contact Us</h2>
+          <section class=" dark:bg-#05445E-900 ">
+            <div class="py-4 lg:py-16 px-4 mx-auto max-w-screen-md sec-style">
+              <h2 class="mb-4 mt-2 text-4xl tracking-tight font-extrabold text-center text-#05445E dark:text-#05445E">Contact Us</h2>
               <p class="mb-8 ml-6 mr-6 lg:mb-16 font-light text-justify text-#05445E-500 sm:text-sm">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
               <form action="#" class="space-y-3">
                 <div>
@@ -213,7 +213,7 @@ function Home() {
                 </div>
                 <div>
                   <label for="subject" class="block mb-2 text-sm font-medium text-#05445E-900 dark:text-#05445E-300">Subject</label>
-                  <input type="text" id="subject" class="block p-3 w-full text-sm text-#05445E-900 bg-#05445E-50 rounded-lg border border-#05445E-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-#05445E-700 dark:border-#05445E-600 dark:placeholder-#05445E-400 dark:text-#05445E dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required></input>
+                  <input type="text" id="subject" class="block p-2 w-full text-sm text-#05445E-900 bg-#05445E-50 rounded-lg border border-#05445E-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-#05445E-700 dark:border-#05445E-600 dark:placeholder-#05445E-400 dark:text-#05445E dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required></input>
                 </div>
                 <div class="sm:col-span-2">
                   <label for="message" class="block mb-2 text-sm font-medium text-#05445E-900 dark:text-#05445E-400">Your message</label>
