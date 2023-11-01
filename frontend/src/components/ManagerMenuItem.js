@@ -50,7 +50,7 @@ export const ManagerMenuItem = [
         icon: <TbAlertSquareRounded />
     },
     {
-        path: "/AddElder",
+        path: "/viewEldersList",
         name: "View Elders",
         icon: <MdOutlineElderlyWoman />
     },

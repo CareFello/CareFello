@@ -1,7 +1,8 @@
 package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.CaregiverDTO;
-
+import com.carefello.backend.DTO.LoginDTO;
+import com.carefello.backend.payload.response.LoginMesage;
 import com.carefello.backend.service.CaregiverService;
 import com.carefello.backend.service.EmailService;
 
@@ -31,6 +32,13 @@ public class CaregiverController {
         }*/
 
         return id;
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> loginEmployee(@RequestBody LoginDTO loginDTO)
+    {
+        LoginMesage loginResponse = caregiverService.loginCaregiver(loginDTO);
+        return ResponseEntity.ok(loginResponse);
     }
 
 

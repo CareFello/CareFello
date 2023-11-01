@@ -112,14 +112,13 @@ function AddDoctor() {
                                             </div>
                                             <TextInput
                                                 required
+                                                value={name2}
                                                 id="base"
-                                                label={isValidnic ? "NIC No" : <p style={{ color: 'red' }}>Invalid NIC No</p>}
-                                                value={nic}
-                                                onChange={(event) => {
-                                                    setNic(event.target.value);
-                                                }}
                                                 sizing="md"
                                                 type="text"
+                                                onChange={(event) => {
+                                                    setname2(event.target.value);
+                                                }}
                                             />
                                         </div>
                                     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import line from '../assets/Line.png';
-import photo from '../assets/photo.png';
+import OLogo from '../assets/OLogo.png';
 import Navbar from '../components/Navbar';
+import reg from "./Registration";
 import '../styles/LoginPage.css';
 import Model from 'react-modal';
 import Visibility from '@mui/icons-material/Visibility';
@@ -11,11 +12,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { Button } from '@mui/material';
+import { HiKey, HiMail } from 'react-icons/hi';
+// import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import login_img from '../assets/login_img.png';
+
+import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 
 Model.setAppElement("#root");
 
@@ -111,62 +115,219 @@ function Login() {
   const [visible, setVisible] = useState(false);
 
 
+  // async function login(event) {
+  //   event.preventDefault();
+  //   try {
+
+  //     await axios.post("http://localhost:8080/api/v1/guardian/login", {
+
+  //       email: email,
+  //       password: password,
+  //     }).then((res) => {
+
+  //       if (res.data.message == "Login Success") {
+
+  //         const guardianId = res.data.id;
+  //         localStorage.setItem('myData', res.data.id);
+  //         navigate(`/GuardianDashboard/${guardianId}`);
+  //       }else if (res.data.message == "Email not exits") {
+
+  //         axios.post("http://localhost:8080/api/v1/employee/login", {
+  //           email: email,
+  //           password: password,
+  //         }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //           } else if (res.data.message == "Email not exits"){
+  //             axios.post("http://localhost:8080/api/v1/caregiver/login", {
+  //             email: email,
+  //             password: password,
+  //             }).then((res) => {
+
+  //             if (res.data.message == "Login Success") {
+  //               // localStorage.setItem('myData', email);
+  //               navigate('/ManagerDashboard');
+  //             } else if (res.data.message == "Email not exits"){
+  //               axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //               email: email,
+  //               password: password,
+  //               }).then((res) => {
+
+  //               if(res.data.message == "Login Success"){
+  //                 // localStorage.setItem('myData', email);
+  //                 navigate('/DoctorDashboard');
+  //               }else{
+  //                 alert("Incorrect Email or Password")
+  //               }
+  //               })
+  //             }else{
+  //               alert("Incorrect Email or Password")
+  //             }
+  //         })
+  //           }
+  //         })
+          
+          
+  //         }else if (res.data.message == "Email not exits"){
+  //           axios.post("http://localhost:8080/api/v1/doctor/login", {
+  //             email: email,
+  //             password: password,
+  //           }).then((res) => {
+
+  //           if (res.data.message == "Login Success") {
+  //             // localStorage.setItem('myData', email);
+  //             navigate('/ManagerDashboard');
+  //         }else{
+  //             alert("Incorrect Email or Password")
+  //           }
+  //         })
+  //       }
+  //       else {
+  //         alert("Incorrect Email or Password");
+  //       }
+  //     }, fail => {
+  //       console.error(fail); // Error!
+  //     });
+  //   }
+
+  //   catch (err) {
+  //     alert(err);
+  //   }
+
+  // }
+
   async function login(event) {
     event.preventDefault();
+  
     try {
-
-      await axios.post("http://localhost:8080/api/v1/guardian/login", {
-
+      const guardianResponse = await axios.post("http://localhost:8080/api/v1/guardian/login", {
         email: email,
         password: password,
-      }).then((res) => {
-
-        if (res.data.message == "Login Success") {
-
-          const guardianId = res.data.id;
-          localStorage.setItem('myData', res.data.id);
-          navigate(`/GuardianDashboard/${guardianId}`);
-        }
-        else if (res.data.message == "Email not exits") {
-
-          axios.post("http://localhost:8080/api/v1/employee/login", {
-            email: email,
-            password: password,
-          }).then((res) => {
-
-            if (res.data.message == "Login Success") {
-              // localStorage.setItem('myData', email);
-              navigate('/ManagerDashboard');
-            } else {
-              alert("Incorrect Email or Password")
-            }
-          })
-        }
-        else {
-          alert("Incorrect Email or Password");
-        }
-      }, fail => {
-        console.error(fail); // Error!
       });
+  
+      if (guardianResponse.data.message === "Login Success") {
+        const guardianId = guardianResponse.data.id;
+        localStorage.setItem('myData', guardianId);
+        navigate(`/GuardianDashboard/${guardianId}`);
+        return;
+      }
+  
+      const employeeResponse = await axios.post("http://localhost:8080/api/v1/employee/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (employeeResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const caregiverResponse = await axios.post("http://localhost:8080/api/v1/caregiver/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (caregiverResponse.data.message === "Login Success") {
+        // localStorage.setItem('myData', email);
+        navigate('/ManagerDashboard');
+        return;
+      }
+  
+      const doctorResponse = await axios.post("http://localhost:8080/api/v1/doctor/login", {
+        email: email,
+        password: password,
+      });
+  
+      if (doctorResponse.data.message === "Login Success") {
+        const doctorId = doctorResponse.data.id;
+        localStorage.setItem('myData', doctorId);
+        navigate(`/DoctorDashboard/${doctorId}`);
+        return;
+      }
+  
+      alert("Incorrect Email or Password");
+    } catch (error) {
+      console.error(error);
+      alert("Incorrect Email or Password");
     }
-
-    catch (err) {
-      alert(err);
-    }
-
   }
+  
 
   return (
-    <div> 
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
-          {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
-            
-      {/* </a> */}
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              
-              <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
+    <div>
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        {/* <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"> */}
+        {/* <img class="w-8 h-8 mr-2" src="login_img" alt="login_img"></img> */}
+
+        {/* </a> */}
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
+            <div className="flex justify-center items-center">
+              <img className="w-40 h-40" src={OLogo} alt="logo" />
+            </div>
+
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Sign In
+            </h1>
+            <form className=" s-form flex max-w-md flex-col gap-4">
+              <div>
+
+                <TextInput
+                  icon={HiMail}
+                  id="email4"
+                  placeholder="Email Address"
+                  required
+                  type="email"
+                  value={email} onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+
+                />
+              </div>
+              <div>
+
+                <TextInput
+                  icon={HiKey}
+                  id="password2"
+                  placeholder='Password'
+                  required
+                  shadow
+                  type="password"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              </div>
+              <div class="checkbox-group">
+                <input
+                  id="remember"
+                  aria-describedby="remember"
+                  type="checkbox"
+                  className="c-style w-4 h-4 mr-2 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  required=""
+                ></input>
+                <label for="remember" className="l-log text-gray-500 dark:text-gray-300">Remember me</label>
+                <label for="remember" className=" l-log text-blue-500 dark:text-blue-300 ml-4 cursor-pointer" onClick={openFirstModal}>
+                  Forgot Password?
+                </label>
+              </div>
+
+
+              <Button type="submit" onClick={login}>
+                Sign In
+              </Button>
+              <div class="flex items-center h-5 mb-2">
+                <div class="ml-3 mb-4 text-sm">
+                  <label for="remember" className=" text-gray-500  dark:text-gray-300">Don't have an account ? </label>
+                  <NavLink to='/Registration' for="remember" className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer" >Register now</NavLink>
+                </div>
+              </div>
+            </form>
+            {/* <form class="space-y-4 md:space-y-6 rounded-lg shadow" action="#" style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign In
               </h1>
@@ -201,12 +362,12 @@ function Login() {
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <a href='http://localhost:3000/Registration' class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                   </p>
-              </form>
+              </form> */}
           </div>
-      
-  </div>
 
-        
+        </div>
+
+
 
         <Model isOpen={firstModalIsOpen}
           onRequestClose={closeFirstModal} style={{
@@ -318,9 +479,9 @@ function Login() {
             </form>
           </div>
         </Model>
-</div>
       </div>
-    
+    </div>
+
   );
 };
 

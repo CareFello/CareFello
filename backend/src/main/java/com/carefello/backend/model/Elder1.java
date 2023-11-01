@@ -8,19 +8,19 @@ import lombok.Data;
 
 public class Elder1 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int elderid;
     private String firstname;
     private String lastname;
     private int age;
-    private char gender;
+    private String gender;
+    
 
-
-    public Elder1(String firstname, String lastname, int age, char gender){
+    public Elder1(String firstname, String lastname, int age, String gender, int elderid){
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
         this.gender = gender;
+        this.elderid = elderid;
     }
 
     public Elder1(){

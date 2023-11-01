@@ -34,6 +34,11 @@ export const GuardianMenuItem = [
         icon: <TbListDetails />
     },
     {
+        path: `/ViewMealPlan`,
+        name: "Meal Plans",
+        icon: <TbAlertSquareRounded />
+    },
+    {
         path: `/GuardianPayments/${data}`,
         name: "Payments",
         icon: <PaymentsIcon />

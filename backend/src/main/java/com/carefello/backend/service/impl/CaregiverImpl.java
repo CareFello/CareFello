@@ -1,9 +1,12 @@
 package com.carefello.backend.service.impl;
 
 import com.carefello.backend.DTO.CaregiverDTO;
-
+import com.carefello.backend.DTO.GuardianDTO;
+import com.carefello.backend.DTO.LoginDTO;
 import com.carefello.backend.model.Caregiver;
 import com.carefello.backend.model.Caregiver1;
+import com.carefello.backend.model.Guardian;
+import com.carefello.backend.payload.response.LoginMesage;
 import com.carefello.backend.repo.Caregiver1Repo;
 import com.carefello.backend.repo.CaregiverRepo;
 import com.carefello.backend.service.CaregiverService;
@@ -75,6 +78,31 @@ try {
         return caregiver.getCaregiverEmail();
     }
 
+
+
+    @Override
+    public LoginMesage loginCaregiver(LoginDTO loginDTO) {
+        String msg = "";
+        Caregiver guardian1 = caregiverRepo.findByEmail(loginDTO.getEmail());
+        if (guardian1 != null) {
+            String password = loginDTO.getPassword();
+            String encodedPassword = guardian1.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            if (isPwdRight) {
+                Optional<Caregiver> guardian = caregiverRepo.findOneByEmailAndPassword(loginDTO.getEmail(), encodedPassword);
+                if (guardian.isPresent()) {
+                    return new LoginMesage("Login Success", true,guardian.get().getUser_id());
+                } else {
+                    return new LoginMesage("Login Failed", false,0);
+                }
+            } else {
+                return new LoginMesage(encodedPassword, false,0);
+
+            }
+        }else {
+            return new LoginMesage("Email not exits", false,0);
+        }
+    }
     
     
 }

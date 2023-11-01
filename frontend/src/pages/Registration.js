@@ -1,279 +1,361 @@
-import React, { useState } from 'react';
-import img from '../assets/reg.png';
-import '../index.css';
-import { Button} from 'flowbite-react';
-import '../styles/Registration.css';
+import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import "../index.css";
+import Header from "../components/Header";
+import { Box } from "@mui/material";
+import {
+  Button,
+  Card,
+  Checkbox,
+  Datepicker,
+  Label,
+  TextInput,
+  Select,
+  Textarea,
+} from "flowbite-react";
+import "../styles/form.css";
+import { ManagerMenuItem } from "../components/ManagerMenuItem";
+import { Grid, Stack } from "@mui/material";
+import slide1 from "../assets/log_2.jpg";
+import axios from "axios";
+import { AiOutlineHome } from "react-icons/ai";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function RegistrationForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isValidNic, setIsValidNic] = useState(true);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [nic, setNic] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [homeAddress, setHomeAddress] = useState('');
-  const [profession, setProfession] = useState('');
-  const [officeAddress, setOfficeAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [nicNo, setNicNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
+  const [profession, setProfession] = useState("");
+  const [homeAddress, setHomeAddress] = useState("");
+  const [workAddress, setWorkAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [nicNoError, setNicNoError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [mobileNoError, setMobileNoError] = useState("");
+  const [professionError, setProfessionError] = useState("");
+  const [homeAddressError, setHomeAddressError] = useState("");
+  const [workAddressError, setWorkAddressError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const handleMouseDownPassword = (event) => {
+  const handleSubmit = async (event) => {
+    // Validation logic
     event.preventDefault();
-  };
+    let isValid = true;
 
-  const handleNicValidation = (event) => {
-    const inputNic = event.target.value;
-    // Example NIC validation: It should be 9 characters.
-    setIsValidNic(inputNic.length === 9);
-  };
+    if (!firstName) {
+      setFirstNameError("First Name is required");
+      isValid = false;
+    } else {
+      setFirstNameError("");
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Add your form submission logic here
+    if (!lastName) {
+      setLastNameError("Last Name is required");
+      isValid = false;
+    } else {
+      setLastNameError("");
+    }
+
+    if (!nicNo) {
+      setNicNoError("NIC No is required");
+      isValid = false;
+    } else if (/^(19|20)\d{10}$/.test(nicNo) || /^9\d{8}V$/.test(nicNo)) {
+      setNicNoError("");
+    } else {
+      setNicNoError("NIC No is invalid");
+      isValid = false;
+    }
+
+    if (!email) {
+      setEmailError("Email is required");
+      isValid = false;
+    } else if (/^\S+@gmail\.com$/.test(email)) {
+      setEmailError("");
+    } else {
+      setEmailError("Email is invalid.");
+      isValid = false;
+    }
+
+    if (!mobileNo) {
+      setMobileNoError("Mobile number is required");
+      isValid = false;
+    } else if (/^\d{10,15}$/.test(mobileNo)) {
+      setMobileNoError("");
+    } else {
+      setMobileNoError("Mobile number is invalid.");
+      isValid = false;
+    }
+
+    if (!profession) {
+      setProfessionError("Profession is required");
+      isValid = false;
+    } else {
+      setProfessionError("");
+    }
+
+    if (!homeAddress) {
+      setHomeAddressError("Home Address is required");
+      isValid = false;
+    } else {
+      setHomeAddressError("");
+    }
+
+    if (!workAddress) {
+      setWorkAddressError("Working Place Address is required");
+      isValid = false;
+    } else {
+      setWorkAddressError("");
+    }
+
+    if (!password) {
+      setPasswordError("Password is required");
+      isValid = false;
+    } else if (password.length >= 8) {
+      setPasswordError("");
+    } else {
+      setPasswordError("Password should contain at least 8 characters");
+      isValid = false;
+    }
+
+    if (!confirmPassword) {
+      setConfirmPasswordError("Password confirmation is required");
+      isValid = false;
+    } else if (password === confirmPassword) {
+      setConfirmPasswordError("");
+    } else {
+      setConfirmPasswordError("Passwords do not match");
+      isValid = false;
+    }
+
+    // Add similar validation logic for other fields...
+
+    if (isValid) {
+      // Form submission logic here
+
+      try {
+        await axios.post("http://localhost:8080/api/v1/guardian/addGuardian", {
+          fname: firstName,
+          lname: lastName,
+          nic: nicNo,
+          email: email,
+          cont: mobileNo,
+          profession: profession,
+          hAddress: homeAddress,
+          wAddress: workAddress,
+          password: password,
+        });
+
+        alert("You have registered successfully");
+        navigate(`/Login`);
+      } catch (err) {
+        // Handle any errors, such as network errors or server-side validation errors
+        alert(err);
+      }
+    }
   };
 
   return (
-    <div className='main-content' >
-    <div className='flex flex-col items-center'>
-      <div className="p-10 space-y-2 md:space-y-0 sm:p-8 " >
-        
-        <div className='content flex flex-row' sx={{boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
-        
-          <form className="md:space-y-0 max-w-3xl w-full" onSubmit={handleSubmit}  style={{ width: '100%', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', background: 'linear-gradient(#D4F1F4, #75E6DA)' }}>
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-          Sign Up
-        </h1>
-            <div className="name flex space-x-4">
-              <div className="fname">
-                <label
-                  htmlFor="first-name"
-                  className="block mb-2 text-sm font-small text-gray-900 dark:text-white "
-                >
-                  First Name
-                </label>
-                <input
-                  required
-                  style={{ fontSize: '12px' }}
-                  value={firstName}
-                  id="first-name"
-                  className="input-field"
-                  type="text"
-                  onChange={(event) => setFirstName(event.target.value)}
-                />
-              </div>
-
-              <div className="lname ml-4">
-                <label
-                  htmlFor="last-name"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Last Name
-                </label>
-                <input
-                  required
-                  value={lastName}
-                  style={{ fontSize: '12px' }}
-                  id="last-name"
-                  className="input-field"
-                  type="text"
-                  onChange={(event) => setLastName(event.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="flex space-x-4">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Email
-                </label>
-                <input
-                  type="text"
-                  value={email}
-                  name="email"
-                  id="email"
-                  style={{ fontSize: '12px' }}
-                  className="input-field"
-                  placeholder="name@company.com"
-                  required=""
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="nic"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  NIC
-                </label>
-                <input
-                  required
-                  value={nic}
-                  id="nic"
-                  style={{ fontSize: '12px' }}
-                  className={`input-field ${isValidNic ? 'dark:placeholder-gray-400' : 'dark:placeholder-red-400'}`}
-                  type="text"
-                  onChange={(event) => {
-                    setNic(event.target.value);
-                    handleNicValidation(event);
-                  }}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="mobile-number"
-                  className="block mb-2 text-gray-900 sm:text-sm "
-                >
-                  Mobile Number
-                </label>
-                <input
-                  required
-                  style={{ fontSize: '12px' }}
-                  value={mobileNumber}
-                  id="mobile-number"
-                  className="input-field"
-                  type="text"
-                  onChange={(event) => setMobileNumber(event.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="textarea-row flex space-x-4">
-              <div class="Home_ad">
-                <label
-                  htmlFor="home-address"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Home Address
-                </label>
-                <textarea
-                  required
-                  style={{ fontSize: '12px' }}
-                  value={homeAddress}
-                  id="home-address"
-                  className="input-field"
-                  style ={{ fontSize: '12px', width: '170px' }}
-                  onChange={(event) => setHomeAddress(event.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="profession"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Profession
-                </label>
-                <input
-                  required
-                  value={profession}
-                  style={{ fontSize: '12px' }}
-                  id="profession"
-                  className="input-field"
-                  type="text"
-                  onChange={(event) => setProfession(event.target.value)}
-                />
-              </div>
-
-              <div className='Office_ad'>
-                <label
-                  htmlFor="office-address"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Work-place Address
-                </label>
-                <textarea
-                style={{ fontSize: '12px' , width: '170px'}}
-                  required
-                  value={officeAddress}
-                  id="office-address"
-                  className="input-field"
-                  onChange={(event) => setOfficeAddress(event.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="password-confirm-row flex space-x-4 mb-5">
-              <div className='pw_2'>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  id="password"
-                  style={{ fontSize: '12px' }}
-                  className="input-field"
-                  required=""
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="confirm-password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Confirm password
-                </label>
-                <input
-                  type="password"
-                  style={{ fontSize: '12px' }}
-                  name="confirm-password"
-                  id="confirm-password"
-                  className="input-field"
-                  required=""
-                  onChange={(event) => setConfirmPassword(event.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                     <div class="flex mt-3 items-center h-5">
-                        <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
-                      </div>
-                      <div class="ml-3 mb-2 text-sm">
-                        <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
-                      </div>
-            </div>
+    <div>
+      <Box height={10} />
+      <Box sx={{ display: "flex" }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <br />
+          
             
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button
-              type="submit"
-              className="text-xl font-bold leading-tight  tracking-tight text-gray-900 md:text-2xl dark:text-white"
-              style={{ width: '150px' }}
-            >
-              Sign Up
-            </Button>
-            </div>
+              <Stack direction="row">
+                <Box>
+                  <NavLink to="/">
+                    <AiOutlineHome
+                      style={{ fontSize: "2rem", color: "#189AB4",marginLeft:8 }}
+                    />
+                  </NavLink>
+                </Box>
+              </Stack>
+             
+              <Grid container spacing={1}>
+            <Grid item xs={7}>
+              <div className="flex justify-center items-center">
+                <img className="w-200 h-320" src={slide1} alt="logo" />
+              </div>
 
-            <p className="text-sm font-light text-gray-500 mt-2 dark:text-gray-400">
-              Already have an account?{' '}
-              <a
-                href="#"
-                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-              >
-                Login here
-              </a>
-            </p>
-          </form>
-          </div>
-        </div>
-      </div>
-    
-  </div>
+            </Grid>
+           
+            <Grid item xs={4}>
+              <h1 className="mb-4">Guardian Registration</h1>
+              <div className="ml-7">
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+                    <TextInput
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      sizing="md"
+                      className="w-full mr-12"
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {firstNameError}
+                    </div>
+                  </div>
+                  <div className="input-container ">
+                    <TextInput
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      sizing="md"
+                      className="w-full mr-12"
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {lastNameError}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <TextInput
+                    placeholder="NIC No"
+                    type="text"
+                    sizing="md"
+                    className="w-68"
+                    value={nicNo}
+                    onChange={(e) => setNicNo(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: "red" }}>
+                    {nicNoError}
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <TextInput
+                    placeholder="Email"
+                    className="w-68"
+                    type="email"
+                    sizing="md"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: "red" }}>
+                    {emailError}
+                  </div>
+                </div>
+
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+                    <TextInput
+                      placeholder="Mobile No"
+                      className="w-full mr-12"
+                      sizing="md"
+                      value={mobileNo}
+                      onChange={(e) => setMobileNo(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {mobileNoError}
+                    </div>
+                  </div>
+                  <div className="input-container">
+                    <TextInput
+                      placeholder="Profession"
+                      className="w-full mr-12"
+                      sizing="md"
+                      value={profession}
+                      onChange={(e) => setProfession(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {professionError}
+                    </div>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <Textarea
+                    placeholder="Home Address"
+                    className="w-full"
+                    sizing="sm"
+                    value={homeAddress}
+                    onChange={(e) => setHomeAddress(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: "red" }}>
+                    {homeAddressError}
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <Textarea
+                    placeholder="Working Place Address"
+                    className="w-68"
+                    sizing="sm"
+                    value={workAddress}
+                    onChange={(e) => setWorkAddress(e.target.value)}
+                  />
+                  <div className="error-message" style={{ color: "red" }}>
+                    {workAddressError}
+                  </div>
+                </div>
+                <div className="flex mb-3">
+                  <div className="input-container mr-4">
+                    <TextInput
+                      placeholder="Password"
+                      type="password"
+                      className="w-full mr-12"
+                      sizing="md"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {passwordError}
+                    </div>
+                  </div>
+                  <div className="input-container">
+                    <TextInput
+                      placeholder="Confirm Password"
+                      type="password"
+                      className="w-full mr-12"
+                      sizing="md"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <div className="error-message" style={{ color: "red" }}>
+                      {confirmPasswordError}
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center h-5 mb-4">
+                  <input
+                    id="remember"
+                    aria-describedby="remember"
+                    type="checkbox"
+                    className="w-4 h-4 mt-9 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    required=""
+                  ></input>
+                  <div class="ml-3 text-sm">
+                    <label
+                      for="remember"
+                      className="text-gray-500  dark:text-gray-300"
+                    >
+                      I agree to
+                    </label>
+                    <label
+                      for="remember"
+                      className="text-blue-500  dark:text-blue-300 ml-1 cursor-pointer"
+                    >
+                      Terms & Conditions
+                    </label>
+                  </div>
+                </div>
+                <Button className="w-68" onClick={handleSubmit}>
+                  Sign In
+                </Button>
+              </div>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </div>
   );
 }
 

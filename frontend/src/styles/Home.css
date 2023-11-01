@@ -285,3 +285,159 @@ html, body {
 .msg-btn {
     width: 25px;
 }
+
+/* Add media query for mobile screens */
+@media screen and (max-width: 768px) {
+    .home {
+      background-size: cover;
+      height: auto;
+    }
+  
+    .quote-box {
+      width: 90%;
+      margin: 2rem auto;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .quote-box .quote p {
+      font-size: 18px;
+    }
+  
+    .main-topic {
+      font-size: 40px;
+    }
+
+    .home-sub-topic{
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+  
+    .grid-box {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .grid-box .s_box {
+      width: 80%;
+      margin: 10px 0;
+      display: flex; /* Add display flex to the container */
+      flex-direction: column; /* Stack items vertically */
+      align-items: center; /* Center items horizontally */
+      justify-content: center; /* Center items vertically */
+    }
+  
+    .grid-box .s_box img {
+      width: 20%;
+      margin: 1rem auto;
+    }
+
+    .h-topic{
+        padding-right: 30px;
+    }
+  
+    .Aboutus_txt {
+      margin: 0 auto;
+      flex-direction: column;
+      width: 90%;
+      align-items: center;
+    }
+
+  
+    .About h2 {
+      font-size: 28px;
+    }
+  
+  
+    .Aboutus_txt .text {
+      margin: 0;
+      font-size: 14px;
+      width: 100%;
+    }
+  
+    .Aboutus_txt .image_about {
+      
+      margin-bottom: 2rem;
+      margin-right: 0;
+    }
+  
+    .countup {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .card01, .card02, .card03{
+        margin-left: 0;
+        width: 80%;
+        margin-bottom: 2rem;
+    }
+  
+    .countup h4 {
+      font-size: 24px;
+    }
+
+    .sec-style{
+        margin-top: 0;
+    }
+  
+    .contact {
+      flex-direction: column;
+      align-items: center;
+      padding-left: 0;
+    }
+  
+    .linklocation img,
+    .linkphone img,
+    .linkmail img {
+      width: 30px;
+      height: auto;
+    }
+  
+    .linkphone {
+      padding: 10px 0;
+    }
+  
+    .phone_no {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .topic {
+      margin-right: 0;
+    }
+  
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin: 0;
+    }
+  
+    /* .links .left {
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+      font-size: small;
+    } */
+  
+    .links a {
+      /* margin: 5px; */
+        display: none;
+    }
+  
+    .fixed-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      margin-right: 0;
+    }
+  
+    .login-btn {
+      padding: 6px 15px;
+      font-size: 14px;
+    }
+  }
+  

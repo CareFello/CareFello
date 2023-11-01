@@ -1,6 +1,7 @@
 package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.ElderDTO;
+import com.carefello.backend.DTO.ElderWithGuardianDTO;
 import com.carefello.backend.model.Elder;
 import com.carefello.backend.model.Elder1;
 import com.carefello.backend.model.Elderguar;
@@ -26,12 +27,13 @@ public class ElderController {
     @Autowired
     private Elder1Repo elder1Repo;
     @PostMapping("/addElder")
-    public ResponseEntity<Elder> addElderToGuardian(
+    public String addElderToGuardian(
             @PathVariable int guardianId,
             @RequestBody ElderDTO elderDTO // Use @ModelAttribute to handle file upload
     ) {
-        Elder elder = elderService.addElderToGuardian(guardianId, elderDTO);
-        return new ResponseEntity<>(elder, HttpStatus.CREATED);
+        elderService.addElderToGuardian(guardianId, elderDTO);
+        // return new ResponseEntity<>(elder, HttpStatus.CREATED);
+        return "hi";
     }
 
     @GetMapping("/viewElderByGuardianId")
@@ -50,6 +52,9 @@ public class ElderController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+   
+
 
     @PutMapping("/{elderId}/updateImage")
     public ResponseEntity<String> updateElderImage(

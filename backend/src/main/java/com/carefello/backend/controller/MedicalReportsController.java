@@ -3,7 +3,9 @@ package com.carefello.backend.controller;
 
 import com.carefello.backend.DTO.MedicalReportsDTO;
 import com.carefello.backend.Util.ImageUtil;
+import com.carefello.backend.model.Emh;
 import com.carefello.backend.model.MedicalReports;
+import com.carefello.backend.repo.EmhRepo;
 import com.carefello.backend.service.MedicalReportsService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class MedicalReportsController {
 
     @Autowired
     private MedicalReportsService medicalReportsService;
+
+    @Autowired
+    private EmhRepo emhRepo;
 
     @PostMapping("/addReports")
     public ResponseEntity<String> addReports(@PathVariable int diseaseId, @RequestParam("pdfFile")MultipartFile pdfFile) throws IOException{
@@ -43,14 +48,14 @@ public class MedicalReportsController {
     @GetMapping("/downloadReport/{reportId}")
     public ResponseEntity<byte[]> downloadReport(@PathVariable int reportId){
         try{
-            MedicalReports reports = medicalReportsService.getReportsById(reportId);
+            Emh emh = emhRepo.findReport(reportId);
 
-            if(reports != null){
-                byte[] decompressedPdfData = ImageUtil.decompressImage(reports.getPdfData());
+            if(emh != null){
+                byte[] decompressedPdfData = ImageUtil.decompressImage(emh.getPdfData());
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.APPLICATION_PDF);
-                headers.setContentDisposition(ContentDisposition.builder("inline").filename(reports.getName()).build());
+                headers.setContentDisposition(ContentDisposition.builder("inline").filename(emh.getName()).build());
                 return ResponseEntity.ok().headers(headers).body(decompressedPdfData);
             } else {
                 return ResponseEntity.notFound().build();
