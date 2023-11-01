@@ -33,5 +33,8 @@ public interface TempreqRepo extends JpaRepository<Tempreq, Integer> {
 
     Tempreq findById(int id);
 
+    @Query("select t from Tempreq t where t.guardianid = :guardianid and t.pending = 0")
+    List<Tempreq> getTemp(@Param("guardianid") int guardianid);
+
 }
 

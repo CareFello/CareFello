@@ -9,6 +9,7 @@ import { ManagerMenuItem } from '../components/ManagerMenuItem'
 import { Grid } from '@mui/material';
 import slide1 from '../assets/log_2.jpg'
 import axios from 'axios';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function RegistrationForm() {
   const [firstName, setFirstName] = useState('');
@@ -21,6 +22,7 @@ function RegistrationForm() {
   const [workAddress, setWorkAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
   const [firstNameError, setFirstNameError] = useState('');
   const [lastNameError, setLastNameError] = useState('');
@@ -143,8 +145,8 @@ function RegistrationForm() {
           password: password,
         });
 
-        alert("You have register successfully");
-        window.location.reload();
+        alert("You have registered successfully");
+        navigate(`/Login`);
 
       } catch (err) {
         // Handle any errors, such as network errors or server-side validation errors
