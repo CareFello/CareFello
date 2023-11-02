@@ -51,14 +51,14 @@ export default function GuardianComplain() {
         <Sidebar menuItems={GuardianMenuItem} />
 
         <Container>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ marginBottom: "5px" }}>
             <Grid item xs={12} md={6}>
               {/* <Typography variant="h6" marginBottom="50px" color="#" >Add Complaint</Typography> */}
-
+              <Box height={40} />
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add Complaint
               </h1>
-
+              <Box height={20} />
               <Card>
                 <CardContent>
                   <Stack spacing={1}>
@@ -78,9 +78,10 @@ export default function GuardianComplain() {
                       rows={4}
                       value={description}
                       sx={{
-                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                          borderWidth: "1px", // Set the border width to 1px
-                        },
+                        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                          {
+                            borderWidth: "1px", // Set the border width to 1px
+                          },
                         "& .MuiOutlinedInput-root": {
                           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                             border: "none", // Remove the border when the input is focused
@@ -106,11 +107,13 @@ export default function GuardianComplain() {
             </Grid>
 
             <Grid item xs={12} md={6}>
+              <Box height={40} />
               <div>
                 {/* <Typography variant="h6">Previous Complaints</Typography> */}
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Previous Complaint
                 </h1>
+                <Box height={20} />
                 {complaints.map((complaint) => (
                   <Card
                     key={complaint.id}
