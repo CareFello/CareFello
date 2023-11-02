@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -26,25 +27,7 @@ import ElderCard from '../../components/ElderCard';
 
 
 
-const caregiverProfiles = [
-  {
-    name: 'Ms.Pawani',
-    age: 30,
-    image: require('../../assets/C1.jpg'),
-  },
-  {
-    name: 'Mr.Kasun',
-    age: 28,
-    image: require('../../assets/C2.jpg'),
-  },
-  {
-    name: 'Ms.Deshani',
-    age: 28,
-    image: require('../../assets/C3.jpg'),
-  },
 
-
-];
 
 
 
@@ -156,24 +139,26 @@ const GuardianDashboard = () => {
                 <Card sx={{ Width: '80px', height: '550px', backgroundColor: 'white', marginTop: "10px" }} className={'elder-card'}>
                   <CardActionArea >
                     <CardContent className='payments'>
-                      <Typography variant="h6" className='h6'>Pending Payments</Typography>
-                      {/* <Typography variant="body1">You have pending payments for the following services at ElderCare Home:</Typography> */}
-                      <List>
-                        {people.map((person) => (
-                          <ListItem key={person.id}>
-                          <ListItemText primary={person.name} secondary={person.price} />
-                          <button onClick={() => handlePayment(person.id)}>Pay</button>
-                        </ListItem>
-                        ))}
-                        
-                        
-                      </List>
+                     
                       <Typography variant="h6" className='h6'>Pending Requests</Typography>
                       <List>
                         {people1.map((person1) => (
                           <ListItem key={person1.id}>
                           <ListItemText primary="Saman Perera" secondary={person1.assStartDate}/>
                           
+                        </ListItem>
+                        ))}
+                        
+                        
+                      </List>
+
+                      <Typography variant="h6" className='h6'>Pending Payments</Typography>
+                      {/* <Typography variant="body1">You have pending payments for the following services at ElderCare Home:</Typography> */}
+                      <List>
+                        {people.map((person) => (
+                          <ListItem key={person.id}>
+                          <ListItemText primary={person.name} secondary={person.price} />
+                          <Button onClick={() => handlePayment(person.id)}>Pay</Button>
                         </ListItem>
                         ))}
                         

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import PdfViewer from '../../components/PdfViewer';
-import Select from '@mui/material/Select';
+// import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import {
   Box,
@@ -21,8 +21,8 @@ import {
 import { GuardianMenuItem } from '../../components/GuardianMenuItem';
 import pro from '../../assets/avatar.png';
 import '../../styles/Guardian/ElderProfile.css';
-import { Button, TextInput, Label, FileInput, Checkbox, Textarea } from "flowbite-react"
-import { useLocation, useParams } from 'react-router-dom';
+import { Button, TextInput, Label, FileInput, Checkbox, Textarea , Select , } from "flowbite-react"
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BiAddToQueue, BiCloset } from 'react-icons/bi';
 import { IoCloseSharp } from 'react-icons/io5'
@@ -402,10 +402,10 @@ function ElderProfile() {
                   <CardContent>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Typography variant='h6' >Medical History & Reports </Typography>
-                      <Button variant="contained" onClick={handleOpenModal} sx={{
-
-                        top: '20px', // Adjust the margin top as needed
-                        left: '50px',
+                      <Button variant="contained" onClick={handleOpenModal} style={{
+                        marginLeft: '300px',
+                        // marginTop: 'px', // Adjust the margin top as needed
+                        
                         zIndex: 1, // Ensure the button appears above other content
                       }}>
                         Add Medical History
@@ -473,8 +473,8 @@ function ElderProfile() {
                     </div>
                     <TableContainer>
                       <Table>
-                        <TableHead>
-                          <TableCell>Disease</TableCell>
+                        <TableHead >
+                          <TableCell >Disease</TableCell>
                           <TableCell>Descriptions</TableCell>
                           <TableCell>Files</TableCell>
                           <TableCell>Actions</TableCell>
@@ -483,7 +483,7 @@ function ElderProfile() {
                           <TableBody key={hist.id}>
                             <TableCell>{hist.disease}</TableCell>
                             <TableCell>{hist.description}</TableCell>
-                            <TableCell><Button outline onClick={() => openPdfInNewTab(hist.id)}>{hist.name}</Button></TableCell>
+                            <TableCell><NavLink outline onClick={() => openPdfInNewTab(hist.id)}>{hist.name}</NavLink></TableCell>
                             <TableCell><Button pill onClick={() => check(hist.id)}>Files</Button></TableCell>
                           </TableBody>
                         ))}
@@ -569,13 +569,16 @@ function ElderProfile() {
                       setDate(event.target.value);
                       }}
                     >
-                    <MenuItem value="Sunday">Sunday</MenuItem>
-                    <MenuItem value="Monday">Monday</MenuItem>
-                    <MenuItem value="Tuesday">Tuesday</MenuItem>
-                    <MenuItem value="Wednesday">Wednesday</MenuItem>
-                    <MenuItem value="Thursday">Thursday</MenuItem>
-                    <MenuItem value="Friday">Friday</MenuItem>
-                    <MenuItem value="Saturday">Saturday</MenuItem>
+                                        <option value="" disabled hidden>
+                      Select Day
+                    </option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
                     </Select>
                     <TextInput
                       placeholder='description'
