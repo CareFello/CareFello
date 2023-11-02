@@ -26,8 +26,9 @@ public class Tempreq {
     private int pending;
     private int caregiverid;
     private int guardianid;
+    private int paid;
 
-    public Tempreq(int elderid, int bed_id, Date assStartDate, Date assEndDate, char gender, String allergyMeal, String currentMedication, List<String> foodNot, String type, long price, int pending, int caregiverid, int guardianid){
+    public Tempreq(int elderid, int bed_id, Date assStartDate, Date assEndDate, char gender, String allergyMeal, String currentMedication, List<String> foodNot, String type, long price, int pending, int caregiverid, int guardianid, int paid){
         this.elderid = elderid;
         this.bed_id = bed_id;
         this.assStartDate = assStartDate;
@@ -41,6 +42,7 @@ public class Tempreq {
         this.pending = pending;
         this.caregiverid = caregiverid;
         this.guardianid = guardianid;
+        this.paid = paid;
     }
 
     public Tempreq(){

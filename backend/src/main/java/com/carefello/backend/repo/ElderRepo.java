@@ -16,5 +16,4 @@ public interface ElderRepo extends JpaRepository<Elder , Integer> {
     Optional<Elder> findByIdAndGuardianId(int elderId, int guardianId);
     Elder findByNic(String nic);
 
-
 }
