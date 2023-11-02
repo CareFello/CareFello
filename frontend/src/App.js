@@ -125,7 +125,7 @@ function App() {
 
 
           <Route path="/ViewMealPlan" element={<ViewMealPlan />} />
-          <Route path="/ViewMeal/:id" element={<ViewMeal />} />
+          <Route path="/ViewMealPlan/:id" element={<ViewMeal />} />
           <Route path="/Caregiverprofile" element={<Caregiverprofile />} />
 
           <Route path="/DonationRequest" element={<DonationRequest/>} />
