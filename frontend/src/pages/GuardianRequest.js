@@ -32,6 +32,7 @@ import pp5 from '../assets/pp5.jpg';
 import pp6 from '../assets/pp6.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'flowbite-react';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -100,6 +101,7 @@ export default function GuardianRequest() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [people, setPeople] = useState([]);
+    const [people1, setPeople1] = useState([]);
     const navigate = useNavigate();
 
     const handleChangePage = (event, newPage) => {
@@ -131,12 +133,26 @@ export default function GuardianRequest() {
         navigate(`/RequestContinue/${elderid}`);
     };
 
+    const handleContinue1 = async (elderid) => {
+
+        console.log(elderid);
+        navigate(`/RequestContinue1/${elderid}`);
+    };
+
     useEffect(() => {
         // Make the GET request using Axios to fetch data from the backend
         axios.get('http://localhost:8080/api/beds/request9')
           .then((response) => setPeople(response.data))
           .catch((error) => console.error(error));
           console.log(people)
+      }, []);
+
+      useEffect(() => {
+        // Make the GET request using Axios to fetch data from the backend
+        axios.get('http://localhost:8080/api/beds/request50')
+          .then((response) => setPeople1(response.data))
+          .catch((error) => console.error(error));
+          console.log(people1)
       }, []);
 
     return (
@@ -242,8 +258,19 @@ export default function GuardianRequest() {
                                         {people.map((person) =>(
                                             <div>
                                                 Name: {person.guardianName} Age: {person.age}
-                                                <button onClick={() => handleDelete(person.id)}>Delete</button>
-                                                <button onClick={() => handleContinue(person.elderid)}>Continue</button>
+                                                <Button onClick={() => handleDelete(person.id)}>Delete</Button>
+                                                <Button onClick={() => handleContinue(person.elderid)}>Continue</Button>
+                                            </div>
+                                        ))}
+                                        
+                                    </TableContainer>
+
+                                    <TableContainer sx={{ maxHeight: 600 }}>
+                                        {people1.map((person1) =>(
+                                            <div>
+                                                Name: {person1.guardianName} Age: {person1.age}
+                                                {/* <button onClick={() => handleDelete(person1.id)}>Delete</button> */}
+                                                <Button onClick={() => handleContinue1(person1.elderid)}>Continue</Button>
                                             </div>
                                         ))}
                                         

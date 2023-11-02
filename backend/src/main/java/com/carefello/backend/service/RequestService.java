@@ -20,6 +20,7 @@ public interface RequestService {
     BedResponse validateRequest2(int[] id, RequestDTO requestDTO);
     BedResponse validateRequest3(int[] id, RequestDTO requestDTO);
     List<ElderRequest> func1();
+    List<ElderRequest> func111();
     BedResponse1 func2(int id);
     String assignElder1(RequestDTO requestDTO);
     BedResponse Tempreqcheck(RequestDTO requestDTO);

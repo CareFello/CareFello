@@ -115,7 +115,7 @@ public class BedController{
     @PostMapping("/request8")
     public String tempreq(@RequestBody RequestDTO requestDTO){
         Elderguar elderguar = elderguarRepo.findByElderid(requestDTO.getAssElderId());
-        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice(),0,0,elderguar.getGuardianid());
+        Tempreq tempreq = new Tempreq(requestDTO.getAssElderId(), requestDTO.getId(), requestDTO.getAssStartDate(), requestDTO.getAssEndDate(), requestDTO.getGender(), requestDTO.getAllergyMeal(), requestDTO.getCurrentMedication(), requestDTO.getFoodNot(), requestDTO.getType(), requestDTO.getPrice(),0,0,elderguar.getGuardianid(),0);
         tempreqRepo.save(tempreq);
         return "hi";
     }
@@ -197,5 +197,20 @@ public class BedController{
     @GetMapping("/request30/{id}")
     public List<Tempreq> getTemp(@PathVariable int id){
         return tempreqRepo.getTemp(id);
+    }
+
+    @PutMapping("/request40/{id}")
+    public String finalizePayment(@PathVariable int id){
+        Price price = priceRepo.findById(id);
+        Tempreq tempreq = tempreqRepo.getTempreq(price.getElderid());
+        tempreq.setPaid(1);
+        tempreqRepo.save(tempreq);
+        return "hi";
+    }
+
+    @GetMapping("/request50")
+    public List<ElderRequest> getPaidtempreq(){
+        List<ElderRequest> str = requestService.func111();
+        return str;
     }
 }

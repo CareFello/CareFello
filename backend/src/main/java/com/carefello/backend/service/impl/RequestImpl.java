@@ -261,6 +261,22 @@ public class RequestImpl implements RequestService {
         return myObjectList;
     }
 
+    public List<ElderRequest> func111(){
+        List<Tempreq> tempreqs = tempreqRepo.getTempreq1();
+        List<ElderRequest> myObjectList = new ArrayList<>();
+        for (Tempreq tempreq : tempreqs){
+            if (tempreq.getPending() == 1){
+                Elder1 elder1 = elder1Repo.findByElderid(tempreq.getElderid());
+                Elderguar elderguar = elderguarRepo.findByElderid(tempreq.getElderid());
+                ElderRequest elderRequest = new ElderRequest(elder1.getAge(), elder1.getFirstname(), elder1.getGender(), tempreq.getElderid(), tempreq.getId());
+                myObjectList.add(elderRequest);
+            }
+            
+        }
+
+        return myObjectList;
+    }
+
     public BedResponse1 func2(int id){
         Elder1 elder1 = elder1Repo.findByElderid(id);
         Elderguar elderguar = elderguarRepo.findByElderid(id);

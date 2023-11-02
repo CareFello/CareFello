@@ -62,15 +62,15 @@ const GuardianDashboard = () => {
   const handlePayment = async (id) => {
 
     console.log(id);
-    // try {
-    //   await axios.delete(`http://localhost:8080/api/persons/delete/${id}`);
-    //   axios.get('http://localhost:8080/api/persons/get')
-    //   .then((response) => setPeople(response.data))
-    //   .catch((error) => console.error(error));
+    try {
+      await axios.put(`http://localhost:8080/api/beds/request40/${id}`);
+      // axios.get('http://localhost:8080/api/persons/get')
+      // .then((response) => setPeople(response.data))
+      // .catch((error) => console.error(error));
       
-    // } catch (error) {
-    //   console.error('Error deleting employee:', error);
-    // }
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+    }
   };
 
 

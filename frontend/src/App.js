@@ -26,6 +26,7 @@ import Registration from "./pages/Registration";
 import AddElder from "./pages/AddElder";
 import Meal from "./pages/Meal";
 import RequestContinue from "./pages/RequestContinue";
+import RequestContinue1 from "./pages/RequestContinue1";
 import GuardianDashboard from "./pages/Guardian/GuardianDashboard";
 import ElderProfile from "./pages/Guardian/ElderProfile";
 import EditElderProfile from "./pages/Guardian/EditElderProfile";
@@ -152,6 +153,7 @@ function App() {
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
           <Route path="/ViewEldersList" element={<ViewEldersList />} />
           <Route path="/RequestContinue/:elderid" element={<RequestContinue />} />
+          <Route path="/RequestContinue1/:elderid" element={<RequestContinue1 />} />
 
 
           <Route path="/GuardianDashboard/:guardianId" element={<GuardianDashboard />} />

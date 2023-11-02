@@ -19,6 +19,9 @@ public interface TempreqRepo extends JpaRepository<Tempreq, Integer> {
     @Query("select t from Tempreq t where t.elderid = :elderid")
     Tempreq getTempreq(@Param("elderid") int elderid);
 
+    @Query("select t from Tempreq t where t.paid = 1 and t.pending = 1")
+    List<Tempreq> getTempreq1();
+
     @Query("select t from Tempreq t where t.assEndDate < :assStartDate and t.bed_id = :bed_id")
     Tempreq getTempreq1(@Param("assStartDate") Date assStartDate, @Param("bed_id") int bed_id);
 
