@@ -233,7 +233,7 @@ const GuardianSendRequest = () => {
                   
                 </Select>
 
-                <div className="age-gender-container">
+                <div className="age-gender-container" style={{display: 'flex', flexDirection: "row"}}>
 
                   <div>
                     <label htmlFor="elderAge" className="elder-age-label">
@@ -242,7 +242,9 @@ const GuardianSendRequest = () => {
                     <input
                       type="number"
                       id="elderAge"
-                      className="elderAge"
+                      disabled
+                      // className="elderAge"
+                      style={{width:"300px"}}
                       value={elder.age}
                       onChange={(event) => {
                         const inputAge = parseInt(event.target.value, 10);
@@ -254,32 +256,22 @@ const GuardianSendRequest = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="elderGender" className="elder-gender-label">
+                    <label htmlFor="elderGender" className="elder-gender-label" style={{marginLeft: "50px"}}>
                       Gender
                     </label>
-                    <input
-                      type='text'
-                      id="elderGender"
-                      className="elderGender"
-                      value={elder.gender}
-                      onChange={(event) => setElderGender(event.target.value)}
-                    
-                    />
+                    <Select
+                  id="Caregivergender"
+                  className="Caregivergender"
+                  style={{width:"300px",marginLeft: "50px"}}
+                  value={gender}
+                  onChange={(event) => setGender(event.target.value)}
+                >
+                  <MenuItem value="F">Female</MenuItem>
+                  <MenuItem value="M">Male</MenuItem>
+                </Select>
                   </div>
 
-                  <div>
-                    <label htmlFor="elderGender" className="elder-gender-label">
-                      Price
-                    </label>
-                    <input
-                      type='text'
-                      id="elderGender"
-                      className="elderGender"
-                      value={price}
-                      // onChange={(event) => setElderGender(event.target.value)}
-                    
-                    />
-                  </div>
+                  
 
                 </div>
 
@@ -295,8 +287,17 @@ const GuardianSendRequest = () => {
                       id="enrollDate"
                       className="enrollDate"
                       placeholder="Enroll Date"
+                      style={{width:"300px"}}
                       value={assStartDate}
-                      onChange={(event) => setAssStartDate(event.target.value)}
+                      onChange={(event) => {
+                        const selectedDate = new Date(event.target.value);
+                        const currentDate = new Date();
+                        if (selectedDate >= currentDate) {
+                          setAssStartDate(event.target.value);
+                        } else {
+                          alert("Please select a date from today onwards.");
+                        }
+                      }}
                     />
                   </div>
 
@@ -310,9 +311,19 @@ const GuardianSendRequest = () => {
                       className="endDate"
                       placeholder="End Date"
                       value={assEndDate}
-                      onChange={(event) => setAssEndDate(event.target.value)}
+                      onChange={(event) => {
+                        const selectedDate = new Date(event.target.value);
+                        const enrollDate = new Date(assStartDate);
+                        if (selectedDate > enrollDate && selectedDate == enrollDate) {
+                          setAssEndDate(event.target.value);
+                        } else {
+                          alert("Check-out date cannot be enroll date or before it.");
+                          setAssEndDate(assStartDate); // reset the check-out date to the enroll date
+                        }
+                      }}
                     />
                   </div>
+
                   
                   <div className="duration-input">
                     <label htmlFor="duration" className="duration-label">
@@ -321,6 +332,7 @@ const GuardianSendRequest = () => {
                     <input
                       type="text"
                       id="duration"
+                      disabled
                       className="duration"
                       value={calculateDuration(assStartDate, assEndDate)}
                       readOnly
@@ -342,8 +354,7 @@ const GuardianSendRequest = () => {
                 </Select>
 
                 {/* Meal Plan and Allergy Items */}
-                <div className="meal-plan-allergy-container">
-
+                <div className="meal-plan-allergy-container" style={{display: "grid", gridTemplateColumns: "1fr 1fr"}}>
                   <div className="meal-plan-input">
                     <label htmlFor="mealPlan" className="meal-plan-label">
                       Meal Plan
@@ -352,55 +363,29 @@ const GuardianSendRequest = () => {
                       id="mealPlan"
                       className="mealPlan"
                       value={mealprice}
+                      style={{width: "70%", height: "50%",marginLeft: "10px"}}
                       onChange={(e) => setMealprice(e.target.value)}
                     >
                       {meal.map((mea) => (
-                    <MenuItem key={mea.id} value={mea.price}>{mea.name}</MenuItem>
-                  ))}
+                        <MenuItem key={mea.id} value={mea.price}>{mea.name}</MenuItem>
+                      ))}
                     </Select>
                   </div>
 
-                  <div className="allergy-items-input">
-                    <label htmlFor="mealItemsDropdown" className="allergy-items-label">
-                      Remove meal items with allergies on your elder
+                  <div>
+                    <label  style={{marginLeft: "35px"}} htmlFor="elderGender" className="elder-gender-label">
+                      Price
                     </label>
-                    <Select
-                      id="mealItemsDropdown"
-                      className="mealItemsDropdown"
-                      multiple
-                      value={selectedMealItems}
-                      onChange={(e) => setSelectedMealItems(e.target.value)}
-                    >
-                      <MenuItem disabled value="">
-                        <em>Select meal items</em>
-                      </MenuItem>
-                      <MenuItem value="Dhal Curry">
-                        <Checkbox checked={isMealItemSelected("Dhal Curry")} />
-                        Dhal Curry
-                      </MenuItem>
-                      <MenuItem value="Chicken Curry">
-                        <Checkbox checked={isMealItemSelected("Chicken Curry")} />
-                        Chicken Curry
-                      </MenuItem>
-                      <MenuItem value="Polsambol">
-                        <Checkbox checked={isMealItemSelected("Polsambol")} />
-                        Polsambol
-                      </MenuItem>
-                      <MenuItem value="Boiled Egg">
-                        <Checkbox checked={isMealItemSelected("Boiled Egg")} />
-                        Boiled Egg
-                      </MenuItem>
-                      <MenuItem value="Bread">
-                        <Checkbox checked={isMealItemSelected("Bread")} />
-                        Bread
-                      </MenuItem>
-                      <MenuItem value="String Hoppers">
-                        <Checkbox checked={isMealItemSelected("String Hoppers")} />
-                        String Hoppers
-                      </MenuItem>
-                    </Select>
+                    <input
+                      type='text'
+                      disabled
+                      id="elderGender"
+                      className="elderGender"
+                      value={price}
+                      style={{width: "70%", height: "50%",marginLeft: "20px"}}
+                      // onChange={(event) => setElderGender(event.target.value)}
+                    />
                   </div>
-                  
                 </div>
 
                 <label htmlFor="otherMealItems">Mention if have any other meal items with allergies</label>

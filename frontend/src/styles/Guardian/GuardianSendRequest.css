@@ -118,18 +118,18 @@ select:focus {
   padding: 20px;
 }
 
-/* Age and Gender Container */
+Age and Gender Container
 .age-gender-container {
   display: flex;
   align-items: center;
   justify-content: space-between !important;
 }
+
 .elderAge{
   width: 320px !important;
 }
 .elderGender{
   width: 320px;
-  padding: 0;
   margin-left: 20px;
   height: 48px;
 }
@@ -163,26 +163,26 @@ select:focus {
 }
 
 /* Meal Plan and Allergy Items Container */
-.meal-plan-allergy-container {
+/* .meal-plan-allergy-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 8px;
-}
+} */
 
 
 /* Meal Plan Selection */
-.mealPlan {
+/* .mealPlan {
   width: 200px;
   padding: 0px;
   margin-top: 5px;
   border-radius: 5px;
   font-size: 16px;
   background-color: #fff;
-}
+} */
 
 /* Allergy Items Selection */
-.mealItemsDropdown {
+/* .mealItemsDropdown {
   width: 440px;
   margin-left: 20px;
   padding: 0px;
@@ -190,7 +190,7 @@ select:focus {
   border-radius: 5px;
   font-size: 16px;
   background-color: #fff;
-}
+} */
 
 
 
