@@ -137,12 +137,12 @@ const GuardianSendRequest = () => {
                 alert("Request successfully sent");
                 window.location.reload();
               }else{
-                alert("No space");
+                alert("Request type of beds are unavailable.");
               }
             })
             
           }else{
-            alert("No space");
+            alert("Request type of beds are unavailable.");
             
           }
           
@@ -224,6 +224,7 @@ const GuardianSendRequest = () => {
                   id="yourElder"
                   className='yourElder'
                   value={name}
+                  // sx={{width:"600px"}}
                   onChange={(event) => setName(event.target.value)}
                 >
                   {people.map((person) => (
@@ -243,6 +244,7 @@ const GuardianSendRequest = () => {
                       type="number"
                       id="elderAge"
                       className="elderAge"
+                      sx={{width: "100"}}
                       value={elder.age}
                       onChange={(event) => {
                         const inputAge = parseInt(event.target.value, 10);

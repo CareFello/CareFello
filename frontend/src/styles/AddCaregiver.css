@@ -1,0 +1,98 @@
+.addDoctor{
+    background-color: #F9FFFE;
+}
+
+.app {
+    display: grid;
+    grid-template-rows: 150px 1px 1fr; /* Dividing into two horizontal parts */
+    gap: 10px;
+  }
+
+  .vertical-part_1 {
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+    margin-top: 500px;
+  }
+
+  .vertical-part_2 {
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 600px;
+  }
+
+  .bottom-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .bottom-part:nth-child(2) {
+    height: 100px; /* Height of the second horizontal part */
+  }
+  
+  .bottom-part:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .bottom-part:nth-child(3) .vertical-part:nth-child(2) {
+    width: 200px; /* Width of the second vertical part in the third horizontal part */
+  }
+
+  .boxname-1{
+    font-size: xx-large;
+  }
+
+  .boxname-2{
+    font-size: x-large;
+  }
+
+
+.name{
+    display:flex;
+    flex-direction: row;
+}
+
+.nic_email{
+    display: flex;
+    flex-direction: row;
+}
+
+.pw{
+    display: flex;
+    flex-direction: row;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.top-part{
+    margin-top: 30px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.topic_reg{
+    font-size:x-large
+}
+
+.form-label {
+  text-align: left;
+  margin-bottom: 8px; /* Adjust margin as needed for spacing */
+}
+
+
+.text-input {
+  width: 100%; /* Make sure the text inputs expand to fill the available space */
+}
