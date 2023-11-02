@@ -306,15 +306,23 @@ function DoctorDashboard() {
                         <Typography variant="h6" align="center">Add Availability</Typography>
                         <form onSubmit={handleSubmit}>
 
+                          {/* Update the Date TextField and validated*/}
                           <TextInput
-
                             placeholder="Date"
                             fullWidth
                             type="date"
                             required
-                            style={{ marginTop: "5px", fontSize: "13px", }}
+                            style={{ marginTop: "5px", fontSize: "13px" }}
                             value={date_available}
-                            onChange={(e) => setDateAvailable(e.target.value)} // Add onChange handler
+                            onChange={(e) => {
+                              const selectedDate = new Date(e.target.value);
+                              const currentDate = new Date();
+                              if (selectedDate < currentDate) {
+                                alert("Please select a Valid date.");
+                              } else {
+                                setDateAvailable(e.target.value);
+                              }
+                            }}
                           />
 
                           <br />
@@ -347,6 +355,7 @@ function DoctorDashboard() {
                           </div>
 
                           <br />
+                          
                           {/* Update the Maximum Elders TextField */}
 
                           <TextInput
