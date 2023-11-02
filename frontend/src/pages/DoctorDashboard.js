@@ -307,14 +307,21 @@ function DoctorDashboard() {
                         <form onSubmit={handleSubmit}>
 
                           <TextInput
-
                             placeholder="Date"
                             fullWidth
                             type="date"
                             required
-                            style={{ marginTop: "5px", fontSize: "13px", }}
+                            style={{ marginTop: "5px", fontSize: "13px" }}
                             value={date_available}
-                            onChange={(e) => setDateAvailable(e.target.value)} // Add onChange handler
+                            onChange={(e) => {
+                              const selectedDate = new Date(e.target.value);
+                              const currentDate = new Date();
+                              if (selectedDate < currentDate) {
+                                alert("Please select a Valid date.");
+                              } else {
+                                setDateAvailable(e.target.value);
+                              }
+                            }}
                           />
 
                           <br />
