@@ -306,6 +306,7 @@ function DoctorDashboard() {
                         <Typography variant="h6" align="center">Add Availability</Typography>
                         <form onSubmit={handleSubmit}>
 
+                          {/* Update the Date TextField and validated*/}
                           <TextInput
                             placeholder="Date"
                             fullWidth
