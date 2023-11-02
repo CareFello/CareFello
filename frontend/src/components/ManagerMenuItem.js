@@ -16,9 +16,9 @@ export const ManagerMenuItem = [
         icon: <FaTh />
     },
     {
-        path: "/ManagerGuardianProfile",
-        name: "Guardian Profiles",
-        icon: <TbListDetails />
+        path: "/GuardianRequest",
+        name: "Guardian Request",
+        icon: <VscRequestChanges />
     },
     {
         path: "/AddDoctor",
@@ -39,11 +39,7 @@ export const ManagerMenuItem = [
         name: "Packages",
         icon: <TbListDetails />
     },
-    {
-        path: "/GuardianRequest",
-        name: "Guardian Request",
-        icon: <VscRequestChanges />
-    },
+
     {
         path: "/MealPlan",
         name: "Meal Plan",
@@ -60,8 +56,8 @@ export const ManagerMenuItem = [
         icon: <TbNurse />
     },
     {
-        path: "/ManagerDoctorView",
-        name: "View Doctors",
+        path: "/DoctorAvailability",
+        name: "Doctor Availabilty",
         icon: <FaUserNurse />
     },
 

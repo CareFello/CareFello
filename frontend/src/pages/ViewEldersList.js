@@ -42,24 +42,7 @@ export default function ViewEldersList() {
                 <main className="elders-list-body">
                     <h2>Elders</h2>
 
-                    <div className="search-bar">
-                        {/* Add your search bar component here */}
-                        <TextField
-                            // label="Search Elders"
-                            variant="outlined"
-                            fullWidth
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon className="search-icon" />
-                                    </InputAdornment>
-                                ),
-                            }}
-                            className="search-input"
-                        // value={searchQuery}
-                        // onChange={handleSearchChange}
-                        />
-                    </div>
+
                     <div className="elders-cards">
                         {elders.map((elder) => (
                             <div className="elder-card" key={elder.id}>
