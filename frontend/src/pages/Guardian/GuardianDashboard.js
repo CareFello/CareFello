@@ -102,7 +102,7 @@ const GuardianDashboard = () => {
           <br />
           <Grid container spacing={1}>
             {/* Other grid items */}
-            <Grid item xs={9} sx={{ marginRight: "50px" }}>
+            <Grid item xs={8} sx={{ marginRight: "1px" }}>
               <Grid item xs={12} spacing={1}>
                 <Stack display="flex" flexDirection={'row'}>
                   <Typography component="div" variant="h6" className='topic'>
@@ -151,7 +151,7 @@ const GuardianDashboard = () => {
               </Grid> */}
               {/* Other grid items */}
             </Grid>
-            <Grid item xs={2} sx={{ marginLeft: "10px" }}>
+            <Grid item xs={3} sx={{ marginLeft: "10px" }}>
               <div>
                 <Card sx={{ Width: '80px', height: '550px', backgroundColor: 'white', marginTop: "10px" }} className={'elder-card'}>
                   <CardActionArea >
@@ -195,11 +195,11 @@ const GuardianDashboard = () => {
                 
               
               </Grid> */}
-            <Grid utem xs={3} className='Pending Payments' sx={{ boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)' }}>
+            <Grid item xs={3} className='Pending Payments' sx={{ boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)' }}>
 
             </Grid>
             <br></br>
-            {/* Assigned Caregivers Section */}
+            Assigned Caregivers Section
             <Box height={40} />
             <Grid item xs={9}>
 

@@ -36,46 +36,46 @@ public class DailyTaskImpl implements DailyTaskService {
         dailyTask.setDescription(dailyTaskDTO.getDescription());
         dailyTask.setTime(dailyTaskDTO.getTime());
         dailyTask.setDate(dailyTaskDTO.getDate());
-        dailyTask.setStatus(false);
+        dailyTask.setStatus("Incomplete");
         dailyTask.setElder(elder);
 
         return dailyTaskRepo.save(dailyTask);
     }
 
-    @Override
-    public DailyTask updateDailyTask(int taskId,DailyTaskDTO dailyTaskDTO){
-        DailyTask dailyTask = dailyTaskRepo.findById(taskId)
-                .orElseThrow(()-> new EntityNotFoundException("Task not found with ID : " + taskId));
+    // @Override
+    // public DailyTask updateDailyTask(int taskId,DailyTaskDTO dailyTaskDTO){
+    //     DailyTask dailyTask = dailyTaskRepo.findById(taskId)
+    //             .orElseThrow(()-> new EntityNotFoundException("Task not found with ID : " + taskId));
 
-        dailyTask.setTaskName(dailyTaskDTO.getTaskName());
-        dailyTask.setDescription(dailyTaskDTO.getDescription());
-        dailyTask.setTime(dailyTaskDTO.getTime());
-        dailyTask.setDate(dailyTaskDTO.getDate());
+    //     dailyTask.setTaskName(dailyTaskDTO.getTaskName());
+    //     dailyTask.setDescription(dailyTaskDTO.getDescription());
+    //     dailyTask.setTime(dailyTaskDTO.getTime());
+    //     dailyTask.setDate(dailyTaskDTO.getDate());
 
-        return dailyTaskRepo.save(dailyTask);
-    }
+    //     return dailyTaskRepo.save(dailyTask);
+    // }
 
 
-    @Override
-    public List<DailyTaskDTO> getTaskByElderIdAndDate(int elderId, LocalDate currentDate) {
-        List<DailyTask> dailyTasks = dailyTaskRepo.findByElderIdAndDate(elderId, currentDate);
+    // @Override
+    // public List<DailyTaskDTO> getTaskByElderIdAndDate(int elderId, LocalDate currentDate) {
+    //     List<DailyTask> dailyTasks = dailyTaskRepo.findByElderIdAndDate(elderId, currentDate);
 
-        // Convert the list of DailyTask objects to DailyTaskDTO objects
-        List<DailyTaskDTO> dailyTaskDTOs = new ArrayList<>();
-        for (DailyTask dailyTask : dailyTasks) {
-            DailyTaskDTO dto = new DailyTaskDTO();
-            dto.setId(dailyTask.getId());
-            dto.setTaskName(dailyTask.getTaskName());
-            dto.setDescription(dailyTask.getDescription());
-            dto.setStatus(dailyTask.isStatus());
-            dto.setTime(dailyTask.getTime());
-            dto.setDate(dailyTask.getDate());
-            // Set other properties as needed
-            dailyTaskDTOs.add(dto);
-        }
+    //     // Convert the list of DailyTask objects to DailyTaskDTO objects
+    //     List<DailyTaskDTO> dailyTaskDTOs = new ArrayList<>();
+    //     for (DailyTask dailyTask : dailyTasks) {
+    //         DailyTaskDTO dto = new DailyTaskDTO();
+    //         dto.setId(dailyTask.getId());
+    //         dto.setTaskName(dailyTask.getTaskName());
+    //         dto.setDescription(dailyTask.getDescription());
+    //         dto.setStatus(dailyTask.isStatus());
+    //         dto.setTime(dailyTask.getTime());
+    //         dto.setDate(dailyTask.getDate());
+    //         // Set other properties as needed
+    //         dailyTaskDTOs.add(dto);
+    //     }
 
-        return dailyTaskDTOs;
-    }
+    //     return dailyTaskDTOs;
+    // }
 
     @Override
     public List<DailyTaskDTO> getTaskByElderId(int elderId) {
@@ -88,7 +88,7 @@ public class DailyTaskImpl implements DailyTaskService {
             dto.setId(dailyTask.getId());
             dto.setTaskName(dailyTask.getTaskName());
             dto.setDescription(dailyTask.getDescription());
-            dto.setStatus(dailyTask.isStatus());
+            dto.setStatus(dailyTask.getStatus());
             dto.setTime(dailyTask.getTime());
             dto.setDate(dailyTask.getDate());
             // Set other properties as needed

@@ -17,7 +17,7 @@ import axios from "axios";
 import { HiKey, HiMail } from 'react-icons/hi';
 // import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import login_img from '../assets/login_img.png';
+
 
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 

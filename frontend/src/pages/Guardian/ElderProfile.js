@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import PdfViewer from '../../components/PdfViewer';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import {
   Box,
   Container,
@@ -249,6 +251,7 @@ function ElderProfile() {
     axios.get(`http://localhost:8080/api/v1/dailyTask/allTask/${elderId}`)
       .then((response) => {
         setPeople2(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.error('Error fetching PDF list:', error);
@@ -556,16 +559,24 @@ function ElderProfile() {
                       setDes(event.target.value);
                       }}
                     />
-                    <TextInput
-                      placeholder='Date'
-                      type='date'
+                    <Select
+                      placeholder='Day'
+                      type='text'
                       className='mb-2'
 
                       value={date}
                       onChange={(event) => {
                       setDate(event.target.value);
                       }}
-                    />
+                    >
+                    <MenuItem value="Sunday">Sunday</MenuItem>
+                    <MenuItem value="Monday">Monday</MenuItem>
+                    <MenuItem value="Tuesday">Tuesday</MenuItem>
+                    <MenuItem value="Wednesday">Wednesday</MenuItem>
+                    <MenuItem value="Thursday">Thursday</MenuItem>
+                    <MenuItem value="Friday">Friday</MenuItem>
+                    <MenuItem value="Saturday">Saturday</MenuItem>
+                    </Select>
                     <TextInput
                       placeholder='description'
                       type='time'
@@ -597,8 +608,9 @@ function ElderProfile() {
                         <TableHead>
                           <TableCell>Task</TableCell>
                           <TableCell>Description</TableCell>
-                          <TableCell>Date</TableCell>
+                          <TableCell>Day</TableCell>
                           <TableCell>Time</TableCell>
+                          <TableCell>Status</TableCell>
                         </TableHead>
                         {people2.map((person2) => (
                           <TableBody key={person2.date}>
@@ -606,6 +618,7 @@ function ElderProfile() {
                             <TableCell>{person2.description}</TableCell>
                             <TableCell>{person2.date}</TableCell>
                             <TableCell>{person2.time}</TableCell>
+                            <TableCell>{person2.status}</TableCell>
                           </TableBody>
                           ))}
                           </Table>

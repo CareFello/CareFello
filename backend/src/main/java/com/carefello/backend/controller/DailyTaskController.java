@@ -31,17 +31,17 @@ public class DailyTaskController {
         return ResponseEntity.ok("Task added successfully with ID" + dailyTask.getId() );
     }
 
-    @PutMapping("/updateTask/{taskId}")
-    public ResponseEntity<String> updateDailyTask(@PathVariable int taskId,@RequestBody DailyTaskDTO dailyTaskDTO){
-        DailyTask dailyTask = dailyTaskService.updateDailyTask(taskId, dailyTaskDTO);
-        return ResponseEntity.ok("Task updated succefully with ID : "+ dailyTask.getId());
+    // @PutMapping("/updateTask/{taskId}")
+    // public ResponseEntity<String> updateDailyTask(@PathVariable int taskId,@RequestBody DailyTaskDTO dailyTaskDTO){
+    //     DailyTask dailyTask = dailyTaskService.updateDailyTask(taskId, dailyTaskDTO);
+    //     return ResponseEntity.ok("Task updated succefully with ID : "+ dailyTask.getId());
 
-    }
-    @GetMapping("/viewTask/{elderId}")
-    public List<DailyTaskDTO> getTasksByElderIdAndDate(@PathVariable int elderId) {
-        LocalDate currentDate = LocalDate.now();
-        return dailyTaskService.getTaskByElderIdAndDate(elderId, currentDate);
-    }
+    // }
+    // @GetMapping("/viewTask/{elderId}")
+    // public List<DailyTaskDTO> getTasksByElderIdAndDate(@PathVariable int elderId) {
+    //     LocalDate currentDate = LocalDate.now();
+    //     return dailyTaskService.getTaskByElderIdAndDate(elderId, currentDate);
+    // }
     @GetMapping("/allTask/{elderId}")
     public List<DailyTaskDTO> getTasksByElderId(@PathVariable int elderId) {
         return dailyTaskService.getTaskByElderId(elderId);

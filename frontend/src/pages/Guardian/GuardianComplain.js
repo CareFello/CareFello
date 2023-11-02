@@ -53,12 +53,14 @@ export default function GuardianComplain() {
         <Container>
           <Grid container spacing={3} sx={{ marginBottom: "5px" }}>
             <Grid item xs={12} md={6}>
+
               {/* <Typography variant="h6" marginBottom="50px" color="#" >Add Complaint</Typography> */}
               <Box height={40} />
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add Complaint
               </h1>
               <Box height={20} />
+
               <Card>
                 <CardContent>
                   <Stack spacing={1}>
@@ -109,11 +111,13 @@ export default function GuardianComplain() {
             <Grid item xs={12} md={6}>
               <Box height={40} />
               <div>
+
                 {/* <Typography variant="h6">Previous Complaints</Typography> */}
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Previous Complaint
                 </h1>
                 <Box height={20} />
+
                 {complaints.map((complaint) => (
                   <Card
                     key={complaint.id}
