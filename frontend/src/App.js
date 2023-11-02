@@ -64,6 +64,7 @@ import DoctorProfile from "./pages/DoctorProfile";
 
 
 import DoctorViewHistory from "./pages/DoctorViewHistory";
+import DoctorAvailability from "./pages/DoctorAvailability";
 // import Caregiverprofile from './pages/caregiverprofile';
 
 // import CheckupEldersList from "./pages/CheckupEldersList";
@@ -125,7 +126,7 @@ function App() {
           <Route path="/GuardianList" element={<GuardianList />} />
           <Route path="/guardians/:guardianId" element={<GuardianDetailsPage />} />
           <Route path="/ManagerDoctorView" element={<ManagerDoctorView />} />
-
+          <Route path= "DoctorAvailability" element={<DoctorAvailability/>}/>
           <Route path="/ManagerRoomDetailsView" element={<ManagerRoomDetailsView />} />
           <Route path="/ViewEldersList" element={<ViewEldersList />} />
           <Route path="/RequestContinue/:elderid" element={<RequestContinue />} />
