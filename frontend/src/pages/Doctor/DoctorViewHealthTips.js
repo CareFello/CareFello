@@ -18,7 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Modal from "@mui/material/Modal";
 // import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 // import { styled } from "@mui/system";
-import { GuardianMenuItem } from "../../components/GuardianMenuItem";
+import {DoctorMenuItem } from "../../components/DoctorMenuItem";
 
 //import "../../styles/DoctorViewHealthTips.css";
 
@@ -123,7 +123,7 @@ const DoctorViewHealthTips = () => {
       <Header />
       <Box height={80} />
       {/* <Box sx={{ display: "flex" }}> */}
-      <Sidebar menuItems={GuardianMenuItem} />
+      <Sidebar menuItems={DoctorMenuItem} />
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}></Box> */}
       <div>
         <Box display="flex" justifyContent="center">

@@ -28,7 +28,7 @@ export const DoctorMenuItem = [
         icon: <Icon.MdHistory />
     },
     {
-        path: "/RoomPackage",
+        path: "/DoctorViewHealthTips",
         name: "Add Health Tips",
         icon: <Icon.MdPostAdd />
     },
